@@ -1,6 +1,6 @@
 # Licensing and distribution
 
-KM Calculator as a combined application is licensed under the GNU General Public
+KM Companion as a combined application is licensed under the GNU General Public
 License, version 3 only (`GPL-3.0-only`). Copyright (c) 2026 Matroskin.
 You may use, study, modify, and redistribute it under [LICENSE](LICENSE).
 It is provided without warranty, including any implied warranty of merchantability
@@ -65,15 +65,15 @@ third party data requires checking those terms again.
 
 For each distributed version, provide its matching source alongside the binary,
 at no additional charge and without an account requirement. The release workflow
-creates and uploads `KM-Calculator-Source-<version>.zip` from the same clean,
+creates and uploads `KM-Companion-Source-<version>.zip` from the same clean,
 tagged commit as the installer. It includes tracked source, license notices,
-lockfiles, and build scripts. `KM-Calculator-Dependencies-<version>.tar.gz`
+lockfiles, and build scripts. `KM-Companion-Dependencies-<version>.tar.gz`
 contains integrity checked production npm packages, pinned preferred TypeScript
 sources for compiled packages, and the unminified jQuery, Sizzle, and Select2
 sources. It also contains the unmodified WiX
 source archive for the version embedded in the separate installer, satisfying
 its source availability requirement. Revisions, hashes, and download locations
-are recorded in `KM-Calculator-Source-<version>.json`.
+are recorded in `KM-Companion-Source-<version>.json`.
 
 The source packaging command is `npm run release:source`. It rejects a dirty
 checkout, mismatched version tag, missing required source files, and mismatched

@@ -1,14 +1,14 @@
-# KM Calculator Security Policy
+# KM Companion Security Policy
 
 ## Supported versions
 
-Security fixes target the latest public KM Calculator release. Older releases are not guaranteed to receive backports.
+Security fixes target the latest public KM Companion release. Older releases are not guaranteed to receive backports.
 
 Before reporting an issue from an older version, update to the latest release and check whether the behavior still occurs. If updating is unsafe because of the suspected vulnerability, say so in the private report.
 
 ## Report security issues privately
 
-Use [GitHub Private Vulnerability Reporting](https://github.com/KotMatrosk1n/KM-Calculator/security/advisories/new) for suspected vulnerabilities. Please do not open a public issue, discussion, or pull request containing exploit details.
+Use [GitHub Private Vulnerability Reporting](https://github.com/KotMatrosk1n/KM-Companion/security/advisories/new) for suspected vulnerabilities. Please do not open a public issue, discussion, or pull request containing exploit details.
 
 If private reporting is unavailable, open a public issue stating only that you need a private security contact. Do not include the vulnerability, affected files, or reproduction details there.
 
@@ -17,13 +17,13 @@ If private reporting is unavailable, open a public issue stating only that you n
 Security issues are problems that cross a trust, privacy, or ownership boundary. Examples include:
 
 * Installer, updater, signature, or release download tampering.
-* Path traversal or writes outside locations owned by KM Calculator.
-* Cleanup or uninstall deleting files KM Calculator does not own.
+* Path traversal or writes outside locations owned by KM Companion.
+* Cleanup or uninstall deleting files KM Companion does not own.
 * Unintended command execution or unsafe handling of untrusted save files, trainer packs, or ROM hack profile data.
 * Exposure of credentials, signing material, private files, personal information, or sensitive local paths.
-* A dependency vulnerability that is reachable through KM Calculator.
+* A dependency vulnerability that is reachable through KM Companion.
 
-File corruption is a security concern when it crosses one of those boundaries or can destroy unrelated user data. Incorrect calculations or imported values limited to KM Calculator's own data are generally correctness bugs, even when they can crash the app or game.
+File corruption is a security concern when it crosses one of those boundaries or can destroy unrelated user data. Incorrect calculations or imported values limited to KM Companion's own data are generally correctness bugs, even when they can crash the app or game.
 
 ## What is normally a regular bug
 
@@ -35,7 +35,7 @@ When in doubt, report privately. The maintainer can move a report to the normal 
 
 A useful security report contains:
 
-* The affected KM Calculator version, or commit when testing source.
+* The affected KM Companion version, or commit when testing source.
 * The affected component and the security impact.
 * Safe, minimal reproduction steps.
 * The files, locations, or user data that could be affected.
@@ -50,4 +50,4 @@ The maintainer will confirm the report, assess impact and affected versions, and
 
 Please allow reasonable time for investigation before public disclosure. Do not test against another person's files or system, maintain access after proving the issue, disrupt release services, or pressure users to share private data.
 
-KM Calculator does not promise a bug bounty or payment for security research unless the maintainer explicitly offers one in writing.
+KM Companion does not promise a bug bounty or payment for security research unless the maintainer explicitly offers one in writing.

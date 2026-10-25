@@ -1,13 +1,13 @@
 {
-  "name": "@km-calculator/engine",
+  "name": "@km-companion/engine",
   "version": "0.11.0",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "description": "Internal multi-generation calculation engine for KM Calculator.",
+  "description": "Internal calculation engine for KM Companion across Pokemon generations.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KotMatrosk1n/KM-Calculator.git",
+    "url": "git+https://github.com/KotMatrosk1n/KM-Companion.git",
     "directory": "calc"
   },
   "contributors": [

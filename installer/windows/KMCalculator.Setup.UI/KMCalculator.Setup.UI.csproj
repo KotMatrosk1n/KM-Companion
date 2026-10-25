@@ -12,17 +12,18 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>KMCalculator.Setup.UI</AssemblyName>
+    <AssemblyName>KMCompanion.Setup.UI</AssemblyName>
+    <RootNamespace>KMCalculator.Setup.UI</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>$(KmIconPath)</ApplicationIcon>
     <Version>$(KmVersion)</Version>
     <Company>Matroskin</Company>
-    <Product>KM Calculator Setup</Product>
-    <Description>KM Calculator installer, updater, and uninstaller</Description>
+    <Product>KM Companion Setup</Product>
+    <Description>KM Companion installer, updater, and uninstaller</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.BootstrapperApplicationApi" Version="7.0.0" />
-    <Resource Include="$(KmLogoPath)" Link="Assets/calculator.png" />
+    <Resource Include="$(KmLogoPath)" Link="Assets/companion.png" />
   </ItemGroup>
   <Target Name="ValidateSetupInputs" BeforeTargets="PrepareForBuild">
     <Error Condition="'$(KmVersion)' == ''" Text="KmVersion is required." />

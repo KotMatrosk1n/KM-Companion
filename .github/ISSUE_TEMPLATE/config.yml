@@ -1,17 +1,17 @@
 blank_issues_enabled: true
 contact_links:
   - name: Security reports
-    url: https://github.com/KotMatrosk1n/KM-Calculator/security/policy
-    about: Report installer, updater, file safety, private-data, or trust-boundary issues privately.
+    url: https://github.com/KotMatrosk1n/KM-Companion/security/policy
+    about: Report installer, updater, file safety, private data, or trust boundary issues privately.
   - name: Release history
-    url: https://github.com/KotMatrosk1n/KM-Calculator/releases
-    about: Browse published KM Calculator and historical Royal Sword Calculator releases.
+    url: https://github.com/KotMatrosk1n/KM-Companion/releases
+    about: Find KM Companion releases when they are available.
   - name: Questions and support
-    url: https://github.com/KotMatrosk1n/KM-Calculator/discussions
+    url: https://github.com/KotMatrosk1n/KM-Companion/discussions
     about: Ask usage questions and discuss ideas that are not ready for an issue.
-  - name: ROM-hack profile guide
-    url: https://github.com/KotMatrosk1n/KM-Calculator/blob/master/docs/rom-hack-profiles.md
+  - name: ROM hack profile guide
+    url: https://github.com/KotMatrosk1n/KM-Companion/blob/master/docs/rom-hack-profiles.md
     about: Learn how profiles isolate game data and generation behavior.
-  - name: Trainer-data guide
-    url: https://github.com/KotMatrosk1n/KM-Calculator/blob/master/docs/trainer-data-packs.md
-    about: Review the attributed trainer-pack format before proposing or importing data.
+  - name: Trainer data guide
+    url: https://github.com/KotMatrosk1n/KM-Companion/blob/master/docs/trainer-data-packs.md
+    about: Review the attributed trainer pack format before proposing or importing data.

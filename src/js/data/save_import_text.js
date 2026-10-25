@@ -1,5 +1,5 @@
 /*
- * Generated KM Calculator save-import name/index data. Do not edit by hand.
+ * Generated KM Companion save-import name/index data. Do not edit by hand.
  * Pokemon Showdown (MIT): 54069be35a89f103e06aabcfbe624382179308af
  * PokeAPI (BSD-3-Clause): 17dd3092872cabcb7c008051771d2a2fd8c8c260
  * Full notices: import/THIRD_PARTY_NOTICES.md

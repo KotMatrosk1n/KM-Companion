@@ -1,6 +1,6 @@
-# Contributing to KM Calculator
+# Contributing to KM Companion
 
-KM Calculator supports canonical Pokemon Generations 1 through 9 and explicit ROM hack profiles layered over them. Contributions are welcome across calculation mechanics, generation data, profile overlays, trainer packs, save compatibility, desktop workflows, documentation, accessibility, packaging, and issue reports.
+KM Companion supports canonical Pokemon Generations 1 through 9 and explicit ROM hack profiles layered over them. Contributions are welcome across calculation mechanics, generation data, profile overlays, trainer packs, save compatibility, desktop workflows, documentation, accessibility, packaging, and issue reports.
 
 The best contribution is not necessarily the largest one. A focused correction that preserves generation and profile boundaries is worth far more than a broad rewrite that quietly mixes one game's rules into another.
 
@@ -15,15 +15,15 @@ Before opening a new issue, search the existing issues and check the repository 
 * **Docs or Guides** for unclear, missing, or outdated public documentation.
 * **Security Policy** for private reports involving trust boundaries, unsafe file access, private data, dependencies, installer behavior, updater integrity, or release integrity.
 
-Use [Discussions](https://github.com/KotMatrosk1n/KM-Calculator/discussions) for general questions and early ideas that are not ready for a focused issue.
+Use [Discussions](https://github.com/KotMatrosk1n/KM-Companion/discussions) for general questions and early ideas that are not ready for a focused issue.
 
-Please reproduce bugs on the latest public release when possible. If no current KM Calculator build has been published, give the source commit you tested.
+Please reproduce bugs on the latest public release when possible. If no current KM Companion build has been published, give the source commit you tested.
 
 ## Write a report someone can reproduce
 
 A useful report includes:
 
-* The KM Calculator version or source commit.
+* The KM Companion version or source commit.
 * The active ROM hack profile and canonical base generation.
 * The battle format or app workflow involved.
 * The shortest repeatable steps.
@@ -56,13 +56,13 @@ Start with the project goal and the smallest integration boundary that supports 
 
 Keep overlays bounded. Do not copy an entire canonical generation when a small provider can express the differences. Trainer packs must keep attribution and permission metadata attached, and imported data must not replace bundled data silently.
 
-Profiles default to the standard calculator layout, which combines the original calculator controls with KM Calculator's shared Team/Box, Player Notes and Clear Notes, trainer dropdown and team sprites, save import and border controls, and enhanced Singles and Doubles workflows. A custom layout may rearrange this shared workflow layer, but it must keep those tools available and functional. It must be a registered bundled provider, preserve the required calculator anchors, scope its styling and behavior to its layout ID, and return a disposer that reverses its changes before another profile mounts. Layout selection and input policy are separate decisions. Hiding EV controls does not disable EVs by itself, and disabling EVs does not authorize unrelated layout changes.
+Profiles default to the standard calculator layout, which combines the original calculator controls with KM Companion's shared Team/Box, Player Notes and Clear Notes, trainer dropdown and team sprites, save import and border controls, and enhanced Singles and Doubles workflows. A custom layout may rearrange this shared workflow layer, but it must keep those tools available and functional. It must be a registered bundled provider, preserve the required calculator anchors, scope its styling and behavior to its layout ID, and return a disposer that reverses its changes before another profile mounts. Layout selection and input policy are separate decisions. Hiding EV controls does not disable EVs by itself, and disabling EVs does not authorize unrelated layout changes.
 
 Custom species and forms need a reviewed sprite resolution path. Prefer a packaged canonical sprite ID when one exists. Otherwise add the smallest permitted profile asset, include it in the build allowlist, and return it through the profile provider. Trainer pack JSON cannot inject asset URLs or executable resolver behavior.
 
 Trainer pack JSON cannot select or execute a custom layout. If a mod creator requests a custom interface, submit the provider as reviewed source code and keep the imported data format declarative.
 
-Do not submit another person's data without permission. External repositories may be useful references, but their source, generated tables, comments, and names do not automatically belong in KM Calculator. Follow their licenses and document permitted provenance.
+Do not submit another person's data without permission. External repositories may be useful references, but their source, generated tables, comments, and names do not automatically belong in KM Companion. Follow their licenses and document permitted provenance.
 
 ## Development setup
 

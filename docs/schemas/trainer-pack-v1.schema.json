@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/KotMatrosk1n/KM-Calculator/blob/master/docs/schemas/trainer-pack-v1.schema.json",
-  "title": "KM Calculator Trainer Pack",
+  "$id": "https://github.com/KotMatrosk1n/KM-Companion/blob/master/docs/schemas/trainer-pack-v1.schema.json",
+  "title": "KM Companion Trainer Pack",
   "type": "object",
   "required": ["schema", "schemaVersion", "id", "name", "version", "authors", "source", "license", "trainers"],
   "properties": {

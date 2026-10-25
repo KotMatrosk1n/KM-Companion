@@ -13,7 +13,7 @@
     <DebugSymbols>false</DebugSymbols>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>KM-Calculator-Setup</AssemblyName>
+    <AssemblyName>KM-Companion-Setup</AssemblyName>
     <RootNamespace>KMCalculator.Setup.Launcher</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>$(KmIconPath)</ApplicationIcon>
@@ -22,8 +22,8 @@
     <AssemblyVersion>$(KmVersion).0</AssemblyVersion>
     <InformationalVersion>$(KmVersion)</InformationalVersion>
     <Company>Matroskin</Company>
-    <Product>KM Calculator Setup</Product>
-    <Description>KM Calculator Windows setup launcher</Description>
+    <Product>KM Companion Setup</Product>
+    <Description>KM Companion Windows setup launcher</Description>
     <Copyright>Copyright 2026 Matroskin</Copyright>
   </PropertyGroup>
 

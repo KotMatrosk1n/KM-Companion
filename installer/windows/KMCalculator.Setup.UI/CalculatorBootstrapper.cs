@@ -70,7 +70,7 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
             }
             else
             {
-                using var host = new HwndSource(new HwndSourceParameters("KM Calculator Setup") { Width = 0, Height = 0, WindowStyle = 0 });
+                using var host = new HwndSource(new HwndSourceParameters("KM Companion Setup") { Width = 0, Height = 0, WindowStyle = 0 });
                 parent = host.Handle;
                 BeginDetection();
                 Dispatcher.Run();
@@ -181,7 +181,7 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
         try
         {
             if (newerInstalled && requested is not LaunchAction.Uninstall and not LaunchAction.UnsafeUninstall and not LaunchAction.Layout and not LaunchAction.Cache)
-                throw new InvalidOperationException("A newer version of KM Calculator is installed. Use its setup or Windows Settings to maintain it.");
+                throw new InvalidOperationException("A newer version of KM Companion is installed. Use its setup or Windows Settings to maintain it.");
             ValidateConditions();
             action = requested;
             engine.SetVariableNumeric("KMCreateDesktopShortcut", state.CreateDesktopShortcut ? 1 : 0);
@@ -287,19 +287,19 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
             "InstallFinalize" => "Finishing setup…",
             _ => state.Operation switch
             {
-                SetupOperation.Update => "Updating KM Calculator…",
-                SetupOperation.Repair => "Repairing KM Calculator…",
-                SetupOperation.Uninstall => "Removing KM Calculator…",
+                SetupOperation.Update => "Updating KM Companion…",
+                SetupOperation.Repair => "Repairing KM Companion…",
+                SetupOperation.Uninstall => "Removing KM Companion…",
                 SetupOperation.Cache => "Preparing setup files…",
                 SetupOperation.Layout => "Saving setup files…",
-                _ => "Installing KM Calculator…"
+                _ => "Installing KM Companion…"
             }
         };
     protected override void OnExecuteFilesInUse(ExecuteFilesInUseEventArgs args)
     {
         base.OnExecuteFilesInUse(args);
         args.Result = Interactive && window != null && dispatcher.Invoke(() => window.Ask(
-            "Close applications to continue", "KM Calculator or another application is using files that setup needs. Save your work and close it, then choose Retry.", "Retry", "Cancel setup"))
+            "Close applications to continue", "KM Companion or another application is using files that setup needs. Save your work and close it, then choose Retry.", "Retry", "Cancel setup"))
             ? Result.Retry : Result.Cancel;
     }
     protected override void OnError(ErrorEventArgs args)
@@ -354,11 +354,11 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
     private static string FailureDetail(int code) => ExitCode(code) switch
     {
         5 => "Windows denied access to a required file or folder. Check its permissions, then try again.",
-        32 or 33 => "A required file is in use. Close KM Calculator and other applications using its files, then try again.",
+        32 or 33 => "A required file is in use. Close KM Companion and other applications using its files, then try again.",
         112 => "There is not enough free disk space to finish setup. Free some space, then try again.",
         1618 => "Another installation is running. Wait for it to finish, then run setup again.",
         1612 or 1619 or 1620 => "Setup could not read the required installation files. Download the complete installer and try again.",
-        1638 => "Another version of KM Calculator is already installed. Use its setup or Windows Settings to maintain it.",
+        1638 => "Another version of KM Companion is already installed. Use its setup or Windows Settings to maintain it.",
         _ => "Setup could not complete the requested changes. Open the setup log for details."
     };
     private void Exit()

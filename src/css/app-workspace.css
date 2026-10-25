@@ -408,11 +408,16 @@ body.km-app .km-results-expanded .km-result-slots { display: none; }
 body.km-app.doubles-format-selected .km-results-expanded .move-result-subgroup { display: block !important; margin-bottom: 8px; }
 body.km-app .km-results-expanded .move-result-group .btn { min-height: 26px; padding-top: 3px; padding-bottom: 3px; }
 body.km-app .km-results-expanded .move-result-subgroup > div:not(.result-move-header) { margin: 3px 0; }
-body.km-app .box-poke { display: flex; flex-wrap: wrap; align-content: start; gap: 4px; justify-content: flex-start; }
-body.km-app .box-poke .box-pokemon { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 68px; width: 68px; height: 68px; margin: 0; padding: 3px; }
+body.km-app .box-poke { display: grid; grid-template-columns: repeat(var(--km-box-columns, 6), var(--km-box-cell-size, 32px)); grid-template-rows: repeat(var(--km-box-rows, 5), var(--km-box-cell-size, 32px)); align-content: start; gap: 3px; justify-content: start; padding: 4px; }
+body.km-app .box-poke .box-pokemon { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; width: var(--km-box-cell-size, 32px); height: var(--km-box-cell-size, 32px); margin: 0; padding: 2px; }
+body.km-app .box-poke .box-pokemon[hidden] { display: none; }
 body.km-app .box-poke .team-box-filter-hidden { display: none !important; }
-body.km-app .box-pokemon-sprite { width: 44px; height: 44px; max-height: 44px; object-fit: contain; }
-.km-box-name { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+body.km-app .box-pokemon-sprite { width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: 40px; max-height: 40px; object-fit: contain; image-rendering: pixelated; }
+body.km-app #team-poke-list { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; }
+body.km-app #team-poke-list .box-pokemon { flex-direction: column; flex: 0 0 68px; width: 68px; height: 68px; padding: 3px; }
+body.km-app #team-poke-list .box-pokemon-sprite { width: 44px; height: 44px; max-width: 36px; max-height: 44px; image-rendering: auto; }
+body.km-app #team-poke-list .km-box-name { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+body.km-app .box-poke:empty::before, body.km-app .box-poke.team-box-filter-empty::after { grid-column: 1 / -1; grid-row: 1 / -1; align-self: center; }
 .km-box-pages { display: flex; align-items: center; justify-content: space-between; padding: 4px; font-size: 11px; }
 body.km-app .km-box-pages button { height: 26px; min-width: 28px; padding: 3px; }
 /* The team drawer shares the calculator's live controls without covering the matchup. */

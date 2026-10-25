@@ -1,4 +1,4 @@
-# KM Calculator Code of Conduct
+# KM Companion Code of Conduct
 
 ## The short version
 
@@ -8,7 +8,7 @@ Damage calculations get technical, modded data gets strange, and frustration hap
 
 ## Where this applies
 
-This code of conduct applies to KM Calculator issues, pull requests, discussions, documentation contributions, release conversations, and other spaces managed by the project. It also applies when someone is representing KM Calculator in another public space.
+This code of conduct applies to KM Companion issues, pull requests, discussions, documentation contributions, release conversations, and other spaces managed by the project. It also applies when someone is representing KM Companion in another public space.
 
 ## What good participation looks like
 

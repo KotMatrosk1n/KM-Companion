@@ -289,6 +289,48 @@
 			}
 		};
 	}
+	function getBoxPageLayout(zone, scale) {
+		if (zone.id === "team-poke-list") {
+			var width = zone.getBoundingClientRect().width / scale;
+			var section = zone.parentNode;
+			var available = (section.getBoundingClientRect().height - section.querySelector(".team-box-heading").getBoundingClientRect().height) / scale - 34;
+			var columns = Math.max(1, Math.floor((width - 8) / 72));
+			var rows = Math.max(1, Math.min(5, Math.floor((available - 8) / 72)));
+			return {capacity: Math.min(6, columns * rows), columns: columns, rows: rows};
+		}
+		var profile = registry && registry.getActiveProfile();
+		var generation = Number(profile ? profile.baseGeneration : window.gen || (document.querySelector(".gen:checked") || {}).value || 8);
+		return generation <= 2 ? {capacity: 20, columns: 5, rows: 4} : {capacity: 30, columns: 6, rows: 5};
+	}
+	function updateBoxPage(view, scale) {
+		var layout = getBoxPageLayout(view.zone, scale);
+		var matches = Array.prototype.filter.call(view.zone.children, function (node) {
+			return node.classList.contains("box-pokemon") && !node.classList.contains("team-box-filter-hidden");
+		}).sort(function (left, right) { return (Number(left.style.order) || 0) - (Number(right.style.order) || 0); });
+		var pages = Math.max(1, Math.ceil(matches.length / layout.capacity));
+		view.page = Math.max(0, Math.min(view.page, pages - 1));
+		Array.prototype.forEach.call(view.zone.children, function (node) {
+			if (!node.classList.contains("box-pokemon")) return;
+			var index = matches.indexOf(node);
+			var hide = index < 0 || Math.floor(index / layout.capacity) !== view.page;
+			if (node.hidden !== hide) node.hidden = hide;
+			if (typeof window.updateTeamBoxPokemonPresentation === "function") window.updateTeamBoxPokemonPresentation(node);
+		});
+		view.pager.hidden = pages === 1;
+		view.status.textContent = (view.page + 1) + " / " + pages;
+		view.previous.disabled = view.page === 0; view.next.disabled = view.page === pages - 1;
+		if (view.zone.id === "team-poke-list") return;
+		var rect = view.zone.getBoundingClientRect();
+		if (!rect.width || !rect.height) return;
+		// Resize the cells to fit a complete game box without changing page membership.
+		var size = Math.max(1, Math.floor(Math.min(48,
+			(rect.width / scale - 8 - (layout.columns - 1) * 3) / layout.columns,
+			(rect.height / scale - 8 - (layout.rows - 1) * 3) / layout.rows)));
+		var properties = {"--km-box-columns": String(layout.columns), "--km-box-rows": String(layout.rows), "--km-box-cell-size": size + "px"};
+		Object.keys(properties).forEach(function (key) {
+			if (view.zone.style.getPropertyValue(key) !== properties[key]) view.zone.style.setProperty(key, properties[key]);
+		});
+	}
 	function setupCalculator(wrapper) {
 		var boxViews = [];
 		var heading = el("div", "km-page-heading km-calculator-heading");
@@ -396,37 +438,28 @@
 			view.next = button("›", function () { view.page++; resizeWorkspace(); }); view.next.setAttribute("aria-label", "Next " + name + " page");
 			pager.appendChild(view.previous); pager.appendChild(status); pager.appendChild(view.next); zone.after(pager); boxViews.push(view);
 			new window.MutationObserver(function (records) {
+				records = records.filter(function (record) {
+					return record.type !== "attributes" || record.attributeName !== "style" || record.target.classList.contains("box-pokemon");
+				});
+				if (!records.length) return;
 				if (records.some(function (record) {
-					return record.type === "attributes" && /\bteam-box-filter-hidden\b/.test(record.oldValue || "") !== record.target.classList.contains("team-box-filter-hidden");
+					return record.type === "attributes" && record.attributeName === "class" && /\bteam-box-filter-hidden\b/.test(record.oldValue || "") !== record.target.classList.contains("team-box-filter-hidden");
 				})) view.page = 0;
 				resizeWorkspace();
-			}).observe(zone, {childList: true, subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ["class"]});
+			}).observe(zone, {childList: true, subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ["class", "style"]});
 		});
 		resizeWorkspace = function () {
 			var scale = Number(window.getComputedStyle(document.body).zoom) || 1;
 			var availableHeight = window.innerHeight / scale - drawer.resize(window.innerHeight / scale);
 			var expanded = window.innerWidth / scale >= 1500 && availableHeight >= 960;
 			results.classList.toggle("km-results-expanded", expanded);
-			boxViews.forEach(function (view) {
-				var rect = view.zone.getBoundingClientRect(); if (!rect.width) return;
-				var columns = Math.max(1, Math.floor((rect.width / scale - 8) / 72));
-				var section = view.zone.parentNode;
-				var available = (section.getBoundingClientRect().height - section.querySelector(".team-box-heading").getBoundingClientRect().height) / scale - 34;
-				var rows = Math.max(1, Math.min(5, Math.floor((available - 8) / 72)));
-				var capacity = columns * rows;
-				var matches = Array.prototype.filter.call(view.zone.children, function (node) { return node.classList.contains("box-pokemon") && !node.classList.contains("team-box-filter-hidden"); });
-				var pages = Math.max(1, Math.ceil(matches.length / capacity)); view.page = Math.max(0, Math.min(view.page, pages - 1));
-				Array.prototype.forEach.call(view.zone.children, function (node) {
-					if (!node.classList.contains("box-pokemon")) return;
-					var index = matches.indexOf(node); var hide = index >= 0 && Math.floor(index / capacity) !== view.page;
-					if (node.hidden !== hide) node.hidden = hide;
-					if (!node.querySelector(".km-box-name")) node.appendChild(el("span", "km-box-name", node.getAttribute("data-pokemon")));
-				});
-				view.pager.hidden = pages === 1; view.status.textContent = (view.page + 1) + " / " + pages;
-				view.previous.disabled = view.page === 0; view.next.disabled = view.page === pages - 1;
-			});
+			boxViews.forEach(function (view) { updateBoxPage(view, scale); });
 		};
 		window.addEventListener("resize", resizeWorkspace);
+		window.addEventListener("kmcalculator:romhackchange", function () {
+			boxViews.forEach(function (view) { view.page = 0; }); resizeWorkspace();
+		});
+		if (window.jQuery) window.jQuery(document).on("change.kmBoxPages", ".gen", function () { resizeWorkspace(); });
 		if (window.ResizeObserver) new window.ResizeObserver(resizeWorkspace).observe(lower);
 		if (window.ResizeObserver) new window.ResizeObserver(resizeWorkspace).observe(field);
 	}

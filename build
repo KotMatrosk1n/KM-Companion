@@ -39,7 +39,7 @@ const srcRuntimeFiles = new Set([
 	'css/app-workspace.css',
 	'css/main.css',
 	'css/vendor/bootstrap.css',
-	'img/km-calculator-icon.png',
+	'img/km-companion-icon.png',
 	'img/royal-sword.png',
 	'img/trainers/swsh-artist.png',
 	'img/trainers/swsh-backpacker.png',

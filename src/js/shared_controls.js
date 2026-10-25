@@ -607,7 +607,7 @@ function getPokemonSpriteId(pokemonName) {
 
 function getPokemonSpriteUrl(pokemonName) {
 	var desktopSpriteBaseUrl = getDesktopSpriteBaseUrl();
-	if (!desktopSpriteBaseUrl) return "./img/km-calculator-icon.png";
+	if (!desktopSpriteBaseUrl) return "./img/km-companion-icon.png";
 	return desktopSpriteBaseUrl + "/gen5/" + getPokemonSpriteId(pokemonName) + ".png";
 }
 
@@ -638,9 +638,12 @@ function getPokemonSpriteUrls(pokemonName, options) {
 	}
 	if (!desktopSpriteBaseUrl) return [getPokemonSpriteUrl(pokemonName)];
 	if (options && options.preferStatic) {
-		return [
-			desktopSpriteBaseUrl + "/gen5/" + spriteId + ".png"
-		];
+		var staticUrls = [desktopSpriteBaseUrl + "/gen5/" + spriteId + ".png"];
+		var species = pokedex && pokedex[pokemonName];
+		if (species && species.baseSpecies && species.baseSpecies !== pokemonName) {
+			staticUrls.push(desktopSpriteBaseUrl + "/gen5/" + getPokemonSpriteId(species.baseSpecies) + ".png");
+		}
+		return staticUrls;
 	}
 	return [
 		desktopSpriteBaseUrl + "/ani/" + spriteId + ".gif",
@@ -1541,7 +1544,10 @@ function applyTeamBoxLayout(layout) {
 		if (!zone) continue;
 		for (var j = 0; j < setNames.length; j++) {
 			var pokemon = document.getElementById(getTeamBoxPokemonId(setNames[j]));
-			if (pokemon) zone.appendChild(pokemon);
+			if (pokemon) {
+				zone.appendChild(pokemon);
+				updateTeamBoxPokemonPresentation(pokemon);
+			}
 		}
 	}
 }
@@ -1596,6 +1602,25 @@ function setTeamBoxPokemonLabels(button, fullSetName) {
 		.attr("title", tooltip);
 }
 
+function updateTeamBoxPokemonPresentation(pokemonButton) {
+	var button = $(pokemonButton);
+	var isTeam = button.parent().attr("id") === "team-poke-list";
+	var style = isTeam ? "animated" : "static";
+	var pokemonName = button.attr("data-pokemon");
+	if (button.attr("data-sprite-style") !== style) {
+		button.children(".box-pokemon-sprite").remove();
+		button.prepend(createPokemonSprite(pokemonName, "box-pokemon-sprite", {preferStatic: !isTeam}));
+		button.attr("data-sprite-style", style);
+	}
+	var name = button.children(".km-box-name");
+	if (isTeam) {
+		if (!name.length) name = $("<span class='km-box-name'></span>").appendTo(button);
+		if (name.text() !== pokemonName) name.text(pokemonName);
+	} else {
+		name.remove();
+	}
+}
+
 function addBoxedPokemon(pokemonName, movesetName) {
 	if (!$("#team-box").length || !pokedex || !pokedex[pokemonName]) return;
 	var fullSetName = pokemonName + " (" + movesetName + ")";
@@ -1603,6 +1628,7 @@ function addBoxedPokemon(pokemonName, movesetName) {
 	var existingButton = document.getElementById(pokemonId);
 	if (existingButton) {
 		setTeamBoxPokemonLabels(existingButton, fullSetName);
+		updateTeamBoxPokemonPresentation(existingButton);
 		return;
 	}
 
@@ -1613,8 +1639,8 @@ function addBoxedPokemon(pokemonName, movesetName) {
 	button.attr("data-pokemon", pokemonName);
 	button.attr("data-set", movesetName);
 	setTeamBoxPokemonLabels(button, fullSetName);
-	button.append(createPokemonSprite(pokemonName, "box-pokemon-sprite"));
 	$("#box-poke-list").append(button);
+	updateTeamBoxPokemonPresentation(button);
 }
 
 function syncTeamBoxWithCustomSets(customsets) {

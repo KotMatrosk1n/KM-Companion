@@ -1,6 +1,6 @@
 /*global module */
 
-/* Reversible UI layouts for KM Calculator ROM-hack profiles. */
+/* Reversible UI layouts for KM Companion ROM-hack profiles. */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) {
 		module.exports = factory();
@@ -252,7 +252,7 @@
 			if (!root.contains(captured[i].node)) missing.push(captured[i].selector);
 		}
 		if (missing.length) {
-			throw new Error("Layout " + provider.id + " detached shared KM Calculator services: " +
+			throw new Error("Layout " + provider.id + " detached shared KM Companion services: " +
 				missing.join(", ") + ".");
 		}
 	}
@@ -435,7 +435,7 @@
 
 	function install(registry) {
 		if (!registry || typeof registry.registerLayoutProvider !== "function") {
-			throw new TypeError("A KM Calculator ROM hack registry with layout support is required.");
+			throw new TypeError("A KM Companion ROM hack registry with layout support is required.");
 		}
 		registry.registerLayoutProvider(BASE_LAYOUT_ID, baseLayoutProvider);
 		registry.registerLayoutProvider("royal-sword", royalSwordLayoutProvider);

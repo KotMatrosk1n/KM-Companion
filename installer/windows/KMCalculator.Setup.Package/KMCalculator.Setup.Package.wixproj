@@ -1,7 +1,7 @@
 <Project Sdk="WixToolset.Sdk/7.0.0">
   <PropertyGroup>
     <OutputType>Package</OutputType>
-    <OutputName>KM.Calculator</OutputName>
+    <OutputName>KM.Companion</OutputName>
     <Platform>x64</Platform>
     <InstallerPlatform>x64</InstallerPlatform>
     <Cultures>en-US</Cultures>

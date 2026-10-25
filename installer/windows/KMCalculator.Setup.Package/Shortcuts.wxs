@@ -9,9 +9,9 @@
                  Transitive="yes"
                  Condition="KM_CREATE_START_MENU_SHORTCUT = 1">
         <Shortcut Id="KmCalculatorStartMenuShortcut"
-                  Name="KM Calculator"
-                  Description="Open KM Calculator"
-                  Target="[INSTALLFOLDER]KM Calculator.exe"
+                  Name="KM Companion"
+                  Description="Open KM Companion"
+                  Target="[INSTALLFOLDER]KM Companion.exe"
                   WorkingDirectory="INSTALLFOLDER"
                   Icon="KmCalculatorProductIcon.ico" />
         <RemoveFolder Id="RemoveKmCalculatorStartMenuFolder" Directory="KmCalculatorStartMenuFolder" On="uninstall" />
@@ -30,9 +30,9 @@
                  Transitive="yes"
                  Condition="KM_CREATE_DESKTOP_SHORTCUT = 1">
         <Shortcut Id="KmCalculatorDesktopShortcut"
-                  Name="KM Calculator"
-                  Description="Open KM Calculator"
-                  Target="[INSTALLFOLDER]KM Calculator.exe"
+                  Name="KM Companion"
+                  Description="Open KM Companion"
+                  Target="[INSTALLFOLDER]KM Companion.exe"
                   WorkingDirectory="INSTALLFOLDER"
                   Icon="KmCalculatorProductIcon.ico" />
         <RegistryValue Root="HKCU"

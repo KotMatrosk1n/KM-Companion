@@ -117,7 +117,7 @@ function Add-FileComponent {
     )
 
     $relative = Get-NormalizedRelativePath -Root $Root -Path $File.FullName
-    $isMainExecutable = $relative.Equals("KM Calculator.exe", [StringComparison]::OrdinalIgnoreCase)
+    $isMainExecutable = $relative.Equals("KM Companion.exe", [StringComparison]::OrdinalIgnoreCase)
     $componentId = if ($isMainExecutable) {
         "KmCalculatorMainExecutableComponent"
     } else {
@@ -150,7 +150,7 @@ function Add-FileComponent {
 
 $payloadRoot = (Resolve-Path -LiteralPath $PayloadDirectory).Path.TrimEnd('\')
 $requiredFiles = @(
-    "KM Calculator.exe",
+    "KM Companion.exe",
     "resources\app.asar",
     "resources\app-update.yml",
     "resources\sprites\manifest.json"

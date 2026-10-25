@@ -37,13 +37,13 @@ module.exports = function registerRunTools(options) {
 	}
 	handle("km-calculator-run-save", async function (parent, value) {
 		var backup = data.validate(value);
-		var result = await options.dialog.showSaveDialog(parent, {title: "Back Up Run", defaultPath: "KM-Calculator-" + backup.profile.id + "-" + backup.createdAt.slice(0, 10) + ".json", filters: [{name: "KM Calculator run backup", extensions: ["json"]}]});
+		var result = await options.dialog.showSaveDialog(parent, {title: "Back Up Run", defaultPath: "KM-Companion-" + backup.profile.id + "-" + backup.createdAt.slice(0, 10) + ".json", filters: [{name: "KM Companion run backup", extensions: ["json"]}]});
 		if (result.canceled || !result.filePath) return {canceled: true};
 		atomicWrite(result.filePath, JSON.stringify(backup));
 		return {saved: true};
 	});
 	handle("km-calculator-run-read", async function (parent) {
-		var result = await options.dialog.showOpenDialog(parent, {title: "Restore Run", properties: ["openFile"], filters: [{name: "KM Calculator run backup", extensions: ["json"]}]});
+		var result = await options.dialog.showOpenDialog(parent, {title: "Restore Run", properties: ["openFile"], filters: [{name: "KM Companion run backup", extensions: ["json"]}]});
 		if (result.canceled || !result.filePaths.length) return {canceled: true};
 		return {backup: readBackup(result.filePaths[0])};
 	});

@@ -20,7 +20,7 @@ Describe the calculation, team building, trainer data, save import, or desktop u
 
 # Desired workflow
 
-Explain how the feature should work from opening KM Calculator through seeing or exporting the result.
+Explain how the feature should work from opening KM Companion through seeing or exporting the result.
 
 # Public references
 

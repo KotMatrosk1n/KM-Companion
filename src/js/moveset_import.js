@@ -71,8 +71,8 @@ function createRoyalSwordTrainerPack() {
 		mod: "Pokemon Royal Sword",
 		authors: [{name: "Matroskin", url: "https://github.com/KotMatrosk1n"}],
 		source: {
-			name: "KM Calculator bundled trainer data",
-			url: "https://github.com/KotMatrosk1n/KM-Calculator"
+			name: "KM Companion bundled trainer data",
+			url: "https://github.com/KotMatrosk1n/KM-Companion"
 		},
 		license: "MIT",
 		trainers: normalized
@@ -95,7 +95,7 @@ function createImportedTrainerProfile(pack) {
 		saveImport: {generation: pack.generations[0]},
 		tile: {
 			description: pack.description || pack.name + " trainer data over Generation " + pack.generations[0] + ".",
-			icon: "./img/km-calculator-icon.png",
+			icon: "./img/km-companion-icon.png",
 			badge: "Generation " + pack.generations[0]
 		},
 		attribution: {

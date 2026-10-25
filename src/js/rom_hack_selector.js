@@ -1,6 +1,6 @@
 /*global module */
 
-/* Accessible startup chooser for bundled KM Calculator ROM hack profiles. */
+/* Accessible startup chooser for bundled KM Companion ROM hack profiles. */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) {
 		module.exports = factory();

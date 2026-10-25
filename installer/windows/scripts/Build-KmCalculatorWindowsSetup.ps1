@@ -130,7 +130,7 @@ function New-StagedUpdaterConfiguration {
     $configText = @(
         "provider: github",
         "owner: KotMatrosk1n",
-        "repo: KM-Calculator",
+        "repo: KM-Companion",
         "updaterCacheDirName: km-calculator-updater"
     ) -join "`n"
     $configText += "`n"
@@ -166,7 +166,7 @@ function Invoke-AuthenticodeSign {
         "/tr", $Rfc3161TimestampUrl,
         "/f", $CertificatePath,
         "/p", $Password,
-        "/d", "KM Calculator",
+        "/d", "KM Companion",
         $TargetPath
     )
     Invoke-CheckedProcess -FilePath $SignToolPath -Arguments @("verify", "/pa", "/all", "/v", $TargetPath)
@@ -289,7 +289,7 @@ $outputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 [IO.Directory]::CreateDirectory($outputRoot) | Out-Null
 
 $requiredFiles = @(
-    "KM Calculator.exe",
+    "KM Companion.exe",
     "resources\app.asar",
     "resources\sprites\manifest.json"
 )
@@ -305,10 +305,10 @@ if ($reparsePoint) {
     throw "Packaged Electron payload contains a file-system link: $($reparsePoint.FullName)"
 }
 
-$mainExecutable = Get-Item -LiteralPath (Join-Path $appRoot "KM Calculator.exe")
+$mainExecutable = Get-Item -LiteralPath (Join-Path $appRoot "KM Companion.exe")
 $versionInfo = $mainExecutable.VersionInfo
-if ($versionInfo.ProductName -ne "KM Calculator" -or $versionInfo.FileVersion -notlike "$Version*") {
-    throw "Packaged executable metadata does not match KM Calculator $Version."
+if ($versionInfo.ProductName -ne "KM Companion" -or $versionInfo.FileVersion -notlike "$Version*") {
+    throw "Packaged executable metadata does not match KM Companion $Version."
 }
 
 $buildRoot = Join-Path $windowsDirectory "obj\setup-build"
@@ -333,7 +333,7 @@ try {
         $signingCertificate = Get-SigningCertificate `
             -CertificatePath $SigningCertificatePath `
             -Password $SigningCertificatePassword
-        $stagedMainExecutable = Join-Path $payloadStage "KM Calculator.exe"
+        $stagedMainExecutable = Join-Path $payloadStage "KM Companion.exe"
         Invoke-AuthenticodeSign `
             -SignToolPath $signToolPath `
             -CertificatePath $SigningCertificatePath `
@@ -353,8 +353,8 @@ try {
         -PayloadDirectory $payloadStage `
         -OutputPath $generatedPayloadWxs
 
-    $iconPath = Join-Path $repositoryRoot "electron\assets\km-calculator-icon.ico"
-    $logoPath = Join-Path $repositoryRoot "electron\assets\km-calculator-icon.png"
+    $iconPath = Join-Path $repositoryRoot "electron\assets\km-companion-icon.ico"
+    $logoPath = Join-Path $repositoryRoot "electron\assets\km-companion-icon.png"
     $packageOutput = Join-Path $buildDirectory "package"
     $bundleOutput = Join-Path $buildDirectory "bundle"
     $launcherOutput = Join-Path $buildDirectory "launcher"
@@ -371,9 +371,9 @@ try {
         "-p:KmGeneratedPayloadWxs=$generatedPayloadWxs",
         "-p:KmIconPath=$iconPath"
     )
-    $msiPath = Join-Path $packageOutput "KM.Calculator.msi"
+    $msiPath = Join-Path $packageOutput "KM.Companion.msi"
     if (-not (Test-Path -LiteralPath $msiPath -PathType Leaf)) {
-        throw "The WiX package build did not produce KM.Calculator.msi."
+        throw "The WiX package build did not produce KM.Companion.msi."
     }
     if ($signingEnabled) {
         Invoke-AuthenticodeSign `
@@ -399,9 +399,9 @@ try {
         "-p:KmIconPath=$iconPath",
         "-p:KmLogoPath=$logoPath"
     )
-    $setupUiPath = Join-Path $setupUiOutput "KMCalculator.Setup.UI.exe"
+    $setupUiPath = Join-Path $setupUiOutput "KMCompanion.Setup.UI.exe"
     if (-not (Test-Path -LiteralPath $setupUiPath -PathType Leaf)) {
-        throw "The setup UI publish did not produce KMCalculator.Setup.UI.exe."
+        throw "The setup UI publish did not produce KMCompanion.Setup.UI.exe."
     }
     if ($signingEnabled) {
         Invoke-AuthenticodeSign `
@@ -424,9 +424,9 @@ try {
         "-p:KmIconPath=$iconPath",
         "-p:KmSetupUiDir=$setupUiOutput"
     )
-    $innerBundlePath = Join-Path $bundleOutput "KM.Calculator.Bundle.exe"
+    $innerBundlePath = Join-Path $bundleOutput "KM.Companion.Bundle.exe"
     if (-not (Test-Path -LiteralPath $innerBundlePath -PathType Leaf)) {
-        throw "The WiX bundle build did not produce KM.Calculator.Bundle.exe."
+        throw "The WiX bundle build did not produce KM.Companion.Bundle.exe."
     }
     if ($signingEnabled) {
         Invoke-AuthenticodeSign `
@@ -438,7 +438,7 @@ try {
             -ExpectedCertificate $signingCertificate
     }
 
-    $innerBundleHashFile = Join-Path $buildDirectory "KM.Calculator.Bundle.sha256"
+    $innerBundleHashFile = Join-Path $buildDirectory "KM.Companion.Bundle.sha256"
     $innerBundleHash = (Get-FileHash -LiteralPath $innerBundlePath -Algorithm SHA256).Hash.ToLowerInvariant()
     [IO.File]::WriteAllText($innerBundleHashFile, $innerBundleHash + "`n", [Text.UTF8Encoding]::new($false))
     $versionFile = Join-Path $buildDirectory "version.txt"
@@ -457,9 +457,9 @@ try {
         "-p:KmInnerBundleSha256File=$innerBundleHashFile",
         "-p:KmVersionFile=$versionFile"
     )
-    $launcherPath = Join-Path $launcherOutput "KM-Calculator-Setup.exe"
+    $launcherPath = Join-Path $launcherOutput "KM-Companion-Setup.exe"
     if (-not (Test-Path -LiteralPath $launcherPath -PathType Leaf)) {
-        throw "The setup launcher build did not produce KM-Calculator-Setup.exe."
+        throw "The setup launcher build did not produce KM-Companion-Setup.exe."
     }
     if ($signingEnabled) {
         Invoke-AuthenticodeSign `
@@ -471,7 +471,7 @@ try {
             -ExpectedCertificate $signingCertificate
     }
 
-    $artifactName = "KM-Calculator-Setup-$Version.exe"
+    $artifactName = "KM-Companion-Setup-$Version.exe"
     $artifactPath = Join-Path $outputRoot $artifactName
     Copy-Item -LiteralPath $launcherPath -Destination $artifactPath -Force
 
@@ -491,7 +491,7 @@ try {
 
     $receipt = [ordered]@{
         schemaVersion = 1
-        product = "KM Calculator"
+        product = "KM Companion"
         version = $Version
         architecture = "x64"
         payloadFileCount = $payloadFileCount
@@ -503,9 +503,9 @@ try {
         signerSubject = $(if ($signingEnabled) { $signingCertificate.Subject } else { $null })
         signerThumbprint = $(if ($signingEnabled) { $signingCertificate.Thumbprint } else { $null })
     }
-    $receipt | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $outputRoot "KM-Calculator-Setup-$Version.receipt.json") -Encoding utf8NoBOM
+    $receipt | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $outputRoot "KM-Companion-Setup-$Version.receipt.json") -Encoding utf8NoBOM
 
-    Write-Host "Built KM Calculator setup: $artifactPath"
+    Write-Host "Built KM Companion setup: $artifactPath"
 } finally {
     if ($signingCertificate) {
         $signingCertificate.Dispose()
