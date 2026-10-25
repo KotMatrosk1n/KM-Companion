@@ -289,24 +289,39 @@
 			}
 		};
 	}
-	function getBoxPageLayout(zone, scale) {
-		if (zone.id === "team-poke-list") {
-			var width = zone.getBoundingClientRect().width / scale;
-			var section = zone.parentNode;
-			var available = (section.getBoundingClientRect().height - section.querySelector(".team-box-heading").getBoundingClientRect().height) / scale - 34;
-			var columns = Math.max(1, Math.floor((width - 8) / 72));
-			var rows = Math.max(1, Math.min(5, Math.floor((available - 8) / 72)));
-			return {capacity: Math.min(6, columns * rows), columns: columns, rows: rows};
-		}
+	function getBoxPageLayout(zone, scale, height) {
+		if (zone.id === "team-poke-list") return {capacity: 6, columns: 6, rows: 1};
 		var profile = registry && registry.getActiveProfile();
 		var generation = Number(profile ? profile.baseGeneration : window.gen || (document.querySelector(".gen:checked") || {}).value || 8);
-		return generation <= 2 ? {capacity: 20, columns: 5, rows: 4} : {capacity: 30, columns: 6, rows: 5};
+		var minimum = generation <= 2 ? 20 : 30;
+		var rect = zone.getBoundingClientRect();
+		var width = Math.max(1, rect.width / scale - 8);
+		height = Math.max(1, (height === undefined ? rect.height / scale : height) - 8);
+		var columns = Math.max(1, Math.floor((width + 3) / 35));
+		var rows = Math.max(1, Math.floor((height + 3) / 35));
+		if (columns * rows < minimum) {
+			// Keep the minimum capacity in small windows, choosing the shape that fits best.
+			var bestSize = -Infinity;
+			for (var count = 1; count <= minimum; count++) {
+				var neededRows = Math.ceil(minimum / count);
+				var size = Math.min((width - (count - 1) * 3) / count, (height - (neededRows - 1) * 3) / neededRows);
+				if (size > bestSize) { bestSize = size; columns = count; rows = neededRows; }
+			}
+		}
+		return {capacity: columns * rows, columns: columns, rows: rows};
 	}
 	function updateBoxPage(view, scale) {
-		var layout = getBoxPageLayout(view.zone, scale);
+		var rect = view.zone.getBoundingClientRect();
+		if (!rect.width || !rect.height) return;
 		var matches = Array.prototype.filter.call(view.zone.children, function (node) {
 			return node.classList.contains("box-pokemon") && !node.classList.contains("team-box-filter-hidden");
 		}).sort(function (left, right) { return (Number(left.style.order) || 0) - (Number(right.style.order) || 0); });
+		var pagerHeight = view.pager.getBoundingClientRect().height / scale || 34;
+		var height = rect.height / scale + (view.pager.hidden ? 0 : pagerHeight);
+		var layout = getBoxPageLayout(view.zone, scale, height);
+		if (matches.length > layout.capacity) layout = getBoxPageLayout(view.zone, scale, height - pagerHeight);
+		if (view.capacity && view.capacity !== layout.capacity) view.page = Math.floor(view.page * view.capacity / layout.capacity);
+		view.capacity = layout.capacity;
 		var pages = Math.max(1, Math.ceil(matches.length / layout.capacity));
 		view.page = Math.max(0, Math.min(view.page, pages - 1));
 		Array.prototype.forEach.call(view.zone.children, function (node) {
@@ -319,14 +334,11 @@
 		view.pager.hidden = pages === 1;
 		view.status.textContent = (view.page + 1) + " / " + pages;
 		view.previous.disabled = view.page === 0; view.next.disabled = view.page === pages - 1;
-		if (view.zone.id === "team-poke-list") return;
-		var rect = view.zone.getBoundingClientRect();
-		if (!rect.width || !rect.height) return;
-		// Resize the cells to fit a complete game box without changing page membership.
-		var size = Math.max(1, Math.floor(Math.min(48,
-			(rect.width / scale - 8 - (layout.columns - 1) * 3) / layout.columns,
-			(rect.height / scale - 8 - (layout.rows - 1) * 3) / layout.rows)));
-		var properties = {"--km-box-columns": String(layout.columns), "--km-box-rows": String(layout.rows), "--km-box-cell-size": size + "px"};
+		var properties = {"--km-box-columns": String(layout.columns), "--km-box-rows": String(layout.rows)};
+		if (view.zone.id === "team-poke-list") {
+			var cardWidth = Math.max(1, (rect.width / scale - 8 - 5 * 3) / 6);
+			properties["--km-team-card-height"] = Math.max(1, Math.min(rect.height / scale - 8, cardWidth + 18)) + "px";
+		}
 		Object.keys(properties).forEach(function (key) {
 			if (view.zone.style.getPropertyValue(key) !== properties[key]) view.zone.style.setProperty(key, properties[key]);
 		});
@@ -460,7 +472,11 @@
 			boxViews.forEach(function (view) { view.page = 0; }); resizeWorkspace();
 		});
 		if (window.jQuery) window.jQuery(document).on("change.kmBoxPages", ".gen", function () { resizeWorkspace(); });
-		if (window.ResizeObserver) new window.ResizeObserver(resizeWorkspace).observe(lower);
+		if (window.ResizeObserver) {
+			var boxObserver = new window.ResizeObserver(resizeWorkspace);
+			boxObserver.observe(lower);
+			boxViews.forEach(function (view) { boxObserver.observe(view.zone); });
+		}
 		if (window.ResizeObserver) new window.ResizeObserver(resizeWorkspace).observe(field);
 	}
 
