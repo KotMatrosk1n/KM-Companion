@@ -1,4 +1,6 @@
-# KM Calculator
+# KM Companion
+
+<img src="src/img/km-companion-icon.png" alt="KM Companion field guide icon" width="96" height="96" />
 
 ![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D6)
 ![Built with](https://img.shields.io/badge/built%20with-Electron%2042-47848F)
@@ -6,33 +8,46 @@
 ![Bundled profile](https://img.shields.io/badge/bundled%20profile-Royal%20Sword-blue)
 [![License](https://img.shields.io/badge/license-GPLv3-lightgrey)](LICENSE)
 
-KM Calculator is a Windows desktop damage calculator built for Pokémon ROM hacks and the game generations beneath them.
+Plan battles, manage your team, and keep track of your run. KM Companion brings damage calculations, encounter tracking, trainer references, item progress, and player notes together in a Windows desktop app for Pokémon ROM hacks.
 
-It keeps each hack's trainers, calculation data, save rules, input policies, layout, and optional tools inside an explicit profile. That makes Royal Sword the first supported game, not the boundary of the calculator.
+Previously named KM Calculator, it keeps existing saved teams, notes, settings, run progress, and compatible backups available under the new name.
 
-Different hacks can share a generation. Their data should never share a namespace by accident.
+Pokémon Royal Sword is the first bundled profile. Support for each hack belongs to its own profile, so its Pokémon, moves, abilities, mechanics, and run tools can reflect the game you are playing.
 
-[Learn about ROM hack profiles](docs/rom-hack-profiles.md) | [Browse release history](https://github.com/KotMatrosk1n/KM-Calculator/releases) | [Report an issue](https://github.com/KotMatrosk1n/KM-Calculator/issues/new/choose)
+[Explore the workspace](docs/app-workspace.md) | [Add support for a ROM hack](docs/rom-hack-profiles.md) | [Browse releases](https://github.com/KotMatrosk1n/KM-Companion/releases) | [Report an issue](https://github.com/KotMatrosk1n/KM-Companion/issues/new/choose)
 
-## Calculate Across Generations And ROM Hacks
+## Plan Your Battles
 
-KM Calculator's canonical calculation foundation covers Generations 1 through 9. An installed ROM hack profile chooses its base generation, then layers only that hack's species, forms, stats, types, moves, abilities, items, trainers, save import rules, and special features over the canonical data it actually changes.
+Compare damage rolls, check what your Pokémon can survive, and explore different moves, items, abilities, and spreads. Singles and Doubles share the same team controls, with battlefield settings and Pokémon details available beside the calculation.
 
-Every launch begins with **Which ROM Hack are you playing?** The available tiles come from installed profiles. Royal Sword is currently bundled and loads its data over Generation 8. A **Change ROM Hack** control lets you return to the chooser without restarting the app.
+The calculation engine covers Generations 1 through 9. Each profile selects its base generation and applies that hack's changes. Royal Sword uses Generation 8, its own calculator layout and trainer data, and a Sword/Shield battle simulator. EV input is disabled for Royal Sword; another profile can use the controls appropriate to its own game.
 
-Profiles use the standard damage calculator layout unless bundled code explicitly selects a registered custom layout. The standard layout keeps the original calculator's IV, DV, EV, level, set, field, and format controls for each generation, then adds KM Calculator's shared workflow tools. Every profile receives Team/Box, Player Notes and Clear Notes, the trainer dropdown and trainer team sprites, save import and border controls, and the enhanced Singles and Doubles experience. While a profile is active, its generation is locked to the base generation declared by that profile.
+Keep your current team beside the calculation. Team retains larger animated sprites and names, while Box, Box 2, Compost, and Trash use compact static sprites with color coding and names available on hover. Royal Sword storage pages hold 30 Pokémon in six columns and five rows. Resizing the window adjusts the cards without changing which Pokémon belong to a page.
 
-Royal Sword explicitly selects its custom arrangement and independently disables EV input. Its layout can reposition the shared workflow tools, but those tools are not Royal Sword exclusive features. Royal Sword also includes its trainer data and Sword/Shield battle simulator. Those profile choices do not pass to another hack unless its own bundled profile declares them.
+## Keep Track Of Your Run
 
-Community trainer packs can be imported without editing the bundled data files. A pack for one generation can become its own selectable tile and use that generation's canonical calculation data and standard layout, while a full game data mod can register a dedicated overlay provider. Imported JSON cannot select or execute a custom layout.
+Royal Sword includes separate Encounters, Trainers, and Route Items sections. Browse encounters by location, method, and weather; use Normal, Royalocke, or Nuzlocke tracking; inspect trainer teams; and mark defeated trainers and collected items. Each encounter mode keeps its own progress, and the rules remain available beside the tracking controls.
 
-## Your Data Stays Under Your Control
+Player Notes and trainer notes keep your plans with the run. **Settings** includes **Back Up Run**, **Restore Run**, and **Undo Last Restore**, with backups covering the selected profile's teams, boxes, notes, imported inventory, and recorded progress. **Reset Run** clears encounter, trainer, and item progress after confirmation while retaining teams, boxes, inventory, notes, settings, and other profiles.
 
-Save files and trainer pack JSON are read locally by the desktop app. They are not uploaded to a server. Imported trainer packs and Team/Box state are stored in the app's local data, and each trainer pack keeps its author, source, version, and redistribution terms attached.
+Route Items currently uses the Sword/Shield 1.3.2 base game guide, including expansions. It is not a verified Royal Sword placement list. Entries retain their source links, edition limits, and known uncertainties. See the [workspace guide](docs/app-workspace.md) for tracking rules, backup scope, and reference coverage.
 
-The selected ROM hack is intentionally requested again on every launch. Switching profiles reloads the associated generation and rebuilds the active species, move, ability, item, trainer, and feature views so one hack's overrides do not leak into another.
+## Getting Started
 
-If a save format or modded layout cannot be recognized safely, import stops instead of guessing. Hacked saves that change the base game's storage layout may require an adapter for that profile.
+A KM Companion desktop release has not been published in this repository yet. To try the current version, follow [Building From Source](#building-from-source), then:
+
+1. Open the generated desktop app.
+2. At **Which ROM Hack are you playing?**, choose **Pokémon Royal Sword** or another installed profile.
+3. Use **Import / Export** to load a compatible save, import community trainer data, or move sets into Team/Box.
+4. Select the trainer or Pokémon sets you want to compare and configure the battlefield.
+5. Open the available reference sections to record encounters, trainer progress, and item pickups.
+6. Use **Change ROM Hack** to return to the chooser without restarting the app.
+
+The app asks you to select a profile on every launch. Switching profiles reloads its data and controls while keeping saved runs separate.
+
+KM Companion does not include ROM files, console keys, save files, or private mod data. You are responsible for obtaining and using game data in compliance with applicable law.
+
+Packaged builds do not require Node.js, Git, a web server, or a separate backend. The generated `dist/` directory is the packaged interface, not a separately supported hosted site.
 
 ## Supported Coverage
 
@@ -51,25 +66,17 @@ Format family recognition does not make every species or form available in every
 
 Save compatibility depends on the exact regional dump, storage layout, game update, and third party tool involved. Keep a backup of the original save before importing it anywhere.
 
-## Getting Started
+## Support For ROM Hack Authors
 
-1. Build KM Calculator from source using the instructions below.
-2. Open the generated desktop app.
-3. At **Which ROM Hack are you playing?**, choose **Pokémon Royal Sword** or another installed profile.
-4. Select the trainer or Pokémon sets you want to compare and configure the battle field.
-5. Use **Import / Export** to load a compatible save, import community trainer data, or move sets into Team/Box.
-6. Use **Change ROM Hack** whenever you need to return to the startup chooser.
+If you are making a ROM hack and need a calculator or companion for your players, [start a discussion](https://github.com/KotMatrosk1n/KM-Companion/discussions). Explain what your game changes and what your players need. Useful support depends on matching the actual Pokémon data and battle mechanics, and on keeping that support accurate as the hack develops.
 
-KM Calculator does not include ROM files, console keys, save files, or private mod data. You are responsible for obtaining and using game data in compliance with applicable law.
+A trainer pack can add selectable trainer teams without editing bundled files. A complete profile can also provide changes to species, forms, stats, types, moves, abilities, items, save rules, and battle behavior. Hacks that share a generation still keep their data and saved runs separate. Imported JSON cannot select or execute a custom layout; that requires reviewed, bundled code.
 
-Packaged KM Calculator builds do not require Node.js, Git, a web server, or a separate backend. The generated `dist/` directory is the packaged interface, not a separately supported hosted site.
-
-## Trainer Data And Community Mods
-
-A trainer pack is a UTF-8 JSON file that identifies its game or mod, base generation, authors, public source, license or redistribution permission, and trainer teams. KM Calculator validates the pack before storing it and prevents an imported file from replacing a bundled pack. Trainer pack JSON is data only: a custom profile layout requires a reviewed, bundled code provider.
+A trainer pack is a UTF-8 JSON file that identifies its game or mod, base generation, authors, public source, license or redistribution permission, and trainer teams. KM Companion validates the pack before storing it and prevents an imported file from replacing a bundled pack.
 
 | What do you need? | Start here |
 | --- | --- |
+| Use teams, tracking, notes, and run backups | [App Workspace](docs/app-workspace.md) |
 | Import or author trainer data | [Trainer Data Packs](docs/trainer-data-packs.md) |
 | Validate a trainer pack | [Trainer Pack v1 Schema](docs/schemas/trainer-pack-v1.schema.json) |
 | Start from a working file | [Example Trainer Pack](docs/examples/trainer-pack.example.json) |
@@ -81,13 +88,15 @@ Before bundling another person's data, confirm that redistribution is allowed an
 
 ## Updates And Network Use
 
-Installed releases check GitHub for newer versions and can guide the user through a supported update. Packaging also downloads the Pokémon sprite set used by the desktop app from Pokémon Showdown when preparing a build.
+Save files and trainer pack JSON are read locally. They are not uploaded to a server. Teams, boxes, notes, inventory, and run progress stay in the app's local data. If a save format or modded layout cannot be recognized safely, import stops instead of guessing. Hacks that change the base game's storage layout may need a profile adapter.
+
+The desktop updater checks this repository on GitHub for newer releases and can guide the user through a supported update when one is available. Packaging downloads the Pokémon sprite set from Pokémon Showdown when preparing a build.
 
 Update checks contact GitHub. The build time sprite download contacts Pokémon Showdown. Save files, trainer packs, calculations, notes, and Team/Box data remain local and are not uploaded by either request.
 
 ## Building From Source
 
-The existing release history predates the KM Calculator rebrand. Until a KM Calculator build is published, use the following steps to work on the source or create a local desktop build.
+Use these steps to work on the source or create a local desktop build.
 
 Development currently requires:
 
@@ -95,15 +104,14 @@ Development currently requires:
 - Git
 - Node.js 24 or a later compatible release
 - npm
-- PowerShell 7 (`pwsh`)
-- .NET SDK 8 or later
-- Windows 10 or 11 SDK `signtool.exe` plus a trusted code signing PFX for release builds
+
+Windows installer builds also require PowerShell 7 (`pwsh`) and .NET SDK 8 or later. Published release builds additionally require Windows SDK `signtool.exe` and a trusted code signing PFX.
 
 Clone the repository and install the locked dependencies:
 
 ```powershell
-git clone https://github.com/KotMatrosk1n/KM-Calculator.git
-Set-Location .\KM-Calculator
+git clone https://github.com/KotMatrosk1n/KM-Companion.git
+Set-Location .\KM-Companion
 
 npm ci
 ```
@@ -140,9 +148,9 @@ The root `package.json` contains the current development, build, and packaging c
 
 ## Contributing
 
-KM Calculator is open source, and focused fixes, compatibility reports, trainer pack contributions, and carefully sourced ROM hack profiles are welcome.
+KM Companion is open source, and focused fixes, compatibility reports, trainer pack contributions, and carefully sourced ROM hack profiles are welcome.
 
-New profile work should keep canonical generation data untouched, be validated locally, and document every bundled data source and author. Found a bug or have a feature request? [Open an issue](https://github.com/KotMatrosk1n/KM-Calculator/issues/new/choose).
+New profile work should keep canonical generation data untouched, be validated locally, and document every bundled data source and author. Found a bug or have a feature request? [Open an issue](https://github.com/KotMatrosk1n/KM-Companion/issues/new/choose).
 
 Read the [Contributing Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before submitting a change. Direct project contributions are recorded in [Contributors](CONTRIBUTORS.md), while inherited and third party work remains documented in [Credits](CREDITS.md).
 
@@ -150,12 +158,12 @@ Suspected vulnerabilities should be reported privately through the [Security Pol
 
 ## Third Party Assets And Project Status
 
-KM Calculator is built on the Smogon damage calculator and uses data or compatibility references from Pokémon Showdown, PokéAPI, PKHeX, and the projects listed in [Credits](CREDITS.md). The [Dependency Notices](THIRD_PARTY_NOTICES.md) inventory the JavaScript dependency trees and bundled browser libraries; source revision notices for generated save import data are kept separately in [Save Import Third Party Notices](import/THIRD_PARTY_NOTICES.md).
+KM Companion is built on the Smogon damage calculator and uses data or compatibility references from Pokémon Showdown, PokéAPI, PKHeX, and the projects listed in [Credits](CREDITS.md). The [Dependency Notices](THIRD_PARTY_NOTICES.md) inventory the JavaScript dependency trees and bundled browser libraries; source revision notices for generated save import data are kept separately in [Save Import Third Party Notices](import/THIRD_PARTY_NOTICES.md).
 
-Pokémon sprites are downloaded from Pokémon Showdown's public `gen5` and `ani` directories for desktop packaging. The [Pokémon Showdown credits](https://pokemonshowdown.com/credits) document contributing artists and upstream sources. These assets are excluded from KM Calculator's software license, and this repository does not grant additional rights to them.
+Pokémon sprites are downloaded from Pokémon Showdown's public `gen5` and `ani` directories for desktop packaging. The [Pokémon Showdown credits](https://pokemonshowdown.com/credits) document contributing artists and upstream sources. These assets are excluded from KM Companion's software license, and this repository does not grant additional rights to them.
 
-KM Calculator is an unofficial fan made project and is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, or the creators of third party supported ROM hacks. Pokémon names, trademarks, and artwork belong to their respective owners.
+KM Companion is an unofficial fan made project and is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, or the creators of third party supported ROM hacks. Pokémon names, trademarks, and artwork belong to their respective owners.
 
-KM Calculator as a combined application is free software under the [GNU General Public License version 3](LICENSE) (`GPL-3.0-only`), without warranty. Save importing remains built in. The original MIT notices are preserved in [LICENSES/MIT-legacy.txt](LICENSES/MIT-legacy.txt); the engine, import data tools, and separate installer retain their explicitly documented MIT terms.
+KM Companion as a combined application is free software under the [GNU General Public License version 3](LICENSE) (`GPL-3.0-only`), without warranty. Save importing remains built in. The original MIT notices are preserved in [LICENSES/MIT-legacy.txt](LICENSES/MIT-legacy.txt); the engine, import data tools, and separate installer retain their explicitly documented MIT terms.
 
 See [LICENSING.md](LICENSING.md) for license boundaries, dependency compatibility, and binary/source distribution instructions. Third party code, data, references, and assets retain their applicable licenses and rights.

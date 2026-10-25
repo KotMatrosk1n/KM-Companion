@@ -33,7 +33,7 @@ var SWSH_PARTY_BLOCK_KEY = 0x2985fe5d;
 var PLA_BOX_BLOCK_KEY = 0x47e1ceab;
 var SV_PARTY_BLOCK_KEY = 0x3aa1a9ad;
 var SAVE_IMPORT_BAG_ITEMS_KEY = "kmCalculatorImportedBagItems";
-/* Compatibility-only read key for inventory imported before the KM Calculator rebrand. */
+/* Compatibility-only read key for inventory imported before the KM Companion rebrand. */
 var SAVE_IMPORT_LEGACY_BAG_ITEMS_KEY = "royalSwordImportedBagItems";
 var SAVE_IMPORT_HELD_ITEM_POUCHES = [
 	{offset: 0x01B8, count: 80},

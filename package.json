@@ -1,20 +1,15 @@
 {
-  "name": "km-calculator",
-  "productName": "KM Calculator",
-  "version": "0.4.26",
-  "description": "A Pokemon damage calculator supporting multiple generations and mods.",
+  "name": "km-companion",
+  "productName": "KM Companion",
+  "version": "0.4.27",
+  "description": "A Pokemon companion for damage calculations, encounter tracking, and run planning.",
   "private": true,
   "main": "electron/main.js",
-  "homepage": "https://github.com/KotMatrosk1n/KM-Calculator",
-  "repository": "github:KotMatrosk1n/KM-Calculator",
+  "homepage": "https://github.com/KotMatrosk1n/KM-Companion",
+  "repository": "github:KotMatrosk1n/KM-Companion",
   "author": "Matroskin",
   "license": "GPL-3.0-only",
   "copyright": "Copyright 2026 Matroskin",
-  "kmCalculator": {
-    "project": "KM Calculator",
-    "creator": "Matroskin",
-    "repository": "KotMatrosk1n/KM-Calculator"
-  },
   "devDependencies": {
     "electron": "^42.11.15",
     "electron-builder": "^26.15.0",
@@ -41,12 +36,12 @@
   },
   "build": {
     "appId": "com.kotmatrosk1n.kmcalculator",
-    "productName": "KM Calculator",
+    "productName": "KM Companion",
     "copyright": "Copyright 2026 Matroskin",
     "extraMetadata": {
-      "project": "KM Calculator",
+      "project": "KM Companion",
       "creator": "Matroskin",
-      "repository": "KotMatrosk1n/KM-Calculator"
+      "repository": "KotMatrosk1n/KM-Companion"
     },
     "afterPack": "electron/after-pack.js",
     "directories": {
@@ -56,7 +51,7 @@
       {
         "provider": "github",
         "owner": "KotMatrosk1n",
-        "repo": "KM-Calculator"
+        "repo": "KM-Companion"
       }
     ],
     "files": [
@@ -64,7 +59,7 @@
       "electron/**/*",
       "!electron/.eslintrc",
       "!electron/after-pack.js",
-      "!electron/assets/km-calculator-icon.ico",
+      "!electron/assets/km-companion-icon.ico",
       "!electron/download-sprites.js",
       "!electron/sprites/**/*",
       "package.json"
@@ -93,7 +88,7 @@
       }
     ],
     "win": {
-      "icon": "electron/assets/km-calculator-icon.ico",
+      "icon": "electron/assets/km-companion-icon.ico",
       "signAndEditExecutable": false
     }
   },
@@ -108,5 +103,10 @@
     "@electron/get@3.1.0": {
       "global-agent": "^4.1.3"
     }
+  },
+  "kmCompanion": {
+    "project": "KM Companion",
+    "creator": "Matroskin",
+    "repository": "KotMatrosk1n/KM-Companion"
   }
 }

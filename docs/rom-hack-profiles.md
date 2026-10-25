@@ -1,6 +1,6 @@
 # ROM Hack Profiles
 
-KM Calculator keeps each supported ROM hack in a profile so custom data never leaks into another game or into the canonical generation data.
+KM Companion keeps each supported ROM hack in a profile so custom data never leaks into another game or into the canonical generation data.
 
 At startup, the app asks **Which ROM Hack are you playing?** Selecting a tile activates one profile, switches to and locks its base generation, resolves its calculator data and layout providers, filters the trainer list, applies its input and save import rules, and enables only the features declared by that profile. The active choice is intentionally not remembered between launches.
 
@@ -24,7 +24,7 @@ Royal Sword is the first bundled profile. It uses canonical Generation 8 as its 
 
 The shared [app workspace](app-workspace.md) provides the full window calculator and profile reference sections. Layout providers operate within that shell and must preserve the live calculator controls and shared workflow anchors.
 
-The `base` layout is the default for every profile that does not explicitly name another layout. It starts with the original damage calculator's core controls, including the IV, DV, EV, level, set, field, and format controls for each generation. It also provides KM Calculator's shared workflow layer: Team/Box, Player Notes and Clear Notes, the trainer dropdown and trainer team sprites, save import and border controls, and the enhanced Singles and Doubles experience. The active profile still locks the generation selector to its declared base generation.
+The `base` layout is the default for every profile that does not explicitly name another layout. It starts with the original damage calculator's core controls, including the IV, DV, EV, level, set, field, and format controls for each generation. It also provides KM Companion's shared workflow layer: Team/Box, Player Notes and Clear Notes, the trainer dropdown and trainer team sprites, save import and border controls, and the enhanced Singles and Doubles experience. The active profile still locks the generation selector to its declared base generation.
 
 Layout and input behavior are independent profile layers:
 
@@ -61,7 +61,7 @@ Mods that change species, forms, base stats, types, moves, abilities, items, or 
 2. Add a calculator `Generation` provider that composes the canonical base generation with the mod's overrides.
 3. If the legacy UI needs data not represented by the `Generation` iterables, implement `getLegacyData(kind, base, calc, profile, context)` for `species`, `moves`, `abilities`, `items`, or `types`.
 4. If the hack adds species or forms whose sprite filenames differ from the packaged canonical sprite set, implement `getPokemonSpriteId(name, calc, context)` or `getPokemonSpriteUrls(name, options, calc, context)` on the resolved provider. Sprite URLs must point to reviewed bundled assets or the packaged sprite protocol. Add every bundled asset to the root build allowlist. Imported trainer JSON cannot provide executable asset resolvers or remote URLs.
-5. Set the profile's trainer pack and save import generation. If the hack changes its base game's save container or repurposes raw entity IDs, register a stable adapter through `window.KM_SAVE_IMPORT.registerSaveAdapter(...)`, set `saveImport.adapter` to that adapter ID, and provide its reviewed resolver. KM Calculator rejects incompatible or partially unresolved saves before changing Team/Box data.
+5. Set the profile's trainer pack and save import generation. If the hack changes its base game's save container or repurposes raw entity IDs, register a stable adapter through `window.KM_SAVE_IMPORT.registerSaveAdapter(...)`, set `saveImport.adapter` to that adapter ID, and provide its reviewed resolver. KM Companion rejects incompatible or partially unresolved saves before changing Team/Box data.
 6. Set `inputs.evs` only when the hack changes EV behavior. Do not use layout code as a substitute for an input policy.
 7. Declare exclusive profile features explicitly. Do not make another mod inherit Royal Sword behavior by default.
 8. If a custom layout is required, register its provider, preserve the required anchors and shared workflow tools, return a complete disposer, and keep its CSS scoped to its layout ID.

@@ -81,14 +81,14 @@ export async function packageReleaseSource(directory = root) {
 
   const output = path.join(directory, "release");
   fs.mkdirSync(output, {recursive: true});
-  const sourceName = `KM-Calculator-Source-${pkg.version}.zip`;
-  const dependencyName = `KM-Calculator-Dependencies-${pkg.version}.tar.gz`;
-  const manifestName = `KM-Calculator-Source-${pkg.version}.json`;
+  const sourceName = `KM-Companion-Source-${pkg.version}.zip`;
+  const dependencyName = `KM-Companion-Dependencies-${pkg.version}.tar.gz`;
+  const manifestName = `KM-Companion-Source-${pkg.version}.json`;
   const staging = fs.mkdtempSync(path.join(os.tmpdir(), "km-release-sources-"));
   try {
     const manifest = {
       version: pkg.version, commit, license: pkg.license,
-      source: `https://github.com/KotMatrosk1n/KM-Calculator/tree/${commit}`,
+      source: `https://github.com/KotMatrosk1n/KM-Companion/tree/${commit}`,
       electron: {
         version: lock.packages["node_modules/electron"].version,
         source: `https://github.com/electron/electron/releases/tag/v${lock.packages["node_modules/electron"].version}`,
@@ -119,14 +119,14 @@ export async function packageReleaseSource(directory = root) {
     }
     fs.writeFileSync(path.join(staging, "SOURCES.json"), JSON.stringify(manifest, null, 2) + "\n");
     // Archive the exact tracked source tree, excluding local files and build outputs.
-    execFileSync("git", ["archive", "--format=zip", `--prefix=KM-Calculator-${pkg.version}/`,
+    execFileSync("git", ["archive", "--format=zip", `--prefix=KM-Companion-${pkg.version}/`,
       "--output=" + path.join(output, sourceName), commit], {cwd: directory});
     execFileSync("tar", ["-czf", path.join(output, dependencyName), "-C", staging, "."], {cwd: directory});
     for (const name of [sourceName, dependencyName]) {
       manifest.files.push({name, sha256: sha256(fs.readFileSync(path.join(output, name)))});
     }
     fs.writeFileSync(path.join(output, manifestName), JSON.stringify(manifest, null, 2) + "\n");
-    fs.writeFileSync(path.join(output, `KM-Calculator-Source-${pkg.version}.sha256`),
+    fs.writeFileSync(path.join(output, `KM-Companion-Source-${pkg.version}.sha256`),
       [...manifest.files, {name: manifestName, sha256: sha256(fs.readFileSync(path.join(output, manifestName)))}]
         .map(file => `${file.sha256}  ${file.name}`).join("\n") + "\n");
     console.log(`Prepared matching source for ${commit}: ${sourceName}, ${dependencyName}`);

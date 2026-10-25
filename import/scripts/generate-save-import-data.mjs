@@ -239,7 +239,7 @@ const data = {
 };
 
 const header = `/*
- * Generated KM Calculator save-import name/index data. Do not edit by hand.
+ * Generated KM Companion save-import name/index data. Do not edit by hand.
  * Pokemon Showdown (MIT): ${SHOWDOWN_REVISION}
  * PokeAPI (BSD-3-Clause): ${POKEAPI_REVISION}
  * Full notices: import/THIRD_PARTY_NOTICES.md

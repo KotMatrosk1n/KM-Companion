@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="author" content="Matroskin" />
     <meta name="creator" content="Matroskin" />
-    <meta name="application-name" content="KM Calculator" />
+    <meta name="application-name" content="KM Companion" />
     <meta name="copyright" content="Copyright 2026 Matroskin" />
-    <meta name="repository" content="https://github.com/KotMatrosk1n/KM-Calculator" />
+    <meta name="repository" content="https://github.com/KotMatrosk1n/KM-Companion" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' royal-sword:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: royal-sword:; font-src 'self' data:; connect-src 'self' royal-sword:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'" />
-    <title>KM Calculator</title>
+    <title>KM Companion</title>
     <!-- Keep the legacy markup measurable but invisible until the workspace is assembled. -->
     <style id="km-startup-guard">
         #km-startup-status { display: none; }
@@ -21,11 +21,11 @@
     <script>
         window.addEventListener('load', function () {
             if (document.documentElement.hasAttribute('data-km-starting')) {
-                document.getElementById('km-startup-status').textContent = 'KM Calculator could not finish loading. Close and reopen the app.';
+                document.getElementById('km-startup-status').textContent = 'KM Companion could not finish loading. Close and reopen the app.';
             }
         });
     </script>
-    <link rel="icon" type="image/png" href="./img/km-calculator-icon.png">
+    <link rel="icon" type="image/png" href="./img/km-companion-icon.png">
     <link type="text/css" rel="stylesheet" href="./js/vendor/select2/select2.css" />
     <link type="text/css" rel="stylesheet" href="./css/main.css?" />
     <link type="text/css" rel="stylesheet" href="./css/vendor/bootstrap.css" />
@@ -38,19 +38,19 @@
 
 <body data-calc-layout="base">
 
-<div id="km-startup-status" role="status">Starting KM Calculator…</div>
+<div id="km-startup-status" role="status">Starting KM Companion…</div>
 
 <header>
     <div class="km-calculator-header">
-        <img class="km-calculator-header-icon" src="img/km-calculator-icon.png" alt="" />
-        <span class="km-calculator-header-title">KM Calculator</span>
+        <img class="km-calculator-header-icon" src="img/km-companion-icon.png" alt="" />
+        <span class="km-calculator-header-title">KM Companion</span>
     </div>
     <button id="km-settings-button" class="km-settings-button" type="button" aria-controls="km-settings-page" aria-pressed="false" aria-label="Settings">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19.4 13a7.8 7.8 0 0 0 .05-1 7.8 7.8 0 0 0-.05-1l2.1-1.64-2-3.46-2.55 1.03a7.6 7.6 0 0 0-1.72-1L14.85 3h-4l-.38 2.93a7.6 7.6 0 0 0-1.72 1L6.2 5.9l-2 3.46L6.3 11a7.8 7.8 0 0 0-.05 1 7.8 7.8 0 0 0 .05 1l-2.1 1.64 2 3.46 2.55-1.03a7.6 7.6 0 0 0 1.72 1l.38 2.93h4l.38-2.93a7.6 7.6 0 0 0 1.72-1l2.55 1.03 2-3.46L19.4 13Zm-6.55 2.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/></svg>
         <span>Settings</span>
         <span id="km-settings-update-badge" class="km-settings-update-badge" aria-hidden="true" hidden>!</span>
     </button>
-    <a id="km-report-problem" class="btn km-report-button" href="https://github.com/KotMatrosk1n/KM-Calculator/issues/new?template=bug_report.md" target="_blank" rel="noopener noreferrer">Report a Problem</a>
+    <a id="km-report-problem" class="btn km-report-button" href="https://github.com/KotMatrosk1n/KM-Companion/issues/new?template=bug_report.md" target="_blank" rel="noopener noreferrer">Report a Problem</a>
 </header>
 
 <section id="km-settings-page" class="km-settings-page" aria-labelledby="km-settings-heading" hidden>
@@ -65,7 +65,7 @@
     <section id="km-settings-updates" class="km-settings-panel" role="tabpanel" aria-labelledby="km-settings-tab-updates" tabindex="0">
         <div id="km-settings-view">
             <h2>Updates</h2>
-            <p class="km-settings-description">Keep KM Calculator up to date.</p>
+            <p class="km-settings-description">Keep KM Companion up to date.</p>
             <div class="km-settings-summary">
                 <div class="km-settings-metric">
                     <span>Installed version</span>
@@ -150,16 +150,16 @@
 [content]
 
 <div class="credits" aria-label="Credits">
-    <p class="project-credit"><strong>KM Calculator</strong> created and maintained by Matroskin. Calculations across generations with support for ROM hack profiles.</p>
-    <p>Free software under <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="links-lighten" target="_blank">GNU GPLv3</a>. You may modify and redistribute it under that license. Provided without warranty. <a href="https://github.com/KotMatrosk1n/KM-Calculator/releases" class="links-lighten" target="_blank">Download matching source code</a>.</p>
-    <ul class="credit-links"><li><a href="https://github.com/KotMatrosk1n/KM-Calculator/issues" class="links-lighten" target="_blank">Bug Reports</a></li>
-    <li><a href="https://github.com/KotMatrosk1n/KM-Calculator" class="links-lighten" target="_blank">KM Calculator GitHub repository</a></li></ul>
+    <p class="project-credit"><strong>KM Companion</strong> created and maintained by Matroskin. Calculations across generations with support for ROM hack profiles.</p>
+    <p>Free software under <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="links-lighten" target="_blank">GNU GPLv3</a>. You may modify and redistribute it under that license. Provided without warranty. <a href="https://github.com/KotMatrosk1n/KM-Companion/releases" class="links-lighten" target="_blank">Download matching source code</a>.</p>
+    <ul class="credit-links"><li><a href="https://github.com/KotMatrosk1n/KM-Companion/issues" class="links-lighten" target="_blank">Bug Reports</a></li>
+    <li><a href="https://github.com/KotMatrosk1n/KM-Companion" class="links-lighten" target="_blank">KM Companion GitHub repository</a></li></ul>
     <p>Damage calculator core created by Honko; maintained by Austin, Kris, jetou, <a href="https://github.com/smogon/damage-calc/contributors" class="links-lighten" target="_blank">and other Smogon contributors</a>.</p>
     <ul class="credit-links"><li><a href="https://github.com/smogon/damage-calc" class="links-lighten" target="_blank">Original calc GitHub repository</a></li>
     <li>Team/Box workflow reference: <a href="https://github.com/ForwardFeed/runbuncalc" class="links-lighten" target="_blank">ForwardFeed/runbuncalc</a></li>
     <li>Save format reference and GPLv3 Switch XOR constant: <a href="https://github.com/kwsch/PKHeX" class="links-lighten" target="_blank">PKHeX by kwsch and contributors</a></li>
     <li>Item and move category artwork: <a href="https://github.com/msikma/pokesprite" class="links-lighten" target="_blank">PokéSprite by Mike Sikma and contributors</a>. Sprites © Nintendo / Creatures Inc. / GAME FREAK inc.</li>
-    <li><a href="https://github.com/KotMatrosk1n/KM-Calculator/blob/master/CREDITS.md" class="links-lighten" target="_blank">Complete credits and licenses</a></li></ul>
+    <li><a href="https://github.com/KotMatrosk1n/KM-Companion/blob/master/CREDITS.md" class="links-lighten" target="_blank">Complete credits and licenses</a></li></ul>
 
     <select id="dark-theme-toggle" aria-label="Theme" title="Theme">
         <option value="classic">Classic</option>

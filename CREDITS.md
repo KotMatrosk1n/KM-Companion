@@ -1,10 +1,10 @@
 # Credits
 
-KM Calculator was created and is maintained by Matroskin as a damage calculator for multiple generations and ROM hack platform.
+KM Companion was created and is maintained by Matroskin as a damage calculator for multiple generations and ROM hack platform.
 
-Repository: <https://github.com/KotMatrosk1n/KM-Calculator>
+Repository: <https://github.com/KotMatrosk1n/KM-Companion>
 
-The KM Calculator name, desktop integration, ROM hack profile framework, trainer pack framework, and bundled Royal Sword integration are maintained by Matroskin. The current KM Calculator icon was provided by the project maintainer.
+The KM Companion name, desktop integration, ROM hack profile framework, trainer pack framework, and bundled Royal Sword integration are maintained by Matroskin. The field guide icon was created for KM Companion.
 
 ## Bundled ROM Hack Profiles
 
@@ -18,7 +18,7 @@ Royal Sword is the first bundled profile. Its data is kept separate from canonic
 
 ## Damage Calculator Lineage
 
-KM Calculator is built on the [Smogon Pokémon damage calculator](https://github.com/smogon/damage-calc), distributed under the MIT License.
+KM Companion is built on the [Smogon Pokémon damage calculator](https://github.com/smogon/damage-calc), distributed under the MIT License.
 
 - Original calculator: Honko
 - Primary upstream maintainers: Austin and jetou
@@ -30,7 +30,7 @@ KM Calculator is built on the [Smogon Pokémon damage calculator](https://github
 - Pokémon Showdown style CSS: Zarel
 - Additional work: the broader [Smogon damage-calc contributor community](https://github.com/smogon/damage-calc/graphs/contributors)
 
-The canonical calculation engine currently tracks the upstream revision documented in [`calc/UPSTREAM.md`](calc/UPSTREAM.md). KM Calculator's Royal Sword data overlay and compatibility shims are intentional local extensions.
+The canonical calculation engine currently tracks the upstream revision documented in [`calc/UPSTREAM.md`](calc/UPSTREAM.md). KM Companion's Royal Sword data overlay and compatibility shims are intentional local extensions.
 
 ## Data, Save Format, And Workflow Sources
 
@@ -42,7 +42,7 @@ Trainer move effect descriptions and accuracy values are adapted from Pokémon S
 
 ### PokéSprite
 
-The item artwork in `src/img/items/` and move category icons in `src/img/move-categories/` come from [PokéSprite](https://github.com/msikma/pokesprite), maintained by Mike Sikma and its [contributors](https://github.com/msikma/pokesprite/blob/master/contributors.md), at revision `c5aaa610ff2acdf7fd8e2dccd181bca8be9fcb3e`. The app uses the Sword/Shield style item outlines and Generation 8 move category icons. PokéSprite's code and metadata use the MIT License; the sprite images are © Nintendo / Creatures Inc. / GAME FREAK inc. and are excluded from KM Calculator's software license.
+The item artwork in `src/img/items/` and move category icons in `src/img/move-categories/` come from [PokéSprite](https://github.com/msikma/pokesprite), maintained by Mike Sikma and its [contributors](https://github.com/msikma/pokesprite/blob/master/contributors.md), at revision `c5aaa610ff2acdf7fd8e2dccd181bca8be9fcb3e`. The app uses the Sword/Shield style item outlines and Generation 8 move category icons. PokéSprite's code and metadata use the MIT License; the sprite images are © Nintendo / Creatures Inc. / GAME FREAK inc. and are excluded from KM Companion's software license.
 
 ### PokéAPI
 
@@ -58,7 +58,7 @@ PKHeX is also an external compatibility reference for save families and entity l
 
 ### ForwardFeed Run & Bun Calculator
 
-[ForwardFeed/runbuncalc](https://github.com/ForwardFeed/runbuncalc), distributed under the MIT License, was consulted for Team/Box and related calculator workflow ideas. KM Calculator does not ship the Run & Bun AI model or its rules data.
+[ForwardFeed/runbuncalc](https://github.com/ForwardFeed/runbuncalc), distributed under the MIT License, was consulted for Team/Box and related calculator workflow ideas. KM Companion does not ship the Run & Bun AI model or its rules data.
 
 ## Bundled Libraries And Build Tools
 
@@ -82,8 +82,8 @@ The package manifests and lockfiles record the installed dependency versions and
 
 Trainer ability and held item descriptions use the official English Pokémon Sword and Shield game text. Game text and artwork remain the property of their respective rights holders.
 
-The trainer portraits in `src/img/trainers/` are rendered from Pokémon Sword and Shield character models and poses. Model and texture reading uses [KM Editor](https://github.com/KotMatrosk1n/KM-Editor), and the portraits are rendered with [Blender](https://www.blender.org/). These rendered game assets are excluded from KM Calculator's software license; their character designs, models, and textures remain the property of their respective rights holders.
+The trainer portraits in `src/img/trainers/` are rendered from Pokémon Sword and Shield character models and poses. Model and texture reading uses [KM Editor](https://github.com/KotMatrosk1n/KM-Editor), and the portraits are rendered with [Blender](https://www.blender.org/). These rendered game assets are excluded from KM Companion's software license; their character designs, models, and textures remain the property of their respective rights holders.
 
-Pokémon names, character names, game titles, trademarks, and artwork are owned by their respective rights holders. KM Calculator is an unofficial fan made tool and is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, or the creators of third party supported ROM hacks.
+Pokémon names, character names, game titles, trademarks, and artwork are owned by their respective rights holders. KM Companion is an unofficial fan made tool and is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, or the creators of third party supported ROM hacks.
 
 The combined application uses [GPLv3](LICENSE), with the original [MIT attribution](LICENSES/MIT-legacy.txt) preserved. Separately licensed components, generated data, external references, and artwork retain their licenses and applicable rights. See [LICENSING.md](LICENSING.md).

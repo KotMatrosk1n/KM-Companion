@@ -47,7 +47,7 @@ internal sealed class EmbeddedBundle : IDisposable
         try
         {
             RejectReparsePoints(temporaryDirectory);
-            var executablePath = Path.Combine(temporaryDirectory, "KM.Calculator.Bundle.exe");
+            var executablePath = Path.Combine(temporaryDirectory, "KM.Companion.Bundle.exe");
             using var destination = new FileStream(
                 executablePath,
                 FileMode.CreateNew,

@@ -1,6 +1,6 @@
 /*global module, require */
 
-/* Bundled ROM-hack profiles for KM Calculator. */
+/* Bundled ROM-hack profiles for KM Companion. */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) {
 		module.exports = factory(require("../rom_hack_registry.js"), require("../rom_hack_layouts.js"));
@@ -54,16 +54,16 @@
 				authors: [
 					{
 						name: "Matroskin",
-						role: "KM Calculator profile, mechanics integration, and bundled trainer data"
+						role: "KM Companion profile, mechanics integration, and bundled trainer data"
 					}
 				],
 				source: {
-					name: "KM Calculator Pokémon Royal Sword profile",
-					url: "https://github.com/KotMatrosk1n/KM-Calculator"
+					name: "KM Companion Pokémon Royal Sword profile",
+					url: "https://github.com/KotMatrosk1n/KM-Companion"
 				},
 				license: {
 					name: "MIT",
-					url: "https://github.com/KotMatrosk1n/KM-Calculator/blob/master/LICENSE"
+					url: "https://github.com/KotMatrosk1n/KM-Companion/blob/master/LICENSES/MIT-legacy.txt"
 				},
 				notes: "Attribution covers the calculator profile and bundled support data."
 			}
@@ -105,7 +105,7 @@
 	function install(registry) {
 		var i;
 		if (!registry || typeof registry.registerProfile !== "function") {
-			throw new TypeError("A KM Calculator ROM-hack registry is required.");
+			throw new TypeError("A KM Companion ROM-hack registry is required.");
 		}
 
 		layoutApi.install(registry);

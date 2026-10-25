@@ -1,6 +1,6 @@
 ---
 name: Docs or Guides
-about: Report confusing, missing, or outdated KM Calculator documentation.
+about: Report confusing, missing, or outdated KM Companion documentation.
 title: ""
 labels: documentation
 assignees: ""

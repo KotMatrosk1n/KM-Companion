@@ -29,7 +29,7 @@
 	function download(backup) {
 		var url = URL.createObjectURL(new Blob([JSON.stringify(backup)], {type: "application/json"}));
 		var link = document.createElement("a"); link.href = url;
-		link.download = "KM-Calculator-" + backup.profile.id + "-" + backup.createdAt.slice(0, 10) + ".json";
+		link.download = "KM-Companion-" + backup.profile.id + "-" + backup.createdAt.slice(0, 10) + ".json";
 		document.body.appendChild(link); link.click(); link.remove();
 		window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
 	}
@@ -123,10 +123,10 @@
 	});
 	function updateReport() {
 		var selected = window.kmRomHackRegistry.getActiveProfile();
-		var body = "# KM Calculator version\n\n" + version() + "\n\n# ROM hack profile and generation\n\n" +
+		var body = "# KM Companion version\n\n" + version() + "\n\n# ROM hack profile and generation\n\n" +
 			(selected ? (selected.shortName || selected.name) + " / Generation " + selected.baseGeneration : "No profile selected") +
 			"\n\n# Steps to reproduce\n\n1. \n\n# Expected behavior\n\n\n# Actual behavior\n\n\n# Additional details\n\nAdd relevant details or a cropped screenshot. Check attachments for personal information before posting.\n";
-		var url = new URL("https://github.com/KotMatrosk1n/KM-Calculator/issues/new");
+		var url = new URL("https://github.com/KotMatrosk1n/KM-Companion/issues/new");
 		url.searchParams.set("template", "bug_report.md"); url.searchParams.set("labels", "bug"); url.searchParams.set("body", body);
 		report.href = url.href;
 	}

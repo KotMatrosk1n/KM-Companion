@@ -16,8 +16,9 @@ internal static class InstalledApplication
 {
     private const uint ErrorNoMoreItems = 259;
     private const string PackageUpgradeCode = "{9971DF03-D3BD-4FB5-A51B-D975985EEA2C}";
+    // Keep registration and upgrade identity shared with the previous product name.
     private const string RegistryPath = @"Software\KM Calculator";
-    private const string MainBinaryName = "KM Calculator.exe";
+    private const string MainBinaryName = "KM Companion.exe";
 
     internal static bool TryLaunch(out string? error)
     {
@@ -30,8 +31,8 @@ internal static class InstalledApplication
         if (candidates.Count != 1)
         {
             error = candidates.Count == 0
-                ? "Setup completed, but the installed KM Calculator location could not be validated."
-                : "Setup completed, but more than one KM Calculator installation marker was found.";
+                ? "Setup completed, but the installed KM Companion location could not be validated."
+                : "Setup completed, but more than one KM Companion installation marker was found.";
             return false;
         }
 
@@ -48,7 +49,7 @@ internal static class InstalledApplication
         }
         catch (Exception exception)
         {
-            error = $"KM Calculator was installed, but it could not be started: {exception.Message}";
+            error = $"KM Companion was installed, but it could not be started: {exception.Message}";
             return false;
         }
     }
@@ -70,7 +71,7 @@ internal static class InstalledApplication
         }
         if (enumResult != 0)
         {
-            throw new Win32Exception((int)enumResult, "KM Calculator registration could not be inspected.");
+            throw new Win32Exception((int)enumResult, "KM Companion registration could not be inspected.");
         }
 
         // Any related Windows Installer registration, including an advertised or
@@ -162,7 +163,7 @@ internal static class InstalledApplication
         {
             fullPath = Path.TrimEndingDirectorySeparator(Path.GetFullPath(candidate));
             var canonicalPath = Path.TrimEndingDirectorySeparator(Path.GetFullPath(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "KM Calculator")));
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "KM Companion")));
             if (!string.Equals(fullPath, canonicalPath, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
@@ -199,7 +200,7 @@ internal static class InstalledApplication
         try
         {
             var versionInfo = FileVersionInfo.GetVersionInfo(executablePath);
-            if (!EqualsExact(versionInfo.ProductName, "KM Calculator") ||
+            if (!EqualsExact(versionInfo.ProductName, "KM Companion") ||
                 !EqualsExact(versionInfo.OriginalFilename, MainBinaryName) ||
                 !VersionsMatch(versionInfo.FileVersion, expectedVersion))
             {

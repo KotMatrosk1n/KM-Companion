@@ -1,8 +1,8 @@
 {
-  "name": "km-calculator-save-import-tools",
-  "description": "Local generators for KM Calculator save-import data.",
+  "name": "km-companion-save-import-tools",
+  "description": "Local generators for KM Companion save import data.",
   "private": true,
-  "repository": "github:KotMatrosk1n/KM-Calculator",
+  "repository": "github:KotMatrosk1n/KM-Companion",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.8.3"

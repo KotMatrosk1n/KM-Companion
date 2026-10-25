@@ -1,7 +1,7 @@
 <Project Sdk="WixToolset.Sdk/7.0.0">
   <PropertyGroup>
     <OutputType>Bundle</OutputType>
-    <OutputName>KM.Calculator.Bundle</OutputName>
+    <OutputName>KM.Companion.Bundle</OutputName>
     <Platform>x64</Platform>
     <Cultures>en-US</Cultures>
     <DefineConstants>
@@ -22,6 +22,6 @@
     <Error Condition="'$(KmVersion)' == ''" Text="KmVersion is required." />
     <Error Condition="!Exists('$(KmMsiPath)')" Text="KmMsiPath does not exist: $(KmMsiPath)" />
     <Error Condition="!Exists('$(KmIconPath)')" Text="KmIconPath does not exist: $(KmIconPath)" />
-    <Error Condition="!Exists('$(KmSetupUiDir)\KMCalculator.Setup.UI.exe')" Text="The published setup UI is missing from KmSetupUiDir: $(KmSetupUiDir)" />
+    <Error Condition="!Exists('$(KmSetupUiDir)\KMCompanion.Setup.UI.exe')" Text="The published setup UI is missing from KmSetupUiDir: $(KmSetupUiDir)" />
   </Target>
 </Project>

@@ -1,8 +1,8 @@
-// By default, importing `@km-calculator/engine` provides a convenience wrapper roughly equivalent
-// to importing `@km-calculator/engine/adaptable` and
-// `import Generations from '@km-calculator/engine/data'`, then
+// By default, importing `@km-companion/engine` provides a convenience wrapper roughly equivalent
+// to importing `@km-companion/engine/adaptable` and
+// `import Generations from '@km-companion/engine/data'`, then
 // using  `Generations` to populate the `Generation` param to these exports. Alternatively, an
-// application may implement a different `@km-calculator/engine/data/interface` and pass a
+// application may implement a different `@km-companion/engine/data/interface` and pass a
 // `Generation` from
 // that to these exports.
 

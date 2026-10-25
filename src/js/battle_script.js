@@ -7,7 +7,7 @@ var BATTLE_SCRIPT_EMPTY_TEXT = "Calculate a script to see timeline actions.";
 var BATTLE_SCRIPT_AUTOCOMPLETE_LIMIT = 8;
 var BATTLE_SCRIPT_STORAGE_KEY = "royalSwordBattleScriptState";
 var BATTLE_SCRIPT_IMPORTED_BAG_ITEMS_KEY = "kmCalculatorImportedBagItems";
-/* Compatibility-only read key for inventory imported before the KM Calculator rebrand. */
+/* Compatibility-only read key for inventory imported before the KM Companion rebrand. */
 var BATTLE_SCRIPT_LEGACY_IMPORTED_BAG_ITEMS_KEY = "royalSwordImportedBagItems";
 var BATTLE_SCRIPT_BAG_ITEM_EVALUATION_LIMIT = 36;
 var BATTLE_SCRIPT_BAG_ITEM_ACTION_LIMIT = 4;

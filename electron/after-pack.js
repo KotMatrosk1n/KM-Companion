@@ -5,7 +5,7 @@ var fs = require("fs/promises");
 var path = require("path");
 
 var CREATOR_NAME = "Matroskin";
-var APP_METADATA_COMMENT = "KM Calculator created by Matroskin.";
+var APP_METADATA_COMMENT = "KM Companion created by Matroskin.";
 
 module.exports.default = async function afterPack(context) {
 	if (context.electronPlatformName !== "win32") {
@@ -15,7 +15,7 @@ module.exports.default = async function afterPack(context) {
 	var projectDir = context.packager.projectDir;
 	var appInfo = context.packager.appInfo;
 	var exePath = path.join(context.appOutDir, appInfo.productFilename + ".exe");
-	var iconPath = path.join(projectDir, "electron", "assets", "km-calculator-icon.ico");
+	var iconPath = path.join(projectDir, "electron", "assets", "km-companion-icon.ico");
 	var rceditPath = require.resolve("electron-winstaller/vendor/rcedit.exe", {paths: [projectDir]});
 
 	await fs.access(exePath);

@@ -1,7 +1,7 @@
 /*global module */
 
 /*
- * KM Calculator ROM hack profile registry.
+ * KM Companion ROM hack profile registry.
  *
  * Profiles describe which canonical generation a ROM hack extends and which
  * calculator, trainer, save-import, and optional data-provider layers belong

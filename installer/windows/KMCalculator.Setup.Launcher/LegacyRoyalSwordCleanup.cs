@@ -68,7 +68,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 mutex.Dispose();
                 throw new IOException(
-                    "Another KM Calculator Setup process is already cleaning Royal Sword Calculator data.");
+                    "Another KM Companion Setup process is already cleaning Royal Sword Calculator data.");
             }
         }
 
@@ -164,7 +164,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new InvalidOperationException(
                     "An unsupported 32-bit Royal Sword Calculator machine registration was detected. " +
-                    "Uninstall it from Windows Settings, then run KM Calculator Setup again.");
+                    "Uninstall it from Windows Settings, then run KM Companion Setup again.");
             }
         }
 
@@ -189,7 +189,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new InvalidOperationException(
                     "The old Royal Sword Calculator installation is reached through a file-system reparse point. " +
-                    "Uninstall it from Windows Settings, then run KM Calculator Setup again.",
+                    "Uninstall it from Windows Settings, then run KM Companion Setup again.",
                     exception);
             }
         }
@@ -208,7 +208,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new IOException(
                     $"The old calculator program folder still exists: {legacyRoot}. " +
-                    "Restart Windows if setup requested it, then run KM Calculator Setup again.");
+                    "Restart Windows if setup requested it, then run KM Companion Setup again.");
             }
         }
 
@@ -221,7 +221,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new IOException(
                     "The old calculator machine registration is still present. " +
-                    "Restart Windows if setup requested it, then run KM Calculator Setup again.");
+                    "Restart Windows if setup requested it, then run KM Companion Setup again.");
             }
         }
     }
@@ -346,7 +346,7 @@ internal static class LegacyRoyalSwordCleanup
         if (failures.Count > 0)
         {
             throw new IOException(
-                "Close Royal Sword Calculator, then run KM Calculator Setup again to retry cleanup. " +
+                "Close Royal Sword Calculator, then run KM Companion Setup again to retry cleanup. " +
                 "Cleanup could not remove: " +
                 string.Join("; ", failures));
         }
@@ -439,7 +439,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new InvalidOperationException(
                     "The old Royal Sword Calculator registration does not match a published release that setup can remove safely. " +
-                    "Uninstall it from Windows Settings, then run KM Calculator Setup again.");
+                    "Uninstall it from Windows Settings, then run KM Companion Setup again.");
             }
 
             var uninstallerPath = GetKnownChild(normalizedRoot, $"Uninstall {identity.ProductName}.exe");
@@ -456,7 +456,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new InvalidOperationException(
                     "The registered Royal Sword Calculator program folder is unavailable. " +
-                    "Reconnect its drive or uninstall it from Windows Settings, then run KM Calculator Setup again.");
+                    "Reconnect its drive or uninstall it from Windows Settings, then run KM Companion Setup again.");
             }
 
             ValidateLegacyProgramPayload(normalizedRoot, identity);
@@ -485,7 +485,7 @@ internal static class LegacyRoyalSwordCleanup
             var registrationDescription = registrationFound ? "does not match its registration" : "is not registered";
             throw new InvalidOperationException(
                 $"The old calculator folder {knownRoot} {registrationDescription}, so setup will not delete it. " +
-                "Uninstall the old app from Windows Settings or remove the leftover folder, then run KM Calculator Setup again.");
+                "Uninstall the old app from Windows Settings or remove the leftover folder, then run KM Companion Setup again.");
         }
 
         return validatedRoots.ToArray();
@@ -639,7 +639,7 @@ internal static class LegacyRoyalSwordCleanup
                 throw new IOException(
                     "Cleanup stopped before the old calculator program folder could be quarantined. " +
                     "Setup cannot distinguish that folder from a reinstall in the same location and will not delete it. " +
-                    "Remove the old app manually, then run KM Calculator Setup again.");
+                    "Remove the old app manually, then run KM Companion Setup again.");
             }
             return leases;
         }
@@ -917,14 +917,14 @@ internal static class LegacyRoyalSwordCleanup
         {
             throw new InvalidOperationException(
                 "The old Royal Sword Calculator registration contains an invalid install location. " +
-                "Uninstall it from Windows Settings, then run KM Calculator Setup again.",
+                "Uninstall it from Windows Settings, then run KM Companion Setup again.",
                 exception);
         }
 
         throw new InvalidOperationException(
-            "Royal Sword Calculator is registered in a custom folder for the current user that KM Calculator Setup " +
+            "Royal Sword Calculator is registered in a custom folder for the current user that KM Companion Setup " +
             "will not delete or assume is gone. Uninstall Royal Sword Calculator from Windows Settings, " +
-            "then run KM Calculator Setup again.");
+            "then run KM Companion Setup again.");
     }
 
     private static void ValidateLegacyProgramPayload(string rootPath, LegacyReleaseIdentity identity)
@@ -946,7 +946,7 @@ internal static class LegacyRoyalSwordCleanup
         {
             throw new InvalidOperationException(
                 "The old Royal Sword Calculator program files do not match the registered published release. " +
-                "Uninstall it from Windows Settings, then run KM Calculator Setup again.");
+                "Uninstall it from Windows Settings, then run KM Companion Setup again.");
         }
 
         if (identity.RequiresSpriteManifest)
@@ -957,7 +957,7 @@ internal static class LegacyRoyalSwordCleanup
             {
                 throw new InvalidOperationException(
                     "The old Royal Sword Calculator sprite payload is incomplete. " +
-                    "Uninstall it from Windows Settings, then run KM Calculator Setup again.");
+                    "Uninstall it from Windows Settings, then run KM Companion Setup again.");
             }
         }
     }
@@ -994,7 +994,7 @@ internal static class LegacyRoyalSwordCleanup
     private static InvalidOperationException IncompleteCurrentUserRegistration() =>
         new(
             "The old Royal Sword Calculator registration is incomplete. " +
-            "Uninstall it from Windows Settings, then run KM Calculator Setup again.");
+            "Uninstall it from Windows Settings, then run KM Companion Setup again.");
 
     private static void RemoveExactPaths(
         IEnumerable<WindowsNoFollowDeletion.DeletionLease> leases,
@@ -1425,7 +1425,7 @@ internal static class LegacyRoyalSwordCleanup
         if ((kmUserDataAttributes & (FileAttributes.Directory | FileAttributes.ReparsePoint)) !=
             FileAttributes.Directory)
         {
-            throw new IOException("The KM Calculator user data root is not a safe directory.");
+            throw new IOException("The KM Companion user data root is not a safe directory.");
         }
 
         foreach (var candidatePath in Directory.EnumerateFiles(

@@ -10,7 +10,7 @@
     <Grid><Grid.RowDefinitions><RowDefinition Height="52" /><RowDefinition Height="*" /></Grid.RowDefinitions>
       <Border Background="{StaticResource TitleSurface}" BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1" CornerRadius="8,8,0,0">
         <Grid Margin="14,0,6,0"><Grid.ColumnDefinitions><ColumnDefinition Width="30" /><ColumnDefinition Width="*" /><ColumnDefinition Width="44" /></Grid.ColumnDefinitions>
-          <Image Source="Assets/calculator.png" Width="30" Height="30" />
+          <Image Source="Assets/companion.png" Width="30" Height="30" />
           <TextBlock Grid.Column="1" Text="{Binding WindowTitle}" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center" />
           <Button Grid.Column="2" Content="×" Style="{StaticResource CloseButton}" AutomationProperties.Name="Close setup" shell:WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseClicked" IsEnabled="{Binding CanClose}" />
         </Grid>
@@ -20,11 +20,11 @@
         <Grid Margin="30,24"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
           <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="66" /></Grid.ColumnDefinitions>
             <StackPanel Margin="0,0,24,0">
-              <TextBlock Text="KM CALCULATOR" FontSize="11" FontWeight="Bold" Foreground="{StaticResource Gold}" />
+              <TextBlock Text="KM COMPANION" FontSize="11" FontWeight="Bold" Foreground="{StaticResource Gold}" />
               <TextBlock Text="{Binding Heading}" Margin="0,7,0,0" FontSize="25" FontWeight="ExtraBold" LineHeight="32" />
               <TextBlock Text="{Binding Description}" Margin="0,6,0,0" Foreground="{StaticResource SoftText}" LineHeight="21" />
             </StackPanel>
-            <Border Grid.Column="1" Width="66" Height="66" VerticalAlignment="Center" CornerRadius="14" Padding="9" Background="{StaticResource Surface}" BorderBrush="{StaticResource Border}" BorderThickness="1"><Image Source="Assets/calculator.png" /></Border>
+            <Border Grid.Column="1" Width="66" Height="66" VerticalAlignment="Center" CornerRadius="14" Padding="9" Background="{StaticResource Surface}" BorderBrush="{StaticResource Border}" BorderThickness="1"><Image Source="Assets/companion.png" /></Border>
           </Grid>
           <Grid Grid.Row="1" Margin="0,20,0,0">
             <Border Style="{StaticResource Card}" Visibility="{Binding ShowProgress, Converter={StaticResource Visible}}"><StackPanel>
@@ -35,19 +35,19 @@
             <Border Style="{StaticResource Card}" Visibility="{Binding ShowOptions, Converter={StaticResource Visible}}"><StackPanel>
               <CheckBox Content="Create a Start Menu shortcut" IsChecked="{Binding CreateStartMenuShortcut}" />
               <CheckBox Content="Create a desktop shortcut" IsChecked="{Binding CreateDesktopShortcut}" />
-              <TextBlock Margin="0,10,0,0" FontSize="12" Foreground="{StaticResource MutedText}" Text="Installs to Program Files\KM Calculator for this computer." />
+              <TextBlock Margin="0,10,0,0" FontSize="12" Foreground="{StaticResource MutedText}" Text="Installs to Program Files\KM Companion for this computer." />
               <TextBlock Margin="0,12,0,0" FontSize="12" LineHeight="18" Foreground="{StaticResource Warning}" Visibility="{Binding ShowLegacyNotice, Converter={StaticResource Visible}}" Text="This first installation permanently removes Royal Sword Calculator and this Windows user's Royal Sword teams, notes, settings, update caches, shortcuts, and registration." />
             </StackPanel></Border>
             <Border Style="{StaticResource Card}" Visibility="{Binding ShowRetention, Converter={StaticResource Visible}}"><StackPanel>
               <TextBlock Text="YOUR DATA IS KEPT" Style="{StaticResource Caption}" />
-              <TextBlock Margin="0,7,0,0" Foreground="{StaticResource SoftText}" Text="Saved teams, notes, encounter and trainer progress, settings, and update caches remain available if you install KM Calculator again." />
+              <TextBlock Margin="0,7,0,0" Foreground="{StaticResource SoftText}" Text="Saved teams, notes, encounter and trainer progress, settings, and update caches remain available if you install KM Companion again." />
             </StackPanel></Border>
             <Border Style="{StaticResource Card}" Background="#2A1519" BorderBrush="#71323A" Visibility="{Binding ShowError, Converter={StaticResource Visible}}"><StackPanel>
               <TextBlock Text="ERROR DETAILS" Style="{StaticResource Caption}" />
               <TextBlock Text="{Binding ErrorMessage}" Margin="0,7,0,0" Foreground="{StaticResource Danger}" />
               <TextBlock Text="{Binding LogPath}" Margin="0,12,0,0" FontSize="12" Foreground="{StaticResource MutedText}" />
             </StackPanel></Border>
-            <Border Style="{StaticResource Card}" Visibility="{Binding ShowHelp, Converter={StaticResource Visible}}"><TextBlock Foreground="{StaticResource SoftText}" Text="Supported options: /install, /repair, /uninstall, /modify, /passive, /quiet, /norestart, /log &lt;file&gt;, /layout &lt;folder&gt;.&#10;&#10;Uninstall keeps KM Calculator data. First installation through the public setup launcher removes the disclosed Royal Sword Calculator data." /></Border>
+            <Border Style="{StaticResource Card}" Visibility="{Binding ShowHelp, Converter={StaticResource Visible}}"><TextBlock Foreground="{StaticResource SoftText}" Text="Supported options: /install, /repair, /uninstall, /modify, /passive, /quiet, /norestart, /log &lt;file&gt;, /layout &lt;folder&gt;.&#10;&#10;Uninstall keeps KM Companion data. First installation through the public setup launcher removes the disclosed Royal Sword Calculator data." /></Border>
           </Grid>
           <Grid Grid.Row="2" Margin="0,20,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
             <TextBlock Text="{Binding VersionText}" FontSize="12" Foreground="{StaticResource MutedText}" VerticalAlignment="Center" Margin="0,0,16,0" />

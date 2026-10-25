@@ -38,7 +38,7 @@ internal static class Program
             }
             catch (Exception exception)
             {
-                ShowError($"KM Calculator Setup could not relocate out of the old updater cache: {exception.Message}",
+                ShowError($"KM Companion Setup could not relocate out of the old updater cache: {exception.Message}",
                     suppress: args.Any(IsQuietLike));
                 return ErrorInstallFailure;
             }
@@ -99,7 +99,7 @@ internal static class Program
                     catch (Exception exception)
                     {
                         ShowError(
-                            "Royal Sword Calculator cleanup from the previous KM Calculator installation " +
+                            "Royal Sword Calculator cleanup from the previous KM Companion installation " +
                             "could not complete: " + exception.Message,
                             effectiveArguments.SuppressErrors);
                         return ErrorInstallFailure;
@@ -152,7 +152,7 @@ internal static class Program
                 if (!InstalledApplication.HasCleanupReceipt(cleanupReceipt, currentUserSid!))
                 {
                     ShowError(
-                        "KM Calculator installed, but setup could not verify the Royal Sword Calculator " +
+                        "KM Companion installed, but setup could not verify the Royal Sword Calculator " +
                             "cleanup receipt. Royal Sword data was not removed.",
                         effectiveArguments.SuppressErrors);
                     return ErrorInstallFailure;
@@ -162,8 +162,8 @@ internal static class Program
                     if (!applicationIsInstalled)
                     {
                         ShowError(
-                            "KM Calculator installed, but its location could not be validated, so Royal Sword " +
-                            "Calculator data was not removed. Repair KM Calculator, then run Setup again.",
+                            "KM Companion installed, but its location could not be validated, so Royal Sword " +
+                            "Calculator data was not removed. Repair KM Companion, then run Setup again.",
                             effectiveArguments.SuppressErrors);
                         return ErrorInstallFailure;
                     }
@@ -177,7 +177,7 @@ internal static class Program
                     catch (Exception exception)
                     {
                         ShowError(
-                            "KM Calculator installed, but Royal Sword Calculator cleanup could not complete: " +
+                            "KM Companion installed, but Royal Sword Calculator cleanup could not complete: " +
                             exception.Message,
                             effectiveArguments.SuppressErrors);
                         return ErrorInstallFailure;
@@ -204,7 +204,7 @@ internal static class Program
                     catch (Exception exception)
                     {
                         ShowError(
-                            "KM Calculator installed, but pending Royal Sword Calculator cleanup could not " +
+                            "KM Companion installed, but pending Royal Sword Calculator cleanup could not " +
                             "complete: " + exception.Message,
                             effectiveArguments.SuppressErrors);
                         return ErrorInstallFailure;
@@ -214,7 +214,7 @@ internal static class Program
 
             if (exitCode == 0 && effectiveArguments.RelaunchAfterSuccess && !InstalledApplication.TryLaunch(out var launchError))
             {
-                ShowError(launchError ?? "KM Calculator could not be started.", effectiveArguments.SuppressErrors);
+                ShowError(launchError ?? "KM Companion could not be started.", effectiveArguments.SuppressErrors);
             }
 
             return exitCode;
@@ -231,7 +231,7 @@ internal static class Program
         }
         catch (Exception exception)
         {
-            ShowError($"KM Calculator Setup could not complete: {exception.Message}", parsed.SuppressErrors);
+            ShowError($"KM Companion Setup could not complete: {exception.Message}", parsed.SuppressErrors);
             return ErrorInstallFailure;
         }
     }
@@ -256,7 +256,7 @@ internal static class Program
     {
         if (!suppress)
         {
-            MessageBoxW(IntPtr.Zero, message, "KM Calculator Setup", MbOk | MbIconError);
+            MessageBoxW(IntPtr.Zero, message, "KM Companion Setup", MbOk | MbIconError);
         }
     }
 

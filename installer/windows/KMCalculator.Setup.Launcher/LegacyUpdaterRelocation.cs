@@ -55,7 +55,7 @@ internal static class LegacyUpdaterRelocation
         }
         Directory.CreateDirectory(temporaryRoot);
         RejectReparsePoints(temporaryRoot);
-        var relocatedPath = Path.Combine(temporaryRoot, "KM-Calculator-Setup.exe");
+        var relocatedPath = Path.Combine(temporaryRoot, "KM-Companion-Setup.exe");
 
         try
         {

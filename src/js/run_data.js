@@ -68,7 +68,7 @@
 		}));
 	}
 	function validate(value) {
-		ensure(object(value) && value.schema === "km-calculator.run" && value.version === 1, "Choose a supported KM Calculator run backup.");
+		ensure(object(value) && value.schema === "km-calculator.run" && value.version === 1, "Choose a supported KM Companion run backup.");
 		ensure(new TextEncoder().encode(JSON.stringify(value)).length <= MAX_BYTES, "This backup is too large to restore.");
 		safeTree(value, 0);
 		var profile = profileInfo(value.profile);

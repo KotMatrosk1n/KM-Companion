@@ -1,12 +1,12 @@
 ---
 name: Bug Report
-about: Report broken KM Calculator app behavior.
+about: Report broken KM Companion app behavior.
 title: ""
 labels: bug
 assignees: ""
 ---
 
-# KM Calculator version
+# KM Companion version
 
 Use the version shown in **Settings**, or give the commit when testing source.
 
@@ -24,7 +24,7 @@ List the shortest repeatable steps.
 
 # Expected behavior
 
-What should KM Calculator have done?
+What should KM Companion have done?
 
 # Actual behavior
 

@@ -22,8 +22,10 @@ var autoUpdater = electronUpdater.autoUpdater;
 // Keep the existing scheme so origin-scoped localStorage remains available after the product rebrand.
 var APP_SCHEME = "royal-sword";
 var APP_HOST = "app";
-var APP_DISPLAY_NAME = "KM Calculator";
-var APP_ICON_PATH = path.join(__dirname, "assets", "km-calculator-icon.png");
+var APP_DISPLAY_NAME = "KM Companion";
+// Retain the existing data directory so renaming the app preserves every profile and backup.
+var APP_USER_DATA_DIRECTORY = "KM Calculator";
+var APP_ICON_PATH = path.join(__dirname, "assets", "km-companion-icon.png");
 var APP_STORAGE_FILE = "app-storage.json";
 var MAIN_WINDOW_STATE_FILE = "main-window-state.json";
 var UPDATER_LOG_FILE = "updater.log";
@@ -32,7 +34,7 @@ var MAIN_WINDOW_DEFAULT_HEIGHT = 960;
 var MAIN_WINDOW_MIN_WIDTH = 900;
 var MAIN_WINDOW_MIN_HEIGHT = 600;
 var LOCAL_SPRITE_ROUTE_PREFIX = "/local-sprites/";
-var UPDATER_CACHE_DIR_NAMES = ["km-calculator-updater"];
+var UPDATER_CACHE_DIR_NAMES = ["km-calculator-updater", "km-companion-updater"];
 var UPDATE_CHECK_DELAY_MS = 0;
 var UPDATE_FIRST_PROGRESS_TIMEOUT_MS = 30000;
 var UPDATE_STALL_TIMEOUT_MS = 90000;
@@ -72,7 +74,7 @@ var appStorageCache = null;
 var appStorageWriteTimer = null;
 app.setName(APP_DISPLAY_NAME);
 if (app.isPackaged) {
-	var kmCalculatorUserDataPath = path.join(app.getPath("appData"), APP_DISPLAY_NAME);
+	var kmCalculatorUserDataPath = path.join(app.getPath("appData"), APP_USER_DATA_DIRECTORY);
 	app.setPath("userData", kmCalculatorUserDataPath);
 }
 
@@ -480,9 +482,9 @@ function getMainWindowTitle() {
 
 function getReleaseNotesUrl(info) {
 	if (info && info.version) {
-		return "https://github.com/KotMatrosk1n/KM-Calculator/releases/tag/v" + encodeURIComponent(info.version);
+		return "https://github.com/KotMatrosk1n/KM-Companion/releases/tag/v" + encodeURIComponent(info.version);
 	}
-	return "https://github.com/KotMatrosk1n/KM-Calculator/releases";
+	return "https://github.com/KotMatrosk1n/KM-Companion/releases";
 }
 
 function getUpdaterErrorText(error) {
@@ -522,7 +524,7 @@ function getUpdaterDiagnostic(error, stage) {
 		return {
 			title: "Permission problem",
 			detail: "Windows blocked the updater from writing or replacing a file. This can happen when another copy of the app or installer is still open.",
-			nextStep: "Close other KM Calculator windows and retry. If Windows asks for permission during install, approve the prompt."
+			nextStep: "Close other KM Companion windows and retry. If Windows asks for permission during install, approve the prompt."
 		};
 	}
 	if (/checksum|sha512|sha256|signature|verify|verification|digest/.test(text)) {
@@ -549,14 +551,14 @@ function getUpdaterDiagnostic(error, stage) {
 	if (stage === "check") {
 		return {
 			title: "Update check failed",
-			detail: "KM Calculator could not check for updates right now.",
+			detail: "KM Companion could not check for updates right now.",
 			nextStep: "Check your internet connection, then try again from Settings."
 		};
 	}
 	if (stage === "install") {
 		return {
 			title: "Update install failed",
-			detail: "KM Calculator could not start the update installer.",
+			detail: "KM Companion could not start the update installer.",
 			nextStep: "Try again. If it still fails, open the release page and install the latest version manually."
 		};
 	}
@@ -819,7 +821,7 @@ function beginUpdateInstall(info) {
 	updateDownloadedReady = true;
 	setUpdaterState({
 		status: "installing",
-		message: "Update ready. KM Calculator will restart to finish installing.",
+		message: "Update ready. KM Companion will restart to finish installing.",
 		version: activeUpdateInfo && activeUpdateInfo.version ? activeUpdateInfo.version : "",
 		percent: 100,
 		error: "",
@@ -953,7 +955,7 @@ function configureAutoUpdates(mainWindow) {
 		updateInstallAuthorized = false;
 		setUpdaterState({
 			status: "up-to-date",
-			message: "KM Calculator is up to date.",
+			message: "KM Companion is up to date.",
 			version: "",
 			percent: null,
 			transferred: 0,

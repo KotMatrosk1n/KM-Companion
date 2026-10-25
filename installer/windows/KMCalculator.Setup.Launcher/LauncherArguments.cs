@@ -71,7 +71,7 @@ internal sealed record LauncherArguments(
                     // Consume the legacy updater argument without trusting or forwarding it.
                     continue;
                 }
-                error = "The obsolete NSIS /D= installation directory argument is not supported by KM Calculator Setup.";
+                error = "The obsolete NSIS /D= installation directory argument is not supported by KM Companion Setup.";
                 return false;
             }
 
@@ -82,7 +82,7 @@ internal sealed record LauncherArguments(
                     // Web installers are disabled. Never open or forward this untrusted path.
                     continue;
                 }
-                error = "Web package installer arguments are not supported by KM Calculator Setup.";
+                error = "Web package installer arguments are not supported by KM Companion Setup.";
                 return false;
             }
 

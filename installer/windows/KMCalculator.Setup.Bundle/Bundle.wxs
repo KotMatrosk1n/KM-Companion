@@ -2,23 +2,27 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
      xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
-  <Bundle Name="KM Calculator"
-          InProgressName="KM Calculator Setup"
+  <Bundle Name="KM Companion"
+          InProgressName="KM Companion Setup"
           Manufacturer="Matroskin"
           Version="$(var.KmVersion)"
           UpgradeCode="6fec009c-ac8f-45c2-b84b-a648204cd665"
           ProviderKey="com.kotmatrosk1n.kmcalculator.bundle"
           IconSourceFile="$(var.KmIconPath)"
           Copyright="Copyright 2026 Matroskin"
-          AboutUrl="https://github.com/KotMatrosk1n/KM-Calculator"
-          HelpUrl="https://github.com/KotMatrosk1n/KM-Calculator/issues"
+          AboutUrl="https://github.com/KotMatrosk1n/KM-Companion"
+          HelpUrl="https://github.com/KotMatrosk1n/KM-Companion/issues"
           DisableModify="no"
           DisableRemove="no"
           Compressed="yes"
           bal:CommandLineVariables="caseInsensitive">
-    <Log Prefix="KM-Calculator-Setup" />
+    <Log Prefix="KM-Companion-Setup" />
 
     <Variable Name="InstallFolder"
+              Type="formatted"
+              Value="[ProgramFiles64Folder]KM Companion\" />
+    <!-- The existing MSI family upgrades the former product from its original canonical path. -->
+    <Variable Name="PreviousInstallFolder"
               Type="formatted"
               Value="[ProgramFiles64Folder]KM Calculator\" />
     <Variable Name="KMCreateDesktopShortcut" Type="numeric" Value="1" bal:Overridable="yes" />
@@ -243,14 +247,14 @@
                   Type="numeric"
                   Condition="LegacyCefRoyalCanonicalValidated = 1 OR LegacyCefPokemonCanonicalValidated = 1 OR LegacyCefRoyalAtPokemonValidated = 1 OR LegacyCefRoyalNestedValidated = 1" />
 
-    <bal:Condition Condition="WixBundleInstalled OR NOT ExistingKmMarkerPresent OR (ExistingInstallLocation AND ExistingInstallLocation ~= InstallFolder)"
-                   Message="A KM Calculator installation was detected outside the required Program Files\KM Calculator folder. Uninstall that copy first, then run setup again." />
+    <bal:Condition Condition="WixBundleInstalled OR NOT ExistingKmMarkerPresent OR (ExistingInstallLocation AND (ExistingInstallLocation ~= InstallFolder OR ExistingInstallLocation ~= PreviousInstallFolder))"
+                   Message="An existing installation was detected outside the supported Program Files\KM Companion or Program Files\KM Calculator folder. Uninstall that copy first, then run setup again." />
     <bal:Condition Condition="NOT KMRemoveLegacy OR (NOT LegacyCefRoyalCanonicalRootPresent AND NOT LegacyCefPokemonCanonicalRootPresent AND NOT LegacyCefRoyalNestedRootPresent AND NOT LegacyCefProductKeyPresent AND NOT LegacyCefArpKeyPresent) OR (LegacyCefValidated = 1 AND (NOT LegacyCefRoyalCanonicalRootPresent OR LegacyCefRoyalCanonicalValidated = 1) AND (NOT LegacyCefPokemonCanonicalRootPresent OR LegacyCefPokemonCanonicalValidated = 1 OR LegacyCefRoyalAtPokemonValidated = 1 OR LegacyCefRoyalNestedValidated = 1) AND (NOT LegacyCefRoyalNestedRootPresent OR LegacyCefRoyalNestedValidated = 1))"
-                   Message="A Royal Sword Calculator installation or leftover program folder was detected but cannot be removed safely. Uninstall Royal Sword Calculator from Windows Settings, or remove its leftover Program Files folder if it is no longer registered, then run KM Calculator Setup again. After KM Calculator installs successfully, setup removes the remaining Royal Sword Calculator data for the current Windows user." />
+                   Message="A Royal Sword Calculator installation or leftover program folder was detected but cannot be removed safely. Uninstall Royal Sword Calculator from Windows Settings, or remove its leftover Program Files folder if it is no longer registered, then run KM Companion Setup again. After KM Companion installs successfully, setup removes the remaining Royal Sword Calculator data for the current Windows user." />
 
-    <BootstrapperApplication SourceFile="$(var.KmSetupUiDir)\KMCalculator.Setup.UI.exe">
+    <BootstrapperApplication SourceFile="$(var.KmSetupUiDir)\KMCompanion.Setup.UI.exe">
       <Payloads Include="$(var.KmSetupUiDir)\**">
-        <Exclude Files="$(var.KmSetupUiDir)\KMCalculator.Setup.UI.exe" />
+        <Exclude Files="$(var.KmSetupUiDir)\KMCompanion.Setup.UI.exe" />
         <Exclude Files="$(var.KmSetupUiDir)\**\*.pdb" />
       </Payloads>
     </BootstrapperApplication>

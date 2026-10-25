@@ -5,7 +5,7 @@
 ## What Changed
 
 <!--
-Use two or three compact paragraphs. For a fix, explain the user impact and root cause. For a feature, explain the complete KM Calculator workflow it improves.
+Use connected paragraphs with enough detail to explain the change. For a fix, explain the user impact and root cause. For a feature, explain the complete KM Companion workflow it improves.
 
 Name affected generations, ROM hack profiles, battle modes, or desktop surfaces when scope matters. For profile or trainer data contributions, include the authors, public source, version, and redistribution basis.
 

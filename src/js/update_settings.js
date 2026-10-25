@@ -232,7 +232,7 @@
 	function renderUpdateView() {
 		var version = getVersionLabel(updateState.version);
 		var applying = isApplyingUpdate();
-		promptCopy.textContent = "KM Calculator " + version + " is available. Install it now?";
+		promptCopy.textContent = "KM Companion " + version + " is available. Install it now?";
 		renderReleaseNotes();
 		updateError.hidden = updateState.status !== "error";
 		updateErrorTitle.textContent = updateState.errorTitle || "Update failed";
@@ -329,7 +329,7 @@
 			error: "",
 			errorTitle: "",
 			nextStep: ""
-		}, "Update check failed", "KM Calculator could not check for updates right now.");
+		}, "Update check failed", "KM Companion could not check for updates right now.");
 	}
 
 	function installUpdate() {
@@ -347,7 +347,7 @@
 			error: "",
 			errorTitle: "",
 			nextStep: ""
-		}, "Update install failed", "KM Calculator could not start the update installer.");
+		}, "Update install failed", "KM Companion could not start the update installer.");
 	}
 
 	function openReleasePage() {
@@ -357,12 +357,12 @@
 			if (result && typeof result.then === "function") {
 				result.then(null, function (error) {
 					void error;
-					setBridgeError("Could not open release page", "KM Calculator could not open the release page.");
+					setBridgeError("Could not open release page", "KM Companion could not open the release page.");
 				});
 			}
 		} catch (error) {
 			void error;
-			setBridgeError("Could not open release page", "KM Calculator could not open the release page.");
+			setBridgeError("Could not open release page", "KM Companion could not open the release page.");
 		}
 	}
 
@@ -410,7 +410,7 @@
 			if (stateRevision === revisionBeforeSnapshot) applyState(nextState);
 		}, function (error) {
 			void error;
-			setBridgeError("Update status unavailable", "KM Calculator could not read the updater status.");
+			setBridgeError("Update status unavailable", "KM Companion could not read the updater status.");
 		});
 	}
 	window.addEventListener("beforeunload", function () {

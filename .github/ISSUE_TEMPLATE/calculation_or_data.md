@@ -6,7 +6,7 @@ labels: bug
 assignees: ""
 ---
 
-# KM Calculator version
+# KM Companion version
 
 Use the version shown in **Settings**, or give the commit when testing source.
 
@@ -24,7 +24,7 @@ List the species or form, level, ability, item, nature, stats, boosts, status, a
 
 # Move and result
 
-Name the move and give the result KM Calculator displayed. Remove private nicknames from exported sets.
+Name the move and give the result KM Companion displayed. Remove private nicknames from exported sets.
 
 # Expected result and source
 

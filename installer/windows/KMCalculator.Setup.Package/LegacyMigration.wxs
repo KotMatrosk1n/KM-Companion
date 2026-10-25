@@ -474,7 +474,7 @@
                  After="DetectUnvalidatedKmLegacyPokemonFolder"
                  Condition="KMLEGACYCEFROYALNESTEDROOTPRESENT AND NOT KmLegacyCefRoyalNestedIdentityValidated" />
     <CustomAction Id="BlockUnvalidatedLegacyCefInstall"
-                  Error="An unrecognized Royal Sword installation or leftover folder was found. Uninstall the old app, or remove its unregistered Program Files folder, then run KM Calculator Setup again." />
+                  Error="An unrecognized Royal Sword installation or leftover folder was found. Uninstall the old app, or remove its unregistered Program Files folder, then run KM Companion Setup again." />
     <InstallExecuteSequence>
       <Custom Action="BlockUnvalidatedLegacyCefInstall"
               After="DetectUnvalidatedKmLegacyNestedFolder"
