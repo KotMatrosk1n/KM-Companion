@@ -2,6 +2,8 @@
 
 KM Companion trainer packs let mod authors and community maintainers distribute trainer teams without editing the calculator's bundled data file.
 
+For a complete mod proposal, use [Mod Submissions](mod-submissions.md). That format also captures Pokémon changes, moves, abilities, items, encounters, item locations, and rules. Its `trainers.yaml` file is review material and cannot be selected in Import Trainer Data. The JSON format described here remains the app's direct trainer import contract. Resolve custom references, profile support, and any submission values beyond this contract before preparing an importable pack.
+
 ## Format
 
 A pack is a UTF-8 JSON file that follows `docs/schemas/trainer-pack-v1.schema.json`. Start with `docs/examples/trainer-pack.example.json`.

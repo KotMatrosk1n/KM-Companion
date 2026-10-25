@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/item-locations.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: route-charm
+    name: Storm Charm behind the sign
+    action: add
+    locationId: storm-route
+    method: hidden
+    items:
+      - item: "@storm-charm"
+        quantity: 1
+    directions: Inspect the ground behind the first route sign.
+    coordinates:
+      mapId: example-route-01
+      x: 12
+      "y": 8
+      z: 0
+      units: tiles
+    conditions:
+      description: Available after the first badge.
+      storyFlags:
+        - first-badge
+    postGame: false
+    repeatable: false
+    eventFlag: example-item-01
+    sourceIds:
+      - release-guide
+  - id: town-shop
+    name: Storm Town medicine stock
+    action: add
+    locationId: storm-town
+    method: shop
+    items:
+      - item: Potion
+        quantity: 1
+    directions: Buy from the clerk in the town shop.
+    price: 200
+    currency: Pokédollars
+    stock: 99
+    repeatable: true
+    postGame: false
+    sourceIds:
+      - release-guide

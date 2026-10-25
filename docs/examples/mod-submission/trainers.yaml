@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/trainers.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: route-ace
+    name: Ace Trainer Mira
+    action: add
+    locationId: storm-route
+    trainerClass: Ace Trainer
+    rawTrainerId: "900"
+    storySplit: First badge
+    battleType: Single
+    levelCap: 20
+    repeatable: false
+    conditions:
+      description: First visit after earning the first badge.
+      storyFlags:
+        - first-badge
+    ai:
+      description: Prefer a guaranteed knockout; otherwise choose the largest expected damage.
+      flags:
+        - no-items
+      ruleIds:
+        - ace-ai
+    field:
+      weather: Rain
+      terrain: None
+      playerEffects: []
+      trainerEffects: []
+      otherEffects: []
+    rewards:
+      money: 1200
+      currency: Pokédollars
+      items:
+        - item: "@storm-charm"
+          quantity: 1
+    pokemon:
+      - slot: 1
+        species: "@stormcub"
+        level: 18
+        gender: F
+        ability: "@storm-charge"
+        item: "@storm-charm"
+        nature: Modest
+        moves:
+          - "@frost-spark"
+          - Thunder Wave
+          - Tackle
+          - Protect
+        ivs:
+          hp: 31
+          atk: 0
+          def: 31
+          spa: 31
+          spd: 31
+          spe: 31
+        evs: 0
+        shiny: false
+        friendship: 70
+        dynamaxLevel: 0
+        gigantamax: false
+    sourceIds:
+      - release-guide

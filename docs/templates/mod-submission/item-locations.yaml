@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/item-locations.schema.json
+# Use stable pickup IDs, shared location IDs, directions, quantities, access conditions, and repeatability.
+# Choose changes, complete, unchanged, or unavailable. Never mark missing research as unchanged.
+formatVersion: 1
+coverage: unavailable
+notes: "Describe what is missing, or change coverage and add records from the filled example."
+records: []

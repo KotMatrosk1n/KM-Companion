@@ -73,6 +73,8 @@ Save compatibility depends on the exact regional dump, storage layout, game upda
 
 If you are making a ROM hack and need a calculator or companion for your players, [start a discussion](https://github.com/KotMatrosk1n/KM-Companion/discussions). Explain what your game changes and what your players need. Useful support depends on matching the actual Pokémon data and battle mechanics, and on keeping that support accurate as the hack develops.
 
+For a complete profile proposal, use the [mod submission guide](docs/mod-submissions.md), [starter folder](docs/templates/mod-submission/README.md), and [filled example](docs/examples/mod-submission/README.md). The readable YAML or JSON files cover Pokémon, moves, abilities, items, trainers, encounters, item locations, and custom rules, with shared project information, source references, and explicit coverage. Authors can send a draft without a development setup; the optional author checker reports format errors and missing information. Submission files are reviewed for integration and are separate from the app's trainer pack import.
+
 A trainer pack can add selectable trainer teams without editing bundled files. A complete profile can also provide changes to species, forms, stats, types, moves, abilities, items, save rules, and battle behavior. Hacks that share a generation still keep their data and saved runs separate. Imported JSON cannot select or execute a custom layout; that requires reviewed, bundled code.
 
 A trainer pack is a UTF-8 JSON file that identifies its game or mod, base generation, authors, public source, license or redistribution permission, and trainer teams. KM Companion validates the pack before storing it and prevents an imported file from replacing a bundled pack.
@@ -80,6 +82,8 @@ A trainer pack is a UTF-8 JSON file that identifies its game or mod, base genera
 | What do you need? | Start here |
 | --- | --- |
 | Use teams, tracking, notes, and run backups | [App Workspace](docs/app-workspace.md) |
+| Submit a complete mod profile | [Mod Submissions](docs/mod-submissions.md) |
+| Fill author files or inspect a complete example | [Starter Folder](docs/templates/mod-submission/README.md) and [Filled Example](docs/examples/mod-submission/README.md) |
 | Import or author trainer data | [Trainer Data Packs](docs/trainer-data-packs.md) |
 | Validate a trainer pack | [Trainer Pack v1 Schema](docs/schemas/trainer-pack-v1.schema.json) |
 | Start from a working file | [Example Trainer Pack](docs/examples/trainer-pack.example.json) |

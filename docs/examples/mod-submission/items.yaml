@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/items.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: storm-charm
+    name: Storm Charm
+    action: add
+    description: A held item that boosts Electric damage.
+    rawItemId: 1800
+    kind: held
+    price: 3000
+    sellPrice: 1500
+    stackLimit: 999
+    consumed: false
+    trigger: When the holder deals Electric damage.
+    effects:
+      - description: Multiply final damage by 1.1.
+        chance: 100
+        target: user
+    usableInBattle: false
+    usableInField: false
+    flingPower: 30
+    behavior: Apply after Storm Charge and round down after each multiplier.
+    interactions:
+      - Stacks with Storm Charge.
+    ruleIds:
+      - storm-bonus
+    sourceIds:
+      - release-guide

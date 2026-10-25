@@ -11,10 +11,12 @@
   "license": "GPL-3.0-only",
   "copyright": "Copyright 2026 Matroskin",
   "devDependencies": {
+    "ajv": "6.15.0",
     "electron": "^42.11.16",
     "electron-builder": "^26.15.0",
     "electron-winstaller": "5.4.0",
     "eslint": "^8.57.0",
+    "js-yaml": "4.3.2",
     "subpkg": "^4.1.0"
   },
   "scripts": {
@@ -32,7 +34,8 @@
     "check:third-party-notices": "node scripts/generate-third-party-notices.mjs --check",
     "release:source": "node scripts/package-release-source.mjs",
     "check:workspace": "node scripts/check-workspace-paths.mjs",
-    "postinstall": "subpkg install"
+    "postinstall": "subpkg install",
+    "validate:mod": "node scripts/validate-mod-submission.mjs"
   },
   "build": {
     "appId": "com.kotmatrosk1n.kmcalculator",
