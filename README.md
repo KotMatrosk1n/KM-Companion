@@ -2,6 +2,7 @@
 
 <img src="src/img/km-companion-icon.png" alt="KM Companion field guide icon" width="96" height="96" />
 
+[![Latest release](https://img.shields.io/github/v/release/KotMatrosk1n/KM-Companion?label=release)](https://github.com/KotMatrosk1n/KM-Companion/releases/latest)
 ![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D6)
 ![Built with](https://img.shields.io/badge/built%20with-Electron%2042-47848F)
 ![Calculation engine](https://img.shields.io/badge/calculation%20engine-Generations%201--9-red)
@@ -14,7 +15,7 @@ Previously named KM Calculator, it keeps existing saved teams, notes, settings, 
 
 Pokémon Royal Sword is the first bundled profile. Support for each hack belongs to its own profile, so its Pokémon, moves, abilities, mechanics, and run tools can reflect the game you are playing.
 
-[Explore the workspace](docs/app-workspace.md) | [Add support for a ROM hack](docs/rom-hack-profiles.md) | [Browse releases](https://github.com/KotMatrosk1n/KM-Companion/releases) | [Report an issue](https://github.com/KotMatrosk1n/KM-Companion/issues/new/choose)
+[Download the latest release](https://github.com/KotMatrosk1n/KM-Companion/releases/latest) | [Explore the workspace](docs/app-workspace.md) | [Add support for a ROM hack](docs/rom-hack-profiles.md) | [Report an issue](https://github.com/KotMatrosk1n/KM-Companion/issues/new/choose)
 
 ## Plan Your Battles
 
@@ -34,9 +35,9 @@ Route Items currently uses the Sword/Shield 1.3.2 base game guide, including exp
 
 ## Getting Started
 
-A KM Companion desktop release has not been published in this repository yet. To try the current version, follow [Building From Source](#building-from-source), then:
+Windows packages are distributed through [Releases](https://github.com/KotMatrosk1n/KM-Companion/releases/latest). If no package is listed yet, or you want to work on the app, follow [Building From Source](#building-from-source).
 
-1. Open the generated desktop app.
+1. Download and run the Windows x64 setup, then open KM Companion.
 2. At **Which ROM Hack are you playing?**, choose **Pokémon Royal Sword** or another installed profile.
 3. Use **Import / Export** to load a compatible save, import community trainer data, or move sets into Team/Box.
 4. Select the trainer or Pokémon sets you want to compare and configure the battlefield.
@@ -44,6 +45,8 @@ A KM Companion desktop release has not been published in this repository yet. To
 6. Use **Change ROM Hack** to return to the chooser without restarting the app.
 
 The app asks you to select a profile on every launch. Switching profiles reloads its data and controls while keeping saved runs separate.
+
+Windows releases are unsigned, so Windows may identify the publisher as unknown. Use the setup attached to this repository's release. Version 0.0.1 starts the public version sequence; users of the earlier 0.4.x development builds should follow the [development build transition](installer/windows/README.md#upgrade-and-uninstall-behavior).
 
 KM Companion does not include ROM files, console keys, save files, or private mod data. You are responsible for obtaining and using game data in compliance with applicable law.
 
@@ -90,7 +93,7 @@ Before bundling another person's data, confirm that redistribution is allowed an
 
 Save files and trainer pack JSON are read locally. They are not uploaded to a server. Teams, boxes, notes, inventory, and run progress stay in the app's local data. If a save format or modded layout cannot be recognized safely, import stops instead of guessing. Hacks that change the base game's storage layout may need a profile adapter.
 
-The desktop updater checks this repository on GitHub for newer releases and can guide the user through a supported update when one is available. Packaging downloads the Pokémon sprite set from Pokémon Showdown when preparing a build.
+The desktop app checks this repository on GitHub for newer releases after launch. A yellow badge appears on Settings in every theme when an update is available. **Settings → Updates** also provides a manual check, release notes, and **Install Update**. Downloads and installation begin after confirmation. Packaging downloads the Pokémon sprite set from Pokémon Showdown when preparing a build.
 
 Update checks contact GitHub. The build time sprite download contacts Pokémon Showdown. Save files, trainer packs, calculations, notes, and Team/Box data remain local and are not uploaded by either request.
 
@@ -105,7 +108,7 @@ Development currently requires:
 - Node.js 24 or a later compatible release
 - npm
 
-Windows installer builds also require PowerShell 7 (`pwsh`) and .NET SDK 8 or later. Published release builds additionally require Windows SDK `signtool.exe` and a trusted code signing PFX.
+Windows installer builds also require PowerShell 7 (`pwsh`) and .NET SDK 8 or later. Optional local signing requires Windows SDK `signtool.exe` and a trusted code signing PFX.
 
 Clone the repository and install the locked dependencies:
 
@@ -131,7 +134,9 @@ pwsh -NoProfile -File installer/windows/scripts/Build-KmCalculatorWindowsSetup.p
 
 The Windows installer uses WiX Toolset v7. WiX requires explicit acceptance of its OSMF EULA; review [the WiX OSMF terms](https://wixtoolset.org/osmf/) before supplying `-AcceptWixEula`. Automated release builds fail closed unless an authorized repository environment sets `WIX_V7_EULA_ACCEPTED=true`.
 
-Local builds may be unsigned. Release builds require a code signing PFX protected by a password and reject missing or invalid signing credentials: the build signs and verifies the stamped application executable, MSI, embedded Burn bundle, and public launcher with SHA-256 plus an RFC 3161 timestamp. The exact certificate subject is written into the packaged `app-update.yml`, so `electron-updater` rejects an installer signed by a different publisher. GitHub Actions expects `KM_WINDOWS_SIGNING_CERTIFICATE_BASE64` and `KM_WINDOWS_SIGNING_CERTIFICATE_PASSWORD` secrets and never publishes when either credential or any signature is missing.
+Published releases are unsigned and do not require certificate secrets. Update downloads use HTTPS and the SHA-512 digest in `latest.yml`; release assets also include `SHA256SUMS.txt`. These checks compare files with the published metadata and do not verify an Authenticode publisher. Optional local signing and its certificate checks remain available through the setup script.
+
+See [Releases](docs/releases.md) for the tag workflow, source archives, and changelog procedure.
 
 The generated Burn setup, `latest.yml`, checksums, smoke test output, and local build logs remain in ignored local paths and are not source files. See [Windows setup documentation](installer/windows/README.md) for the installer identity, signing controls, legacy removal safeguards, and updater argument contract.
 

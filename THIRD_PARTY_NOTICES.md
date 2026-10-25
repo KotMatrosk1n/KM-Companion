@@ -33,7 +33,7 @@ The resolved versions and license evidence come from the committed manifests and
 | import | development dependency | [`typescript`](https://github.com/microsoft/TypeScript) | `^5.8.3` | `5.8.3` | `Apache-2.0` | package metadata; `LICENSE.txt` |
 | root | dependency | [`builder-util-runtime`](https://github.com/electron-userland/electron-builder) | `9.7.0` | `9.7.0` | `MIT` | package metadata; `LICENSE` |
 | root | dependency | [`electron-updater`](https://github.com/electron-userland/electron-builder) | `^6.8.9` | `6.8.9` | `MIT` | package metadata; `LICENSE` |
-| root | development dependency | [`electron`](https://github.com/electron/electron) | `^42.11.15` | `42.11.15` | `MIT` | package metadata; `LICENSE` |
+| root | development dependency | [`electron`](https://github.com/electron/electron) | `^42.11.16` | `42.11.16` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-builder`](https://github.com/electron-userland/electron-builder) | `^26.15.0` | `26.15.3` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-winstaller`](https://github.com/electron/windows-installer) | `5.4.0` | `5.4.0` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`eslint`](https://github.com/eslint/eslint) | `^8.57.0` | `8.57.0` | `MIT` | package metadata; `LICENSE` |
@@ -119,7 +119,7 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `duplexer2@0.1.4` — root:dev
 - `esquery@1.4.2` — root:dev
 - `esquery@1.7.0` — calc:dev
-- `fast-uri@3.1.8` — root:dev
+- `fast-uri@3.1.9` — root:dev
 - `global-agent@4.1.3` — root:dev:optional
 - `pkijs@3.4.0` — root:dev
 - `source-map@0.6.1` — root:dev
@@ -283,7 +283,7 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `dir-compare@4.2.0` — root:dev
 - `dmg-builder@26.15.3` — root:dev
 - `dunder-proto@1.0.1` — root:dev
-- `electron@42.11.15` — root:dev
+- `electron@42.11.16` — root:dev
 - `electron-builder@26.15.3` — root:dev
 - `electron-builder-squirrel-windows@26.15.3` — root:dev
 - `electron-publish@26.15.3` — root:dev

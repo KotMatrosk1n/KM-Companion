@@ -67,11 +67,15 @@ notices must accompany the payload; refresh `LICENSES/` when changing runtimes.
 
 ## Release signing
 
-Unsigned local builds remain available for development. To create a signed local build, provide the PFX path and password through `KM_SIGNING_CERTIFICATE_PATH` and `KM_SIGNING_CERTIFICATE_PASSWORD`, or the matching script parameters. Set `KM_REQUIRE_SIGNING=true` (or pass `-RequireSigning`) whenever an unsigned result must be forbidden. `KM_SIGNTOOL_PATH` can identify an SDK `signtool.exe` when it is not on `PATH`.
+Published Windows releases are unsigned. The release workflow sets `KM_REQUIRE_SIGNING=false`, supplies no certificate, and verifies that the build receipt and public setup executable are unsigned before uploading them. Windows may identify the publisher as unknown. Download setup from this repository's GitHub Releases.
+
+The updater downloads through HTTPS and checks the asset against the SHA-512 digest in `latest.yml`. Unsigned builds do not include a certificate publisher pin, so these checks verify the download against the release metadata rather than an Authenticode publisher. `SHA256SUMS.txt` provides separate hashes for the published assets.
+
+Optional local signing remains available through the PFX path and password in `KM_SIGNING_CERTIFICATE_PATH` and `KM_SIGNING_CERTIFICATE_PASSWORD`, or the matching script parameters. Set `KM_REQUIRE_SIGNING=true` (or pass `-RequireSigning`) whenever a local unsigned result must be forbidden. `KM_SIGNTOOL_PATH` can identify an SDK `signtool.exe` when it is not on `PATH`.
 
 Signed builds use SHA-256 Authenticode signatures and an RFC 3161 SHA-256 timestamp for the already stamped `KM Companion.exe`, the MSI, the custom setup UI executable, the inner Burn bundle, and the final public launcher. Each signature is verified against the supplied certificate and must contain a trusted timestamp before the next layer is built. The inner bundle is signed before its SHA-256 digest is embedded in the launcher. The certificate's complete subject distinguished name is added to the staged `resources/app-update.yml` before payload harvesting; this makes `electron-updater` verify the downloaded installer against that exact publisher instead of relying on the asset hash alone.
 
-The release workflow always sets `KM_REQUIRE_SIGNING=true`. It expects a base64 encoded PFX in the `KM_WINDOWS_SIGNING_CERTIFICATE_BASE64` repository secret and its nonempty password in `KM_WINDOWS_SIGNING_CERTIFICATE_PASSWORD`. The PFX is written only to the runner's temporary directory and removed in an `always()` cleanup step. Missing credentials, an unusable or expired certificate, an unavailable timestamp, a signer mismatch, or an invalid signature stops the workflow before publication.
+See [Releases](../../docs/releases.md) for the version tag workflow and published changelog procedure.
 
 ## Stable installer identity
 
@@ -85,8 +89,15 @@ Burn is the only visible Programs and Features entry. Its chained MSI is hidden,
 
 ## Upgrade and uninstall behavior
 
-KM Companion continues the KM Calculator installer family with version 0.4.27.
-The MSI and Burn upgrade codes and provider key remain unchanged. Setup accepts
+KM Companion 0.0.1 begins the public version sequence. Earlier development builds
+used 0.4.26 and 0.4.27, which compare as newer versions. They will not offer 0.0.1
+through automatic updates. Back up the run before moving from a development
+build. If it was installed through setup, uninstall that registered development
+copy through Windows Settings before installing 0.0.1. Uninstall preserves the
+existing app data. A standalone unpacked preview only needs to be closed.
+
+The MSI and Burn upgrade codes and provider key remain unchanged. For supported
+upgrades to a higher version, setup accepts
 an existing KM Calculator installation at `%ProgramFiles%\KM Calculator` as an
 upgrade source, removes its registered payload through Windows Installer, and
 installs `KM Companion.exe` under `%ProgramFiles%\KM Companion`. Both executable

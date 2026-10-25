@@ -231,7 +231,6 @@ body.km-app .finder-explanation-order em { color: var(--km-muted); }
 body.km-app :is(.finder-explanation-token, .finder-explanation-order span) { background: var(--km-selection); color: var(--km-text); border-color: var(--km-control-line); text-shadow: none; }
 body.km-app .km-update-progress-track { background: var(--km-inset); border-color: var(--km-control-line); }
 body.km-app .km-update-progress-fill { background: linear-gradient(90deg, var(--km-action), var(--km-accent)); }
-body.km-app .km-settings-update-badge { color: var(--km-on-action); background: var(--km-action-fill); border-color: var(--km-accent); }
 body.km-app .km-update-error, body.km-app .km-settings-update-status[data-kind="error"] { border-color: var(--km-danger); color: var(--km-text); background: color-mix(in srgb, var(--km-danger) 8%, var(--km-panel)); }
 body.km-app .km-settings-update-status[data-kind="available"] { border-left-color: var(--km-accent); }
 body.km-app ::-webkit-scrollbar { width: 10px; height: 10px; }
