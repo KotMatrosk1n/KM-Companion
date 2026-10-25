@@ -1,7 +1,7 @@
 {
   "name": "km-companion",
   "productName": "KM Companion",
-  "version": "0.4.27",
+  "version": "0.0.1",
   "description": "A Pokemon companion for damage calculations, encounter tracking, and run planning.",
   "private": true,
   "main": "electron/main.js",
@@ -11,7 +11,7 @@
   "license": "GPL-3.0-only",
   "copyright": "Copyright 2026 Matroskin",
   "devDependencies": {
-    "electron": "^42.11.15",
+    "electron": "^42.11.16",
     "electron-builder": "^26.15.0",
     "electron-winstaller": "5.4.0",
     "eslint": "^8.57.0",

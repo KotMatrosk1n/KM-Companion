@@ -59,51 +59,16 @@ jobs:
     - name: Pack Windows application
       run: npm run electron:pack
 
-    - name: Stage required Windows signing certificate
-      shell: pwsh
-      env:
-        KM_SIGNING_CERTIFICATE_BASE64: ${{ secrets.KM_WINDOWS_SIGNING_CERTIFICATE_BASE64 }}
-        KM_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.KM_WINDOWS_SIGNING_CERTIFICATE_PASSWORD }}
-      run: |
-        $ErrorActionPreference = "Stop"
-        if ([string]::IsNullOrWhiteSpace($env:KM_SIGNING_CERTIFICATE_BASE64)) {
-          throw "The KM_WINDOWS_SIGNING_CERTIFICATE_BASE64 release secret is required."
-        }
-        if ([string]::IsNullOrWhiteSpace($env:KM_SIGNING_CERTIFICATE_PASSWORD)) {
-          throw "The KM_WINDOWS_SIGNING_CERTIFICATE_PASSWORD release secret is required."
-        }
-
-        try {
-          $certificateBytes = [Convert]::FromBase64String($env:KM_SIGNING_CERTIFICATE_BASE64)
-        } catch {
-          throw "KM_WINDOWS_SIGNING_CERTIFICATE_BASE64 is not valid base64."
-        }
-        if ($certificateBytes.Length -eq 0) {
-          throw "KM_WINDOWS_SIGNING_CERTIFICATE_BASE64 decoded to an empty file."
-        }
-
-        $certificatePath = Join-Path $env:RUNNER_TEMP "km-calculator-release-signing.pfx"
-        "KM_SIGNING_CERTIFICATE_PATH=$certificatePath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        [IO.File]::WriteAllBytes($certificatePath, $certificateBytes)
-
-    - name: Build signed Windows installer
+    - name: Build unsigned Windows installer
       shell: pwsh
       env:
         WIX_V7_EULA_ACCEPTED: ${{ vars.WIX_V7_EULA_ACCEPTED }}
-        KM_REQUIRE_SIGNING: "true"
-        KM_SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.KM_WINDOWS_SIGNING_CERTIFICATE_PASSWORD }}
+        KM_REQUIRE_SIGNING: "false"
+        KM_SIGNING_CERTIFICATE_PATH: ""
+        KM_SIGNING_CERTIFICATE_PASSWORD: ""
       run: pwsh -NoProfile -File installer/windows/scripts/Build-KmCalculatorWindowsSetup.ps1
 
-    - name: Remove staged signing certificate
-      if: always()
-      shell: pwsh
-      run: |
-        if (-not [string]::IsNullOrWhiteSpace($env:KM_SIGNING_CERTIFICATE_PATH) -and
-            (Test-Path -LiteralPath $env:KM_SIGNING_CERTIFICATE_PATH -PathType Leaf)) {
-          Remove-Item -LiteralPath $env:KM_SIGNING_CERTIFICATE_PATH -Force
-        }
-
-    - name: Create GitHub release
+    - name: Create draft GitHub release
       shell: pwsh
       env:
         GH_TOKEN: ${{ github.token }}
@@ -144,18 +109,17 @@ jobs:
         )
 
         $receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json
-        if ($receipt.signed -ne $true) {
-          throw "The installer build receipt does not confirm required signing."
+        $installerHash = (Get-FileHash -LiteralPath $installerTarget -Algorithm SHA256).Hash.ToLowerInvariant()
+        if ($receipt.version -ne $packageVersion -or $receipt.installer -ne $installerAssetName -or
+            $receipt.installerSha256 -ne $installerHash) {
+          throw "The installer does not match its build receipt and release version."
+        }
+        if ($receipt.signed -ne $false -or $receipt.signerSubject -or $receipt.signerThumbprint) {
+          throw "The installer build receipt does not match the unsigned release configuration."
         }
         $installerSignature = Get-AuthenticodeSignature -LiteralPath $installerTarget
-        if ($installerSignature.Status -ne [Management.Automation.SignatureStatus]::Valid -or
-            -not $installerSignature.SignerCertificate -or
-            -not $installerSignature.TimeStamperCertificate) {
-          throw "The release installer does not have a valid timestamped Authenticode signature."
-        }
-        if ($installerSignature.SignerCertificate.Subject -ne $receipt.signerSubject -or
-            $installerSignature.SignerCertificate.Thumbprint -ne $receipt.signerThumbprint) {
-          throw "The release installer signer does not match the certificate recorded by the layered build."
+        if ($installerSignature.Status -ne [Management.Automation.SignatureStatus]::NotSigned) {
+          throw "The release installer must be unsigned."
         }
 
         $latestText = Get-Content $latestPath -Raw
@@ -163,6 +127,12 @@ jobs:
         $metadataPath = $metadataPath.Trim([char[]]@([char]39, [char]34))
         if ($metadataPath -ne $installerAssetName) {
           throw "release/latest.yml path '$metadataPath' does not match '$installerAssetName'."
+        }
+        $metadataVersion = [regex]::Match($latestText, '(?m)^version:\s*(?<value>[^\r\n]+)$').Groups["value"].Value.Trim()
+        $metadataHash = [regex]::Match($latestText, '(?m)^sha512:\s*(?<value>[^\r\n]+)$').Groups["value"].Value.Trim()
+        $installerSha512 = [Convert]::ToBase64String([Convert]::FromHexString((Get-FileHash -LiteralPath $installerTarget -Algorithm SHA512).Hash))
+        if ($metadataVersion -ne $packageVersion -or $metadataHash -ne $installerSha512) {
+          throw "The updater metadata does not match the release version and installer digest."
         }
         foreach ($asset in $assets) {
           if ($asset.Name -match '\s') {
@@ -180,6 +150,7 @@ jobs:
         Build instructions, retained third party notices, and component license boundaries are included in LICENSING.md.
         "@ | Set-Content -LiteralPath $releaseNotesPath -Encoding utf8
         gh release create "${{ github.ref_name }}" $assets.FullName `
+          --draft `
           --title "KM Companion ${{ github.ref_name }}" `
           --notes-file $releaseNotesPath `
           --generate-notes
