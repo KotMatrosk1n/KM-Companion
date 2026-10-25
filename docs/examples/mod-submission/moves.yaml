@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/moves.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: frost-spark
+    name: Frost Spark
+    action: add
+    description: Deals special Electric damage and can lower Speed.
+    rawMoveId: 1500
+    type: Electric
+    category: Special
+    power: 70
+    accuracy: 100
+    pp: 15
+    priority: 0
+    target: One adjacent opponent
+    flags:
+      - protect
+      - mirror
+    effects:
+      - description: Lowers the target Speed by one stage after damage.
+        chance: 20
+        target: target
+        statChanges:
+          - stat: spe
+            stages: -1
+            target: target
+            chance: 100
+    criticalHitStage: 0
+    ruleIds:
+      - storm-bonus
+    sourceIds:
+      - release-guide
+  - id: swagger
+    name: Swagger
+    action: remove
+    base: Swagger
+    notes: Explicitly removed from this fictional mod.
+    sourceIds:
+      - release-guide

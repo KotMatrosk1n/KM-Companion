@@ -1,0 +1,138 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/pokemon.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: stormcub
+    name: Stormcub
+    action: add
+    description: A fictional Electric and Ice species.
+    nationalDex: 10001
+    rawSpeciesId: 1500
+    rawFormId: 0
+    types:
+      - Electric
+      - Ice
+    baseStats:
+      hp: 60
+      atk: 45
+      def: 55
+      spa: 80
+      spd: 60
+      spe: 75
+    abilities:
+      primary: "@storm-charge"
+      secondary: None
+      hidden: Static
+    weightKg: 8.5
+    heightM: 0.5
+    genderRatio: 50% male and 50% female
+    catchRate: 120
+    growthRate: Medium Fast
+    baseExperience: 145
+    evYield:
+      spa: 1
+    eggGroups:
+      - Field
+    eggCycles: 20
+    baseFriendship: 50
+    heldItems:
+      - item: Oran Berry
+        quantity: 1
+        chance: 5
+    evolutions: []
+    learnsetCoverage: complete
+    learnset:
+      - move: Tackle
+        method: level
+        level: 1
+      - move: "@frost-spark"
+        method: level
+        level: 15
+      - move: Thunderbolt
+        method: machine
+        machine: TR08
+    removedMoves: []
+    sprite: Public custom artwork will be supplied separately with permission.
+    availability:
+      description: Available on Storm Route after the first badge.
+      storyFlags:
+        - first-badge
+    sourceIds:
+      - release-guide
+    notes: >-
+      The added species, IDs, mechanics, and source page are fictional. Secondary ability None means no second
+      ability.
+  - id: pikachu
+    name: Pikachu
+    action: change
+    base: Pikachu
+    baseStats:
+      spa: 65
+    notes: Only Special Attack changes. Omitted fields inherit the declared base game.
+    sourceIds:
+      - release-guide
+  - id: stormcub-aurora
+    name: Stormcub Aurora
+    action: add
+    description: A fictional alternate form reached during aurora weather.
+    nationalDex: 10001
+    rawSpeciesId: 1500
+    rawFormId: 1
+    types:
+      - Electric
+      - Ice
+    baseStats:
+      hp: 60
+      atk: 45
+      def: 65
+      spa: 90
+      spd: 70
+      spe: 55
+    abilities:
+      primary: "@storm-charge"
+      secondary: None
+      hidden: Static
+    weightKg: 8.5
+    heightM: 0.5
+    genderRatio: 50% male and 50% female
+    catchRate: 120
+    growthRate: Medium Fast
+    baseExperience: 145
+    evYield:
+      spa: 1
+    eggGroups:
+      - Field
+    eggCycles: 20
+    baseFriendship: 50
+    heldItems:
+      - item: Oran Berry
+        quantity: 1
+        chance: 5
+    evolutions: []
+    learnsetCoverage: complete
+    learnset:
+      - move: Tackle
+        method: level
+        level: 1
+      - move: "@frost-spark"
+        method: level
+        level: 15
+      - move: Thunderbolt
+        method: machine
+        machine: TR08
+    removedMoves: []
+    sprite: Public custom artwork will be supplied separately with permission.
+    availability:
+      description: Available on Storm Route after the first badge.
+      storyFlags:
+        - first-badge
+    sourceIds:
+      - release-guide
+    notes: Complete form battle data is supplied explicitly; no omitted custom species fields are inferred.
+    baseSpecies: "@stormcub"
+    form: Aurora
+    formRules: Changes form during aurora weather and returns afterward. No permanent evolution occurs.
+    ruleIds:
+      - aurora-form

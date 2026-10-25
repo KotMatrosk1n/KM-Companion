@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/mod.schema.json
+# Fictional filled example. This folder is a review submission, not an app import.
+format: km-companion.mod-submission
+formatVersion: 1
+status: ready
+project:
+  id: example-storm
+  name: Example Storm
+  version: 1.0.0
+  summary: Fictional data demonstrating a complete submission. No game files are included.
+  homepage: https://example.com/example-storm
+  baseGame: Pokémon Sword
+  gameVersion: 1.3.2
+  baseGeneration: 8
+  languages:
+    - English
+  gameModes:
+    - Story
+    - Challenge
+authors:
+  - name: Example Author
+    role: Mod author and data maintainer
+    url: https://example.com/author
+maintenance:
+  maintainers:
+    - name: Example Author
+      url: https://example.com/example-storm/discussions
+  updatePolicy: Publish a versioned submission whenever battle or reference data changes.
+permission:
+  redistribution: allowed
+  statement: Fictional example permission for this original demonstration data.
+  evidenceUrl: https://example.com/example-storm/permission
+  assetNotes: No custom artwork is included.
+sources:
+  - id: release-guide
+    name: Example Storm authored data guide
+    url: https://example.com/example-storm/data
+    revision: 1.0.0
+    notes: All custom records below are fictional examples.
+locations:
+  - id: storm-route
+    name: Storm Route
+    region: Example Galar
+    mapIds:
+      - example-route-01
+  - id: storm-town
+    name: Storm Town
+    region: Example Galar
+    mapIds:
+      - example-town-01
+requestedFeatures:
+  - Damage calculations
+  - Trainer selection
+  - Encounter tracking
+  - Item pickup tracking
+notes: An intake example, not a playable mod or an installable profile.

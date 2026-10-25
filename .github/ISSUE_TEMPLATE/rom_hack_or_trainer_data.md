@@ -22,6 +22,12 @@ List the data authors, maintainers, public source, version, and license or expli
 
 Summarize the species, forms, stats, types, moves, abilities, items, trainers, rules, or save layout that differ from the canonical generation.
 
+# Submission files
+
+For a complete profile proposal, follow the [mod submission guide](https://github.com/KotMatrosk1n/KM-Companion/blob/master/docs/mod-submissions.md). Copy its starter folder, fill the project manifest and eight category files, and attach a ZIP or public repository link. State the exact mod version and any draft gaps. If you used the optional author checker, include its summary. Passing the format check does not establish runtime support.
+
+For a trainer import only, use the existing trainer pack JSON format instead. Keep the two formats distinct.
+
 # Public references
 
 Link the official project page and any public technical documentation that reviewers may use to verify the proposal.

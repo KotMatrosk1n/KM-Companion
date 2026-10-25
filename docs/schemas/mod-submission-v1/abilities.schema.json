@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/abilities.schema.json",
+  "title": "KM Companion abilities submission",
+  "$ref": "common.schema.json#/definitions/abilitiesFile"
+}

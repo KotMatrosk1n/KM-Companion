@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/abilities.schema.json
+# Describe triggers, exact effects, suppression, interactions, and rules. New behavior needs a worked rule example.
+# Choose changes, complete, unchanged, or unavailable. Never mark missing research as unchanged.
+formatVersion: 1
+coverage: unavailable
+notes: "Describe what is missing, or change coverage and add records from the filled example."
+records: []

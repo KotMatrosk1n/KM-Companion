@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/encounters.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: route-land-rain
+    name: Storm Route rain encounters
+    action: add
+    locationId: storm-route
+    method: Land
+    kind: random
+    rateMode: percent
+    weather:
+      - Rain
+    time:
+      - Any
+    versions:
+      - Example Storm 1.0.0
+    conditions:
+      description: Available after the first badge.
+    shinyLocked: false
+    slots:
+      - id: stormcub-slot
+        species: "@stormcub"
+        level:
+          min: 12
+          max: 15
+        rate: 40
+      - id: pikachu-slot
+        species: Pikachu
+        level:
+          min: 12
+          max: 15
+        rate: 60
+    sourceIds:
+      - release-guide
+  - id: town-trade
+    name: Storm Town Eevee trade
+    action: add
+    locationId: storm-town
+    method: Trade
+    kind: trade
+    rateMode: none
+    slots:
+      - id: eevee-trade
+        species: Eevee
+        level:
+          min: 15
+          max: 15
+        requiredPokemon: Pikachu
+        guaranteed: true
+    sourceIds:
+      - release-guide

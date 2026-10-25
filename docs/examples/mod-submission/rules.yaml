@@ -1,0 +1,134 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/rules.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: storm-bonus
+    name: Storm damage bonuses
+    action: add
+    kind: battle
+    trigger: An Electric damaging move is used.
+    behavior: >-
+      During rain, Storm Charge multiplies final damage by 1.2. Storm Charm then multiplies the result by 1.1
+      regardless of weather. Neither affects status moves.
+    order: After ordinary final damage modifiers. Apply the ability before the item.
+    rounding: Round down after each multiplier.
+    parameters:
+      abilityMultiplier:
+        numerator: 6
+        denominator: 5
+      itemMultiplier:
+        numerator: 11
+        denominator: 10
+    examples:
+      - name: Both bonuses
+        given: >-
+          Final damage before these bonuses is 100; the attacker has Storm Charge and Storm Charm; rain is
+          active.
+        when: The attacker uses Frost Spark.
+        then: Damage is floor(floor(100 * 1.2) * 1.1) = 132.
+      - name: No rain
+        given: Final damage is 100 and the same ability and item are present, but there is no rain.
+        when: The attacker uses Frost Spark.
+        then: Only Storm Charm applies. Damage is 110.
+    sourceIds:
+      - release-guide
+  - id: ace-ai
+    name: Route Ace move choice
+    action: add
+    kind: ai
+    trigger: Ace Trainer Mira selects a move.
+    behavior: >-
+      Choose a guaranteed knockout if one exists. Otherwise maximize expected damage. Resolve ties by the
+      original move slot.
+    order: After checking legal move targets.
+    examples:
+      - name: Guaranteed knockout
+        given: Move slot 1 deals 20 to 24 damage, slot 2 deals 30 to 36 damage, and the target has 25 HP.
+        when: Both moves are legal.
+        then: Choose slot 2.
+    sourceIds:
+      - release-guide
+  - id: route-quota
+    name: Storm Route challenge allowance
+    action: add
+    kind: encounter
+    trigger: A player records a catch in Challenge mode.
+    behavior: >-
+      Storm Route permits one catch, including gifts and statics. Misses use the allowance. A caught evolution
+      family is excluded from future challenge catches.
+    parameters:
+      locationIds:
+        - storm-route
+      mode: Challenge
+      limit: 1
+      giftsShareAllowance: true
+      missesUseAllowance: true
+    examples:
+      - name: Gift uses the route
+        given: No catch is recorded for Storm Route.
+        when: The player records a gift there.
+        then: The route has no remaining allowance.
+    sourceIds:
+      - release-guide
+  - id: ev-policy
+    name: No EV gains
+    action: add
+    kind: input
+    trigger: A Pokémon is imported or loaded.
+    behavior: All EVs are zero in this mod. IVs retain their recorded values.
+    parameters:
+      evs: disabled
+    examples:
+      - name: Imported EVs
+        given: An imported Pokémon contains 252 Special Attack EVs.
+        when: The profile loads it.
+        then: Use zero EVs and retain its IVs.
+    sourceIds:
+      - release-guide
+  - id: save-ids
+    name: Added species ID
+    action: add
+    kind: save
+    trigger: A supported Sword save contains raw species ID 1500 and form ID 0.
+    behavior: Resolve that pair to Stormcub. Do not map another form automatically.
+    saveFormat:
+      baseGame: Pokémon Sword 1.3.2
+      extensions:
+        - main
+      layoutChanges: Container layout and checksums are unchanged.
+      entityIdMappings: >-
+        Species 1500, form 0 = @stormcub; species 1500, form 1 = @stormcub-aurora; item 1800 = @storm-charm;
+        move 1500 = @frost-spark; ability 500 = @storm-charge.
+      checksumChanges: None
+      versionDetection: Use the declared mod version during profile selection.
+    examples:
+      - name: Added species
+        given: Species 1500 and form 0 occur in a supported save.
+        when: The matching mod profile imports it.
+        then: Create Stormcub with its saved data. Reject unresolved forms before replacing the roster.
+    sourceIds:
+      - release-guide
+  - id: aurora-form
+    name: Aurora form change
+    action: add
+    kind: battle
+    appliesTo:
+      - "@stormcub"
+      - "@stormcub-aurora"
+    trigger: Aurora weather starts or ends, or Stormcub enters the field.
+    behavior: >-
+      While Aurora weather is active, Stormcub uses its Aurora form. It returns to its ordinary form when the
+      weather ends. Preserve level, IVs, EVs, HP, status, stat stages, moves, and held item. Both forms have
+      the same base HP.
+    order: Resolve the form before selecting moves and calculating damage.
+    exceptions:
+      - No permanent evolution or save species change occurs.
+    examples:
+      - name: Aurora begins
+        given: Stormcub is active at 50 HP and Aurora weather begins.
+        when: The weather change resolves.
+        then: Use Stormcub Aurora stats for the next action while retaining 50 HP and all existing battle state.
+    sourceIds:
+      - release-guide

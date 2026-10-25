@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/mod.schema.json
+# Start here. Replace every example.com address and instruction with real public project information.
+# Keep status draft while information is incomplete; use ready only after the readiness check passes.
+format: km-companion.mod-submission
+formatVersion: 1
+status: draft
+project:
+  id: your-mod
+  name: Your Mod
+  version: 0.1.0
+  summary: Describe your mod and the support your players need.
+  homepage: https://example.com/your-project
+  baseGame: Pokémon Sword
+  gameVersion: 1.3.2
+  baseGeneration: 8
+  languages:
+    - English
+authors:
+  - name: Your public author name
+    role: Mod author
+maintenance:
+  maintainers:
+    - name: Your public author name
+      url: https://example.com/your-public-contact
+  updatePolicy: Explain who maintains the data and how changes will be announced.
+permission:
+  redistribution: needs_review
+  statement: State the actual license or explicit permission to redistribute your authored data.
+  evidenceUrl: null
+  assetNotes: Explain whether custom assets are included and who permits their use.
+sources:
+  - id: author-data
+    name: Your authoritative data source
+    url: https://example.com/your-data
+    revision: Your mod version or source revision
+locations: []
+requestedFeatures:
+  - Describe the features you want
+notes: Fill mod.yaml, then work through every category file. This starter is deliberately incomplete.

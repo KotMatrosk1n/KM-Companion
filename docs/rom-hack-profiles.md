@@ -2,6 +2,8 @@
 
 KM Companion keeps each supported ROM hack in a profile so custom data never leaks into another game or into the canonical generation data.
 
+Mod authors can prepare a complete proposal using the [mod submission guide](mod-submissions.md). Its [starter folder](templates/mod-submission/README.md) and [filled example](examples/mod-submission/README.md) cover all eight data categories, shared locations and sources, and custom behavior. YAML and JSON submissions describe the intended profile for review; they do not install providers or execute code. The author checker validates structure, references, completeness, and selected consistency rules before integration. The existing trainer pack format remains available for direct trainer imports.
+
 At startup, the app asks **Which ROM Hack are you playing?** Selecting a tile activates one profile, switches to and locks its base generation, resolves its calculator data and layout providers, filters the trainer list, applies its input and save import rules, and enables only the features declared by that profile. The active choice is intentionally not remembered between launches.
 
 ## Profile Layers
@@ -56,6 +58,8 @@ See [Trainer Data Packs](trainer-data-packs.md) and the [example pack](examples/
 ## Adding A Full Data Overlay
 
 Mods that change species, forms, base stats, types, moves, abilities, items, or damage mechanics need a bundled profile and a generation override provider in addition to a trainer pack.
+
+Begin with the versioned submission files and record the actual behavior, including unsupported mechanics. Preserve the source records and explicit unknowns during review. Convert trainer data into the existing trainer pack contract only after resolving custom references and supported limits. Do not silently discard additional team members, battle formats, moves, custom rules, or data in `extra`. Information beyond current runtime support requires an integration decision rather than an automatic import.
 
 1. Register the profile in `src/js/data/rom_hacks.js`. Omit `ui.layout` to use `base`, or name a bundled registered layout provider.
 2. Add a calculator `Generation` provider that composes the canonical base generation with the mod's overrides.

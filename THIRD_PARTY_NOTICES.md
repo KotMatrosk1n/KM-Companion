@@ -33,10 +33,12 @@ The resolved versions and license evidence come from the committed manifests and
 | import | development dependency | [`typescript`](https://github.com/microsoft/TypeScript) | `^5.8.3` | `5.8.3` | `Apache-2.0` | package metadata; `LICENSE.txt` |
 | root | dependency | [`builder-util-runtime`](https://github.com/electron-userland/electron-builder) | `9.7.0` | `9.7.0` | `MIT` | package metadata; `LICENSE` |
 | root | dependency | [`electron-updater`](https://github.com/electron-userland/electron-builder) | `^6.8.9` | `6.8.9` | `MIT` | package metadata; `LICENSE` |
+| root | development dependency | [`ajv`](https://github.com/ajv-validator/ajv) | `6.15.0` | `6.15.0` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron`](https://github.com/electron/electron) | `^42.11.16` | `42.11.16` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-builder`](https://github.com/electron-userland/electron-builder) | `^26.15.0` | `26.15.3` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-winstaller`](https://github.com/electron/windows-installer) | `5.4.0` | `5.4.0` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`eslint`](https://github.com/eslint/eslint) | `^8.57.0` | `8.57.0` | `MIT` | package metadata; `LICENSE` |
+| root | development dependency | [`js-yaml`](https://github.com/nodeca/js-yaml) | `4.3.2` | `4.3.2` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`subpkg`](https://github.com/scheibo/subpkg) | `^4.1.0` | `4.1.0` | `MIT` | package metadata; `LICENSE` |
 
 ## Locked NPM License Categories

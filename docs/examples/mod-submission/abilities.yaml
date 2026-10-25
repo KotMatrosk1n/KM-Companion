@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KotMatrosk1n/KM-Companion/master/docs/schemas/mod-submission-v1/abilities.schema.json
+# Fictional filled example. Copy individual records into the starter files as needed.
+# Exact base names refer to the declared base game; @id refers to this submission.
+formatVersion: 1
+coverage: changes
+records:
+  - id: storm-charge
+    name: Storm Charge
+    action: add
+    description: In rain, Electric moves gain a damage bonus.
+    rawAbilityId: 500
+    activation: Before final damage when rain is active and the user uses an Electric damaging move.
+    effects:
+      - description: Multiply the final damage by 1.2 during rain.
+        chance: 100
+        target: user
+        ruleIds:
+          - storm-bonus
+    behavior: Use the storm-bonus rule for ordering and rounding.
+    suppressedBy:
+      - Gastro Acid
+      - Neutralizing Gas
+    ignoredBy: []
+    copiedBy:
+      - Trace
+    interactions:
+      - Does not change move accuracy.
+    ruleIds:
+      - storm-bonus
+    sourceIds:
+      - release-guide
