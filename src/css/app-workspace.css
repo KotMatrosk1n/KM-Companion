@@ -58,6 +58,9 @@ body.km-app .km-trainer-model { display: block; width: 96px; height: 128px; obje
 .km-trainer-types { display: flex; flex-direction: column; align-self: start; gap: 4px; font-size: 11px; line-height: 17px; }
 .km-trainer-types .km-type-badge { min-width: 64px; box-sizing: border-box; text-align: center; white-space: nowrap; }
 .km-trainer-portrait { width: 76px; height: 76px; display: flex; align-items: center; justify-content: center; }
+.km-trainer-pokemon:has(> .km-trainer-portrait:empty), .km-trainer-pokemon:has(> .km-trainer-portrait > img[data-km-sprite-state="disabled"]), .km-trainer-pokemon:has(> .km-trainer-portrait > img[data-km-sprite-state="missing"]) { grid-template-columns: minmax(0, 1fr) auto; }
+.km-trainer-portrait:empty, .km-trainer-portrait:has(> img[data-km-sprite-state="disabled"]), .km-trainer-portrait:has(> img[data-km-sprite-state="missing"]) { display: none; }
+.km-trainer-pokemon > .km-pokemon-facts { min-width: 0; }
 body.km-app .km-trainer-sprite { width: auto; height: auto; max-width: 76px; max-height: 76px; object-fit: contain; }
 .km-trainer-pokemon .km-pokemon-facts { margin: 0; grid-template-columns: 43px minmax(0, 1fr); gap: 2px 6px; font-size: 12px; line-height: 17px; }
 .km-trainer-pokemon dd { overflow-wrap: anywhere; }
@@ -419,10 +422,14 @@ body.km-app .box-poke .box-pokemon { display: flex; align-items: center; justify
 body.km-app .box-poke .box-pokemon[hidden] { display: none; }
 body.km-app .box-poke .team-box-filter-hidden { display: none !important; }
 body.km-app .box-pokemon-sprite { width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: none; max-height: none; object-fit: contain; image-rendering: pixelated; }
+body.km-app .box-poke .km-box-name, .km-pokemon-fallback-name { display: none; }
+body.km-app .box-pokemon:has(> img[data-km-sprite-state="disabled"]) > .km-box-name, body.km-app .box-pokemon:has(> img[data-km-sprite-state="missing"]) > .km-box-name,
+body.km-app button:has(> img[data-km-sprite-state="disabled"]) > .km-pokemon-fallback-name, body.km-app button:has(> img[data-km-sprite-state="missing"]) > .km-pokemon-fallback-name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; white-space: normal; min-width: 0; max-width: 100%; font-size: 10px; line-height: 12px; text-align: center; }
 body.km-app #team-poke-list { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: var(--km-team-card-height, 68px); align-content: start; }
 body.km-app #team-poke-list .box-pokemon { flex-direction: column; padding: 2px; }
 body.km-app #team-poke-list .box-pokemon-sprite { flex: 1; height: 0; image-rendering: auto; }
-body.km-app #team-poke-list .km-box-name { flex-shrink: 0; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; line-height: 14px; }
+body.km-app #team-poke-list .km-box-name { display: block; flex-shrink: 0; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; line-height: 14px; }
+body.km-app #team-poke-list .box-pokemon:has(> img[data-km-sprite-state="disabled"]) > .km-box-name, body.km-app #team-poke-list .box-pokemon:has(> img[data-km-sprite-state="missing"]) > .km-box-name { display: -webkit-box; white-space: normal; }
 body.km-app .box-poke:empty::before, body.km-app .box-poke.team-box-filter-empty::after { grid-column: 1 / -1; grid-row: 1 / -1; align-self: center; }
 .km-box-pages { display: flex; align-items: center; justify-content: space-between; padding: 4px; font-size: 11px; }
 body.km-app .km-box-pages button { height: 26px; min-width: 28px; padding: 3px; }

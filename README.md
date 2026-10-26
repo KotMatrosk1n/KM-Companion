@@ -23,7 +23,7 @@ Compare damage rolls, check what your Pokémon can survive, and explore differen
 
 The calculation engine covers Generations 1 through 9. Each profile selects its base generation and applies that hack's changes. Royal Sword uses Generation 8, its own calculator layout and trainer data, and a Sword/Shield battle simulator. EV input is disabled for Royal Sword; another profile can use the controls appropriate to its own game.
 
-Keep your current team beside the calculation. Team keeps all six Pokémon in one row with animated sprites and names. Box, Box 2, Compost, and Trash use compact static sprites with color coding and names available on hover. Storage capacity adapts to the available space, with at least 30 entries per Royal Sword page and more when the window allows.
+Keep your current team beside the calculation. Team keeps all six Pokémon in one row with animated sprites and names. Box, Box 2, Compost, and Trash use compact static sprites with color coding and names available on hover. When pictures are disabled or unavailable, storage and Pokémon selection buttons show names instead. Storage capacity adapts to the available space, with at least 30 entries per Royal Sword page and more when the window allows.
 
 ## Explore Your Dex
 

@@ -767,6 +767,7 @@ function renderTrainerTeam(trainerId) {
 		var pokemon = trainer[i];
 		var button = $("<button type='button' class='trainer-pokemon' draggable='true'></button>");
 		button.append(createPokemonSprite(getTrainerPokemonSpecies(pokemon), "trainer-pokemon-sprite"));
+		button.append($("<span class='km-pokemon-fallback-name'></span>").text(getTrainerPokemonSpecies(pokemon)));
 		button.find("img").prop("draggable", false);
 		button.attr("aria-label", getTrainerPokemonButtonLabel(pokemon));
 		button.attr("title", getTrainerPokemonLabel(pokemon));

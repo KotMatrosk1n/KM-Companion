@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "9d164632e868fc7852764bada607047cd87579f99979b685656579284db8eee4",
+  "revision": "9df87f634c79ee26b4df22c82af439e7a6072b2c2a3f0e625b8e217f25cfae0e",
   "baseUrl": "https://play.pokemonshowdown.com/sprites/",
   "sprites": {
     "gen5/ababo.png": {
@@ -30,6 +30,10 @@
     "gen5/accelgor.png": {
       "size": 688,
       "sha256": "e63f52167c7fedb79ba27d596e103cdce8bd3efffa4e18fbc6c38ca90a6a6a16"
+    },
+    "gen5/aegislash-blade.png": {
+      "size": 923,
+      "sha256": "344794f5a28dd81ec0874317ac15623ab876fe697c8337e0ac23eb53e5c01b38"
     },
     "gen5/aegislash.png": {
       "size": 876,
@@ -63,9 +67,41 @@
       "size": 987,
       "sha256": "4733821af7974ebb45f418659ad67f95cabc3853c86cc0aae07bc88eb6f11580"
     },
+    "gen5/alcremie-caramelswirl.png": {
+      "size": 694,
+      "sha256": "c191960e4b77fc89361aa7e68d1622d55e0bd80df6bfff8ce28398f6aee1af1b"
+    },
     "gen5/alcremie-gmax.png": {
       "size": 1327,
       "sha256": "55f8e88cc1574eb429835ac6b84b79f55e35d8118b6b9ec67e4eb41412424ad1"
+    },
+    "gen5/alcremie-lemoncream.png": {
+      "size": 694,
+      "sha256": "a1ba4a2bdbda2f3d7b67947e6824dfc55ff1d2ebe29f36794229bcf42be17887"
+    },
+    "gen5/alcremie-matchacream.png": {
+      "size": 694,
+      "sha256": "e1dbfa7ea196c1d340c8c14645adb9c55e2d90f8e5064e83b8a9a9b07a053363"
+    },
+    "gen5/alcremie-mintcream.png": {
+      "size": 693,
+      "sha256": "c7607bd38692915e8b676207677cde1d608ef9377f5e61661a9d57c2253b3a43"
+    },
+    "gen5/alcremie-rainbowswirl.png": {
+      "size": 694,
+      "sha256": "e781e189774cfc92e7c9c26868464b74ac6f72bf40eb4ecba8d7cefc663171c0"
+    },
+    "gen5/alcremie-rubycream.png": {
+      "size": 694,
+      "sha256": "0f1bd5411f389d4e2a6bec7d18c25ced52d958199812159946a4b5aadcd59e6b"
+    },
+    "gen5/alcremie-rubyswirl.png": {
+      "size": 694,
+      "sha256": "4c582d67f8bcfab6aca6c61f47088235fda9dbfb280c3a89fbb5f55f2f765bb5"
+    },
+    "gen5/alcremie-saltedcream.png": {
+      "size": 694,
+      "sha256": "d4bb94248260795e0128c2af69d196bc661bcc97b03cb8bcc9c961c45e0119de"
     },
     "gen5/alcremie.png": {
       "size": 694,
@@ -1734,6 +1770,10 @@
     "gen5/gastly.png": {
       "size": 725,
       "sha256": "45c1927245c8d4a721714ce3f03e31fab019db329b7b4cfa69d37fa07bbf562d"
+    },
+    "gen5/gastrodon-east.png": {
+      "size": 608,
+      "sha256": "bb81ef262d82ebd030dcc5a3c33f7efe6f41c322faaacee0c6566c36c5c6aedd"
     },
     "gen5/gastrodon.png": {
       "size": 600,
@@ -4191,6 +4231,10 @@
       "size": 493,
       "sha256": "3a849eb81390dbbdb01ebe4c1b541e7637a2c2950dca3702eed687079d44ccb2"
     },
+    "gen5/shellos-east.png": {
+      "size": 476,
+      "sha256": "e86f23f042f22a6ed397e200a3db16b2c7830798887899c93745577cd3542fc0"
+    },
     "gen5/shellos.png": {
       "size": 444,
       "sha256": "230829c7443b36c32b9bb1117cbe22ec95783210792978a95b4be1d2bef89556"
@@ -4967,6 +5011,10 @@
       "size": 803,
       "sha256": "8e49d618feced51182b7fa455fa063b52fd5c837b09b7839cfc0409029910c46"
     },
+    "gen5/toxtricity-gmax.png": {
+      "size": 1415,
+      "sha256": "c59ff4e6f419de97fdbb38a97a478ea6ca9215e0f603657a47a2a418d4603559"
+    },
     "gen5/toxtricity-lowkey.png": {
       "size": 958,
       "sha256": "5aa0f1fe130b357aef669f628bba9e02f2d4c1e640b06df6c3c9c5f03c7c0289"
@@ -5531,6 +5579,10 @@
       "size": 68353,
       "sha256": "93f5667b59edb58ea3945fbc0bd1d0edf7839e984591f8c811f43b730c573764"
     },
+    "ani/aegislash-blade.gif": {
+      "size": 87022,
+      "sha256": "20a33efe42d5c0894091288d02cfa0010518524036545f5db53d29c8a3b15115"
+    },
     "ani/aegislash.gif": {
       "size": 83982,
       "sha256": "a55f21a0b1f3bbf35463280c9850ab128aa61f25e2bd355de2ac7ffee6ae9faa"
@@ -5563,9 +5615,41 @@
       "size": 107471,
       "sha256": "553d76f187c01267b624eaa09d80783914569fde2f95164e0f04108b84e515d0"
     },
+    "ani/alcremie-caramelswirl.gif": {
+      "size": 113816,
+      "sha256": "9df0f96e1889aa975d463056690858c87c7866a0dffa5051f57e6272616a7248"
+    },
     "ani/alcremie-gmax.gif": {
       "size": 582437,
       "sha256": "e3b9b3e043570566876d41daa7551f7e1b7e4c4877c21feaec8856a0b5169e64"
+    },
+    "ani/alcremie-lemoncream.gif": {
+      "size": 113906,
+      "sha256": "89b3311b587e809d867aa44ac12c857329d9cbce09de1778358ced3a9ac3b69c"
+    },
+    "ani/alcremie-matchacream.gif": {
+      "size": 99484,
+      "sha256": "050d83bedba2f1e2d2d1e3371b46338672bbf0cde275a90be957e0fb14de0c89"
+    },
+    "ani/alcremie-mintcream.gif": {
+      "size": 113715,
+      "sha256": "d0c3bd0aa6194dbb809705b02b7f20ac244115f93c18352791643b99d8cf39b6"
+    },
+    "ani/alcremie-rainbowswirl.gif": {
+      "size": 118225,
+      "sha256": "386c4249e9400eca5dacbe01341d605ee0e7c86a8160e7299023a484680448d9"
+    },
+    "ani/alcremie-rubycream.gif": {
+      "size": 102760,
+      "sha256": "dc275da19249de351d9517ce23a4dc498f37f8c02bf7a0a93f4ead513f233995"
+    },
+    "ani/alcremie-rubyswirl.gif": {
+      "size": 117204,
+      "sha256": "2db21a40bc3a78475af92d450d5c35aceae92f01b1637d6387c389a521c6f703"
+    },
+    "ani/alcremie-saltedcream.gif": {
+      "size": 92591,
+      "sha256": "961ead0a7fb08fb227a647aac53014af141d2ab46cb0b08ee260391f02111b76"
     },
     "ani/alcremie.gif": {
       "size": 104121,
@@ -7146,6 +7230,10 @@
     "ani/gastly.gif": {
       "size": 42866,
       "sha256": "13da08bd2242e213f63656bf9c70ae04de2311a0d72978a92e78ab99de6fb186"
+    },
+    "ani/gastrodon-east.gif": {
+      "size": 188096,
+      "sha256": "586de8a7c110d4d6b40938da62bec2b13aa32a7105e26fef58af8624ef98c1a7"
     },
     "ani/gastrodon.gif": {
       "size": 67531,
@@ -9483,6 +9571,10 @@
       "size": 46837,
       "sha256": "ce5277e42922c353860adda50cd150c3e9aa25cc26f71f3843ab472f0bcfe1f4"
     },
+    "ani/shellos-east.gif": {
+      "size": 123380,
+      "sha256": "ac61821a45e528424a4a6b836464fb0465f490f2aadc246d6a69f13703408c89"
+    },
     "ani/shellos.gif": {
       "size": 37757,
       "sha256": "2ac60ba7757df447f6445b55951728b694c18d742573221cc47a31590953601c"
@@ -10222,6 +10314,10 @@
     "ani/toxicroak.gif": {
       "size": 17604,
       "sha256": "39ce53325f5fcb3effb2a703ca0ca311701f782f75d4f1948ca433833bbb2463"
+    },
+    "ani/toxtricity-gmax.gif": {
+      "size": 328357,
+      "sha256": "852740ee410a90acd607852b512220947385728c8dee2852c6c00cae7a8a97eb"
     },
     "ani/toxtricity-lowkey.gif": {
       "size": 302465,

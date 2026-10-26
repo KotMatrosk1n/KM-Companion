@@ -251,6 +251,7 @@ const srcRuntimeFiles = new Set([
 	'js/rom_hack_selector.js',
 	'js/save_import.js',
 	'js/shared_controls.js',
+	'js/pokemon_sprites.js',
 	'js/swsh_ai_engine.js',
 	'js/trainer_data_registry.js',
 	'js/update_settings.js',
@@ -379,6 +380,7 @@ if (process.argv[2] !== 'view') {
 
 assertSrcFileClassification('src');
 assertRequiredSrcRuntimeFiles();
+console.log('Pokemon sprite coverage:', require('./scripts/check-pokemon-sprites.cjs').checkPokemonSprites());
 fs.rmSync(path.resolve(rootDir, 'dist'), {recursive: true, force: true});
 cpdir('src', 'dist', {skip: shouldSkipSrcRuntimeFile});
 cpdir('calc/dist', 'dist/calc', {skip: shouldSkipRuntimeCalcFile});
