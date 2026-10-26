@@ -19,9 +19,13 @@ The detail sections contain:
 
 Type defenses describe typing alone. Abilities, held items, weather, and other battle effects can change the damage received. Egg cycles are shown as stored in the game data; the guide does not assume a universal conversion to steps.
 
+Evolution pairs use compact cards with each Pokémon's picture, National number, and name inside its selection button. The evolution condition sits between them. Cards wrap with the available width and stack their contents in narrow layouts, while names remain visible without pictures.
+
 Moves opens on **Level up**, including moves learned on evolution. Choose **TM**, **TR**, **Tutor**, or **Egg** to browse that method separately. Search and pagination apply only to the selected subtab. Changing subtabs returns to its first page, and the selected method stays with the profile while navigating Pokémon and forms. Arrow keys, Home, and End navigate the move subtabs. A method without records displays an empty state.
 
 The overview places official artwork, base stats, and abilities beside compact information cards. Labels and values share a row, stat ranges sit beside their bars, and each card takes only the height of its contents. Dex numbers share Pokémon data, wild held items share Training and breeding, and type defenses occupy their own compact card. Window width and usable height determine the arrangement and spacing, including app scaling and display DPI. The directory measures the actual remaining viewport for its page size. Search, selected form, and detail section survive navigation and are kept separately for each profile during the session.
+
+Directory names and types retain their text column when an individual sprite is missing, keeping rows aligned with entries that have pictures. Turning artwork off removes the sprite column. Long names stay within their row, with full names and types available on hover and to assistive technology. The overview uses the available portrait space for data when artwork is off.
 
 ## Official artwork
 

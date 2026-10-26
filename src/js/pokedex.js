@@ -94,7 +94,9 @@
 				b.appendChild(el("span", "km-dex-number", number(species.number)));
 				b.appendChild(sprite(entry ? entry.name : species.name, "km-dex-sprite"));
 				var name = el("span", "km-dex-entry-name", species.name); b.appendChild(name);
-				name.appendChild(el("small", "km-muted", entry ? entry.types.join(" / ") : "No profile data"));
+				var typeText = entry ? entry.types.join(" / ") : "No profile data";
+				name.title = species.name + "\n" + typeText;
+				name.appendChild(el("small", "km-muted", typeText));
 				list.appendChild(b);
 			});
 			if (!results.length) list.appendChild(el("p", "km-dex-empty", "No Pokémon match these filters."));

@@ -9233,6 +9233,7 @@ function renderBattleScriptTeamStrip(strip, team, side) {
 		button.attr("title", "Drag to insert this " + sideLabel + " Pokemon into the script" + (team[i].detail ? "\n" + team[i].detail : ""));
 		button.attr("aria-label", "Drag to insert " + sideLabel + " " + commandName + " into the script");
 		button.append(createPokemonSprite(team[i].pokemonName, "trainer-pokemon-sprite"));
+		button.append($("<span class='km-pokemon-fallback-name'></span>").text(team[i].pokemonName));
 		strip.append(button);
 	}
 }

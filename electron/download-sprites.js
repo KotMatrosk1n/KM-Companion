@@ -1,6 +1,8 @@
 var fs = require("fs");
 var https = require("https");
 var path = require("path");
+var vm = require("vm");
+var pokemonSprites = require("../src/js/pokemon_sprites");
 
 var SPRITE_ROOT = path.join(__dirname, "sprites");
 var CONCURRENCY = 16;
@@ -71,20 +73,6 @@ function parseSpriteIndex(html, extension) {
 	return sprites;
 }
 
-function toPokemonId(name) {
-	return String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
-}
-
-function getPokemonSpriteId(pokemonName, speciesData, toID) {
-	if (!pokemonName) return "";
-	if (pokemonName === "Toxtricity-Low-Key-Gmax") return "toxtricity-gmax";
-	if (speciesData && speciesData.baseSpecies && speciesData.baseSpecies !== pokemonName) {
-		var forme = pokemonName.slice(speciesData.baseSpecies.length).replace(/^-/, "");
-		return toID(speciesData.baseSpecies) + "-" + toID(forme);
-	}
-	return toID(pokemonName);
-}
-
 function loadCalcData() {
 	try {
 		return require(path.join(__dirname, "..", "calc", "dist"));
@@ -97,16 +85,30 @@ function loadCalcData() {
 
 function getCalcSpriteFileNames(extension) {
 	var calc = loadCalcData();
-	var toID = calc && calc.toID ? calc.toID : toPokemonId;
 	var spriteFiles = {};
 	if (!calc || !Array.isArray(calc.SPECIES)) return null;
+	function addPokemon(name, species, suppliedId) {
+		var spriteId = suppliedId || pokemonSprites.getId(name, species, calc.SPECIES);
+		if (extension === "png") spriteId = pokemonSprites.getStaticId(spriteId);
+		if (/^[a-z0-9-]+$/.test(spriteId)) spriteFiles[spriteId + "." + extension] = true;
+	}
+	pokemonSprites.getKnownIds().forEach(function (id) { addPokemon("", null, id); });
 
 	calc.SPECIES.forEach(function (generationSpecies) {
 		if (!generationSpecies) return;
 		Object.keys(generationSpecies).forEach(function (pokemonName) {
-			var spriteId = getPokemonSpriteId(pokemonName, generationSpecies[pokemonName], toID);
-			if (spriteId) spriteFiles[spriteId + "." + extension] = true;
+			addPokemon(pokemonName, generationSpecies[pokemonName]);
 		});
+	});
+	var dex = {window: {}};
+	["pokedex_catalog.js", "pokedex_royal_sword.js"].forEach(function (file) {
+		vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "src", "js", "data", file), "utf8"), dex);
+	});
+	dex.window.KMPokedexCatalog.species.forEach(function (species) { addPokemon(species.name); });
+	Object.keys(dex.window.KMPokedexProfiles).forEach(function (id) {
+		var pack = dex.window.KMPokedexProfiles[id];
+		pack.entries.forEach(function (entry) { addPokemon(entry.name); });
+		(pack.battleForms || []).forEach(function (form) { addPokemon(form.calcName); });
 	});
 	// Reference cards may use display names or forms outside calculator sets.
 	var referenceSource = fs.readFileSync(path.join(__dirname, "..", "src", "js", "data", "royal_sword_reference.js"), "utf8");
@@ -117,8 +119,7 @@ function getCalcSpriteFileNames(extension) {
 		(references[profileId].trainers || []).forEach(function (trainer) {
 			trainer.team.forEach(function (pokemon) {
 				var species = calc.SPECIES[9][pokemon.pokemon] || calc.SPECIES[8][pokemon.pokemon];
-				var spriteId = pokemon.sprite || getPokemonSpriteId(pokemon.pokemon, species, toID);
-				if (/^[a-z0-9-]+$/.test(spriteId)) spriteFiles[spriteId + "." + extension] = true;
+				addPokemon(pokemon.pokemon, species, pokemon.sprite);
 			});
 		});
 	});
