@@ -25,12 +25,14 @@ The setup UI is published with its .NET desktop runtime and embedded in Burn,
 so installation and the cached uninstaller do not require a preinstalled .NET
 runtime. The public launcher still owns legacy cleanup after installation and updater
 relaunch. Finish returns control to that launcher; setup does not launch the
-application ahead of cleanup. Uninstall preserves Companion user data.
+application ahead of cleanup. Uninstall preserves saved teams, progress, notes, and settings.
 
 Pokémon illustrations and sprites are an optional app download rather than part
 of the installer payload. The app stores them in its existing per user data
 directory, outside Program Files and installer or updater caches. Updates,
-repair, uninstall, and reinstall keep these files for the same Windows account.
+repairs, and installing over an existing copy keep the collection. Uninstall removes
+its downloaded illustrations and sprites for the current Windows account while
+keeping saved teams, progress, notes, and settings.
 Current payload checks require the executable and Electron archive; historical
 Royal Sword identity checks retain their original sprite manifest requirements.
 See [artwork storage and delivery](../../docs/pokedex-data.md#artwork-storage-and-delivery).
@@ -119,7 +121,7 @@ existing updater cache identity. These compatibility names preserve user data
 and upgrade history; they are not separate installations. Repository links and
 the update feed now use `KotMatrosk1n/KM-Companion`.
 
-Setup saves its validated marker in 64 bit `HKLM\Software\KM Calculator`. Shortcut preferences are written there by the MSI and reloaded by Burn. Installation and maintenance are restricted to the single canonical `%ProgramFiles%\KM Companion` path; the Burn variable cannot be overridden through the command line, no folder browser is exposed, and the MSI independently rejects any other destination. Uninstall always preserves KM Companion saved teams, notes, settings, and updater caches. The elevated MSI does not accept or perform recursive cleanup of user profile paths.
+Setup saves its validated marker in 64 bit `HKLM\Software\KM Calculator`. Shortcut preferences are written there by the MSI and reloaded by Burn. Installation and maintenance are restricted to the single canonical `%ProgramFiles%\KM Companion` path; the Burn variable cannot be overridden through the command line, no folder browser is exposed, and the MSI independently rejects any other destination. Uninstall preserves KM Companion saved teams, notes, progress, settings, and updater caches. Only downloaded Pokémon illustrations and sprites are removed. The cached setup interface requires successful removal of the app MSI and a successful overall uninstall before deleting the current Windows account's two fixed artwork directories. Related bundle removals during upgrades, repair, modify, install, cache, layout, failure, and cancellation do not authorize this cleanup. The existing handle based deletion helper rejects reparse points and keeps all traversal inside the selected directories. Cleanup failures are reported separately from application removal. The elevated MSI does not accept or perform recursive cleanup of user profile paths.
 
 The published legacy validation set is `0.1.0` through `0.2.2`, plus `0.3.21` and `0.4.26`. Every release uses NSIS identity `cef17072-1d18-5c82-9672-1f987b4e4970`; `0.1.0` through `0.1.2` are named `Pokemon Royal Sword`, while later releases are `Royal Sword Calculator`. Setup validates the exact version, display name, publisher, executable and uninstaller versions, `/allusers` uninstall command, Electron archive, updater configuration, and the sprite manifest for releases that shipped one. It recognizes the published upgrade lineage at the fixed 64 bit Program Files `Royal Sword Calculator`, `Pokemon Royal Sword`, and nested `Pokemon Royal Sword\Royal Sword Calculator` locations. A nested installation removes only the registered inner tree and removes its parent nonrecursively when empty.
 

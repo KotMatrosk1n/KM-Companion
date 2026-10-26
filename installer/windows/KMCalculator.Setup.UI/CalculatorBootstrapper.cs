@@ -21,6 +21,7 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
     private IntPtr parent;
     private LaunchAction action;
     private bool installed, olderInstalled, newerInstalled, restartApproved;
+    private bool removingApplicationPackage, applicationPackageRemoved;
     private volatile bool rollback;
     private int cancellation; // 0 available, 1 requested, 2 delivered, 3 completed
     private int exitCode = 1602;
@@ -249,9 +250,20 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
     {
         base.OnExecutePackageBegin(args);
         rollback = !args.ShouldExecute;
+        if (args.PackageId == "KmCalculatorMsi")
+        {
+            removingApplicationPackage = args.ShouldExecute && args.Action == ActionState.Uninstall;
+            applicationPackageRemoved = false;
+        }
         args.Cancel |= TakeCancellation();
         var isRollback = rollback;
         Post(() => { state.Detail = ExecutionDetail(null, isRollback); state.Refresh(); });
+    }
+    protected override void OnExecutePackageComplete(ExecutePackageCompleteEventArgs args)
+    {
+        base.OnExecutePackageComplete(args);
+        if (args.PackageId == "KmCalculatorMsi")
+            applicationPackageRemoved = removingApplicationPackage && args.Status >= 0 && !Cancelled(args.Status);
     }
     protected override void OnExecuteMsiMessage(ExecuteMsiMessageEventArgs args)
     {
@@ -317,6 +329,22 @@ internal sealed class CalculatorBootstrapper : BootstrapperApplication
         Interlocked.Exchange(ref cancellation, 3);
         var needsRestart = args.Restart == ApplyRestart.RestartRequired || restart == Restart.Always;
         var success = args.Status >= 0 && !Cancelled(args.Status);
+        if (ArtworkUninstallCleanup.ShouldRemove(action, command.Relation,
+                Numeric("KMUpdaterInvocation") != 0, installed, newerInstalled, applicationPackageRemoved, success))
+        {
+            Post(() => { state.Detail = "Removing downloaded Pokémon artwork…"; state.Refresh(); });
+            try
+            {
+                ArtworkUninstallCleanup.RemoveCurrentUserArtifacts();
+                state.ArtworkRemoved = true;
+            }
+            catch (Exception exception)
+            {
+                engine.Log(LogLevel.Error, "Downloaded artwork cleanup failed: " + exception);
+                Post(() => Fail(1603, "KM Companion was removed, but some downloaded artwork could not be removed. Close applications using those files and check folder permissions. Your saved teams, progress, notes, and settings are preserved."));
+                return;
+            }
+        }
         var autoRestart = success && needsRestart && restart is Restart.Automatic or Restart.Always;
         if (autoRestart) args.Action = BOOTSTRAPPER_APPLYCOMPLETE_ACTION.Restart;
         Post(() =>

@@ -13,6 +13,7 @@ internal sealed class SetupState : INotifyPropertyChanged
     public SetupOperation Operation { get; set; }
     public bool Installed { get; set; }
     public bool RemoveLegacy { get; set; }
+    public bool ArtworkRemoved { get; set; }
     public bool RestartRequired { get; set; }
     public bool CanRestart { get; set; }
     public bool Cancelling { get; set; }
@@ -63,8 +64,11 @@ internal sealed class SetupState : INotifyPropertyChanged
     {
         SetupPage.Preparing => "Setup is checking your computer and the available installation options.",
         SetupPage.Progress when Cancelling => "Please wait while Windows Installer safely finishes or rolls back the current operation.",
+        SetupPage.Progress when Operation == SetupOperation.Uninstall => "Please wait while setup removes the application and downloaded Pokémon artwork. Your saved teams, progress, notes, and settings are preserved.",
         SetupPage.Progress => "Please wait while setup applies the requested changes. Your KM Companion data is preserved.",
+        SetupPage.Complete when RestartRequired && ArtworkRemoved => "Restart Windows to finish removing the application. Downloaded Pokémon artwork was removed, and your saved teams, progress, notes, and settings are preserved.",
         SetupPage.Complete when RestartRequired => "Restart Windows to finish applying the changes. Your KM Companion data is preserved.",
+        SetupPage.Complete when Operation == SetupOperation.Uninstall && ArtworkRemoved => "The application and downloaded Pokémon artwork have been removed. Your saved teams, notes, progress, and settings are preserved.",
         SetupPage.Complete when Operation == SetupOperation.Uninstall => "The application has been removed. Your saved teams, notes, encounter progress, and settings are preserved.",
         SetupPage.Complete when RemoveLegacy && Operation == SetupOperation.Install => "Installation is complete. Choose Finish so setup can complete the disclosed Royal Sword Calculator cleanup.",
         SetupPage.Complete => "The requested changes completed successfully.",
@@ -73,7 +77,7 @@ internal sealed class SetupState : INotifyPropertyChanged
         SetupPage.Help => "Install, update, repair, or remove KM Companion. The application uses the 64-bit Program Files folder.",
         _ => Operation switch
         {
-            SetupOperation.Uninstall => "Remove the application from this computer. Your personal KM Companion data will be kept.",
+            SetupOperation.Uninstall => "Remove the application and this Windows user's downloaded Pokémon artwork. Your saved teams, progress, notes, and settings will be kept.",
             SetupOperation.Update => "Install the latest bundled calculator and game data while keeping your teams, notes, and settings.",
             SetupOperation.Repair => "Restore missing or damaged application files, or uninstall KM Companion.",
             SetupOperation.Layout => "Save the complete setup payload to the requested folder for installation later.",

@@ -41,13 +41,14 @@
             <Border Style="{StaticResource Card}" Visibility="{Binding ShowRetention, Converter={StaticResource Visible}}"><StackPanel>
               <TextBlock Text="YOUR DATA IS KEPT" Style="{StaticResource Caption}" />
               <TextBlock Margin="0,7,0,0" Foreground="{StaticResource SoftText}" Text="Saved teams, notes, encounter and trainer progress, settings, and update caches remain available if you install KM Companion again." />
+              <TextBlock Margin="0,7,0,0" Foreground="{StaticResource SoftText}" Text="Downloaded Pokémon artwork is removed only when you uninstall. Updates and repairs keep it." />
             </StackPanel></Border>
             <Border Style="{StaticResource Card}" Background="#2A1519" BorderBrush="#71323A" Visibility="{Binding ShowError, Converter={StaticResource Visible}}"><StackPanel>
               <TextBlock Text="ERROR DETAILS" Style="{StaticResource Caption}" />
               <TextBlock Text="{Binding ErrorMessage}" Margin="0,7,0,0" Foreground="{StaticResource Danger}" />
               <TextBlock Text="{Binding LogPath}" Margin="0,12,0,0" FontSize="12" Foreground="{StaticResource MutedText}" />
             </StackPanel></Border>
-            <Border Style="{StaticResource Card}" Visibility="{Binding ShowHelp, Converter={StaticResource Visible}}"><TextBlock Foreground="{StaticResource SoftText}" Text="Supported options: /install, /repair, /uninstall, /modify, /passive, /quiet, /norestart, /log &lt;file&gt;, /layout &lt;folder&gt;.&#10;&#10;Uninstall keeps KM Companion data. First installation through the public setup launcher removes the disclosed Royal Sword Calculator data." /></Border>
+            <Border Style="{StaticResource Card}" Visibility="{Binding ShowHelp, Converter={StaticResource Visible}}"><TextBlock Foreground="{StaticResource SoftText}" Text="Supported options: /install, /repair, /uninstall, /modify, /passive, /quiet, /norestart, /log &lt;file&gt;, /layout &lt;folder&gt;.&#10;&#10;Uninstall removes downloaded Pokémon artwork and keeps saved teams, progress, notes, and settings. Updates and repairs keep artwork. First installation through the public setup launcher removes the disclosed Royal Sword Calculator data." /></Border>
           </Grid>
           <Grid Grid.Row="2" Margin="0,20,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
             <TextBlock Text="{Binding VersionText}" FontSize="12" Foreground="{StaticResource MutedText}" VerticalAlignment="Center" Margin="0,0,16,0" />
