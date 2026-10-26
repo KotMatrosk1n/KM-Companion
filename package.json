@@ -27,8 +27,8 @@
     "build-ui": "node build view",
     "generate:swsh-ai": "node scripts/generate-swsh-ai-data.mjs",
     "sprites:download": "node electron/download-sprites.js",
-    "electron:dev": "npm run build && npm run sprites:download && electron .",
-    "electron:pack": "npm run build && npm run sprites:download && electron-builder --win --dir",
+    "electron:dev": "npm run build && electron .",
+    "electron:pack": "npm run build && electron-builder --win --dir",
     "electron:dist": "npm run electron:pack && pwsh -NoProfile -File installer/windows/scripts/Build-KmCalculatorWindowsSetup.ps1",
     "generate:third-party-notices": "node scripts/generate-third-party-notices.mjs",
     "check:third-party-notices": "node scripts/generate-third-party-notices.mjs --check",
@@ -78,13 +78,6 @@
       {
         "from": "dist/licenses/node_modules",
         "to": "licenses/node_modules",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": "electron/sprites",
-        "to": "sprites",
         "filter": [
           "**/*"
         ]

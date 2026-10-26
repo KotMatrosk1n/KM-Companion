@@ -36,7 +36,7 @@ The canonical calculation engine currently tracks the upstream revision document
 
 ### Pokémon Showdown
 
-[Pokémon Showdown](https://github.com/smogon/pokemon-showdown), created by Guangcong Luo and maintained by its contributors, is used for permissively licensed name data and as the source of the Pokémon sprite directories downloaded for desktop packaging. Its source code and applicable data are distributed under the MIT License. Sprite artwork and other media remain subject to their own rights; see the [Pokémon Showdown credits](https://pokemonshowdown.com/credits).
+[Pokémon Showdown](https://github.com/smogon/pokemon-showdown), created by Guangcong Luo and maintained by its contributors, is used for permissively licensed name data and as the source of the Pokémon sprite directories available through the app's optional artwork download. Its source code and applicable data are distributed under the MIT License. Sprite artwork and other media remain subject to their own rights; see the [Pokémon Showdown credits](https://pokemonshowdown.com/credits).
 
 Trainer move effect descriptions and accuracy values are adapted from Pokémon Showdown's move data at revision `f0e61e58ad297885578231746036438e1b42f40a`, including Generation 8 overrides. The original MIT notice is included with the bundled reference text. Move type, category, and base power use the active calculator generation, as does accuracy when supplied by its data provider.
 
@@ -46,7 +46,7 @@ The item artwork in `src/img/items/` and move category icons in `src/img/move-ca
 
 ### PokéAPI
 
-[PokéAPI](https://github.com/PokeAPI/pokeapi), by Paul Hallett and PokéAPI contributors, supplies permissively licensed factual game index and growth rate data used by the generated save import lookup bundle. That data is used under the BSD 3-Clause License.
+[PokéAPI](https://github.com/PokeAPI/pokeapi), by Paul Hallett and PokéAPI contributors, supplies factual game index and growth rate data for the generated save import lookup bundle, plus the National Dex index, names, and descriptive species metadata. Its data is used under the BSD 3-Clause License. Official Pokémon game descriptions retain their respective owners' rights.
 
 The pinned Pokémon Showdown and PokéAPI revisions and their complete license notices are recorded in [`import/THIRD_PARTY_NOTICES.md`](import/THIRD_PARTY_NOTICES.md).
 
@@ -79,6 +79,8 @@ PKHeX is also an external compatibility reference for save families and entity l
 The package manifests and lockfiles record the installed dependency versions and transitive package graph. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the generated dependency license inventory; each distributed dependency remains subject to its own license and notice requirements.
 
 ## Pokémon And Third Party Assets
+
+Official Dex illustrations come from the public [PokéAPI image repository](https://github.com/PokeAPI/sprites/tree/97a7832d307311c0e1c6ea9035308bf80cc94f81/sprites/pokemon/other/official-artwork) at revision `97a7832d307311c0e1c6ea9035308bf80cc94f81`. KM Companion uses the illustration artwork directory rather than pixel sprites for the main picture. The repository notice is retained in [PokeAPI Artwork](LICENSES/PokeAPI-Artwork.txt). Pokémon artwork remains the property of its respective rights holders and is excluded from the software license. See [Dex data](docs/pokedex-data.md).
 
 Trainer ability and held item descriptions use the official English Pokémon Sword and Shield game text. Game text and artwork remain the property of their respective rights holders.
 

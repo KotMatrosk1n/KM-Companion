@@ -27,6 +27,14 @@ runtime. The public launcher still owns legacy cleanup after installation and up
 relaunch. Finish returns control to that launcher; setup does not launch the
 application ahead of cleanup. Uninstall preserves Companion user data.
 
+Pokémon illustrations and sprites are an optional app download rather than part
+of the installer payload. The app stores them in its existing per user data
+directory, outside Program Files and installer or updater caches. Updates,
+repair, uninstall, and reinstall keep these files for the same Windows account.
+Current payload checks require the executable and Electron archive; historical
+Royal Sword identity checks retain their original sprite manifest requirements.
+See [artwork storage and delivery](../../docs/pokedex-data.md#artwork-storage-and-delivery).
+
 ## Build prerequisites
 
 - Windows x64

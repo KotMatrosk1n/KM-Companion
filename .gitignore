@@ -1,6 +1,7 @@
 dist/
 release/
 logs/
+/.cache/
 node_modules/
 electron/sprites/
 eslint-cache/

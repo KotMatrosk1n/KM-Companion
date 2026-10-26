@@ -30,6 +30,7 @@
     <link type="text/css" rel="stylesheet" href="./css/main.css?" />
     <link type="text/css" rel="stylesheet" href="./css/vendor/bootstrap.css" />
     <link type="text/css" rel="stylesheet" href="./css/app-workspace.css?" />
+    <link type="text/css" rel="stylesheet" href="./css/pokedex.css?" />
     <link type="text/css" rel="stylesheet" href="./css/themes.css?" />
     <script type="text/javascript" src="./js/desktop_storage.js?"></script>
     <script type="text/javascript" src="./js/desktop_dialogs.js?"></script>
@@ -61,6 +62,7 @@
     <nav class="km-settings-tabs" role="tablist" aria-label="Settings sections">
         <button id="km-settings-tab-updates" type="button" role="tab" aria-controls="km-settings-updates" aria-selected="true">Updates</button>
         <button id="km-settings-tab-backup" type="button" role="tab" aria-controls="km-settings-backup" aria-selected="false" tabindex="-1">Backup</button>
+        <button id="km-settings-tab-artwork" type="button" role="tab" aria-controls="km-settings-artwork" aria-selected="false" tabindex="-1">Artwork</button>
     </nav>
     <section id="km-settings-updates" class="km-settings-panel" role="tabpanel" aria-labelledby="km-settings-tab-updates" tabindex="0">
         <div id="km-settings-view">
@@ -145,7 +147,37 @@
         <p id="km-run-status" class="km-muted" role="status" aria-live="polite"></p>
         <input id="km-run-file" type="file" accept=".json,application/json" hidden />
     </section>
+    <section id="km-settings-artwork" class="km-settings-panel" role="tabpanel" aria-labelledby="km-settings-tab-artwork" tabindex="0" hidden>
+        <h2>Artwork</h2>
+        <p class="km-settings-description">Keep Pokémon illustrations and animated and static sprites available offline.</p>
+        <div class="km-artwork-card">
+            <label class="km-artwork-toggle"><input id="km-artwork-enabled" type="checkbox" disabled /> Show Pokémon artwork</label>
+            <p id="km-artwork-summary" class="km-muted"></p>
+            <p id="km-artwork-status" role="status" aria-live="polite">Checking saved artwork.</p>
+            <progress id="km-artwork-progress" aria-label="Artwork progress" max="1" value="0" hidden></progress>
+            <div class="km-artwork-actions">
+                <button id="km-artwork-download" type="button" disabled>Download artwork</button>
+                <button id="km-artwork-check" type="button" disabled>Check artwork</button>
+                <button id="km-artwork-pause" type="button" hidden>Pause download</button>
+            </div>
+            <p class="km-muted">Check artwork verifies the collection for your app version. Download artwork adds missing files and repairs damaged files. Downloads continue while you use the app.</p>
+            <p class="km-muted">Turning artwork off keeps saved files. App updates, repairs, and reinstalls preserve the collection for this Windows account. No download starts without your choice.</p>
+        </div>
+    </section>
 </section>
+
+<dialog id="km-artwork-prompt" class="km-dialog km-artwork-prompt" aria-labelledby="km-artwork-prompt-heading" aria-describedby="km-artwork-prompt-copy km-artwork-prompt-size">
+    <h2 id="km-artwork-prompt-heading">Download Pokémon artwork?</h2>
+    <p id="km-artwork-prompt-copy">Add Dex illustrations and animated and static sprites for Team, boxes, trainers, and encounters. You can keep using the app while they download.</p>
+    <p id="km-artwork-prompt-size"></p>
+    <p>Choose No thanks to use the app without Pokémon pictures. You can download them later in Settings → Artwork. Saved files stay available across app updates and reinstalls.</p>
+    <p id="km-artwork-prompt-error" role="status" aria-live="polite"></p>
+    <div class="km-artwork-actions">
+        <button id="km-artwork-accept" type="button">Download artwork</button>
+        <button id="km-artwork-decline" type="button" autofocus>No thanks</button>
+    </div>
+</dialog>
+
 
 [content]
 
@@ -167,6 +199,7 @@
         <option value="royal">Royal</option>
         <option value="sovereign">Sovereign</option>
     </select>
+    <script type="text/javascript" src="./js/artwork_settings.js?"></script>
     <script type="text/javascript" src="./js/update_settings.js?"></script>
     <script type="text/javascript" src="./js/run_data.js?"></script>
     <script type="text/javascript" src="./js/run_tools.js?"></script>

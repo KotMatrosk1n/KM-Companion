@@ -9,7 +9,7 @@
 ![Bundled profile](https://img.shields.io/badge/bundled%20profile-Royal%20Sword-blue)
 [![License](https://img.shields.io/badge/license-GPLv3-lightgrey)](LICENSE)
 
-Plan battles, manage your team, and keep track of your run. KM Companion brings damage calculations, encounter tracking, trainer references, item progress, and player notes together in a Windows desktop app for Pokémon ROM hacks.
+Plan battles, manage your team, and keep track of your run. KM Companion brings damage calculations, a ROM hack Dex, encounter tracking, trainer references, item progress, and player notes together in a Windows desktop app for Pokémon ROM hacks.
 
 Previously named KM Calculator, it keeps existing saved teams, notes, settings, run progress, and compatible backups available under the new name.
 
@@ -23,7 +23,15 @@ Compare damage rolls, check what your Pokémon can survive, and explore differen
 
 The calculation engine covers Generations 1 through 9. Each profile selects its base generation and applies that hack's changes. Royal Sword uses Generation 8, its own calculator layout and trainer data, and a Sword/Shield battle simulator. EV input is disabled for Royal Sword; another profile can use the controls appropriate to its own game.
 
-Keep your current team beside the calculation. Team retains larger animated sprites and names, while Box, Box 2, Compost, and Trash use compact static sprites with color coding and names available on hover. Royal Sword storage pages hold 30 Pokémon in six columns and five rows. Resizing the window adjusts the cards without changing which Pokémon belong to a page.
+Keep your current team beside the calculation. Team keeps all six Pokémon in one row with animated sprites and names. Box, Box 2, Compost, and Trash use compact static sprites with color coding and names available on hover. Storage capacity adapts to the available space, with at least 30 entries per Royal Sword page and more when the window allows.
+
+## Explore Your Dex
+
+The **Dex** tab sits between Calculator and Encounters. Search by Pokémon name, form, or National Dex number and browse all 1,025 National entries in order. Detailed pages show the selected ROM hack's base stats, ability slots 1/2/Hidden, move compatibility, evolution rules, breeding and training facts, type defenses, and recorded encounter locations.
+
+Mega forms open through **Mega**, **Mega X**, or **Mega Y** buttons on their base species page. **Base** restores the profile's base form, while the directory keeps one entry per National number.
+
+View official Pokémon illustrations from the public PokéAPI image repository beside compact stat and ability cards. Pictures and sprites are an optional download managed in Settings → Artwork and stay available offline across app updates. The layout adapts to the available width, height, and scaling; missing artwork or ROM hack data is identified explicitly. See the [Dex guide](docs/pokedex.md) for coverage and controls.
 
 ## Keep Track Of Your Run
 
@@ -61,6 +69,7 @@ Packaged builds do not require Node.js, Git, a web server, or a separate backend
 | Profile layouts | Standard calculator layout by default; bundled Royal Sword custom layout |
 | Shared profile workflows | Team/Box; Player Notes and Clear Notes; trainer dropdown and team sprites; save import and border controls; enhanced Singles and Doubles |
 | Trainer data | Bundled profile packs and attributed `trainer-pack-v1` JSON imports |
+| Dex | Full National index; Royal Sword personal data, ability slots, moves, evolution rules, and recorded locations; official illustration artwork |
 | Main series save families | R/B/Y; G/S/C; R/S/E and FR/LG; D/P/Pt and HG/SS; B/W and B2/W2; X/Y and OR/AS; S/M and US/UM; LGPE; Sw/Sh; BD/SP; Legends: Arceus; S/V; Legends: Z-A |
 | Standalone Pokémon files | `.pk1` through `.pk9`, `.pb7`, `.pb8`, `.pa8`, `.pa9`, and their supported encrypted variants |
 | Exclusive profile tools | Royal Sword Sword/Shield battle simulator |
@@ -97,9 +106,11 @@ Before bundling another person's data, confirm that redistribution is allowed an
 
 Save files and trainer pack JSON are read locally. They are not uploaded to a server. Teams, boxes, notes, inventory, and run progress stay in the app's local data. If a save format or modded layout cannot be recognized safely, import stops instead of guessing. Hacks that change the base game's storage layout may need a profile adapter.
 
-The desktop app checks this repository on GitHub for newer releases after launch. A yellow badge appears on Settings in every theme when an update is available. **Settings → Updates** also provides a manual check, release notes, and **Install Update**. Downloads and installation begin after confirmation. Packaging downloads the Pokémon sprite set from Pokémon Showdown when preparing a build.
+The desktop app checks this repository on GitHub for newer releases after launch. A yellow badge appears on Settings in every theme when an update is available. **Settings → Updates** also provides a manual check, release notes, and **Install Update**. Downloads and installation begin after confirmation.
 
-Update checks contact GitHub. The build time sprite download contacts Pokémon Showdown. Save files, trainer packs, calculations, notes, and Team/Box data remain local and are not uploaded by either request.
+At first launch, **Download artwork** offers the complete collection of Pokémon illustrations and static and animated sprites, about 251 MiB. Choose **No thanks** to use the app without Pokémon pictures. **Settings → Artwork** can download later, check saved files against your app version, repair missing files, pause a download, or hide pictures while keeping them saved. Updates and reinstalls for the same Windows account retain the collection; later downloads reuse unchanged files.
+
+Update checks contact GitHub. Explicit artwork downloads contact Pokémon Showdown and PokéAPI's public image repository on GitHub. App starts, artwork checks, and image viewing do not download Pokémon images. Save files, trainer packs, calculations, notes, and Team/Box data remain local and are not uploaded by these requests.
 
 ## Building From Source
 
@@ -169,7 +180,7 @@ Suspected vulnerabilities should be reported privately through the [Security Pol
 
 KM Companion is built on the Smogon damage calculator and uses data or compatibility references from Pokémon Showdown, PokéAPI, PKHeX, and the projects listed in [Credits](CREDITS.md). The [Dependency Notices](THIRD_PARTY_NOTICES.md) inventory the JavaScript dependency trees and bundled browser libraries; source revision notices for generated save import data are kept separately in [Save Import Third Party Notices](import/THIRD_PARTY_NOTICES.md).
 
-Pokémon sprites are downloaded from Pokémon Showdown's public `gen5` and `ani` directories for desktop packaging. The [Pokémon Showdown credits](https://pokemonshowdown.com/credits) document contributing artists and upstream sources. These assets are excluded from KM Companion's software license, and this repository does not grant additional rights to them.
+Pokémon sprites are available as an optional app download from Pokémon Showdown's public `gen5` and `ani` directories. The [Pokémon Showdown credits](https://pokemonshowdown.com/credits) document contributing artists and upstream sources. These assets are excluded from KM Companion's software license, and this repository does not grant additional rights to them.
 
 KM Companion is an unofficial fan made project and is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc., The Pokémon Company, or the creators of third party supported ROM hacks. Pokémon names, trademarks, and artwork belong to their respective owners.
 

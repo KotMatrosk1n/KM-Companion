@@ -2,7 +2,7 @@
 /* The app shell keeps the live calculator mounted while profile reference views change. */
 (function () {
 	"use strict";
-	var tabs = ["Calculator", "Encounters", "Trainers", "Route Items"];
+	var tabs = ["Calculator", "Dex", "Encounters", "Trainers", "Route Items"];
 	var panels = [];
 	var buttons = [];
 	var views = [];
@@ -19,6 +19,7 @@
 	var itemProfileId;
 	var resetRunDialog;
 	var resizeWorkspace = function () {};
+	var pokedexView;
 
 	function el(tag, className, text) {
 		var node = document.createElement(tag);
@@ -63,6 +64,7 @@
 		window.scrollTo(0, tabScroll[index] || 0);
 		resizeWorkspace();
 		resizeReferences();
+		if (pokedexView) pokedexView.setVisible(index === 1);
 	}
 	function modal(title, className, parent) {
 		var dialog = el("dialog", "km-dialog " + className);
@@ -1178,6 +1180,7 @@
 	function refreshProfile() {
 		if (resetRunDialog) resetRunDialog.close();
 		var profile = registry.getActiveProfile();
+		if (pokedexView) pokedexView.setProfile(profile);
 		var data = window.KMCalculatorReferenceData;
 		sourceData = profile && data && Object.prototype.hasOwnProperty.call(data, profile.id) ? data[profile.id] : null;
 		loadTrainerProgress(profile);
@@ -1217,6 +1220,8 @@
 		if (changeProfile) document.querySelector("header").appendChild(changeProfile);
 		setupCalculator(wrapper);
 		panels.push(wrapper);
+		pokedexView = window.KMPokedex.create({registry: registry});
+		panels.push(pokedexView.element);
 		panels.push(buildReference("Encounters", "encounters", "Find Pokémon by location, encounter method, and weather."));
 		panels.push(buildReference("Trainers", "trainers", "Plan ahead with trainer teams, moves, and level caps."));
 		panels.push(buildReference("Route Items", "items", "Find pickups, gifts, shops, and berry trees by location."));
