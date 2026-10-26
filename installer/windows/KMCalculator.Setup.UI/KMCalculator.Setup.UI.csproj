@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.BootstrapperApplicationApi" Version="7.0.0" />
+    <Compile Include="..\KMCalculator.Setup.Launcher\WindowsNoFollowDeletion.cs" Link="WindowsNoFollowDeletion.cs" />
     <Resource Include="$(KmLogoPath)" Link="Assets/companion.png" />
   </ItemGroup>
   <Target Name="ValidateSetupInputs" BeforeTargets="PrepareForBuild">
