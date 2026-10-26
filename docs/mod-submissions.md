@@ -6,6 +6,8 @@ Start with the [starter folder](templates/mod-submission/README.md). The [filled
 
 This is a submission for review. KM Companion does not import this folder or its ZIP through Import Trainer Data. A complete profile still needs integration and verification. The existing [trainer pack JSON](trainer-data-packs.md) remains the direct import format for trainer teams that use an installed profile or canonical generation.
 
+The app's [Dex](pokedex.md) uses the integrated profile data. Include every ability slot, form, evolution condition, move compatibility method, and changed effect description, even when several slots share a value. Supply encounter locations and custom rules as well. List permitted custom illustration links under `extra.artwork`, with creator, permission, and exact species and form. These are references for review, not automatic downloads. The [Dex integration guide](pokedex-data.md) explains how reviewed submissions become profile data.
+
 ## Quick Start
 
 1. Copy every file from `docs/templates/mod-submission` into a folder named after your mod.

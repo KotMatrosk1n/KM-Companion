@@ -1,0 +1,155 @@
+/* Compact profile artwork and information cards sized to their contents. */
+.km-pokedex-panel { container: km-dex-workspace / inline-size; width: 100%; padding: 12px 16px 16px; }
+.km-dex-heading { margin-bottom: 10px; }
+.km-dex-heading h1 { font-size: 22px; letter-spacing: -.3px; }
+.km-dex-totals { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.km-dex-totals > div { display: flex; align-items: baseline; gap: 8px; }
+.km-dex-totals strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.km-dex-totals span { font-size: 12px; }
+.km-dex-filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; padding: 10px; background: var(--km-panel); border: 1px solid var(--km-line); border-radius: 8px; margin-bottom: 12px; }
+.km-dex-field { display: flex; flex-direction: column; min-width: 0; gap: 5px; margin: 0; }
+.km-dex-field > span { color: var(--km-muted); font-size: 12px; font-weight: 600; }
+.km-dex-field input, .km-dex-field select { width: 100%; min-height: 30px; margin: 0; }
+.km-dex-search { flex: 1 1 260px; }
+.km-dex-filters > .km-dex-field:not(.km-dex-search) { flex: 0 1 175px; }
+.km-dex-filters > button { min-height: 30px; }
+.km-dex-browser { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 16px; align-items: start; }
+.km-dex-directory { position: sticky; top: 16px; border: 1px solid var(--km-line); border-radius: 10px; background: var(--km-panel); padding: 8px; min-width: 0; }
+.km-dex-directory-heading { display: flex; align-items: center; justify-content: space-between; padding: 5px 7px 12px; gap: 10px; font-size: 12px; }
+.km-dex-list { display: flex; flex-direction: column; gap: 3px; }
+body.km-app button.km-dex-entry { display: grid; grid-template-columns: 39px 34px minmax(0, 1fr); align-items: center; height: 46px; width: 100%; margin: 0; padding: 3px 6px; gap: 7px; text-align: left; border: 1px solid transparent; background: transparent; border-radius: 6px; white-space: normal; }
+body.km-app button.km-dex-entry:hover { background: var(--km-hover); border-color: var(--km-control-line); }
+body.km-app button.km-dex-entry[aria-current="true"] { background: var(--km-selected-fill); border-color: var(--km-accent); box-shadow: inset 3px 0 var(--km-accent); }
+.km-dex-number { color: var(--km-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.km-dex-sprite { display: block; width: 34px; height: 34px; object-fit: contain; image-rendering: pixelated; }
+.km-dex-entry-name { min-width: 0; font-size: 12px; font-weight: 600; overflow-wrap: anywhere; line-height: 1.25; }
+.km-dex-entry-name small { display: block; font-weight: 400; font-size: 10px; margin-top: 2px; }
+.km-dex-pager { display: flex; justify-content: space-between; gap: 6px; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--km-line); }
+.km-dex-pager button { padding: 5px 8px; font-size: 11px; }
+.km-dex-pager span { font-size: 11px; text-align: center; font-variant-numeric: tabular-nums; }
+.km-dex-detail { container: km-dex-detail / inline-size; min-width: 0; }
+.km-dex-identity { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 10px; }
+.km-dex-identity h2 { margin: 2px 0 5px; font-size: clamp(25px, 1.8vw, 32px); font-weight: 700; letter-spacing: -.5px; line-height: 1.12; overflow-wrap: anywhere; }
+.km-dex-kicker { color: var(--km-accent); font-size: 12px; font-weight: 650; letter-spacing: .6px; }
+.km-dex-types { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.km-dex-types > .km-muted { margin-left: 6px; font-size: 12px; }
+.km-dex-neighbors { display: flex; gap: 8px; flex-shrink: 0; }
+.km-dex-neighbors button { font-size: 12px; }
+.km-dex-form-row { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin: 0 0 8px; }
+.km-dex-form-row label { min-width: 200px; max-width: 100%; }
+.km-dex-mega-switches { display: flex; flex-wrap: wrap; gap: 6px; }
+body.km-app button.km-dex-form-button { min-height: 30px; margin: 0; padding: 5px 12px; font-size: 12px; }
+body.km-app button.km-dex-form-button[aria-pressed="true"] { background: var(--km-selected-fill); border-color: var(--km-accent); color: var(--km-text); }
+.km-dex-hero { display: grid; grid-template-columns: minmax(150px, .55fr) minmax(270px, 1fr) minmax(260px, 1fr); gap: 12px; align-items: start; margin-bottom: 12px; }
+.km-dex-hero.km-dex-without-artwork { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.km-dex-without-artwork .km-dex-abilities { grid-column: auto; }
+.km-dex-without-artwork .km-dex-missing { grid-column: 1 / -1; }
+.km-dex-artwork-card[hidden] { display: none; }
+.km-dex-card { min-width: 0; align-self: start; border: 1px solid var(--km-line); border-radius: 8px; background: var(--km-panel-fill); padding: 12px 14px; }
+.km-dex-card h3 { margin: 0 0 9px; color: var(--km-text); font-size: 14px; font-weight: 650; }
+.km-dex-stat { display: grid; grid-template-columns: 54px 28px minmax(30px, 1fr) 70px; align-items: center; gap: 8px; margin: 2px 0; font-size: 12px; line-height: 18px; }
+.km-dex-stat-range { text-align: right; font-size: 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.km-dex-stats { display: grid; grid-template-columns: 1fr auto; gap: 0; }
+.km-dex-stats h3 { align-self: center; margin: 0; }
+.km-dex-stats > .km-dex-stat, .km-dex-stats > .km-dex-stat-total, .km-dex-stats > .km-dex-footnote { grid-column: 1 / -1; }
+.km-dex-range-level { width: auto; max-width: 185px; grid-column: 2; margin: 0 0 6px; min-height: 28px; font-size: 11px; }
+.km-dex-stats .km-dex-footnote { margin: 10px 0 0; font-size: 10px; }
+.km-dex-stat > span:first-child { color: var(--km-muted); }
+.km-dex-stat strong { text-align: right; font-variant-numeric: tabular-nums; }
+.km-dex-stat-track { display: block; height: 7px; background: var(--km-inset); border-radius: 8px; overflow: hidden; }
+.km-dex-stat-track > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--km-action), var(--km-accent)); }
+.km-dex-stat-total { display: flex; align-items: baseline; gap: 14px; justify-content: flex-end; border-top: 1px solid var(--km-line); padding-top: 7px; margin-top: 8px; font-size: 12px; color: var(--km-muted); }
+.km-dex-stat-total strong { font-size: 18px; font-variant-numeric: tabular-nums; color: var(--km-text); }
+.km-dex-ability { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 9px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--km-line); font-size: 13px; }
+.km-dex-ability:first-of-type { padding-top: 0; }
+.km-dex-ability:last-child { padding-bottom: 0; border-bottom: 0; }
+.km-dex-slot { font-size: 10px; font-weight: 700; color: var(--km-accent); background: var(--km-selection); border: 1px solid var(--km-line); border-radius: 5px; text-align: center; padding: 3px; }
+.km-dex-ability p { font-size: 12px; margin: 4px 0 0; line-height: 1.45; }
+.km-dex-sections { display: flex; gap: 16px; border-bottom: 1px solid var(--km-line); margin: 0 0 10px; flex-wrap: wrap; }
+body.km-app button.km-dex-section-tab { background: transparent; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 9px 2px; margin: 0; color: var(--km-muted); }
+body.km-app button.km-dex-section-tab[aria-selected="true"] { color: var(--km-accent); border-bottom-color: var(--km-accent); }
+.km-dex-info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.km-dex-facts { display: grid; gap: 6px; margin: 0; }
+.km-dex-facts dt { font-size: 12px; font-weight: 400; color: var(--km-muted); margin: 0; }
+.km-dex-facts dd { font-size: 12px; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+.km-dex-footnote { font-size: 12px; margin: 0 0 12px; line-height: 1.5; }
+.km-dex-facts + .km-dex-footnote { margin: 14px 0 0; }
+.km-dex-defenses-card { container: km-dex-defenses / inline-size; }
+.km-dex-defenses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.km-dex-defense { display: grid; grid-template-columns: minmax(0, 1fr) max-content; align-items: center; gap: 4px; border: 1px solid var(--km-line); border-radius: 5px; padding: 4px; }
+.km-dex-defense strong { font-size: 12px; font-variant-numeric: tabular-nums; }
+.km-dex-defense [data-effect="weak"] { color: var(--km-danger); }
+.km-dex-defense [data-effect="resist"] { color: var(--km-success); }
+.km-pokedex-panel .km-type-badge { font-size: 10px; line-height: 16px; padding: 1px 7px; min-width: 48px; text-align: center; white-space: nowrap; border-radius: 4px; }
+.km-dex-evolution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 390px), 1fr)); gap: 12px; }
+.km-dex-evolution-link { display: grid; grid-template-columns: minmax(90px, 1fr) minmax(90px, 1.2fr) minmax(90px, 1fr); align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--km-line); border-radius: 8px; background: var(--km-inset); }
+body.km-app button.km-dex-evolution-pokemon { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 6px; background: transparent; border-color: transparent; white-space: normal; overflow-wrap: anywhere; font-size: 12px; text-align: center; }
+body.km-app button.km-dex-evolution-pokemon[aria-current="true"] { background: var(--km-selection); border-color: var(--km-accent); }
+.km-dex-evolution-sprite { width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; }
+.km-dex-evolution-condition { display: flex; flex-direction: column; gap: 7px; font-size: 11px; line-height: 1.4; color: var(--km-muted); text-align: center; }
+.km-dex-evolution-condition > span:first-child { font-size: 24px; color: var(--km-accent); }
+.km-dex-move-filters { display: flex; gap: 12px; margin-bottom: 12px; }
+.km-dex-move-filters > label:first-child { flex: 1; }
+.km-dex-move-tabs { display: flex; flex-wrap: wrap; gap: 4px; width: fit-content; max-width: 100%; padding: 3px; margin: 0 0 10px; border: 1px solid var(--km-line); border-radius: 7px; background: var(--km-inset); }
+body.km-app button.km-dex-move-tab { min-height: 30px; padding: 5px 12px; margin: 0; border: 1px solid transparent; border-radius: 5px; background: transparent; color: var(--km-muted); font-size: 12px; white-space: nowrap; }
+body.km-app button.km-dex-move-tab:hover { background: var(--km-hover); border-color: var(--km-control-line); color: var(--km-text); }
+body.km-app button.km-dex-move-tab[aria-selected="true"] { background: var(--km-selected-fill); border-color: var(--km-accent); color: var(--km-text); }
+.km-dex-move-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 12px; }
+.km-dex-move-table caption { text-align: left; font-size: 11px; padding: 0 0 10px; }
+.km-dex-move-table th { font-size: 11px; color: var(--km-muted); text-align: left; background: var(--km-inset); }
+.km-dex-move-table th, .km-dex-move-table td { border-bottom: 1px solid var(--km-line); padding: 9px 8px; vertical-align: top; overflow-wrap: anywhere; }
+.km-dex-move-table th:first-child { width: 11%; }
+.km-dex-move-table th:nth-child(2) { width: 32%; }
+.km-dex-move-table th:nth-child(n+5), .km-dex-move-table td:nth-child(n+5) { text-align: right; font-variant-numeric: tabular-nums; }
+.km-dex-move-table summary { font-weight: 600; cursor: pointer; }
+.km-dex-move-table p { margin: 8px 0; font-size: 12px; line-height: 1.5; }
+.km-dex-location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 10px; }
+.km-dex-location { display: flex; flex-direction: column; gap: 6px; font-size: 12px; padding: 12px; background: var(--km-inset); border: 1px solid var(--km-line); border-radius: 7px; }
+.km-dex-section-content blockquote { margin: 0 0 16px; padding: 12px 16px; border-left: 3px solid var(--km-accent); background: var(--km-inset); font-size: 13px; line-height: 1.6; }
+.km-dex-section-content blockquote p { margin: 0 0 7px; }
+.km-dex-section-content cite { font-size: 11px; font-style: normal; }
+.km-dex-empty { padding: 28px 14px; color: var(--km-muted); text-align: center; }
+.km-pokedex-panel :focus-visible { outline: 2px solid var(--km-focus); outline-offset: 3px; }
+
+.km-dex-artwork-card { display: flex; flex-direction: column; align-items: center; min-width: 0; margin: 0; padding: 4px; }
+.km-dex-artwork { display: block; width: min(100%, 220px); height: auto; max-height: 220px; object-fit: contain; image-rendering: auto; }
+.km-dex-artwork-status { font-size: 12px; padding: 18px 8px; margin: 0; text-align: center; }
+.km-dex-artwork-status button { display: block; margin: 8px auto 0; }
+.km-dex-missing { grid-column: 2 / -1; }
+.km-dex-facts > div { display: grid; grid-template-columns: minmax(85px, .85fr) minmax(0, 1.15fr); align-items: baseline; gap: 10px; line-height: 1.5; }
+.km-dex-facts + .km-dex-facts { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--km-line); }
+.km-dex-defenses .km-type-badge { min-width: 0; padding: 1px 3px; font-size: 10px; }
+.km-pokedex-panel[data-density="compact"] .km-dex-card { padding: 10px 12px; }
+.km-pokedex-panel[data-density="compact"] .km-dex-facts { gap: 4px; }
+.km-pokedex-panel[data-density="compact"] .km-dex-ability { padding: 6px 0; }
+.km-pokedex-panel[data-density="compact"] .km-dex-artwork { max-height: 190px; width: min(100%, 190px); }
+.km-pokedex-panel[data-density="compact"] .km-dex-identity h2 { font-size: 26px; }
+@container km-dex-defenses (min-width: 560px) { .km-dex-defenses { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@container km-dex-detail (max-width: 840px) { .km-dex-info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .km-dex-defenses-card { grid-column: 1 / -1; } .km-dex-defenses { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@container km-dex-detail (max-width: 730px) {
+    .km-dex-hero { grid-template-columns: minmax(140px, .6fr) minmax(260px, 1fr); }
+    .km-dex-abilities { grid-column: 1 / -1; }
+    .km-dex-artwork { max-height: 190px; width: min(100%, 190px); }
+    .km-dex-identity { flex-wrap: wrap; }
+    .km-dex-neighbors { margin-left: auto; }
+}
+@container km-dex-detail (max-width: 490px) {
+    .km-dex-hero, .km-dex-info-grid { grid-template-columns: minmax(0, 1fr); }
+    .km-dex-missing { grid-column: 1; }
+    .km-dex-artwork { max-height: 160px; width: min(100%, 160px); }
+    .km-dex-defenses { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .km-dex-move-table th, .km-dex-move-table td { padding: 6px 3px; font-size: 11px; }
+    .km-dex-move-table .km-type-badge { min-width: 0; padding: 1px 3px; font-size: 9px; }
+}
+@container km-dex-workspace (max-width: 820px) {
+    .km-dex-browser { grid-template-columns: minmax(0, 1fr); }
+    .km-dex-directory { position: static; }
+    .km-dex-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); }
+    .km-dex-heading { flex-wrap: wrap; gap: 7px; }
+}
+@media (prefers-reduced-motion: reduce) { .km-pokedex-panel * { scroll-behavior: auto; transition: none; } }
+@media (forced-colors: active) {
+    .km-dex-stat-track > span { background: Highlight; }
+    .km-dex-stat-track, .km-dex-slot, .km-dex-defense { border: 1px solid CanvasText; }
+    .km-dex-entry[aria-current="true"], .km-dex-section-tab[aria-selected="true"], .km-dex-move-tab[aria-selected="true"] { outline: 2px solid Highlight; }
+}

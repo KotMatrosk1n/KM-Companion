@@ -47,6 +47,10 @@ The required calculator anchors include `.wrapper`, `#p1`, `#p2`, `.field-info`,
 
 The layout manager restores `base` while switching and restores the previous working layout if a new provider cannot mount. Scope custom CSS through `body[data-calc-layout="<layout-id>"]` instead of changing the standard layout globally.
 
+## Dex data
+
+The Dex uses a full National index and a separate pack for the exact selected profile. The bundled Royal Sword pack contains extracted personal facts, three ability slots, moves, and evolution rules. Encounter locations come from that profile's reference guide. A reviewed provider can implement `getPokedexData(profile, context)`; a returned pack must carry the same `profileId`. Missing packs show **No profile data**. They do not inherit another hack's records or modern canonical stats. See [Dex data](pokedex-data.md) for the pack shape, sources, artwork delivery, and regeneration.
+
 ## Adding Trainer Support Without Calculation Changes
 
 For a mod whose battle data matches a canonical generation, create a trainer pack that follows [`trainer-pack-v1.schema.json`](schemas/trainer-pack-v1.schema.json) and test it through **Import Trainer Data**. An imported pack for one generation becomes a selectable tile automatically and uses the canonical calculator data, standard layout, shared workflow tools, and default generation input policies for that generation.
@@ -64,7 +68,7 @@ Begin with the versioned submission files and record the actual behavior, includ
 1. Register the profile in `src/js/data/rom_hacks.js`. Omit `ui.layout` to use `base`, or name a bundled registered layout provider.
 2. Add a calculator `Generation` provider that composes the canonical base generation with the mod's overrides.
 3. If the legacy UI needs data not represented by the `Generation` iterables, implement `getLegacyData(kind, base, calc, profile, context)` for `species`, `moves`, `abilities`, `items`, or `types`.
-4. If the hack adds species or forms whose sprite filenames differ from the packaged canonical sprite set, implement `getPokemonSpriteId(name, calc, context)` or `getPokemonSpriteUrls(name, options, calc, context)` on the resolved provider. Sprite URLs must point to reviewed bundled assets or the packaged sprite protocol. Add every bundled asset to the root build allowlist. Imported trainer JSON cannot provide executable asset resolvers or remote URLs.
+4. If the hack adds species or forms whose sprite filenames differ from the reviewed sprite collection, implement `getPokemonSpriteId(name, calc, context)` or `getPokemonSpriteUrls(name, options, calc, context)` on the resolved provider. Sprite URLs must point to reviewed bundled assets or the local sprite protocol, which reads the optional artwork collection. Add every bundled asset to the root build allowlist. Imported trainer JSON cannot provide executable asset resolvers or remote URLs. The shared artwork preference controls whether Pokémon sprites display.
 5. Set the profile's trainer pack and save import generation. If the hack changes its base game's save container or repurposes raw entity IDs, register a stable adapter through `window.KM_SAVE_IMPORT.registerSaveAdapter(...)`, set `saveImport.adapter` to that adapter ID, and provide its reviewed resolver. KM Companion rejects incompatible or partially unresolved saves before changing Team/Box data.
 6. Set `inputs.evs` only when the hack changes EV behavior. Do not use layout code as a substitute for an input policy.
 7. Declare exclusive profile features explicitly. Do not make another mod inherit Royal Sword behavior by default.

@@ -2,7 +2,7 @@
     "root": true,
     "overrides": [
         {
-            "files": ["src/js/desktop_storage.js", "src/js/run_tools.js"],
+            "files": ["src/js/desktop_storage.js", "src/js/run_tools.js", "src/js/pokedex.js", "src/js/pokedex_data.js"],
             "parserOptions": {"ecmaVersion": 2017}
         }
     ],

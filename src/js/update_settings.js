@@ -378,7 +378,11 @@
 			event.preventDefault(); selectSettingsTab(index, true);
 		});
 	});
-	window.addEventListener("kmcalculator:settingsopen", function () { selectSettingsTab(activeSettingsTab, true); });
+	window.addEventListener("kmcalculator:settingsopen", function (event) {
+		var section = event.detail && event.detail.section;
+		var requested = settingsTabs.findIndex(function (tab) { return tab.id === "km-settings-tab-" + section; });
+		selectSettingsTab(requested < 0 ? activeSettingsTab : requested, true);
+	});
 	if (notesPrevious && notesNext) {
 		notesPrevious.addEventListener("click", function () { notesPage--; renderReleaseNotes(); });
 		notesNext.addEventListener("click", function () { notesPage++; renderReleaseNotes(); });

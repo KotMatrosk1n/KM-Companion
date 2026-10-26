@@ -618,6 +618,8 @@ function getDesktopSpriteBaseUrl() {
 }
 
 function getPokemonSpriteUrls(pokemonName, options) {
+	var desktopArtwork = window.kmCalculatorDesktop || window.royalSwordDesktop;
+	if (desktopArtwork && desktopArtwork.artwork && (!window.KMPokemonArtwork || !window.KMPokemonArtwork.isEnabled())) return [];
 	var provider = getActiveProfileProvider();
 	var context = getActiveProfileContext();
 	var suppliedUrls;
@@ -658,10 +660,14 @@ function setPokemonSpriteSource(sprite, spriteUrl) {
 
 function createPokemonSprite(pokemonName, className, options) {
 	var sprite = $("<img alt='' />");
-	var spriteUrls = getPokemonSpriteUrls(pokemonName, options);
-	var spriteUrlIndex = 0;
+	var spriteUrls, spriteUrlIndex;
 	sprite.addClass(className || "pokemon-sprite");
-	setPokemonSpriteSource(sprite, spriteUrls[spriteUrlIndex]);
+	sprite.attr("data-km-pokemon-sprite", "");
+	sprite[0].kmRefreshSprite = function () {
+		spriteUrls = getPokemonSpriteUrls(pokemonName, options); spriteUrlIndex = 0;
+		if (!spriteUrls.length) { sprite.removeAttr("src").hide(); return; }
+		sprite.show(); setPokemonSpriteSource(sprite, spriteUrls[0]);
+	};
 	sprite.on("error", function () {
 		spriteUrlIndex += 1;
 		if (spriteUrls[spriteUrlIndex]) {
@@ -670,6 +676,7 @@ function createPokemonSprite(pokemonName, className, options) {
 		}
 		$(this).hide();
 	});
+	sprite[0].kmRefreshSprite();
 	return sprite;
 }
 

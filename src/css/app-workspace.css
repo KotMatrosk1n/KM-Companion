@@ -333,6 +333,12 @@ body.km-app .km-results-column .move-result-no-effect { color: var(--km-muted); 
 body.km-app .field-format-toggle { display: inline-flex; width: auto; margin: 0; }
 body.km-app .field-format-toggle .btn { margin: 0; width: auto; }
 body.km-app .km-dialog { color: var(--km-text); background: var(--km-panel); border: 1px solid var(--km-line); border-radius: 10px; width: 620px; max-width: calc(100vw / var(--km-scale) - 32px); max-height: calc(100dvh / var(--km-scale) - 32px); padding: 16px; }
+body.km-app .km-artwork-card { width: min(100%, 700px); box-sizing: border-box; padding: 16px; border: 1px solid var(--km-line); border-radius: 8px; background: var(--km-panel); }
+.km-artwork-toggle { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.km-artwork-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.km-artwork-card p, .km-artwork-prompt p { line-height: 1.5; }
+.km-artwork-card progress { width: 100%; accent-color: var(--km-accent); }
+.km-artwork-prompt::backdrop { background: #0009; }
 .km-dialog::backdrop { background: #060a12bc; }
 .km-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .km-dialog-heading h2 { margin: 0; font-size: 18px; }

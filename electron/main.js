@@ -6,6 +6,8 @@ var pathToFileURL = require("url").pathToFileURL;
 var builderUtilRuntime = require("builder-util-runtime");
 var electron = require("electron");
 var electronUpdater = require("electron-updater");
+var pokemonArtwork = require("./pokemon-artwork");
+var pokemonArtworkLibrary;
 var CancellationToken = builderUtilRuntime.CancellationToken;
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
@@ -145,6 +147,11 @@ function fetchLocalFile(filePath) {
 
 function registerAppProtocol() {
 	protocol.handle(APP_SCHEME, function (request) {
+		var artworkUrl = parseUrl(request.url);
+		if (!artworkUrl || !isAppUrl(request.url)) return new Response("", {status: 404});
+		if (artworkUrl.pathname.indexOf("/pokedex-artwork/") === 0 || artworkUrl.pathname.indexOf(LOCAL_SPRITE_ROUTE_PREFIX) === 0) {
+			return pokemonArtworkLibrary.read(artworkUrl.pathname.slice(1));
+		}
 		var filePath = getRequestedFilePath(request.url);
 		if (!filePath) return new Response("", {status: 404});
 		return fetchLocalFile(filePath);
@@ -155,6 +162,7 @@ function isAllowedRendererNetworkUrl(url) {
 	var parsedUrl = parseUrl(url);
 	if (!parsedUrl) return true;
 	if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") return true;
+	if (pokemonArtworkLibrary && pokemonArtworkLibrary.allowsUrl(url)) return true;
 	return ALLOWED_RENDERER_NETWORK_ORIGINS.indexOf(parsedUrl.origin) !== -1;
 }
 
@@ -675,6 +683,26 @@ function registerUpdaterIpc() {
 	});
 }
 
+function registerArtworkIpc() {
+	pokemonArtworkLibrary = pokemonArtwork.createLibrary({
+		directory: app.getPath("userData"), legacySprites: getSpriteRoot(),
+		illustrations: JSON.parse(fsSync.readFileSync(path.join(getDistRoot(), "data/pokedex-artwork.json"), "utf8")),
+		sprites: JSON.parse(fsSync.readFileSync(path.join(getDistRoot(), "data/pokemon-sprites.json"), "utf8")),
+		fetch: function (url, options) { return net.fetch(url, options); },
+		onChange: function (state) {
+			BrowserWindow.getAllWindows().forEach(function (win) {
+				if (!win.isDestroyed() && isAppUrl(win.webContents.getURL())) win.webContents.send("km-calculator-artwork-changed", state);
+			});
+		}
+	});
+	["getState", "check", "choose", "setEnabled", "download", "pause"].forEach(function (method) {
+		ipcMain.handle("km-calculator-artwork-" + method, function (event, value) {
+			if (!event.senderFrame || event.senderFrame !== event.sender.mainFrame || !isAppUrl(event.senderFrame.url)) throw new Error("Artwork request rejected.");
+			return pokemonArtworkLibrary[method](value);
+		});
+	});
+}
+
 function stopUpdateDownloadWatchdog() {
 	if (!updateDownloadWatchdog) return;
 	clearInterval(updateDownloadWatchdog);
@@ -1149,6 +1177,7 @@ function createMainWindow() {
 
 app.whenReady().then(function () {
 	scheduleStaleUpdaterCacheCleanup();
+	registerArtworkIpc();
 	registerAppProtocol();
 	registerAppStorageIpc();
 	registerAppDialogIpc();

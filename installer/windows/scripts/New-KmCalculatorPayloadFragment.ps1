@@ -152,8 +152,7 @@ $payloadRoot = (Resolve-Path -LiteralPath $PayloadDirectory).Path.TrimEnd('\')
 $requiredFiles = @(
     "KM Companion.exe",
     "resources\app.asar",
-    "resources\app-update.yml",
-    "resources\sprites\manifest.json"
+    "resources\app-update.yml"
 )
 foreach ($requiredFile in $requiredFiles) {
     if (-not (Test-Path -LiteralPath (Join-Path $payloadRoot $requiredFile) -PathType Leaf)) {

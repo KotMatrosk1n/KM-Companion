@@ -290,8 +290,7 @@ $outputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 
 $requiredFiles = @(
     "KM Companion.exe",
-    "resources\app.asar",
-    "resources\sprites\manifest.json"
+    "resources\app.asar"
 )
 foreach ($requiredFile in $requiredFiles) {
     if (-not (Test-Path -LiteralPath (Join-Path $appRoot $requiredFile) -PathType Leaf)) {

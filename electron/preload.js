@@ -95,6 +95,20 @@ function createDesktopBridge() {
 			}
 		},
 		updates: createUpdateBridge(),
+		artwork: {
+			getState: function () { return ipcRenderer.invoke("km-calculator-artwork-getState"); },
+			check: function () { return ipcRenderer.invoke("km-calculator-artwork-check"); },
+			choose: function (value) { return ipcRenderer.invoke("km-calculator-artwork-choose", value); },
+			setEnabled: function (value) { return ipcRenderer.invoke("km-calculator-artwork-setEnabled", value); },
+			download: function () { return ipcRenderer.invoke("km-calculator-artwork-download"); },
+			pause: function () { return ipcRenderer.invoke("km-calculator-artwork-pause"); },
+			subscribe: function (listener) {
+				if (typeof listener !== "function") return function () {};
+				var handler = function (event, state) { listener(state); };
+				ipcRenderer.on("km-calculator-artwork-changed", handler);
+				return function () { ipcRenderer.removeListener("km-calculator-artwork-changed", handler); };
+			}
+		},
 		runs: {
 			save: function (backup) { return ipcRenderer.invoke("km-calculator-run-save", backup); },
 			read: function () { return ipcRenderer.invoke("km-calculator-run-read"); },

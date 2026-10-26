@@ -24,6 +24,7 @@ copyright and license notices must be retained:
 | Separate Windows installer in `installer/windows/` | [MIT](installer/windows/LICENSE) for original installer code. WiX components retain [MS-RL](LICENSES/WiX-MS-RL.txt); .NET and its dependencies retain their notices. |
 | Other third party code | Its original license, preserved file headers, [CREDITS.md](CREDITS.md), and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). |
 | Game text, portraits, sprites, trademarks, and other artwork | Excluded from the software license. Their rights remain with their respective holders; GPLv3 supplies no additional asset permissions. |
+| Official Dex illustrations | Public PokéAPI artwork retains its source notice in `LICENSES/PokeAPI-Artwork.txt`. Pokémon artwork remains excluded from the software license, with rights retained by its respective owners. |
 
 The app and installer are separate programs: the installer copies and launches
 the app payload; the calculator does not link to WiX or its bootstrapper API.
@@ -83,8 +84,9 @@ sources and create matching source artifacts first.
 
 To rebuild the calculator, use Node.js 24 and `npm ci`, then `npm run build`.
 Generated lookup data is checked in.
-`npm run electron:pack` adds the downloaded sprite resources and Electron
-runtime. The package copies the GPL text, retained licenses, credits, import
+`npm run electron:pack` adds the Electron runtime. Pokémon illustrations and
+sprites are an optional download; their inventories and notices ship with the
+app. The package copies the GPL text, retained licenses, credits, import
 notices, and production npm license texts into `dist/licenses/` inside the app
 and the installed `resources/licenses/` directory for direct offline access.
 Electron's own license files remain alongside the executable.

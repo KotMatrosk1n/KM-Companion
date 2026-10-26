@@ -1,6 +1,6 @@
 # App workspace
 
-The app provides four main sections: Calculator, Encounters, Trainers, and Route Items. Settings opens its own page from the header. Team & Boxes opens from the bottom of the Calculator page. The live calculator stays mounted when switching sections, preserving the matchup and each section's position.
+The app provides five main sections: Calculator, Dex, Encounters, Trainers, and Route Items. Settings opens its own page from the header. Team & Boxes opens from the bottom of the Calculator page. The live calculator stays mounted when switching sections, preserving the matchup and each section's position.
 
 During startup, the original calculator markup stays invisible until the workspace, profile, and initial tab are assembled. The desktop window waits for both page load and first paint before appearing. If workspace initialization fails, the startup surface displays an error instead of exposing the unfinished layout.
 
@@ -46,13 +46,23 @@ The shared app shell does not choose mechanics or input policies. Registered pro
 
 ## Settings and run backups
 
-Settings has Updates and Backup tabs, remembers its selected tab, and provides a button to return to the previous app section. Arrow keys, Home, and End navigate the Settings tabs. Updates retains version information, manual checks, paginated release notes, download progress, retry actions, and installation confirmation. Navigating away keeps the current calculator and update state available.
+Settings has Updates, Backup, and Artwork tabs, remembers its selected tab, and provides a button to return to the previous app section. Arrow keys, Home, and End navigate the Settings tabs. Updates retains version information, manual checks, paginated release notes, download progress, retry actions, and installation confirmation. Navigating away keeps the current calculator and update state available.
+
+Artwork manages the optional Pokémon illustrations and static and animated sprites. The first launch prompt offers the complete collection or No thanks; declining keeps pictures off and does not prompt again. Download artwork adds missing files, Check artwork verifies the collection for the installed app version, and Pause download keeps completed files. Show Pokémon artwork changes visibility without removing downloads. The collection remains in app data across updates and reinstalls for the same Windows account. Run backups and run resets do not include or delete artwork. See [Dex artwork](pokedex.md#official-artwork).
 
 Back Up Run saves a JSON file for the selected profile. It includes custom sets, team and box order, color settings, imported inventory, global and trainer notes, all encounter modes, trainer progress, item pickups, and associated imported trainer packs. Pending notes are saved before the backup is created.
 
 Restore Run validates the file and compatible profile, asks before replacing the run, and saves a recovery copy for Undo Last Restore. Other profiles and global preferences are kept. Restoring a backup made before item pickup tracking clears pickup checks for that restored profile. Desktop uses native file dialogs; browser use downloads and reads the same backup format.
 
 Report a Problem appears after About in the header. It opens a GitHub draft containing the calculator version, current profile, and generation, with space for reproduction steps and expected and actual behavior. The user reviews and submits the report; run data and attachments are not submitted automatically.
+
+## Dex
+
+The [Dex](pokedex.md) follows all 1,025 National numbers and searches Pokémon by name, form, or number. Details use the selected ROM hack's personal data, move compatibility, evolution rules, and encounter guide. Form controls, stat bars and totals, three labeled ability slots, and official illustration artwork share the main detail view. Further sections cover breeding, training, type defenses, move details, and locations. Missing profile records and unavailable artwork are identified explicitly. Mega buttons switch between Base and supported Mega forms, including separate X and Y variants, within one National entry.
+
+Artwork comes from the public PokéAPI image repository. On desktop, pictures download on first use and are checked and cached for later use. Cards size to their contents, labels align with values, and stats and abilities remain beside a bounded picture. The directory measures its actual remaining viewport for page sizing. The overview reflows with window size and display scaling. Search and form choices remain separate for each profile during the session.
+
+Within Moves, separate Level up, TM, TR, Tutor, and Egg subtabs keep learnsets apart. Move search and page controls apply to the active subtab. The selected method persists while navigating within that profile, and each method has its own empty state when no records are available.
 
 ## Profile reference sections
 
@@ -76,7 +86,7 @@ The Royal Sword reference includes:
 - Royalocke allows six catches across each of eight Wild Area pairs, and six in Lake of Outrage. City of Motostoke allows one fishing encounter and the Aron trade; Town of Hulbury allows one fishing encounter and the Cottonee trade. Route 2 gifts, Route 5's Togepi gift, and Galar Mine No. 2's static encounter share their location's single allowance with its other encounters. Other locations allow one catch. Closing either paired area early closes both, and reopening either clears both manual overrides.
 - Nuzlocke allows exactly one encounter per individual location. Gifts, trades, statics, and starters consume that location's same allowance. There are no shared Wild Area allowances or extra city trades, and manual catches require a location.
 - In Royalocke and Nuzlocke, caught evolution families are crossed out and disabled everywhere else, including manual catch log submissions. Missed/used locations do not exclude a family. Exhausted allowances prevent further catches while recorded catches remain removable. A family stays excluded until its last saved catch is removed. Available odds renormalize the full method table after family exclusions; search does not change them. Exhausted allowances, manually closed locations, and special encounters have no available random rate. Weather tables combine the first seven land slots with the three replacement slots.
-- Trainer cards include a sprite, levels, held items, abilities, natures, moves, and all six recorded stats inline. Sprites prefer bundled animations, with matching static forms when an animation is unavailable. Display names and regional/form variants have explicit sprite mappings. A persistent Beaten checkbox beside the battle format strikes out the trainer in the left list; unchecking restores it. Battle notes remain visible separately from the name. Browsing these tables does not replace the active calculator team or trainer packs.
+- Trainer cards include a sprite when artwork is enabled, levels, held items, abilities, natures, moves, and all six recorded stats inline. Sprites prefer saved animations, with matching static forms when an animation is unavailable. Display names and regional/form variants have explicit sprite mappings. A persistent Beaten checkbox beside the battle format strikes out the trainer in the left list; unchecking restores it. Battle notes remain visible separately from the name. Browsing these tables does not replace the active calculator team or trainer packs.
 - Trainer rewards show money and awarded items separately from held items. No verified reward data is currently bundled, so both fields say Not recorded. A trainer can supply `rewards: {money: 12500, items: [{name: "Rare Candy", quantity: 2}]}`; money `0` and an empty item array explicitly mean zero and no items. Missing fields remain unknown.
 - A Sword/Shield 1.3.2 base game item guide covering pickups, gifts, shops, and berry trees. It is not a verified Royal Sword placement list. Edition limits, location corrections, uncertain placements, match explanations, and source links remain attached to the entries. A placement match does not confirm placement in the game, and stored pool weights must not be interpreted as runtime odds.
 
