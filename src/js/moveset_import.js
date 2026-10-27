@@ -1,4 +1,4 @@
-/*global KMTrainerDataRegistry, SETDEX, TRAINERDEX, clearDoublesSlotSide, createPokemonSprite, gen, getPokemonLegendTitle, getZeroEVs, importPokemonSaveFile, importSwordShieldSaveFile, isDoublesFormatSelected, readCustomSets, rebuildKMCalculatorTrainerIndex, rebuildRoyalSwordTrainerIndex, setDoublesActiveSlot, setDoublesSlotSelection, setdex, showDoublesSlotMenu, syncTeamBoxWithCustomSets, updateDoublesSlotHighlights, updateDoublesSlotSummaries, updatePokemonLegendSprite */
+/*global KMTrainerDataRegistry, SETDEX, TRAINERDEX, clearDoublesSlotSide, createPokemonSprite, createPokemonSpriteFallbackName, gen, getPokemonLegendTitle, getZeroEVs, importPokemonSaveFile, importSwordShieldSaveFile, isDoublesFormatSelected, readCustomSets, rebuildKMCalculatorTrainerIndex, rebuildRoyalSwordTrainerIndex, setDoublesActiveSlot, setDoublesSlotSelection, setdex, showDoublesSlotMenu, syncTeamBoxWithCustomSets, updateDoublesSlotHighlights, updateDoublesSlotSummaries, updatePokemonLegendSprite */
 
 var trainerDataRegistry = null;
 var importedTrainerProfileIds = {};
@@ -766,8 +766,8 @@ function renderTrainerTeam(trainerId) {
 	for (var i = 0; i < trainer.length; i++) {
 		var pokemon = trainer[i];
 		var button = $("<button type='button' class='trainer-pokemon' draggable='true'></button>");
-		button.append(createPokemonSprite(getTrainerPokemonSpecies(pokemon), "trainer-pokemon-sprite"));
-		button.append($("<span class='km-pokemon-fallback-name'></span>").text(getTrainerPokemonSpecies(pokemon)));
+		var sprite = createPokemonSprite(getTrainerPokemonSpecies(pokemon), "trainer-pokemon-sprite");
+		button.append(sprite, createPokemonSpriteFallbackName(sprite, getTrainerPokemonSpecies(pokemon)));
 		button.find("img").prop("draggable", false);
 		button.attr("aria-label", getTrainerPokemonButtonLabel(pokemon));
 		button.attr("title", getTrainerPokemonLabel(pokemon));

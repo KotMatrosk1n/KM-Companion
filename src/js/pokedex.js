@@ -61,10 +61,15 @@
 		function defaultEntry(species) {
 			var forms = allForms(species), q = data.normalize(search.value);
 			var base = index.entries[species.number + ":0"];
-			if (base && forms.some(function (entry) { return entry.formKind === "mega"; }) && (!q || q === data.normalize(species.name) || /^#?\d+$/.test(search.value.trim())) && (!type.value || base.types.indexOf(type.value) !== -1)) return base;
+			var speciesQuery = !q || /^#?\d+$/.test(search.value.trim()) || q === data.normalize(species.name) || (species.names || []).some(function (name) { return data.normalize(name.name) === q; });
+			if (base && speciesQuery && (!type.value || base.types.indexOf(type.value) !== -1) && (availability.value !== "present" || base.present)) return base;
 			var matching = forms.filter(function (entry) { return (!type.value || entry.types.indexOf(type.value) !== -1) && (availability.value !== "present" || entry.present); });
 			if (matching.length) forms = matching;
-			return q && forms.find(function (entry) { return data.searchNames(entry.name).indexOf(q) !== -1; }) || forms.find(function (entry) { return entry.present; }) || forms[0];
+			var exact = q && forms.find(function (entry) { return data.searchNames(entry.name).split(" ").indexOf(q) !== -1; });
+			if (exact) return exact;
+			var named = q && forms.filter(function (entry) { return data.searchNames(entry.name).indexOf(q) !== -1; });
+			if (named && named.length) forms = named;
+			return forms.indexOf(base) !== -1 ? base : forms.find(function (entry) { return entry.present; }) || forms[0];
 		}
 		function selectedSpecies() { return results.find(function (species) { return species.number === state.number; }); }
 		function selectedEntry() { return index.entries[state.key]; }

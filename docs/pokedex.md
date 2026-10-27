@@ -8,6 +8,8 @@ Select a Pokémon to view its forms, base stat numbers and total, and ability sl
 
 Pokémon with Mega Evolutions have **Base** and **Mega** buttons on their page. Charizard and Mewtwo have separate **Mega X** and **Mega Y** buttons. Selecting a Mega updates the picture, stats, types, and ability slots together. **Base** restores the profile's existing base record. Other forms retain their form selector. Each species keeps one directory entry and one National number.
 
+Opening a species normally selects its base form. A specific form search, the Form selector, or a filter that excludes the base can select an alternate form.
+
 The detail sections contain:
 
 | Section | Information |

@@ -644,6 +644,17 @@ function setPokemonSpriteSource(sprite, spriteUrl) {
 	sprite.attr("src", spriteUrl);
 }
 
+function setPokemonSpriteState(sprite, state) {
+	var unavailable = state === "disabled" || state === "missing";
+	sprite.attr("data-km-sprite-state", state).prop("hidden", unavailable).toggle(!unavailable);
+	sprite.siblings(".km-pokemon-fallback-name").prop("hidden", !unavailable);
+}
+
+function createPokemonSpriteFallbackName(sprite, pokemonName) {
+	var state = sprite.attr("data-km-sprite-state");
+	return $("<span class='km-pokemon-fallback-name' hidden></span>").text(pokemonName).prop("hidden", state !== "disabled" && state !== "missing");
+}
+
 function createPokemonSprite(pokemonName, className, options) {
 	var sprite = $("<img alt='' />");
 	var spriteUrls, spriteUrlIndex;
@@ -651,21 +662,21 @@ function createPokemonSprite(pokemonName, className, options) {
 	sprite.attr("data-km-pokemon-sprite", "");
 	sprite[0].kmRefreshSprite = function () {
 		spriteUrls = getPokemonSpriteUrls(pokemonName, options); spriteUrlIndex = 0;
-		if (!spriteUrls.length) { sprite.attr("data-km-sprite-state", "disabled").removeClass("pokemon-sprite-animated").removeAttr("src").hide(); return; }
-		sprite.attr("data-km-sprite-state", "loading").show(); setPokemonSpriteSource(sprite, spriteUrls[0]);
+		if (!spriteUrls.length) { sprite.removeClass("pokemon-sprite-animated").removeAttr("src"); setPokemonSpriteState(sprite, "disabled"); return; }
+		setPokemonSpriteState(sprite, "loading"); setPokemonSpriteSource(sprite, spriteUrls[0]);
 	};
 	sprite.on("load", function () {
-		if (spriteUrls.length && spriteUrlIndex < spriteUrls.length) sprite.attr("data-km-sprite-state", "ready").show();
+		if (spriteUrls.length && spriteUrlIndex < spriteUrls.length) setPokemonSpriteState(sprite, "ready");
 	});
 	sprite.on("error", function () {
 		if (!spriteUrls.length) return;
 		spriteUrlIndex += 1;
 		if (spriteUrls[spriteUrlIndex]) {
-			sprite.attr("data-km-sprite-state", "loading");
+			setPokemonSpriteState(sprite, "loading");
 			setPokemonSpriteSource($(this), spriteUrls[spriteUrlIndex]);
 			return;
 		}
-		$(this).attr("data-km-sprite-state", "missing").hide();
+		setPokemonSpriteState(sprite, "missing");
 	});
 	sprite[0].kmRefreshSprite();
 	return sprite;
@@ -1733,8 +1744,8 @@ function getDefaultSetOptionForSelector(element) {
 
 function renderPlayerTeamPokemon(fullSetName, pokemonName) {
 	var button = $("<button type='button' class='player-team-pokemon' draggable='true'></button>");
-	button.append(createPokemonSprite(pokemonName, "trainer-pokemon-sprite"));
-	button.append($("<span class='km-pokemon-fallback-name'></span>").text(pokemonName));
+	var sprite = createPokemonSprite(pokemonName, "trainer-pokemon-sprite");
+	button.append(sprite, createPokemonSpriteFallbackName(sprite, pokemonName));
 	button.find("img").prop("draggable", false);
 	button.attr("data-id", fullSetName);
 	setTeamBoxPokemonLabels(button, fullSetName);

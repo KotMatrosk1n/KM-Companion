@@ -423,8 +423,9 @@ body.km-app .box-poke .box-pokemon[hidden] { display: none; }
 body.km-app .box-poke .team-box-filter-hidden { display: none !important; }
 body.km-app .box-pokemon-sprite { width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: none; max-height: none; object-fit: contain; image-rendering: pixelated; }
 body.km-app .box-poke .km-box-name, .km-pokemon-fallback-name { display: none; }
+body.km-app .km-pokemon-fallback-name[hidden], body.km-app img[data-km-pokemon-sprite][hidden] { display: none !important; }
 body.km-app .box-pokemon:has(> img[data-km-sprite-state="disabled"]) > .km-box-name, body.km-app .box-pokemon:has(> img[data-km-sprite-state="missing"]) > .km-box-name,
-body.km-app button:has(> img[data-km-sprite-state="disabled"]) > .km-pokemon-fallback-name, body.km-app button:has(> img[data-km-sprite-state="missing"]) > .km-pokemon-fallback-name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; white-space: normal; min-width: 0; max-width: 100%; font-size: 10px; line-height: 12px; text-align: center; }
+body.km-app .km-pokemon-fallback-name:not([hidden]) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; white-space: normal; min-width: 0; max-width: 100%; font-size: 10px; line-height: 12px; text-align: center; }
 body.km-app #team-poke-list { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: var(--km-team-card-height, 68px); align-content: start; }
 body.km-app #team-poke-list .box-pokemon { flex-direction: column; padding: 2px; }
 body.km-app #team-poke-list .box-pokemon-sprite { flex: 1; height: 0; image-rendering: auto; }

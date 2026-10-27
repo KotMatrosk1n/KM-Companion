@@ -38,6 +38,8 @@ Finder and color code help open as native modal dialogs, with topic buttons inst
 
 Import / Export in Team & Boxes opens the import tools without leaving the matchup.
 
+See [Save imports](save-imports.md) for recognized game families, standalone Pokémon files, and profile compatibility limits.
+
 Catch logs show eight records per page, keep newly added catches visible, and retain keyboard focus after removing a record. Update release notes use measured pages that preserve all source text. Long editable notes, imported team text, and searchable dropdowns retain normal scrolling.
 
 The profile chooser displays the Royal Sword logo and Creator: Matroskin. The active profile is labelled Currently selected without the filled toggle appearance used by other controls. Attribution and licensing records remain available in the app's documentation.
