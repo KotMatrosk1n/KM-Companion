@@ -66,7 +66,7 @@ Do not submit another person's data without permission. External repositories ma
 
 ## Development setup
 
-Development requires Node.js 24 or a later compatible release and npm. Windows desktop packaging has additional PowerShell, .NET, Windows SDK, signing, and WiX requirements documented in the [Windows installer guide](installer/windows/README.md).
+Development requires Node.js 24 or a later compatible release and npm. The [development guide](docs/development.md) covers cloning, running, and packaging the desktop app. Installer prerequisites and optional local signing are documented in the [Windows installer guide](installer/windows/README.md).
 
 After cloning the repository, install the locked dependencies:
 
