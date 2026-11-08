@@ -906,6 +906,8 @@ function applyActiveRomHackProfile(context) {
 		$(this).prop("disabled", Number($(this).val()) !== Number(profile.baseGeneration));
 	});
 	generationInput.prop("checked", true).trigger("change");
+	// Generation change handlers also replace the trainer target.
+	refreshColorCode();
 }
 
 window.applyActiveRomHackProfile = applyActiveRomHackProfile;
@@ -1665,11 +1667,7 @@ function syncTeamBoxWithCustomSets(customsets) {
 	});
 	restoreTeamBoxLayout();
 	refreshPlayerTeamMirror();
-	if (!$("#show-cc").prop("hidden")) {
-		refreshColorCode();
-	} else {
-		applyTeamBoxFilters();
-	}
+	applyTeamBoxFilters();
 }
 
 function assignBoxPokemonToSlot(fullSetName, slot) {
@@ -2436,11 +2434,6 @@ function sortTeamBoxStorage() {
 		sortTeamBoxZone(TEAM_BOX_SORT_ZONE_IDS[i], mode, teamRanks);
 	}
 	saveTeamBoxLayout();
-	if (!$("#show-cc").prop("hidden")) {
-		refreshColorCode();
-	} else {
-		applyTeamBoxFilters();
-	}
 }
 
 function getTeamBoxDropZone(target) {
@@ -2599,13 +2592,7 @@ function initializeColorCodeOptions() {
 	$("#cc-spe-border").prop("checked", options.speedBorder);
 	$("#cc-ohko-color").prop("checked", options.ohkoColor);
 	$("#cc-auto-refr").prop("checked", true);
-	window.AUTO_REFRESH = true;
-}
-
-function refreshColorCodeAfterInitialLoad() {
-	if (!$("#cc-spe-border").prop("checked") && !$("#cc-ohko-color").prop("checked")) return;
-	refreshColorCode();
-	window.setTimeout(refreshColorCode, 0);
+	window.AUTO_REFRESH = $("#show-cc").prop("hidden") === true;
 }
 
 function colorCodeUpdate() {
@@ -2636,14 +2623,14 @@ function colorCodeUpdate() {
 }
 
 function showColorCodes() {
-	window.AUTO_REFRESH = $("#cc-auto-refr").prop("checked");
 	setColorCodeControlsVisible(true);
-	colorCodeUpdate();
+	refreshColorCode();
 }
 
 function refreshColorCode() {
-	window.AUTO_REFRESH = $("#cc-auto-refr").prop("checked");
-	colorCodeUpdate();
+	var visible = $("#show-cc").prop("hidden") === true;
+	window.AUTO_REFRESH = visible && $("#cc-auto-refr").prop("checked");
+	if (visible) colorCodeUpdate();
 	applyTeamBoxFilters();
 }
 
@@ -2651,9 +2638,8 @@ function hideColorCodes() {
 	$(".box-pokemon").each(function () {
 		clearBoxPokemonColorClasses(this);
 	});
-	window.AUTO_REFRESH = false;
 	setColorCodeControlsVisible(false);
-	applyTeamBoxFilters();
+	refreshColorCode();
 }
 
 function getColorCodeExampleMarkup(example) {
@@ -3000,7 +2986,7 @@ function installTeamBoxControls() {
 	applyDefaultPlayerPokemonFromTeam();
 	if ($("#p1 input.set-selector").val()) setDoublesSlotSelection("player", 1, getSetSlotSelection($("#p1 input.set-selector").val()));
 	if ($("#p2 input.set-selector").val()) setDoublesSlotSelection("opponent", 1, getSetSlotSelection($("#p2 input.set-selector").val()));
-	refreshColorCodeAfterInitialLoad();
+	refreshColorCode();
 }
 
 window.saveTeamBoxLayout = saveTeamBoxLayout;

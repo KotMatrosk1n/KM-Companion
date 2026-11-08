@@ -451,6 +451,7 @@ function loadTrainerData(callback) {
 		initializeTrainerDataRegistry();
 		rebuildTrainerRuntimeIndex();
 		callback();
+		if (typeof window.refreshColorCode === "function") window.refreshColorCode();
 	}
 	if (typeof TRAINERDEX !== "undefined") {
 		finish();
@@ -587,6 +588,7 @@ function refreshTrainerDataViews(preferredTrainerId) {
 	rebuildTrainerRuntimeIndex();
 	if (!$("#trainer-selector").length) installTrainerControls();
 	else refreshTrainerSelectorForBattleFormat(preferredTrainerId);
+	if (typeof window.refreshColorCode === "function") window.refreshColorCode();
 	$(document).trigger("kmtrainerdatachange");
 }
 
@@ -1363,6 +1365,7 @@ function addSets(pokes, name) {
 		}
 	}
 	if (addedPokes > 0) {
+		if (typeof window.refreshColorCode === "function") window.refreshColorCode();
 		alert("Successfully imported " + addedPokes + (addedPokes === 1 ? " set" : " sets"));
 		setImportedSetOptionsVisible(true);
 	} else {
