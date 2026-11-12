@@ -6,7 +6,11 @@ Use this guide to run KM Companion from source or create a local Windows desktop
 
 - Windows 10 or Windows 11 on x64
 - Git
-- Node.js 24 or a later compatible release, with npm
+- Node.js 26 LTS, version 26.13.1 or later, with npm
+
+The build and release workflows select the latest Node.js 26 release. Use the
+same release series for local development. This requirement applies to the build
+tools; installed releases use Electron's bundled runtime.
 
 Installer builds additionally require PowerShell 7 (`pwsh`) and .NET SDK 11. Both installer projects target .NET 11 and use C# 15. The [Windows setup guide](../installer/windows/README.md) documents hardware and WiX requirements, installer identity, and optional local signing. Published releases are unsigned and do not require certificate secrets.
 

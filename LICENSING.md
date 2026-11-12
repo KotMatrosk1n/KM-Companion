@@ -82,7 +82,8 @@ WiX package versions. Run it before building the release. Do not distribute a
 modified local build with an archive from an older commit: commit the actual
 sources and create matching source artifacts first.
 
-To rebuild the calculator, use Node.js 24 and `npm ci`, then `npm run build`.
+To rebuild the calculator, use Node.js 26 LTS, version 26.13.1 or later, and
+`npm ci`, then `npm run build`.
 Generated lookup data is checked in.
 `npm run electron:pack` adds the Electron runtime. Pokémon illustrations and
 sprites are an optional download; their inventories and notices ship with the

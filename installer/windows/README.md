@@ -40,7 +40,7 @@ See [artwork storage and delivery](../../docs/pokedex-data.md#artwork-storage-an
 ## Build prerequisites
 
 - Windows x64
-- Node.js 24 and `npm`
+- Node.js 26 LTS, version 26.13.1 or later, and `npm`
 - PowerShell 7 (`pwsh`), not Windows PowerShell 5.1
 - .NET SDK 11, including the C# 15 compiler
 - WiX Toolset v7 packages restored by the projects

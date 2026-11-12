@@ -9,6 +9,9 @@
   "repository": "github:KotMatrosk1n/KM-Companion",
   "author": "Matroskin",
   "license": "GPL-3.0-only",
+  "engines": {
+    "node": "^26.13.1"
+  },
   "copyright": "Copyright 2026 Matroskin",
   "devDependencies": {
     "ajv": "6.15.0",

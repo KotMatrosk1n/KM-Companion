@@ -190,7 +190,7 @@ Rules, formulas, and effect descriptions are data for review. They never execute
 
 ## Check Your Folder
 
-The optional checker uses Node.js 24 or a later compatible version from a KM Companion source checkout. Install the locked author dependencies without running application setup scripts:
+The optional checker uses Node.js 26 LTS, version 26.13.1 or later, from a KM Companion source checkout. Install the locked author dependencies without running application setup scripts:
 
 ```powershell
 npm ci --ignore-scripts
