@@ -42,9 +42,18 @@ See [artwork storage and delivery](../../docs/pokedex-data.md#artwork-storage-an
 - Windows x64
 - Node.js 24 and `npm`
 - PowerShell 7 (`pwsh`), not Windows PowerShell 5.1
-- .NET SDK 8 or later
+- .NET SDK 11, including the C# 15 compiler
 - WiX Toolset v7 packages restored by the projects
 - Windows 10 or 11 SDK `signtool.exe` and a trusted code signing PFX for signed builds
+
+Both installer projects target `net11.0-windows` and use C# 15. They include their
+.NET 11 runtime, so users do not need to install .NET separately. The release
+workflow selects the .NET 11 SDK. When updating that SDK, review the runtime
+version selected for publishing and refresh its retained notices.
+
+The .NET 11 runtime requires an x64 processor with the `x86-64-v2` instruction
+set, including SSE4.2 and POPCNT. Older processors without those instructions
+cannot run setup. See Microsoft's [minimum hardware requirements](https://learn.microsoft.com/en-us/dotnet/core/compatibility/jit/11/minimum-hardware-requirements).
 
 WiX v7 requires explicit acceptance of its OSMF EULA. Review <https://wixtoolset.org/osmf/> first. The build fails closed unless either `-AcceptWixEula` is supplied directly or the authorized build environment contains `WIX_V7_EULA_ACCEPTED=true`. The repository does not record acceptance.
 

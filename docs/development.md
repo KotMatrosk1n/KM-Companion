@@ -8,7 +8,7 @@ Use this guide to run KM Companion from source or create a local Windows desktop
 - Git
 - Node.js 24 or a later compatible release, with npm
 
-Installer builds additionally require PowerShell 7 (`pwsh`) and .NET SDK 8 or later. The [Windows setup guide](../installer/windows/README.md) documents WiX requirements, installer identity, and optional local signing. Published releases are unsigned and do not require certificate secrets.
+Installer builds additionally require PowerShell 7 (`pwsh`) and .NET SDK 11. Both installer projects target .NET 11 and use C# 15. The [Windows setup guide](../installer/windows/README.md) documents hardware and WiX requirements, installer identity, and optional local signing. Published releases are unsigned and do not require certificate secrets.
 
 ## Run from source
 
