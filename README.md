@@ -79,7 +79,7 @@ Complete submissions are reviewed for profile integration. To share trainer team
 
 ## Development and contributing
 
-Use Node.js 24 or a later compatible release and npm. After cloning the repository, run:
+Use Node.js 26 LTS, version 26.13.1 or later, and npm. After cloning the repository, run:
 
 ```powershell
 npm ci
