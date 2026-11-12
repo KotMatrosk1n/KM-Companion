@@ -34,7 +34,7 @@ The resolved versions and license evidence come from the committed manifests and
 | root | dependency | [`builder-util-runtime`](https://github.com/electron-userland/electron-builder) | `9.7.0` | `9.7.0` | `MIT` | package metadata; `LICENSE` |
 | root | dependency | [`electron-updater`](https://github.com/electron-userland/electron-builder) | `^6.8.9` | `6.8.9` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`ajv`](https://github.com/ajv-validator/ajv) | `6.15.0` | `6.15.0` | `MIT` | package metadata; `LICENSE` |
-| root | development dependency | [`electron`](https://github.com/electron/electron) | `^42.11.16` | `42.11.16` | `MIT` | package metadata; `LICENSE` |
+| root | development dependency | [`electron`](https://github.com/electron/electron) | `^45.3.1` | `45.3.1` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-builder`](https://github.com/electron-userland/electron-builder) | `^26.15.0` | `26.15.3` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`electron-winstaller`](https://github.com/electron/windows-installer) | `5.4.0` | `5.4.0` | `MIT` | package metadata; `LICENSE` |
 | root | development dependency | [`eslint`](https://github.com/eslint/eslint) | `^8.57.0` | `8.57.0` | `MIT` | package metadata; `LICENSE` |
@@ -43,7 +43,7 @@ The resolved versions and license evidence come from the committed manifests and
 
 ## Locked NPM License Categories
 
-The three npm lockfiles contain 483 dependency locations and 373 distinct package/version identities. The summary and complete inventory below include every resolved lockfile identity, including optional packages retained for other operating systems. Consequently, this is intentionally broader than the set installed on any one machine or copied into any one binary.
+The three npm lockfiles contain 486 dependency locations and 374 distinct package/version identities. The summary and complete inventory below include every resolved lockfile identity, including optional packages retained for other operating systems. Consequently, this is intentionally broader than the set installed on any one machine or copied into any one binary.
 
 License strings are reproduced from installed package metadata when available and from lockfile metadata otherwise. Compound expressions are preserved instead of being simplified to one license.
 
@@ -55,9 +55,9 @@ License strings are reproduced from installed package metadata when available an
 | `Apache-2.0` | 15 |
 | `BSD-2-Clause` | 13 |
 | `BSD-3-Clause` | 11 |
-| `BlueOak-1.0.0` | 8 |
-| `ISC` | 42 |
-| `MIT` | 278 |
+| `BlueOak-1.0.0` | 9 |
+| `ISC` | 41 |
+| `MIT` | 279 |
 | `Python-2.0` | 1 |
 | `WTFPL` | 1 |
 | `WTFPL OR ISC` | 1 |
@@ -126,18 +126,19 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `pkijs@3.4.0` — root:dev
 - `source-map@0.6.1` — root:dev
 
-### BlueOak-1.0.0 (8)
+### BlueOak-1.0.0 (9)
 
+- `@isaacs/nonrecursive-glob-match@1.1.0` — calc:dev, root:dev
 - `chownr@3.0.0` — root:dev
 - `isexe@3.1.5` — root:dev
 - `isexe@4.0.0` — root:dev
-- `minimatch@10.2.6` — calc:dev, root:dev
+- `minimatch@11.0.1` — calc:dev, root:dev
 - `minipass@7.1.3` — root:dev
 - `sax@1.6.0` — root:prod
 - `tar@7.5.22` — root:dev
 - `yallist@5.0.0` — root:dev
 
-### ISC (42)
+### ISC (41)
 
 - `@isaacs/fs-minipass@4.0.1` — root:dev
 - `@ungap/structured-clone@1.2.0` — root:dev
@@ -161,7 +162,6 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `lru-cache@6.0.0` — root:dev
 - `minimatch@3.1.5` — calc:dev, root:dev
 - `minimatch@5.1.9` — root:dev
-- `minimatch@9.0.9` — root:dev
 - `nopt@9.0.0` — root:dev
 - `once@1.4.0` — calc:dev, root:dev
 - `picocolors@1.1.1` — root:dev
@@ -182,7 +182,7 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `yallist@4.0.0` — root:dev
 - `yargs-parser@21.1.1` — root:dev
 
-### MIT (278)
+### MIT (279)
 
 - `@aashutoshrathi/word-wrap@1.2.6` — root:dev
 - `@electron/asar@3.4.1` — root:dev
@@ -252,6 +252,7 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `brace-expansion@1.1.21` — calc:dev, root:dev
 - `brace-expansion@2.1.7` — root:dev
 - `brace-expansion@5.0.12` — calc:dev, root:dev
+- `brace-expansion@5.0.13` — root:dev
 - `buffer-from@1.1.2` — root:dev
 - `builder-util@26.15.3` — root:dev
 - `builder-util-runtime@9.7.0` — root:prod
@@ -285,7 +286,7 @@ Tags use `root`, `calc`, or `import` for the dependency tree; `prod` or `dev` re
 - `dir-compare@4.2.0` — root:dev
 - `dmg-builder@26.15.3` — root:dev
 - `dunder-proto@1.0.1` — root:dev
-- `electron@42.11.16` — root:dev
+- `electron@45.3.1` — root:dev
 - `electron-builder@26.15.3` — root:dev
 - `electron-builder-squirrel-windows@26.15.3` — root:dev
 - `electron-publish@26.15.3` — root:dev

@@ -15,7 +15,7 @@
   "copyright": "Copyright 2026 Matroskin",
   "devDependencies": {
     "ajv": "6.15.0",
-    "electron": "^42.11.16",
+    "electron": "^45.3.1",
     "electron-builder": "^26.15.0",
     "electron-winstaller": "5.4.0",
     "eslint": "^8.57.0",
@@ -100,6 +100,7 @@
     "electron-updater": "^6.8.9"
   },
   "overrides": {
+    "minimatch@>=7.0.0 <11.0.1": "11.0.1",
     "@electron/get@3.1.0": {
       "global-agent": "^4.1.3"
     }
