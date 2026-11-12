@@ -13,9 +13,9 @@ relicense third party components.
   terms for an upstream release that has no separate license file.
 - `WiX-MS-RL.txt`: upstream `LICENSE.TXT` from WiX v7.0.0.
 - `dotnet-LICENSE.TXT` and `dotnet-THIRD-PARTY-NOTICES.TXT`: unmodified notices
-  from `Microsoft.NETCore.App.Runtime.win-x64` 8.0.28.
+  from `Microsoft.NETCore.App.Runtime.win-x64` 11.0.0.
 - `dotnet-desktop-LICENSE.txt`: the unmodified `LICENSE` from
-  `Microsoft.WindowsDesktop.App.Runtime.win-x64` 8.0.28.
+  `Microsoft.WindowsDesktop.App.Runtime.win-x64` 11.0.0.
 
 The build also copies complete license/notice files from every installed
 production npm package into the distribution, preserving their original text.

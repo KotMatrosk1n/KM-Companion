@@ -91,17 +91,19 @@ notices, and production npm license texts into `dist/licenses/` inside the app
 and the installed `resources/licenses/` directory for direct offline access.
 Electron's own license files remain alongside the executable.
 
-The Windows setup additionally requires Windows, .NET SDK 8, and the pinned WiX
-toolchain. See [installer/windows/README.md](installer/windows/README.md).
+The Windows setup additionally requires Windows, .NET SDK 11, and the pinned WiX
+toolchain. Both installer projects use C# 15 and include their .NET 11 runtime.
+See [installer/windows/README.md](installer/windows/README.md).
 Signing credentials are not needed to modify or run the app or build a local
-unsigned installer. They are required only by this project's official signed
-release pipeline. No private signing key is part of Corresponding Source.
+unsigned installer. Published releases are unsigned; optional local signing uses
+credentials supplied outside the repository. No private signing key is part of
+Corresponding Source.
 
 The source manifest records exact npm versions, registry tarball locations and
 integrities, repository locations, and Electron's matching source release.
 `scripts/release-sources.json` pins the additional source archives and hashes;
 update and review it when changing the corresponding dependencies. The .NET
-notices in `LICENSES/` come from the 8.0.28 runtime and desktop runtime packages;
+notices in `LICENSES/` come from the 11.0.0 runtime and desktop runtime packages;
 refresh them when updating the installer's runtime.
 Unmodified general purpose build tools and runtimes are obtained separately.
 When distributing changes to dependencies, include their preferred source and
