@@ -1,7 +1,7 @@
 {
   "name": "km-companion",
   "productName": "KM Companion",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Pokemon companion for damage calculations, encounter tracking, and run planning.",
   "private": true,
   "main": "electron/main.js",

@@ -51,7 +51,7 @@ Browse Royal Sword encounters by location, method, and weather, with separate No
 
 Use **Settings → Backup** to back up or restore the selected profile's run, with **Undo Last Restore** available for recovery. **Reset Run** clears encounter, trainer, and item progress after confirmation while retaining teams, boxes, inventory, notes, and settings. Other profiles keep their own runs.
 
-**Route Items currently uses the Sword/Shield 1.3.2 base game guide, including expansions. It is not a verified Royal Sword placement list.** Entries retain source links and known limits. The [workspace guide](docs/app-workspace.md) explains tracking rules and backup scope.
+**Route Items uses the Sword and Shield 1.3.2 guide, including expansions, with Royal Sword updates for matched pickups.** Entries retain source links and known limits. The [workspace guide](docs/app-workspace.md) explains tracking rules and backup scope.
 
 ## Artwork, offline use, and updates
 
