@@ -69,6 +69,16 @@ jobs:
         KM_SIGNING_CERTIFICATE_PASSWORD: ""
       run: pwsh -NoProfile -File installer/windows/scripts/Build-KmCalculatorWindowsSetup.ps1
 
+    - name: Build the cumulative Windows update patch
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        $version = (Get-Content package.json -Raw | ConvertFrom-Json).version
+        $patchWork = Join-Path $env:RUNNER_TEMP "km-patch-$([Guid]::NewGuid().ToString('N'))"
+        & installer/windows/scripts/New-KmCalculatorReleasePatch.ps1 -Version $version `
+          -ReleaseDirectory release -WorkDirectory $patchWork -VerifyInstall
+
     - name: Create draft GitHub release
       shell: pwsh
       env:
@@ -134,6 +144,19 @@ jobs:
         $installerSha512 = [Convert]::ToBase64String([Convert]::FromHexString((Get-FileHash -LiteralPath $installerTarget -Algorithm SHA512).Hash))
         if ($metadataVersion -ne $packageVersion -or $metadataHash -ne $installerSha512) {
           throw "The updater metadata does not match the release version and installer digest."
+        }
+        $patchPath = Join-Path "release" "KM-Companion-Update-$packageVersion.msp"
+        if (Test-Path -LiteralPath $patchPath -PathType Leaf) {
+          $patch = Get-Item -LiteralPath $patchPath
+          $patchHash = [Convert]::ToBase64String([Convert]::FromHexString((Get-FileHash -LiteralPath $patchPath -Algorithm SHA512).Hash))
+          if ($latestText -notmatch '(?m)^windowsPatch:\s*$' -or
+              $latestText -notmatch ('(?m)^  sha512: ' + [regex]::Escape($patchHash) + '\r?$') -or
+              $latestText -notmatch ('(?m)^  size: ' + $patch.Length + '\r?$')) {
+            throw "The updater metadata does not match the Windows patch."
+          }
+          $assets += $patch
+        } elseif ($latestText -match '(?m)^windowsPatch:\s*$') {
+          throw "The updater metadata lists a missing Windows patch."
         }
         foreach ($asset in $assets) {
           if ($asset.Name -match '\s') {

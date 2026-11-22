@@ -7,6 +7,7 @@ var builderUtilRuntime = require("builder-util-runtime");
 var electron = require("electron");
 var electronUpdater = require("electron-updater");
 var pokemonArtwork = require("./pokemon-artwork");
+var windowsUpdatePatch = require("./windows-update-patch");
 var pokemonArtworkLibrary;
 var CancellationToken = builderUtilRuntime.CancellationToken;
 var app = electron.app;
@@ -60,6 +61,7 @@ var updateLastProgressAt = 0;
 var updateLastProgressPercent = 0;
 var updateLastProgressBytes = 0;
 var updateLastLoggedProgressPercent = -1;
+var skipWindowsPatchVersion = "";
 var updaterState = {
 	status: "idle",
 	message: "Not checked",
@@ -807,8 +809,8 @@ function updateDownloadProgress(progress) {
 	});
 }
 
-function startUpdateDownload(info) {
-	if (updateDownloadInProgress || !info) return Promise.resolve(getUpdaterStateSnapshot());
+async function startUpdateDownload(info) {
+	if (updateDownloadInProgress || !info) return getUpdaterStateSnapshot();
 	activeUpdateInfo = info;
 	updateDownloadInProgress = true;
 	updateInstallAuthorized = true;
@@ -831,22 +833,47 @@ function startUpdateDownload(info) {
 	});
 	startUpdateDownloadWatchdog();
 
-	return autoUpdater.downloadUpdate(updateDownloadCancellationToken).catch(function (error) {
+	var token = updateDownloadCancellationToken;
+	if (skipWindowsPatchVersion !== info.version && windowsUpdatePatch.getPatch(info, app.getVersion())) {
+		try {
+			var patch = await windowsUpdatePatch.downloadPatch(info, {
+				version: app.getVersion(), userData: app.getPath("userData"), executable: app.getPath("exe"),
+				token: token, progress: updateDownloadProgress,
+				fetch: function (url, options) { return session.fromPartition("km-companion-patch").fetch(url, options); }
+			});
+			if (patch) {
+				if (token.cancelled) await windowsUpdatePatch.discard(patch);
+				else beginUpdateInstall(info, patch);
+				return getUpdaterStateSnapshot();
+			}
+		} catch (error) {
+			skipWindowsPatchVersion = info.version;
+			updaterLogger.warn("Patch download unavailable. Using the full installer.", error.message);
+			if (!token.cancelled) {
+				startUpdateDownloadWatchdog();
+				updateLastLoggedProgressPercent = -1;
+				setUpdaterState({message: "Preparing the full installer download...", percent: 0,
+					transferred: 0, total: 0, bytesPerSecond: 0});
+			}
+		}
+	}
+	if (token.cancelled) return getUpdaterStateSnapshot();
+	try {
+		await autoUpdater.downloadUpdate(token);
+	} catch (error) {
 		if (updateDownloadInProgress || updateInstallAuthorized) handleUpdaterError(error, "download");
-		return null;
-	}).then(function () {
-		return getUpdaterStateSnapshot();
-	});
+	}
+	return getUpdaterStateSnapshot();
 }
 
-function beginUpdateInstall(info) {
+function beginUpdateInstall(info, patch) {
 	if (!updateInstallAuthorized || updaterState.status === "installing") return;
 	activeUpdateInfo = info || activeUpdateInfo;
 	updateDownloadInProgress = false;
 	stopUpdateDownloadWatchdog();
 	updateDownloadCancellationToken = null;
 	updateDownloadInfo = null;
-	updateDownloadedReady = true;
+	updateDownloadedReady = !patch;
 	setUpdaterState({
 		status: "installing",
 		message: "Update ready. KM Companion will restart to finish installing.",
@@ -857,11 +884,20 @@ function beginUpdateInstall(info) {
 		nextStep: ""
 	});
 	updaterLogger.info("Installing update from explicit Settings action", getUpdateVersionLabel(activeUpdateInfo));
-	setTimeout(function () {
+	setTimeout(async function () {
 		if (!updateInstallAuthorized) return;
 		try {
-			autoUpdater.quitAndInstall(true, true);
+			if (patch) {
+				await windowsUpdatePatch.installPatch(patch, {userData: app.getPath("userData"), executable: app.getPath("exe")});
+				app.quit();
+			} else {
+				autoUpdater.quitAndInstall(true, true);
+			}
 		} catch (error) {
+			if (patch) {
+				skipWindowsPatchVersion = info.version;
+				await windowsUpdatePatch.discard(patch);
+			}
 			handleUpdaterError(error, "install");
 		}
 	}, UPDATE_INSTALL_HANDOFF_DELAY_MS);
@@ -943,7 +979,8 @@ function configureAutoUpdates(mainWindow) {
 	updaterLogger.info(
 		"Configured updater",
 		"version=" + app.getVersion(),
-		"differentialDownloads=disabled",
+		"setupDifferentialDownloads=disabled",
+		"windowsInstallerPatches=enabled",
 		"webInstaller=disabled",
 		"autoInstallOnQuit=disabled",
 		"autoRunAfterInstall=enabled"
@@ -975,6 +1012,21 @@ function configureAutoUpdates(mainWindow) {
 			errorTitle: "",
 			nextStep: ""
 		});
+		if (windowsUpdatePatch.getPatch(info, app.getVersion())) {
+			windowsUpdatePatch.alreadyAttempted(app.getPath("userData"), app.getVersion(), info.version).then(function (attempted) {
+				if (attempted && activeUpdateInfo === info && updaterState.status === "available") {
+					setUpdaterState({
+						status: "error",
+						message: "The smaller update did not finish.",
+						error: "The smaller update did not finish.",
+						errorTitle: "Try the full installer",
+						nextStep: "Retry Update will download the full installer."
+					});
+				}
+			}).catch(function (error) {
+				updaterLogger.debug("Unable to read the previous patch attempt", error.message);
+			});
+		}
 	});
 	autoUpdater.on("update-not-available", function () {
 		updaterLogger.info("Updater event: update-not-available");
