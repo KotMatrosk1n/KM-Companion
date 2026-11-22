@@ -26,19 +26,32 @@
 		if (!catalog || !Object.prototype.hasOwnProperty.call(catalog, kind)) return null;
 		var key = keyFor(name);
 		if (catalog.aliases && Object.prototype.hasOwnProperty.call(catalog.aliases, key)) key = catalog.aliases[key];
-		if (!Object.prototype.hasOwnProperty.call(catalog[kind], key)) return null;
+		var generation = typeof window.getActiveCalcGeneration === "function" && window.getActiveCalcGeneration();
+		var pack = generation && generation.game === "royal-sword" && window.KMPokedexProfiles && window.KMPokedexProfiles["pokemon-royal-sword"];
+		if (pack && kind === "abilities" && pack.abilities && pack.abilities[key]) return {name: name, description: pack.abilities[key]};
+		if (pack && kind === "items") {
+			var item = generation.items.get(key);
+			if (item && item.megaStone) return {name: name, description: "Allows " + Object.keys(item.megaStone).join(" or ") + " to Mega Evolve in battle."};
+		}
+		if (!Object.prototype.hasOwnProperty.call(catalog[kind], key)) {
+			if (!pack || kind !== "moves" || !generation.moves.get(key)) return null;
+		}
 		var detail = Object.assign({}, catalog[kind][key]);
 		if (kind === "abilities" && detail.forms) {
 			var form = pokemon && pokemon.sprite;
 			detail.description = form && Object.prototype.hasOwnProperty.call(detail.forms, form) ? detail.forms[form] :
 				Object.keys(detail.forms).map(function (id) { return detail.forms[id]; }).join("\n\n");
 		}
-		if (kind === "moves" && typeof window.getActiveCalcGeneration === "function") {
-			var generation = window.getActiveCalcGeneration();
+		if (kind === "moves" && generation) {
 			var move = generation && generation.num === catalog.generation && generation.moves.get(key);
 			if (move) {
+				detail.name = detail.name || move.name;
 				detail.power = move.basePower; detail.type = move.type; detail.category = move.category;
 				if (move.accuracy === true || (typeof move.accuracy === "number" && move.accuracy >= 0 && move.accuracy <= 100)) detail.accuracy = move.accuracy;
+				if (pack) {
+					var id = Object.keys(pack.moveDescriptions || {}).find(function (id) { return keyFor(pack.moves[id].name) === key; });
+					if (id) detail.effects = pack.moveDescriptions[id];
+				}
 			}
 		}
 		return detail;
@@ -138,7 +151,7 @@
 			metrics.appendChild(node("span", "", "Accuracy " + (detail.accuracy === true ? "No check" : typeof detail.accuracy === "number" ? detail.accuracy + "%" : "Unknown")));
 			facts.appendChild(metrics);
 			popup.appendChild(facts);
-			popup.appendChild(node("p", "km-tooltip-description", descriptionText(detail.effects)));
+			popup.appendChild(node("p", "km-tooltip-description", descriptionText(detail.effects || "Move effect text is not recorded.")));
 		} else popup.appendChild(node("p", "km-tooltip-description", descriptionText(detail.description)));
 		var descriptions = (anchor.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
 		descriptions.push(popup.id); anchor.setAttribute("aria-describedby", descriptions.join(" "));

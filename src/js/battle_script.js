@@ -739,7 +739,7 @@ var battleScriptLoadedCraftScriptText = "";
 var battleScriptMessages = [];
 var battleScriptItemNameMap = null;
 var battleScriptMoveEffectLibrary = {};
-var battleScriptMoveEffectLibraryGen = null;
+var battleScriptMoveEffectLibrarySource = null;
 var battleScriptResizeObserver = null;
 var battleScriptRuntimeState = null;
 var battleScriptTeamObserver = null;
@@ -2010,13 +2010,6 @@ function getBattleScriptMoveLibrarySource() {
 	return null;
 }
 
-function getBattleScriptMoveLibraryGeneration() {
-	try {
-		if (typeof GENERATION !== "undefined" && GENERATION && GENERATION.num) return GENERATION.num;
-	} catch (e) {}
-	return typeof gen !== "undefined" ? gen : 0;
-}
-
 function hasBattleScriptEquivalentMoveEffect(effects, candidate) {
 	for (var i = 0; i < (effects || []).length; i++) {
 		var effect = effects[i];
@@ -2070,6 +2063,16 @@ function createBattleScriptMoveEffectProfile(moveData) {
 	var name = moveData && moveData.name ? moveData.name : "";
 	var accuracyInfo = getBattleScriptConfiguredMoveAccuracy(name);
 	var explicitEffects = getBattleScriptExplicitMoveEffects(moveData);
+	if (moveData && moveData.accuracy === true) accuracyInfo = {accuracy: 100, alwaysHits: true};
+	else if (moveData && moveData.accuracy > 0) accuracyInfo = {accuracy: moveData.accuracy, alwaysHits: false};
+	if (moveData) explicitEffects.forEach(function (effect) {
+		var chance = effect.kind === "status" ? moveData.statusChance :
+			effect.kind === "boost" || effect.kind === "accuracy" || effect.kind === "evasion" ? moveData.statChance : undefined;
+		if (typeof chance === "number") effect.chance = chance;
+	});
+	if (moveData && typeof moveData.statChance === "number" && (name === "Leaf Tornado" || name === "Night Daze")) {
+		explicitEffects.push({kind: "accuracy", target: "defender", amount: -1, chance: moveData.statChance});
+	}
 	var profile = {
 		name: name,
 		type: moveData && moveData.type ? moveData.type : "",
@@ -2088,13 +2091,11 @@ function createBattleScriptMoveEffectProfile(moveData) {
 }
 
 function ensureBattleScriptMoveEffectLibrary() {
-	var currentGen = getBattleScriptMoveLibraryGeneration();
-	var source;
+	var source = getBattleScriptMoveLibrarySource();
 	var moves = [];
-	if (battleScriptMoveEffectLibraryGen === currentGen && battleScriptMoveEffectLibrary) return;
+	if (battleScriptMoveEffectLibrarySource === source && battleScriptMoveEffectLibrary) return;
 	battleScriptMoveEffectLibrary = {};
-	battleScriptMoveEffectLibraryGen = currentGen;
-	source = getBattleScriptMoveLibrarySource();
+	battleScriptMoveEffectLibrarySource = source;
 	if (!source) return;
 	try {
 		moves = Array.from(source);

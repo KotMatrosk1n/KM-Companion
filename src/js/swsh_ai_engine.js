@@ -264,9 +264,11 @@
 
 	function moveRecord(move, index, entry) {
 		var vanilla = lookupMove(move);
-		var type = vanilla ? vanilla.type : typeId(move && move.type);
-		var category = vanilla ? vanilla.category : categoryId(move && move.category);
-		var power = vanilla ? vanilla.power : (move && (move.bp || move.basePower) ? (move.bp || move.basePower) : 0);
+		var generation = entry && entry.pokemon && entry.pokemon.gen;
+		var profileMove = generation && generation.game === "royal-sword" && generation.moves.get(normalizeName(move && move.name));
+		var type = profileMove ? typeId(profileMove.type) : vanilla ? vanilla.type : typeId(move && move.type);
+		var category = profileMove ? categoryId(profileMove.category) : vanilla ? vanilla.category : categoryId(move && move.category);
+		var power = profileMove ? profileMove.basePower : vanilla ? vanilla.power : (move && (move.bp || move.basePower) ? (move.bp || move.basePower) : 0);
 		var effect = vanilla ? vanilla.effect : 0;
 		return {
 			slot: index,
@@ -281,7 +283,7 @@
 			power: power || 0,
 			effect_id: effect || 0,
 			effect: effect || 0,
-			priority: vanilla ? vanilla.priority : (move && move.priority ? move.priority : 0),
+			priority: profileMove ? profileMove.priority : vanilla ? vanilla.priority : (move && move.priority ? move.priority : 0),
 			target_behavior: vanilla ? vanilla.target : 0,
 			pp: 1,
 			can_use_move: isMoveUsableForEntry(entry, move)

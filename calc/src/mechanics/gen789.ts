@@ -141,7 +141,9 @@ export function calculateSMSSSV(
     move.flags.contact = 1;
   }
 
-  const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed ||
+  const piercingDrill = gen.game === 'royal-sword' && attacker.hasAbility('Piercing Drill') &&
+    !!move.flags.contact && !move.breaksProtect;
+  const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed || piercingDrill ||
   (attacker.hasAbility('Unseen Fist') && move.flags.contact);
 
   if (field.defenderSide.isProtected && !breaksProtect) {
@@ -178,7 +180,7 @@ export function calculateSMSSSV(
     'Vital Spirit', 'Volt Absorb', 'Water Absorb', 'Water Bubble',
     'Water Veil', 'Well-Baked Body', 'White Smoke', 'Wind Rider',
     'Wonder Guard', 'Wonder Skin'
-  );
+  ) || (gen.game === 'royal-sword' && defender.hasAbility('Aura Guard', 'Eelevate'));
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
   const moveIgnoresAbility = move.named(
@@ -238,13 +240,15 @@ export function calculateSMSSSV(
   let type = move.type;
   if (move.originalName === 'Weather Ball') {
     const holdingUmbrella = attacker.hasItem('Utility Umbrella');
+    const megaSol = hasMegaSol(attacker);
     type =
-      field.hasWeather('Sun', 'Harsh Sunshine') && !holdingUmbrella ? 'Fire'
+      (megaSol || field.hasWeather('Sun', 'Harsh Sunshine')) && !holdingUmbrella ? 'Fire'
       : field.hasWeather('Rain', 'Heavy Rain') && !holdingUmbrella ? 'Water'
       : field.hasWeather('Sand') ? 'Rock'
       : field.hasWeather('Hail', 'Snow') ? 'Ice'
       : 'Normal';
-    desc.weather = field.weather;
+    if (megaSol) desc.attackerAbility = attacker.ability;
+    else desc.weather = field.weather;
     desc.moveType = type;
   } else if (move.named('Judgment') && attacker.item?.includes('Plate')) {
     type = getItemBoostType(attacker.item)!;
@@ -336,6 +340,7 @@ export function calculateSMSSSV(
   let isGalvanize = false;
   let isLiquidVoice = false;
   let isNormalize = false;
+  let isDragonize = false;
   const noTypeChange = move.named(
     'Revelation Dance',
     'Judgment',
@@ -360,10 +365,13 @@ export function calculateSMSSSV(
       type = 'Fairy';
     } else if ((isRefrigerate = attacker.hasAbility('Refrigerate') && normal)) {
       type = 'Ice';
+    } else if ((isDragonize = gen.game === 'royal-sword' &&
+      attacker.hasAbility('Dragonize') && normal)) {
+      type = 'Dragon';
     } else if ((isNormalize = attacker.hasAbility('Normalize'))) { // Boosts any type
       type = 'Normal';
     }
-    if (isGalvanize || isPixilate || isRefrigerate || isAerilate || isNormalize) {
+    if (isGalvanize || isPixilate || isRefrigerate || isAerilate || isNormalize || isDragonize) {
       desc.attackerAbility = attacker.ability;
       hasAteAbilityTypeChange = true;
     } else if (isLiquidVoice) {
@@ -479,7 +487,8 @@ export function calculateSMSSSV(
         defender.hasAbility('Lightning Rod', 'Motor Drive', 'Volt Absorb')) ||
       (move.hasType('Ground') &&
         !field.isGravity && !move.named('Thousand Arrows') &&
-        !defender.hasItem('Iron Ball') && defender.hasAbility('Levitate')) ||
+        !defender.hasItem('Iron Ball') && (defender.hasAbility('Levitate') ||
+          (gen.game === 'royal-sword' && defender.hasAbility('Eelevate')))) ||
       (move.flags.bullet && defender.hasAbility('Bulletproof')) ||
       (move.flags.sound && !move.named('Clangorous Soul') && defender.hasAbility('Soundproof')) ||
       (move.priority > 0 && defender.hasAbility('Queenly Majesty', 'Dazzling', 'Armor Tail')) ||
@@ -510,7 +519,11 @@ export function calculateSMSSSV(
 
   const fixedDamage = handleFixedDamageMoves(attacker, move);
   if (fixedDamage) {
-    if (attacker.hasAbility('Parental Bond')) {
+    if (piercingDrill && field.defenderSide.isProtected) {
+      result.damage = pokeRound(fixedDamage / 4);
+      desc.attackerAbility = attacker.ability;
+      desc.isProtected = true;
+    } else if (attacker.hasAbility('Parental Bond')) {
       result.damage = [fixedDamage, fixedDamage];
       desc.attackerAbility = attacker.ability;
     } else {
@@ -644,9 +657,10 @@ export function calculateSMSSSV(
 
   let protect = false;
   if (field.defenderSide.isProtected &&
-    (attacker.isDynamaxed || (move.isZ && attacker.item?.includes(' Z')))) {
+    (piercingDrill || attacker.isDynamaxed || (move.isZ && attacker.item?.includes(' Z')))) {
     protect = true;
     desc.isProtected = true;
+    if (piercingDrill) desc.attackerAbility = attacker.ability;
   }
 
   const finalMod = chainMods(finalMods, 41, 131072);
@@ -860,7 +874,8 @@ export function calculateBasePowerSMSSSV(
     desc.moveBP = basePower;
     break;
   case 'Weather Ball':
-    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+    basePower = move.bp * (hasMegaSol(attacker) ||
+      (field.weather && !field.hasWeather('Strong Winds')) ? 2 : 1);
     if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
       attacker.hasItem('Utility Umbrella')) basePower = move.bp;
     desc.moveBP = basePower;
@@ -1088,6 +1103,7 @@ export function calculateBPModsSMSSSV(
     bpMods.push(6144);
     desc.moveBP = basePower * 1.5;
   } else if (move.named('Solar Beam', 'Solar Blade') &&
+      !hasMegaSol(attacker) &&
       field.hasWeather('Rain', 'Heavy Rain', 'Sand', 'Hail', 'Snow')) {
     bpMods.push(2048);
     desc.moveBP = basePower / 2;
@@ -1636,6 +1652,11 @@ export function calculateDfModsSMSSSV(
   return dfMods;
 }
 
+function hasMegaSol(attacker: Pokemon) {
+  return attacker.gen.game === 'royal-sword' && attacker.hasAbility('Mega Sol') &&
+    !attacker.hasItem('Utility Umbrella');
+}
+
 function calculateBaseDamageSMSSSV(
   gen: Generation,
   attacker: Pokemon,
@@ -1664,6 +1685,11 @@ function calculateBaseDamageSMSSSV(
   ) {
     baseDamage = pokeRound(OF32(baseDamage * 6144) / 4096);
     desc.weather = field.weather;
+  } else if (!defender.hasItem('Utility Umbrella') && hasMegaSol(attacker)) {
+    if (move.hasType('Fire', 'Water')) {
+      baseDamage = pokeRound(OF32(baseDamage * (move.hasType('Fire') ? 6144 : 2048)) / 4096);
+      desc.attackerAbility = attacker.ability;
+    }
   } else if (!defender.hasItem('Utility Umbrella')) {
     if (
       (field.hasWeather('Sun', 'Harsh Sunshine') && move.hasType('Fire')) ||
@@ -1745,6 +1771,10 @@ export function calculateFinalModsSMSSSV(
   }
 
   if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach')) {
+    finalMods.push(2048);
+    desc.defenderAbility = defender.ability;
+  } else if (gen.game === 'royal-sword' && defender.hasAbility('Aura Guard') &&
+      move.flags.contact && !attacker.hasAbility('Long Reach')) {
     finalMods.push(2048);
     desc.defenderAbility = defender.ability;
   } else if (

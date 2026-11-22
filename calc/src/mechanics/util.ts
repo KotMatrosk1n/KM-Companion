@@ -31,6 +31,7 @@ export function isGrounded(pokemon: Pokemon, field: Field) {
   return (field.isGravity || pokemon.hasItem('Iron Ball') ||
     (!pokemon.hasType('Flying') &&
       !pokemon.hasAbility('Levitate') &&
+      !(pokemon.gen.game === 'royal-sword' && pokemon.hasAbility('Eelevate')) &&
       !pokemon.hasItem('Air Balloon')));
 }
 

@@ -30,7 +30,7 @@ function add(key, pokemonId) {
   if (entry) artwork[key] = {path: directory + entry.path, size: entry.size, sha: entry.sha, pokemonId};
 }
 for (let number = 1; number <= 1025; number++) add(number + ":0", number);
-const aliases = {"Meowstic-F": "meowstic-female", "Indeedee-F": "indeedee-female", "Basculegion-F": "basculegion-female", "Necrozma-Dusk-Mane": "necrozma-dusk", "Necrozma-Dawn-Wings": "necrozma-dawn", "Darmanitan-Galar": "darmanitan-galar-standard", "Rockruff-Dusk": "rockruff-own-tempo", "Greninja-Bond": "greninja-battle-bond"};
+const aliases = {"Meowstic-F": "meowstic-female", "Meowstic-Mega": "meowstic-male-mega", "Meowstic-Mega-F": "meowstic-female-mega", "Indeedee-F": "indeedee-female", "Basculegion-F": "basculegion-female", "Necrozma-Dusk-Mane": "necrozma-dusk", "Necrozma-Dawn-Wings": "necrozma-dawn", "Darmanitan-Galar": "darmanitan-galar-standard", "Rockruff-Dusk": "rockruff-own-tempo", "Greninja-Bond": "greninja-battle-bond"};
 for (const entry of context.window.KMPokedexProfiles["pokemon-royal-sword"].entries) {
   if (!entry.form) continue;
   const match = identifiers.get(id(aliases[entry.name] || entry.name));

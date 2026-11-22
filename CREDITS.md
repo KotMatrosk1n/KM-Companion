@@ -80,7 +80,7 @@ The package manifests and lockfiles record the installed dependency versions and
 
 ## Pokémon And Third Party Assets
 
-Official Dex illustrations come from the public [PokéAPI image repository](https://github.com/PokeAPI/sprites/tree/97a7832d307311c0e1c6ea9035308bf80cc94f81/sprites/pokemon/other/official-artwork) at revision `97a7832d307311c0e1c6ea9035308bf80cc94f81`. KM Companion uses the illustration artwork directory rather than pixel sprites for the main picture. The repository notice is retained in [PokeAPI Artwork](LICENSES/PokeAPI-Artwork.txt). Pokémon artwork remains the property of its respective rights holders and is excluded from the software license. See [Dex data](docs/pokedex-data.md).
+Official Dex illustrations, Legends: Z-A menu icons, and Legends: Z-A and Scarlet and Violet animated sprites come from the public [PokéAPI image repository](https://github.com/PokeAPI/sprites/tree/97a7832d307311c0e1c6ea9035308bf80cc94f81/sprites/pokemon) at revision `97a7832d307311c0e1c6ea9035308bf80cc94f81`. See the [PokéAPI contributor credits](https://github.com/PokeAPI/sprites/blob/97a7832d307311c0e1c6ea9035308bf80cc94f81/README.md#special-thanks). The repository notice is retained in [PokeAPI Artwork](LICENSES/PokeAPI-Artwork.txt). Pokémon artwork remains the property of its respective rights holders and is excluded from the software license. See [Dex data](docs/pokedex-data.md).
 
 Trainer ability and held item descriptions use the official English Pokémon Sword and Shield game text. Game text and artwork remain the property of their respective rights holders.
 

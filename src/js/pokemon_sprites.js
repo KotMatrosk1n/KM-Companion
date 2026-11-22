@@ -11,6 +11,7 @@
 		greninjabond: "greninja", ribombeetotem: "ribombee", rockruffdusk: "rockruff",
 		shelloseast: "shellos-east", gastrodoneast: "gastrodon-east", xerneasactive: "xerneas",
 		zygarde10: "zygarde-10", zygarde10powerconstruct: "zygarde-10", zygardepowerconstruct: "zygarde",
+		charizardgmax: "charizard-gmax", meowsticmega: "meowstic-mmega", meowsticmegaf: "meowstic-fmega",
 		toxtricitylowkeygmax: "toxtricity-gmax"
 	};
 	["Ruby-Cream", "Matcha-Cream", "Mint-Cream", "Lemon-Cream", "Salted-Cream", "Ruby-Swirl", "Caramel-Swirl", "Rainbow-Swirl"].forEach(function (cream) {
@@ -43,6 +44,8 @@
 		if (Object.prototype.hasOwnProperty.call(aliases, id)) return aliases[id];
 		species = species || canonical(name, generations);
 		var base = species && normalize(species.baseSpecies);
+		var mega = /^(.*)-Mega(?:-([XYZ]))?$/i.exec(name || "");
+		if (mega) return normalize(mega[1]) + "-mega" + (mega[2] || "").toLowerCase();
 		if (base && id.indexOf(base) === 0 && id.length > base.length) return base + "-" + id.slice(base.length);
 		return id;
 	}
