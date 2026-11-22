@@ -106,6 +106,8 @@ See [Releases](../../docs/releases.md) for the version tag workflow and publishe
 
 Burn is the only visible Programs and Features entry. Its chained MSI is hidden, supports major upgrades, repair, and uninstall, and owns the complete Electron payload.
 
+The MSI ProductCode in `KMCalculator.Setup.Package/Package.wxs` stays constant while releases share the same file and component layout. Each MSI has its own PackageCode. A change that needs a new ProductCode establishes a new patch baseline through the full setup. The separate upgrade codes above let setup replace prior baselines.
+
 ## Upgrade and uninstall behavior
 
 KM Companion 0.0.1 begins the public version sequence. Earlier development builds
@@ -152,4 +154,4 @@ The public launcher recognizes the existing Electron contract:
 - `/D=...` and `--package-file=...` provided by the updater are consumed but never opened or forwarded. Outside an updater invocation they are rejected.
 - relaunch occurs only after success and only from the validated 64 bit `HKLM\Software\KM Calculator` marker at the canonical `%ProgramFiles%\KM Companion` path, with the expected version, executable metadata, a directory chain without reparse points, and `resources\app.asar`.
 
-The custom installer does not produce an NSIS blockmap. `latest.yml` remains the authoritative `electron-updater` metadata and contains the exact asset name, byte size, and base64 SHA-512 digest.
+`latest.yml` contains the full setup filename, byte size, and base64 SHA-512 digest. When the release includes a cumulative Windows Installer patch, it also records the patch size, digest, ProductCode, and supported versions. See the [release workflow](../../docs/releases.md#smaller-windows-updates) for baseline selection and validation.

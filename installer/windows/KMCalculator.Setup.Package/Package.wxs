@@ -4,6 +4,7 @@
   <Package Name="KM Companion"
            Manufacturer="Matroskin"
            Version="$(var.KmVersion)"
+           ProductCode="96384873-dfb1-429e-809c-edf5f3728f8a"
            UpgradeCode="9971df03-d3bd-4fb5-a51b-d975985eea2c"
            Scope="perMachine"
            InstallerVersion="500"
@@ -16,6 +17,7 @@
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
     <Icon Id="KmCalculatorProductIcon.ico" SourceFile="$(var.KmIconPath)" />
+    <Property Id="ARPSYSTEMCOMPONENT" Value="1" />
     <Property Id="ARPPRODUCTICON" Value="KmCalculatorProductIcon.ico" />
     <Property Id="ARPHELPLINK" Value="https://github.com/KotMatrosk1n/KM-Companion" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/KotMatrosk1n/KM-Companion" />
@@ -24,6 +26,18 @@
 
     <Property Id="KM_CREATE_DESKTOP_SHORTCUT" Value="1" Secure="yes" />
     <Property Id="KM_CREATE_START_MENU_SHORTCUT" Value="1" Secure="yes" />
+    <Property Id="KM_PATCH_DESKTOP_SHORTCUT">
+      <RegistrySearch Id="KmPatchDesktopShortcutSearch" Root="HKLM" Key="Software\KM Calculator"
+                      Name="CreateDesktopShortcut" Type="raw" Bitness="always64" />
+    </Property>
+    <Property Id="KM_PATCH_START_MENU_SHORTCUT">
+      <RegistrySearch Id="KmPatchStartMenuShortcutSearch" Root="HKLM" Key="Software\KM Calculator"
+                      Name="CreateStartMenuShortcut" Type="raw" Bitness="always64" />
+    </Property>
+    <SetProperty Id="KM_CREATE_DESKTOP_SHORTCUT" Value="0" Sequence="execute" After="AppSearch"
+                 Condition="PATCH AND KM_PATCH_DESKTOP_SHORTCUT = &quot;#0&quot;" />
+    <SetProperty Id="KM_CREATE_START_MENU_SHORTCUT" Value="0" Sequence="execute" After="SetKM_CREATE_DESKTOP_SHORTCUT"
+                 Condition="PATCH AND KM_PATCH_START_MENU_SHORTCUT = &quot;#0&quot;" />
     <Property Id="KM_LEGACY_CEF_VALID" Value="0" Secure="yes" />
     <Property Id="KM_REMOVE_LEGACY" Value="0" Secure="yes" />
     <Property Id="KM_LEGACY_CLEANUP_RECEIPT" Secure="yes" Hidden="yes" />

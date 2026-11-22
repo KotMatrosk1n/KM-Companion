@@ -30,12 +30,23 @@ Each release includes:
 
 - `KM-Companion-Setup-<version>.exe`, the Windows install, update, repair, and uninstall package.
 - `latest.yml`, with the setup filename, size, and SHA-512 digest used by the updater.
-- `SHA256SUMS.txt`, with hashes for the installer, updater metadata, and source assets.
+- `KM-Companion-Update-<version>.msp`, when a smaller Windows Installer patch is available for recent versions.
+- `SHA256SUMS.txt`, with hashes for the installer, any patch, updater metadata, and source assets.
 - `KM-Companion-Source-<version>.zip`, containing the exact application source for the release commit.
 - `KM-Companion-Dependencies-<version>.tar.gz`, containing dependency sources, including the separate installer's WiX source.
 - `KM-Companion-Source-<version>.json`, recording source revisions and archive hashes.
 
 The combined application is GPLv3 only. Retained component notices and source distribution requirements are documented in [LICENSING.md](../LICENSING.md).
+
+## Smaller Windows Updates
+
+The first release with patch support establishes a new MSI ProductCode. Existing installs receive that release through the full setup. Keep that code for subsequent releases with the same MSI file and component layout. When the layout changes, assign a new ProductCode in `Package.wxs` and ship the full setup to establish the next baseline. The MSI and Burn upgrade codes and the Burn provider key carry the installation across baselines.
+
+The release workflow builds one cumulative patch against up to four earlier published versions that share the ProductCode. It extracts the original MSI packages from the verified release setups and uses the Windows SDK patch builder to encode binary changes. The workflow checks each advertised upgrade on its clean Windows runner, compares the installed files with the release payload, verifies uninstall, and exercises the full setup path before it creates the draft. When the preceding release has a compatible patch, the workflow also tests updating an installation that already received it.
+
+An eligible installation can jump directly to the latest version. A clean install, a version outside the patch's supported range, or a failed patch download uses the full setup. If Windows Installer cannot apply a downloaded patch, the app reopens and offers the full setup on the next install attempt. The setup remains available on every release page.
+
+The app and its MSI report the patched version. Windows Installed Apps can show the version of the last full setup because that setup still owns the visible maintenance entry.
 
 ## Unsigned Windows Releases
 

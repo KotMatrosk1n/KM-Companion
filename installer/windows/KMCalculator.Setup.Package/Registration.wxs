@@ -7,6 +7,7 @@
                  Bitness="always64">
         <RegistryKey Root="HKLM" Key="Software\KM Calculator" ForceDeleteOnUninstall="yes">
           <RegistryValue Name="InstallerFamily" Value="BurnMsi" Type="string" KeyPath="yes" />
+          <RegistryValue Name="ProductCode" Value="[ProductCode]" Type="string" />
           <RegistryValue Name="InstallLocation" Value="[INSTALLFOLDER]" Type="string" />
           <RegistryValue Name="InstallScope" Value="perMachine" Type="string" />
           <RegistryValue Name="Version" Value="[ProductVersion]" Type="string" />
