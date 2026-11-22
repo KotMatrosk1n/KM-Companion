@@ -38,6 +38,8 @@ An extension alone does not establish compatibility. The file must also match a 
 
 The bundled profile is Pokémon Royal Sword. Other hacks need explicit integration for their changed species, forms, moves, mechanics, and save rules. See [ROM hack profiles](rom-hack-profiles.md) for those boundaries.
 
+Under Royal Sword, Sword and Shield saves and `.pk8` files use the profile's species, form, ability, and held item IDs. This covers the added species and Mega forms, custom abilities, and named Mega Stones. Supported held items in the Sword and Shield bag use the same profile item names.
+
 Save import is separate from **Settings → Backup → Restore Run**. A run backup preserves the app's selected profile data, including notes and tracking progress; a game save is not a replacement for that backup. See the [workspace guide](app-workspace.md#settings-and-run-backups) for backup scope and recovery.
 
 When reporting a compatibility problem, provide the app version, profile, game and update, file format, and error message. Follow [Contributing](../CONTRIBUTING.md) and avoid posting private saves, ROMs, console keys, or personal data.

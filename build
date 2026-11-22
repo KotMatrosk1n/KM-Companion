@@ -15,6 +15,7 @@ const calcRuntimeFiles = new Set([
 	'data/moves.js',
 	'data/natures.js',
 	'data/royal-sword.js',
+	'data/royal-sword-data.js',
 	'data/species.js',
 	'data/types.js',
 	'desc.js',

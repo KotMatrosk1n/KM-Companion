@@ -23,7 +23,7 @@
 	}
 	function badge(type) { var node = el("span", "km-type-badge", type); node.setAttribute("data-type", type); return node; }
 	function number(value) { return "#" + String(value).padStart(4, "0"); }
-	function pokemonLabel(entry) { return entry.name.replace(/^(.*)-Mega(?:-([XY]))?$/, function (match, name, suffix) { return "Mega " + name + (suffix ? " " + suffix : ""); }); }
+	function pokemonLabel(entry) { return entry.name.replace(/^(.*)-Mega(?:-([XYZ]))?$/, function (match, name, suffix) { return "Mega " + name + (suffix ? " " + suffix : ""); }); }
 	function sprite(name, className) {
 		if (window.createPokemonSprite) return window.createPokemonSprite(name, className, {preferStatic: true})[0];
 		return el("span", className);
@@ -201,8 +201,9 @@
 			entry.abilities.forEach(function (name, i) {
 				var row = el("div", "km-dex-ability"); row.appendChild(el("span", "km-dex-slot", ["1", "2", "Hidden"][i]));
 				var copy = el("div"); copy.appendChild(el("strong", "", name || "None"));
-				var descriptions = index.pack.abilities || (window.KMCalculatorTooltipData && window.KMCalculatorTooltipData.swsh && profile.id === "pokemon-royal-sword" ? window.KMCalculatorTooltipData.swsh.abilities : {});
-				var description = descriptions[data.normalize(name)];
+				var descriptions = window.KMCalculatorTooltipData && window.KMCalculatorTooltipData.swsh && profile.id === "pokemon-royal-sword" ? window.KMCalculatorTooltipData.swsh.abilities : {};
+				var abilityId = data.normalize(name);
+				var description = (index.pack.abilities || {})[abilityId] || descriptions[abilityId];
 				if (description) copy.appendChild(el("p", "km-muted", typeof description === "string" ? description : description.description));
 				row.appendChild(copy); abilities.appendChild(row);
 			});
@@ -231,7 +232,14 @@
 				if (!edge.to) return;
 				var link = el("div", "km-dex-evolution-link");
 				[edge.from, edge.to].forEach(function (pokemon, i) {
-					if (i) { var condition = el("div", "km-dex-evolution-condition"); condition.appendChild(el("span", "", "→")); condition.appendChild(el("span", "", data.evolutionText(edge.rule, window.SAVE_IMPORT_TEXT))); link.appendChild(condition); }
+					if (i) {
+						var condition = el("div", "km-dex-evolution-condition");
+						var text = window.SAVE_IMPORT_TEXT || {};
+						var lookup = Object.assign({}, text, {items: Object.assign({}, text.items, index.pack.itemNames)});
+						condition.appendChild(el("span", "", "→"));
+						condition.appendChild(el("span", "", data.evolutionText(edge.rule, lookup)));
+						link.appendChild(condition);
+					}
 					var b = button("", function () {
 						var species = index.catalog.species.find(function (s) { return s.number === pokemon.number; });
 						if (!results.some(function (s) { return s.number === pokemon.number; })) { search.value = type.value = gen.value = availability.value = ""; filter(); }
@@ -316,7 +324,7 @@
 				var b = button(pair[0], function () { var species = results[pair[1]]; state.page = Math.floor(pair[1] / perPage); choose(species, defaultEntry(species)); }); b.disabled = !results[pair[1]]; nav.appendChild(b);
 			}); top.appendChild(nav);
 
-			var forms = allForms(species), megas = forms.filter(function (form) { return form.formKind === "mega" || /-Mega(?:-[XY])?$/.test(form.name); });
+			var forms = allForms(species), megas = forms.filter(function (form) { return form.formKind === "mega" || /-Mega(?:-[XYZ])?$/.test(form.name); });
 			var ordinary = forms.filter(function (form) { return megas.indexOf(form) === -1; });
 			if (ordinary.length > 1 || megas.length) {
 				var formRow = el("div", "km-dex-form-row");
@@ -329,9 +337,9 @@
 				}
 				if (megas.length) {
 					var switches = el("div", "km-dex-mega-switches"); switches.setAttribute("role", "group"); switches.setAttribute("aria-label", "Mega Evolution forms");
-					var base = index.entries[species.number + ":0"];
+					var base = index.entries[entry && (entry.baseKey || (ordinary.indexOf(entry) !== -1 && entry.key)) || species.number + ":0"];
 					[base].concat(megas).filter(Boolean).forEach(function (form) {
-						var label = form === base ? "Base" : form.buttonLabel || form.name.match(/-Mega(?:-([XY]))?$/)[0].replace(/-/g, " ").trim();
+						var label = form === base ? "Base" : form.buttonLabel || form.name.match(/-Mega(?:-[XYZ])?$/)[0].replace(/-/g, " ").trim();
 						var control = button(label, function () {
 							state.key = form.key; state.movePage = 0; renderDetail();
 							var selected = detail.querySelector('.km-dex-mega-switches [aria-pressed="true"]'); if (selected) selected.focus({preventScroll: true});

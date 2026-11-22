@@ -6155,6 +6155,42 @@
       "sha": "755cd792ebe2fb63e87e3e3f660761882d17a459",
       "pokemonId": 1025
     },
+    "3:1": {
+      "path": "sprites/pokemon/other/official-artwork/10033.png",
+      "size": 190329,
+      "sha": "0e9dcdb953c1976efda5674e3fde5739f076d3cd",
+      "pokemonId": 10033
+    },
+    "6:1": {
+      "path": "sprites/pokemon/other/official-artwork/10034.png",
+      "size": 170074,
+      "sha": "dbef10863a537e280feb9a496e5cf2028f5671d1",
+      "pokemonId": 10034
+    },
+    "6:2": {
+      "path": "sprites/pokemon/other/official-artwork/10035.png",
+      "size": 152506,
+      "sha": "116589cab4f754062dec49361ad0ec897df9eafc",
+      "pokemonId": 10035
+    },
+    "9:1": {
+      "path": "sprites/pokemon/other/official-artwork/10036.png",
+      "size": 173732,
+      "sha": "dc703c2b71e9e0130ca970022f159bb36583e548",
+      "pokemonId": 10036
+    },
+    "15:1": {
+      "path": "sprites/pokemon/other/official-artwork/10090.png",
+      "size": 152077,
+      "sha": "f24e4ccd962b43716080aee4771cbb5e667f9b86",
+      "pokemonId": 10090
+    },
+    "18:1": {
+      "path": "sprites/pokemon/other/official-artwork/10073.png",
+      "size": 156103,
+      "sha": "f5dadeafbcedd3a1c4efe70a58e4769ff37626a3",
+      "pokemonId": 10073
+    },
     "25:1": {
       "path": "sprites/pokemon/other/official-artwork/10094.png",
       "size": 160050,
@@ -6215,6 +6251,18 @@
       "sha": "92358bebec604ffbe3426576a7ba42305cd68593",
       "pokemonId": 10100
     },
+    "26:2": {
+      "path": "sprites/pokemon/other/official-artwork/10304.png",
+      "size": 80875,
+      "sha": "c72efd7277b47a2d01a523c8027b53fc2832005e",
+      "pokemonId": 10304
+    },
+    "26:3": {
+      "path": "sprites/pokemon/other/official-artwork/10305.png",
+      "size": 97333,
+      "sha": "d5cdd4279df71b83f697903e00a64a2b81be1cd7",
+      "pokemonId": 10305
+    },
     "27:1": {
       "path": "sprites/pokemon/other/official-artwork/10101.png",
       "size": 161375,
@@ -6226,6 +6274,12 @@
       "size": 165484,
       "sha": "b23f12138104072e415a2dd8f2640e380b6b72e4",
       "pokemonId": 10102
+    },
+    "36:1": {
+      "path": "sprites/pokemon/other/official-artwork/10278.png",
+      "size": 81137,
+      "sha": "7dfa9bfb070eb0665663514bd6b5468e45685332",
+      "pokemonId": 10278
     },
     "37:1": {
       "path": "sprites/pokemon/other/official-artwork/10103.png",
@@ -6268,6 +6322,30 @@
       "size": 118549,
       "sha": "ec55d103a654a430462120d62e4893fc5df92e71",
       "pokemonId": 10108
+    },
+    "58:1": {
+      "path": "sprites/pokemon/other/official-artwork/10229.png",
+      "size": 138427,
+      "sha": "0e501c314821c252a83c9ff0aa13ecfced6f2d81",
+      "pokemonId": 10229
+    },
+    "59:1": {
+      "path": "sprites/pokemon/other/official-artwork/10230.png",
+      "size": 151774,
+      "sha": "f651ee662c865635a0fad27842e069de5d521ea9",
+      "pokemonId": 10230
+    },
+    "65:1": {
+      "path": "sprites/pokemon/other/official-artwork/10037.png",
+      "size": 154479,
+      "sha": "b5832a1e9027f75f153b363e1dc884be874c3b2a",
+      "pokemonId": 10037
+    },
+    "71:1": {
+      "path": "sprites/pokemon/other/official-artwork/10279.png",
+      "size": 108349,
+      "sha": "be31e1c26dfdb298f873f93b3b90849b6de183bc",
+      "pokemonId": 10279
     },
     "74:1": {
       "path": "sprites/pokemon/other/official-artwork/10109.png",
@@ -6323,6 +6401,36 @@
       "sha": "76b7915426959c5d59cf2f44abb14cfe20f944bd",
       "pokemonId": 10166
     },
+    "88:1": {
+      "path": "sprites/pokemon/other/official-artwork/10112.png",
+      "size": 126478,
+      "sha": "4d3d4e8befd799266aa56d5bb08238e85146cbf8",
+      "pokemonId": 10112
+    },
+    "89:1": {
+      "path": "sprites/pokemon/other/official-artwork/10113.png",
+      "size": 115416,
+      "sha": "3a9b6136095ceb5332c2e0c47ef4a57c368fd875",
+      "pokemonId": 10113
+    },
+    "94:1": {
+      "path": "sprites/pokemon/other/official-artwork/10038.png",
+      "size": 145543,
+      "sha": "1a494d91c3a83e82ba5d7d3c6c9fba96866f49b6",
+      "pokemonId": 10038
+    },
+    "100:1": {
+      "path": "sprites/pokemon/other/official-artwork/10231.png",
+      "size": 176508,
+      "sha": "206cc2c905d3a6e985cfdb0e84104e230e553c48",
+      "pokemonId": 10231
+    },
+    "101:1": {
+      "path": "sprites/pokemon/other/official-artwork/10232.png",
+      "size": 155829,
+      "sha": "c73b5f53d80d066a62872fb6d2e32f89be6ab9d8",
+      "pokemonId": 10232
+    },
     "103:1": {
       "path": "sprites/pokemon/other/official-artwork/10114.png",
       "size": 82428,
@@ -6341,11 +6449,41 @@
       "sha": "8321ed24c8820b3b46dc7d0106cd323c10ba26b8",
       "pokemonId": 10167
     },
+    "115:1": {
+      "path": "sprites/pokemon/other/official-artwork/10039.png",
+      "size": 202697,
+      "sha": "d7595e1367dea440daedfaf2d66d275294ea80d9",
+      "pokemonId": 10039
+    },
+    "121:1": {
+      "path": "sprites/pokemon/other/official-artwork/10280.png",
+      "size": 143317,
+      "sha": "2d944c2faa6def27a5103dbb95630d2cf1526c10",
+      "pokemonId": 10280
+    },
     "122:1": {
       "path": "sprites/pokemon/other/official-artwork/10168.png",
       "size": 130262,
       "sha": "d8ef1c34fd36c6165d29e4e9a48be2e276237c47",
       "pokemonId": 10168
+    },
+    "127:1": {
+      "path": "sprites/pokemon/other/official-artwork/10040.png",
+      "size": 143574,
+      "sha": "66dc198372d37ca4fae7d6c80a259823c770d2c0",
+      "pokemonId": 10040
+    },
+    "130:1": {
+      "path": "sprites/pokemon/other/official-artwork/10041.png",
+      "size": 165764,
+      "sha": "ada071e157dc214d6ae7b5d0ce74061acabc3727",
+      "pokemonId": 10041
+    },
+    "142:1": {
+      "path": "sprites/pokemon/other/official-artwork/10042.png",
+      "size": 113807,
+      "sha": "b9ef8c306258f1b6251da72ae46852a843fdbf2d",
+      "pokemonId": 10042
     },
     "144:1": {
       "path": "sprites/pokemon/other/official-artwork/10169.png",
@@ -6365,17 +6503,119 @@
       "sha": "e495c13937e94be97b5666fa12b50d8309a4988d",
       "pokemonId": 10171
     },
+    "149:1": {
+      "path": "sprites/pokemon/other/official-artwork/10281.png",
+      "size": 192449,
+      "sha": "c0578ed4c7d2b5108a89766457af837efec077a8",
+      "pokemonId": 10281
+    },
+    "150:1": {
+      "path": "sprites/pokemon/other/official-artwork/10043.png",
+      "size": 108748,
+      "sha": "8ec5003645d37123fe801b1b9f0dc42f9391cfa4",
+      "pokemonId": 10043
+    },
+    "150:2": {
+      "path": "sprites/pokemon/other/official-artwork/10044.png",
+      "size": 109153,
+      "sha": "3b6e52eee08c50508612d4c10c7c3a07e0d3d695",
+      "pokemonId": 10044
+    },
+    "154:1": {
+      "path": "sprites/pokemon/other/official-artwork/10282.png",
+      "size": 121069,
+      "sha": "dffb7081115aee56a89a2a5ae879b9ef4f6ce0f9",
+      "pokemonId": 10282
+    },
+    "157:1": {
+      "path": "sprites/pokemon/other/official-artwork/10233.png",
+      "size": 108328,
+      "sha": "869af0a5c73064315757a019f875a7a28f892c1c",
+      "pokemonId": 10233
+    },
+    "160:1": {
+      "path": "sprites/pokemon/other/official-artwork/10283.png",
+      "size": 141473,
+      "sha": "f8d496a5a4d51288355cc773022814bd5e8278f8",
+      "pokemonId": 10283
+    },
+    "181:1": {
+      "path": "sprites/pokemon/other/official-artwork/10045.png",
+      "size": 153128,
+      "sha": "115eb6aff40394e163257a129ce00d13cc602b98",
+      "pokemonId": 10045
+    },
     "199:1": {
       "path": "sprites/pokemon/other/official-artwork/10172.png",
       "size": 164381,
       "sha": "9d062bed054eb88d4ee8ad59a114c93afd53c4e9",
       "pokemonId": 10172
     },
+    "208:1": {
+      "path": "sprites/pokemon/other/official-artwork/10072.png",
+      "size": 172617,
+      "sha": "d12b4e8a232c48c3db7428f81f9542ccad7dd1c4",
+      "pokemonId": 10072
+    },
+    "211:1": {
+      "path": "sprites/pokemon/other/official-artwork/10234.png",
+      "size": 83045,
+      "sha": "840e31b6276cfd9b4454fd18bd397c2cdf189337",
+      "pokemonId": 10234
+    },
+    "212:1": {
+      "path": "sprites/pokemon/other/official-artwork/10046.png",
+      "size": 142223,
+      "sha": "f8c7d5e88b9bcd41a632bddccfa98eaef1f7a03b",
+      "pokemonId": 10046
+    },
+    "214:1": {
+      "path": "sprites/pokemon/other/official-artwork/10047.png",
+      "size": 124609,
+      "sha": "b171e5372d78bd0e99a991d2ecea972751bdac6d",
+      "pokemonId": 10047
+    },
     "222:1": {
       "path": "sprites/pokemon/other/official-artwork/10173.png",
       "size": 78201,
       "sha": "74eafa59c004fa862062ae34d44d1d7d7802ff8d",
       "pokemonId": 10173
+    },
+    "227:1": {
+      "path": "sprites/pokemon/other/official-artwork/10284.png",
+      "size": 139927,
+      "sha": "bd925d21d34ed2c34424c4e774cefed1688cc257",
+      "pokemonId": 10284
+    },
+    "229:1": {
+      "path": "sprites/pokemon/other/official-artwork/10048.png",
+      "size": 119346,
+      "sha": "cd3f7dd7d57d44e1fcba1c4dfbd096ed943618ca",
+      "pokemonId": 10048
+    },
+    "248:1": {
+      "path": "sprites/pokemon/other/official-artwork/10049.png",
+      "size": 157994,
+      "sha": "32c098a11f053bef91c6756ca9c16aa518c16c24",
+      "pokemonId": 10049
+    },
+    "254:1": {
+      "path": "sprites/pokemon/other/official-artwork/10065.png",
+      "size": 106996,
+      "sha": "2721498d8659eb542e39ff86bf08d4aa643eaa29",
+      "pokemonId": 10065
+    },
+    "257:1": {
+      "path": "sprites/pokemon/other/official-artwork/10050.png",
+      "size": 123823,
+      "sha": "335bfc64c1433b6cecfd7bf917afa0f515fdd03d",
+      "pokemonId": 10050
+    },
+    "260:1": {
+      "path": "sprites/pokemon/other/official-artwork/10064.png",
+      "size": 203660,
+      "sha": "0cd425c57b5342a606106c7e4723559ba29a015d",
+      "pokemonId": 10064
     },
     "263:1": {
       "path": "sprites/pokemon/other/official-artwork/10174.png",
@@ -6389,11 +6629,203 @@
       "sha": "67eb163f33003bbb15044938c37bcb1fe4e08059",
       "pokemonId": 10175
     },
+    "282:1": {
+      "path": "sprites/pokemon/other/official-artwork/10051.png",
+      "size": 116478,
+      "sha": "e52fc39c7e3011d90c4dba13ff642988a51399cb",
+      "pokemonId": 10051
+    },
+    "302:1": {
+      "path": "sprites/pokemon/other/official-artwork/10066.png",
+      "size": 149045,
+      "sha": "933218bd9a1075dcc6ddd8aaaf28e3951920990d",
+      "pokemonId": 10066
+    },
+    "303:1": {
+      "path": "sprites/pokemon/other/official-artwork/10052.png",
+      "size": 153771,
+      "sha": "eb4100f18efa897e302975f3d253e231ac12a571",
+      "pokemonId": 10052
+    },
+    "306:1": {
+      "path": "sprites/pokemon/other/official-artwork/10053.png",
+      "size": 173809,
+      "sha": "db6818b3ce1e5cc45230cb192a2d8080a11e8ad4",
+      "pokemonId": 10053
+    },
+    "308:1": {
+      "path": "sprites/pokemon/other/official-artwork/10054.png",
+      "size": 140378,
+      "sha": "133e2f8b29d4d99e09256adb09042f5c3f70b21a",
+      "pokemonId": 10054
+    },
+    "310:1": {
+      "path": "sprites/pokemon/other/official-artwork/10055.png",
+      "size": 148328,
+      "sha": "90564c10a7940e62a1bb8d2f05170365da47cc8d",
+      "pokemonId": 10055
+    },
+    "319:1": {
+      "path": "sprites/pokemon/other/official-artwork/10070.png",
+      "size": 137605,
+      "sha": "f686012183ad2740a0350282eba835d251093913",
+      "pokemonId": 10070
+    },
+    "323:1": {
+      "path": "sprites/pokemon/other/official-artwork/10087.png",
+      "size": 157560,
+      "sha": "300be8a397b10aba8c8b6336965a853863f74be2",
+      "pokemonId": 10087
+    },
+    "334:1": {
+      "path": "sprites/pokemon/other/official-artwork/10067.png",
+      "size": 138692,
+      "sha": "54b0f50ea4b55f9ae1c3d18a507b38ae71bd2f3a",
+      "pokemonId": 10067
+    },
+    "354:1": {
+      "path": "sprites/pokemon/other/official-artwork/10056.png",
+      "size": 135182,
+      "sha": "810586d8a2912a5835f37695fef73cb85ac32b2b",
+      "pokemonId": 10056
+    },
+    "358:1": {
+      "path": "sprites/pokemon/other/official-artwork/10306.png",
+      "size": 200456,
+      "sha": "15980f3ef558997cc6250733f7131f402fc35393",
+      "pokemonId": 10306
+    },
+    "359:1": {
+      "path": "sprites/pokemon/other/official-artwork/10057.png",
+      "size": 144245,
+      "sha": "3ca74995e18b737b3d1dce04a26dda3b57bd9e81",
+      "pokemonId": 10057
+    },
+    "359:2": {
+      "path": "sprites/pokemon/other/official-artwork/10307.png",
+      "size": 148206,
+      "sha": "2806f2ff9efb131d67e27ffbcff17388307039aa",
+      "pokemonId": 10307
+    },
+    "362:1": {
+      "path": "sprites/pokemon/other/official-artwork/10074.png",
+      "size": 179810,
+      "sha": "0ec54ba85d56fb701eb3bf3d31647b716a03db9d",
+      "pokemonId": 10074
+    },
+    "373:1": {
+      "path": "sprites/pokemon/other/official-artwork/10089.png",
+      "size": 90394,
+      "sha": "970d5139be0fde295ca25941eeedd08e2c4480f1",
+      "pokemonId": 10089
+    },
+    "376:1": {
+      "path": "sprites/pokemon/other/official-artwork/10076.png",
+      "size": 177430,
+      "sha": "61a8b61621dc222cd00e5385bef60653178dfdd9",
+      "pokemonId": 10076
+    },
+    "380:1": {
+      "path": "sprites/pokemon/other/official-artwork/10062.png",
+      "size": 117662,
+      "sha": "8ab70fb00fb29703881fde3887a746a3bff3c50b",
+      "pokemonId": 10062
+    },
+    "381:1": {
+      "path": "sprites/pokemon/other/official-artwork/10063.png",
+      "size": 83816,
+      "sha": "38cf6afda07a1070b644d409160b73bf8018a175",
+      "pokemonId": 10063
+    },
+    "382:1": {
+      "path": "sprites/pokemon/other/official-artwork/10077.png",
+      "size": 142476,
+      "sha": "ee0a2bb6499da0b72b7a534340f8d6ff57fa5909",
+      "pokemonId": 10077
+    },
+    "383:1": {
+      "path": "sprites/pokemon/other/official-artwork/10078.png",
+      "size": 147222,
+      "sha": "16dfef80085cda86522bf82c6697ff1ef99b3999",
+      "pokemonId": 10078
+    },
     "384:1": {
       "path": "sprites/pokemon/other/official-artwork/10079.png",
       "size": 186606,
       "sha": "d89bbca901ec930cdc935cdde5b1503a06365f86",
       "pokemonId": 10079
+    },
+    "386:1": {
+      "path": "sprites/pokemon/other/official-artwork/10001.png",
+      "size": 113212,
+      "sha": "dd1219c1bea2a8577fdbce00b030fda462e479b8",
+      "pokemonId": 10001
+    },
+    "386:2": {
+      "path": "sprites/pokemon/other/official-artwork/10002.png",
+      "size": 141496,
+      "sha": "a8a0dfbd0f6565c27e8e97bc38648582427ccc53",
+      "pokemonId": 10002
+    },
+    "386:3": {
+      "path": "sprites/pokemon/other/official-artwork/10003.png",
+      "size": 122939,
+      "sha": "00cfca1d34d99d79a29f7514d50fa1fa9c19c2ec",
+      "pokemonId": 10003
+    },
+    "398:1": {
+      "path": "sprites/pokemon/other/official-artwork/10308.png",
+      "size": 162559,
+      "sha": "64ab3199e507b2e96031203b19dabf1a3f4db7ba",
+      "pokemonId": 10308
+    },
+    "428:1": {
+      "path": "sprites/pokemon/other/official-artwork/10088.png",
+      "size": 118061,
+      "sha": "36ce5e548f0572f3a0c8ee9784d100afcc8fbd19",
+      "pokemonId": 10088
+    },
+    "445:1": {
+      "path": "sprites/pokemon/other/official-artwork/10058.png",
+      "size": 122018,
+      "sha": "100307b2dd86bdc8c222624c6b4d4447a7dda2cf",
+      "pokemonId": 10058
+    },
+    "445:2": {
+      "path": "sprites/pokemon/other/official-artwork/10309.png",
+      "size": 126681,
+      "sha": "bc51f518a31778bc908a766e5228a8724230807a",
+      "pokemonId": 10309
+    },
+    "448:1": {
+      "path": "sprites/pokemon/other/official-artwork/10059.png",
+      "size": 138895,
+      "sha": "d09e9bf86f12cda9279f2e41fa908cfe5c0b5b4e",
+      "pokemonId": 10059
+    },
+    "448:2": {
+      "path": "sprites/pokemon/other/official-artwork/10310.png",
+      "size": 169225,
+      "sha": "351b11671f6aac5f2b51c4fadcf42ef25a00d796",
+      "pokemonId": 10310
+    },
+    "460:1": {
+      "path": "sprites/pokemon/other/official-artwork/10060.png",
+      "size": 211520,
+      "sha": "062b071fc0da9443075e39d2f20aedb56779387c",
+      "pokemonId": 10060
+    },
+    "475:1": {
+      "path": "sprites/pokemon/other/official-artwork/10068.png",
+      "size": 128071,
+      "sha": "8357c9713800608e8ec3263521dbad27d728ffd8",
+      "pokemonId": 10068
+    },
+    "478:1": {
+      "path": "sprites/pokemon/other/official-artwork/10285.png",
+      "size": 121057,
+      "sha": "d6717aba043a6ebbaba72f79630dbfc7d0136b62",
+      "pokemonId": 10285
     },
     "479:1": {
       "path": "sprites/pokemon/other/official-artwork/10008.png",
@@ -6425,17 +6857,77 @@
       "sha": "20ba105611451ed20e57fa446262f93ea0e8ccd5",
       "pokemonId": 10012
     },
+    "483:1": {
+      "path": "sprites/pokemon/other/official-artwork/10245.png",
+      "size": 146554,
+      "sha": "c0fa566908af9c5c14b8ed64562968072e44fe72",
+      "pokemonId": 10245
+    },
+    "484:1": {
+      "path": "sprites/pokemon/other/official-artwork/10246.png",
+      "size": 123910,
+      "sha": "1b1a2452d2e3d3b2b5fd79c471a737c55c2aaf0a",
+      "pokemonId": 10246
+    },
+    "485:1": {
+      "path": "sprites/pokemon/other/official-artwork/10311.png",
+      "size": 140471,
+      "sha": "0468262691e899272ff68bc0bb3a29d594c4b39d",
+      "pokemonId": 10311
+    },
     "487:1": {
       "path": "sprites/pokemon/other/official-artwork/10007.png",
       "size": 203539,
       "sha": "9a47fc31ab5339dea9af1853dc79295106a9170d",
       "pokemonId": 10007
     },
+    "491:1": {
+      "path": "sprites/pokemon/other/official-artwork/10312.png",
+      "size": 73742,
+      "sha": "86bac2ddd888d1c124c796290230b044b7739a11",
+      "pokemonId": 10312
+    },
+    "500:1": {
+      "path": "sprites/pokemon/other/official-artwork/10286.png",
+      "size": 175889,
+      "sha": "26f6cfc4a8d0538208ca28833aeed7a973029c85",
+      "pokemonId": 10286
+    },
+    "503:1": {
+      "path": "sprites/pokemon/other/official-artwork/10236.png",
+      "size": 136124,
+      "sha": "f56830536027a75600c15a0ac135021873ac17c1",
+      "pokemonId": 10236
+    },
+    "530:1": {
+      "path": "sprites/pokemon/other/official-artwork/10287.png",
+      "size": 113250,
+      "sha": "3084db76c416c750c89a47482354eab0b5fc4b0b",
+      "pokemonId": 10287
+    },
+    "531:1": {
+      "path": "sprites/pokemon/other/official-artwork/10069.png",
+      "size": 128852,
+      "sha": "e1a7e4827be5d0b6dbdad2b5e3eab4ae4a74c953",
+      "pokemonId": 10069
+    },
+    "545:1": {
+      "path": "sprites/pokemon/other/official-artwork/10288.png",
+      "size": 142258,
+      "sha": "5e636bbe9a810bb68a4f2a1aeaa43cd529415afd",
+      "pokemonId": 10288
+    },
     "550:1": {
       "path": "sprites/pokemon/other/official-artwork/10016.png",
       "size": 133747,
       "sha": "ef4cdaf3a9985eacefaa6947a22684f3d717eedd",
       "pokemonId": 10016
+    },
+    "550:2": {
+      "path": "sprites/pokemon/other/official-artwork/10247.png",
+      "size": 115594,
+      "sha": "aca73425b614f850be594496e218680e7e3f3542",
+      "pokemonId": 10247
     },
     "554:1": {
       "path": "sprites/pokemon/other/official-artwork/10176.png",
@@ -6461,17 +6953,41 @@
       "sha": "81a029b7435baa86139e4466bb5590f99c1ae8cb",
       "pokemonId": 10178
     },
+    "560:1": {
+      "path": "sprites/pokemon/other/official-artwork/10289.png",
+      "size": 135157,
+      "sha": "7ca3342a101ab420814af915fdd8646d27c7d19c",
+      "pokemonId": 10289
+    },
     "562:1": {
       "path": "sprites/pokemon/other/official-artwork/10179.png",
       "size": 80365,
       "sha": "d2903ab73d0a2c92fe0e576ece8d8b384e297f86",
       "pokemonId": 10179
     },
+    "604:1": {
+      "path": "sprites/pokemon/other/official-artwork/10290.png",
+      "size": 117172,
+      "sha": "7d2ad8e44774b18f36bd0938c23df94ada92b6b5",
+      "pokemonId": 10290
+    },
+    "609:1": {
+      "path": "sprites/pokemon/other/official-artwork/10291.png",
+      "size": 121595,
+      "sha": "29b4f6841dad21e98b8abe2453b49bb359102991",
+      "pokemonId": 10291
+    },
     "618:1": {
       "path": "sprites/pokemon/other/official-artwork/10180.png",
       "size": 86990,
       "sha": "1b3c8de052fc213f8d9c90beede81e3d7c59bca2",
       "pokemonId": 10180
+    },
+    "623:1": {
+      "path": "sprites/pokemon/other/official-artwork/10313.png",
+      "size": 232632,
+      "sha": "62e382260bb13c7f62c230197cea296447f42201",
+      "pokemonId": 10313
     },
     "641:1": {
       "path": "sprites/pokemon/other/official-artwork/10019.png",
@@ -6509,17 +7025,101 @@
       "sha": "57a78525c82b0c7c5bbba3226a768b10db08e1ca",
       "pokemonId": 10024
     },
+    "652:1": {
+      "path": "sprites/pokemon/other/official-artwork/10292.png",
+      "size": 176355,
+      "sha": "66d9698dfbf24a63fe690f029b5a04a5b3d8b85f",
+      "pokemonId": 10292
+    },
+    "655:1": {
+      "path": "sprites/pokemon/other/official-artwork/10293.png",
+      "size": 141060,
+      "sha": "bedad5ea9341d2cf34d50be891c24ef8c041f3cc",
+      "pokemonId": 10293
+    },
+    "658:1": {
+      "path": "sprites/pokemon/other/official-artwork/10116.png",
+      "size": 91388,
+      "sha": "709af937c080030a697f5275bca9565575820f62",
+      "pokemonId": 10116
+    },
+    "658:2": {
+      "path": "sprites/pokemon/other/official-artwork/10117.png",
+      "size": 102464,
+      "sha": "06f399987aefa30ab402f0e1e6b864e0c58c8f27",
+      "pokemonId": 10117
+    },
+    "658:3": {
+      "path": "sprites/pokemon/other/official-artwork/10294.png",
+      "size": 104728,
+      "sha": "80327311d507e268737148933e3cfa860a697841",
+      "pokemonId": 10294
+    },
+    "668:1": {
+      "path": "sprites/pokemon/other/official-artwork/10295.png",
+      "size": 152144,
+      "sha": "a4e847c280cdcd03ede034c2c6b66abc2366a7dc",
+      "pokemonId": 10295
+    },
     "678:1": {
       "path": "sprites/pokemon/other/official-artwork/10025.png",
       "size": 135378,
       "sha": "20b61d8283c4276eb3950957e0f5982558c9522d",
       "pokemonId": 10025
     },
+    "678:2": {
+      "path": "sprites/pokemon/other/official-artwork/10314.png",
+      "size": 85120,
+      "sha": "bd02cf47f3a26c0abdce2b50561955baeaa95773",
+      "pokemonId": 10314
+    },
+    "678:3": {
+      "path": "sprites/pokemon/other/official-artwork/10326.png",
+      "size": 85120,
+      "sha": "3585d620d23148655a5fcc82e4bc9c7ca5ae3a1a",
+      "pokemonId": 10326
+    },
     "681:1": {
       "path": "sprites/pokemon/other/official-artwork/10026.png",
       "size": 151934,
       "sha": "d17fbd7fd743360d4ae6cc419f30b4c26edd2eec",
       "pokemonId": 10026
+    },
+    "687:1": {
+      "path": "sprites/pokemon/other/official-artwork/10297.png",
+      "size": 143325,
+      "sha": "434435d04efdde5b3ff50edde65dc82f568bd2be",
+      "pokemonId": 10297
+    },
+    "689:1": {
+      "path": "sprites/pokemon/other/official-artwork/10298.png",
+      "size": 137308,
+      "sha": "c9e8ef30bece3b1e94179c26738fada4a42235de",
+      "pokemonId": 10298
+    },
+    "691:1": {
+      "path": "sprites/pokemon/other/official-artwork/10299.png",
+      "size": 153704,
+      "sha": "6d5f60e08cf47a84140552104a4c615f21ca9831",
+      "pokemonId": 10299
+    },
+    "701:1": {
+      "path": "sprites/pokemon/other/official-artwork/10300.png",
+      "size": 176216,
+      "sha": "1350a831cd69cada94ed4ac7f79ca4e26dc5aff5",
+      "pokemonId": 10300
+    },
+    "705:1": {
+      "path": "sprites/pokemon/other/official-artwork/10241.png",
+      "size": 89829,
+      "sha": "ede783a406e6a005f1ea8277d1dc2a54f46e3e9e",
+      "pokemonId": 10241
+    },
+    "706:1": {
+      "path": "sprites/pokemon/other/official-artwork/10242.png",
+      "size": 114235,
+      "sha": "afae9f560a40a6cc9f1d7ca183ee5aae7367344d",
+      "pokemonId": 10242
     },
     "710:1": {
       "path": "sprites/pokemon/other/official-artwork/10027.png",
@@ -6575,6 +7175,36 @@
       "sha": "823207c0f77bd4cf3ee37101b601ab761836ffb3",
       "pokemonId": 10120
     },
+    "718:5": {
+      "path": "sprites/pokemon/other/official-artwork/10301.png",
+      "size": 167622,
+      "sha": "ce7b4202ffb4a5198a6cd356bfccb3196c3371ca",
+      "pokemonId": 10301
+    },
+    "719:1": {
+      "path": "sprites/pokemon/other/official-artwork/10075.png",
+      "size": 165325,
+      "sha": "1ebd6affc77e7d92fcdbd5fcc3b6a3e9fb9038bf",
+      "pokemonId": 10075
+    },
+    "720:1": {
+      "path": "sprites/pokemon/other/official-artwork/10086.png",
+      "size": 164624,
+      "sha": "4409464d34df9d33fbde2d624a3a6d3fe59032be",
+      "pokemonId": 10086
+    },
+    "724:1": {
+      "path": "sprites/pokemon/other/official-artwork/10244.png",
+      "size": 166501,
+      "sha": "487b850e674557c7380151f506257383bbab2997",
+      "pokemonId": 10244
+    },
+    "740:1": {
+      "path": "sprites/pokemon/other/official-artwork/10315.png",
+      "size": 211622,
+      "sha": "e717452866943bc59a3c23cecdcfedbe683bc747",
+      "pokemonId": 10315
+    },
     "744:1": {
       "path": "sprites/pokemon/other/official-artwork/10151.png",
       "size": 119174,
@@ -6599,11 +7229,23 @@
       "sha": "3481d7628af5b188afff61046878baf5722e1cd0",
       "pokemonId": 10127
     },
+    "768:1": {
+      "path": "sprites/pokemon/other/official-artwork/10316.png",
+      "size": 183085,
+      "sha": "3f0bf9f72de0e100c6c294ebb151b96dcefdef42",
+      "pokemonId": 10316
+    },
     "778:1": {
       "path": "sprites/pokemon/other/official-artwork/10143.png",
       "size": 97839,
       "sha": "b50b5b8efbf0428c73af7667b8f446c387b695d6",
       "pokemonId": 10143
+    },
+    "780:1": {
+      "path": "sprites/pokemon/other/official-artwork/10302.png",
+      "size": 146240,
+      "sha": "3398056d558d39cc3b4ceb1c300ce017975026e3",
+      "pokemonId": 10302
     },
     "800:1": {
       "path": "sprites/pokemon/other/official-artwork/10155.png",
@@ -6623,6 +7265,24 @@
       "sha": "89db3df65d852355c10dfb84c84ae714fd44b941",
       "pokemonId": 10147
     },
+    "801:2": {
+      "path": "sprites/pokemon/other/official-artwork/10317.png",
+      "size": 162342,
+      "sha": "24d7054cb87fa7f6cf14feb3d96a083a84246d96",
+      "pokemonId": 10317
+    },
+    "801:3": {
+      "path": "sprites/pokemon/other/official-artwork/10318.png",
+      "size": 55041,
+      "sha": "19efc250f6fd6b92f4db27db5ddcb50df413aa32",
+      "pokemonId": 10318
+    },
+    "807:1": {
+      "path": "sprites/pokemon/other/official-artwork/10319.png",
+      "size": 118463,
+      "sha": "2795231d19862b2bfe9828f0028816c58db5f1b2",
+      "pokemonId": 10319
+    },
     "845:1": {
       "path": "sprites/pokemon/other/official-artwork/10182.png",
       "size": 84607,
@@ -6640,6 +7300,12 @@
       "size": 90722,
       "sha": "255668d69b3af9451302c5e10f52298daee3cf63",
       "pokemonId": 10184
+    },
+    "870:1": {
+      "path": "sprites/pokemon/other/official-artwork/10303.png",
+      "size": 97204,
+      "sha": "e7af2be4c4175ef05635787d985ccc30fa504e58",
+      "pokemonId": 10303
     },
     "875:1": {
       "path": "sprites/pokemon/other/official-artwork/10185.png",
@@ -6701,293 +7367,17 @@
       "sha": "c25d50bf087767a1292dc7b2dcd49dd3e95c3788",
       "pokemonId": 10194
     },
-    "460:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10060.png",
-      "size": 211520,
-      "sha": "062b071fc0da9443075e39d2f20aedb56779387c",
-      "pokemonId": 10060
+    "902:1": {
+      "path": "sprites/pokemon/other/official-artwork/10248.png",
+      "size": 110814,
+      "sha": "1cf63412a5c4a8178a8766b66d06a129f27dc41a",
+      "pokemonId": 10248
     },
-    "359:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10057.png",
-      "size": 144245,
-      "sha": "3ca74995e18b737b3d1dce04a26dda3b57bd9e81",
-      "pokemonId": 10057
-    },
-    "142:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10042.png",
-      "size": 113807,
-      "sha": "b9ef8c306258f1b6251da72ae46852a843fdbf2d",
-      "pokemonId": 10042
-    },
-    "306:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10053.png",
-      "size": 173809,
-      "sha": "db6818b3ce1e5cc45230cb192a2d8080a11e8ad4",
-      "pokemonId": 10053
-    },
-    "65:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10037.png",
-      "size": 154479,
-      "sha": "b5832a1e9027f75f153b363e1dc884be874c3b2a",
-      "pokemonId": 10037
-    },
-    "334:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10067.png",
-      "size": 138692,
-      "sha": "54b0f50ea4b55f9ae1c3d18a507b38ae71bd2f3a",
-      "pokemonId": 10067
-    },
-    "181:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10045.png",
-      "size": 153128,
-      "sha": "115eb6aff40394e163257a129ce00d13cc602b98",
-      "pokemonId": 10045
-    },
-    "531:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10069.png",
-      "size": 128852,
-      "sha": "e1a7e4827be5d0b6dbdad2b5e3eab4ae4a74c953",
-      "pokemonId": 10069
-    },
-    "354:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10056.png",
-      "size": 135182,
-      "sha": "810586d8a2912a5835f37695fef73cb85ac32b2b",
-      "pokemonId": 10056
-    },
-    "15:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10090.png",
-      "size": 152077,
-      "sha": "f24e4ccd962b43716080aee4771cbb5e667f9b86",
-      "pokemonId": 10090
-    },
-    "9:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10036.png",
-      "size": 173732,
-      "sha": "dc703c2b71e9e0130ca970022f159bb36583e548",
-      "pokemonId": 10036
-    },
-    "257:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10050.png",
-      "size": 123823,
-      "sha": "335bfc64c1433b6cecfd7bf917afa0f515fdd03d",
-      "pokemonId": 10050
-    },
-    "323:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10087.png",
-      "size": 157560,
-      "sha": "300be8a397b10aba8c8b6336965a853863f74be2",
-      "pokemonId": 10087
-    },
-    "6:mega-x": {
-      "path": "sprites/pokemon/other/official-artwork/10034.png",
-      "size": 170074,
-      "sha": "dbef10863a537e280feb9a496e5cf2028f5671d1",
-      "pokemonId": 10034
-    },
-    "6:mega-y": {
-      "path": "sprites/pokemon/other/official-artwork/10035.png",
-      "size": 152506,
-      "sha": "116589cab4f754062dec49361ad0ec897df9eafc",
-      "pokemonId": 10035
-    },
-    "719:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10075.png",
-      "size": 165325,
-      "sha": "1ebd6affc77e7d92fcdbd5fcc3b6a3e9fb9038bf",
-      "pokemonId": 10075
-    },
-    "475:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10068.png",
-      "size": 128071,
-      "sha": "8357c9713800608e8ec3263521dbad27d728ffd8",
-      "pokemonId": 10068
-    },
-    "445:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10058.png",
-      "size": 122018,
-      "sha": "100307b2dd86bdc8c222624c6b4d4447a7dda2cf",
-      "pokemonId": 10058
-    },
-    "282:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10051.png",
-      "size": 116478,
-      "sha": "e52fc39c7e3011d90c4dba13ff642988a51399cb",
-      "pokemonId": 10051
-    },
-    "94:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10038.png",
-      "size": 145543,
-      "sha": "1a494d91c3a83e82ba5d7d3c6c9fba96866f49b6",
-      "pokemonId": 10038
-    },
-    "362:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10074.png",
-      "size": 179810,
-      "sha": "0ec54ba85d56fb701eb3bf3d31647b716a03db9d",
-      "pokemonId": 10074
-    },
-    "130:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10041.png",
-      "size": 165764,
-      "sha": "ada071e157dc214d6ae7b5d0ce74061acabc3727",
-      "pokemonId": 10041
-    },
-    "214:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10047.png",
-      "size": 124609,
-      "sha": "b171e5372d78bd0e99a991d2ecea972751bdac6d",
-      "pokemonId": 10047
-    },
-    "229:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10048.png",
-      "size": 119346,
-      "sha": "cd3f7dd7d57d44e1fcba1c4dfbd096ed943618ca",
-      "pokemonId": 10048
-    },
-    "115:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10039.png",
-      "size": 202697,
-      "sha": "d7595e1367dea440daedfaf2d66d275294ea80d9",
-      "pokemonId": 10039
-    },
-    "380:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10062.png",
-      "size": 117662,
-      "sha": "8ab70fb00fb29703881fde3887a746a3bff3c50b",
-      "pokemonId": 10062
-    },
-    "381:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10063.png",
-      "size": 83816,
-      "sha": "38cf6afda07a1070b644d409160b73bf8018a175",
-      "pokemonId": 10063
-    },
-    "428:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10088.png",
-      "size": 118061,
-      "sha": "36ce5e548f0572f3a0c8ee9784d100afcc8fbd19",
-      "pokemonId": 10088
-    },
-    "448:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10059.png",
-      "size": 138895,
-      "sha": "d09e9bf86f12cda9279f2e41fa908cfe5c0b5b4e",
-      "pokemonId": 10059
-    },
-    "310:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10055.png",
-      "size": 148328,
-      "sha": "90564c10a7940e62a1bb8d2f05170365da47cc8d",
-      "pokemonId": 10055
-    },
-    "303:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10052.png",
-      "size": 153771,
-      "sha": "eb4100f18efa897e302975f3d253e231ac12a571",
-      "pokemonId": 10052
-    },
-    "308:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10054.png",
-      "size": 140378,
-      "sha": "133e2f8b29d4d99e09256adb09042f5c3f70b21a",
-      "pokemonId": 10054
-    },
-    "376:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10076.png",
-      "size": 177430,
-      "sha": "61a8b61621dc222cd00e5385bef60653178dfdd9",
-      "pokemonId": 10076
-    },
-    "150:mega-x": {
-      "path": "sprites/pokemon/other/official-artwork/10043.png",
-      "size": 108748,
-      "sha": "8ec5003645d37123fe801b1b9f0dc42f9391cfa4",
-      "pokemonId": 10043
-    },
-    "150:mega-y": {
-      "path": "sprites/pokemon/other/official-artwork/10044.png",
-      "size": 109153,
-      "sha": "3b6e52eee08c50508612d4c10c7c3a07e0d3d695",
-      "pokemonId": 10044
-    },
-    "18:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10073.png",
-      "size": 156103,
-      "sha": "f5dadeafbcedd3a1c4efe70a58e4769ff37626a3",
-      "pokemonId": 10073
-    },
-    "127:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10040.png",
-      "size": 143574,
-      "sha": "66dc198372d37ca4fae7d6c80a259823c770d2c0",
-      "pokemonId": 10040
-    },
-    "384:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10079.png",
-      "size": 186606,
-      "sha": "d89bbca901ec930cdc935cdde5b1503a06365f86",
-      "pokemonId": 10079
-    },
-    "302:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10066.png",
-      "size": 149045,
-      "sha": "933218bd9a1075dcc6ddd8aaaf28e3951920990d",
-      "pokemonId": 10066
-    },
-    "373:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10089.png",
-      "size": 90394,
-      "sha": "970d5139be0fde295ca25941eeedd08e2c4480f1",
-      "pokemonId": 10089
-    },
-    "254:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10065.png",
-      "size": 106996,
-      "sha": "2721498d8659eb542e39ff86bf08d4aa643eaa29",
-      "pokemonId": 10065
-    },
-    "212:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10046.png",
-      "size": 142223,
-      "sha": "f8c7d5e88b9bcd41a632bddccfa98eaef1f7a03b",
-      "pokemonId": 10046
-    },
-    "319:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10070.png",
-      "size": 137605,
-      "sha": "f686012183ad2740a0350282eba835d251093913",
-      "pokemonId": 10070
-    },
-    "80:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10071.png",
-      "size": 129206,
-      "sha": "8665eae1352d6ceb1fc01223fcfd6362a06ad682",
-      "pokemonId": 10071
-    },
-    "208:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10072.png",
-      "size": 172617,
-      "sha": "d12b4e8a232c48c3db7428f81f9542ccad7dd1c4",
-      "pokemonId": 10072
-    },
-    "260:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10064.png",
-      "size": 203660,
-      "sha": "0cd425c57b5342a606106c7e4723559ba29a015d",
-      "pokemonId": 10064
-    },
-    "248:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10049.png",
-      "size": 157994,
-      "sha": "32c098a11f053bef91c6756ca9c16aa518c16c24",
-      "pokemonId": 10049
-    },
-    "3:mega": {
-      "path": "sprites/pokemon/other/official-artwork/10033.png",
-      "size": 190329,
-      "sha": "0e9dcdb953c1976efda5674e3fde5739f076d3cd",
-      "pokemonId": 10033
+    "905:1": {
+      "path": "sprites/pokemon/other/official-artwork/10249.png",
+      "size": 103008,
+      "sha": "9049a4046791e1b23b75bb7c982038d2344a6561",
+      "pokemonId": 10249
     }
   }
 }

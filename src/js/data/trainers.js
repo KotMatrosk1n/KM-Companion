@@ -161,17 +161,16 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Sobble",
-				"gender": "M",
+				"species": "Popplio",
+				"gender": "F",
 				"level": 10,
-				"ability": "Sniper",
-				"item": "Scope Lens",
+				"ability": "Liquid Voice",
+				"item": "Mystic Water",
 				"nature": "Modest",
 				"moves": [
-					"Rain Dance",
-					"Double Team",
-					"Whirlpool",
-					"Bubble Beam"
+					"Pound",
+					"Disarming Voice",
+					"Whirlpool"
 				],
 				"ivs": {
 					"hp": 31,
@@ -237,17 +236,17 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Grookey",
+				"species": "Turtwig",
 				"gender": "M",
 				"level": 10,
-				"ability": "Grassy Surge",
-				"item": "Grassy Seed",
-				"nature": "Jolly",
+				"ability": "Shell Armor",
+				"item": "Miracle Seed",
+				"nature": "Adamant",
 				"moves": [
+					"Tackle",
 					"Growl",
-					"Scratch",
-					"Branch Poke",
-					"Taunt"
+					"Vine Whip",
+					"Leech Seed"
 				],
 				"ivs": {
 					"hp": 31,
@@ -313,16 +312,17 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Scorbunny",
+				"species": "Cyndaquil",
 				"gender": "M",
 				"level": 10,
-				"ability": "Libero",
-				"item": "Life Orb",
-				"nature": "Jolly",
+				"ability": "Flash Fire",
+				"item": "Charcoal",
+				"nature": "Mild",
 				"moves": [
+					"Tackle",
 					"Growl",
 					"Ember",
-					"Quick Attack"
+					"Fire Spin"
 				],
 				"ivs": {
 					"hp": 31,
@@ -409,9 +409,10 @@ var TRAINERDEX = [
 				"item": "Black Glasses",
 				"nature": "Hasty",
 				"moves": [
-					"Leer",
-					"Lick",
-					"Snarl"
+					"Charm",
+					"Tickle",
+					"Extreme Speed",
+					"Helping Hand"
 				],
 				"ivs": {
 					"hp": 31,
@@ -2236,6 +2237,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Klinklang",
+				"gender": "N",
 				"level": 24,
 				"ability": "Clear Body",
 				"item": "Metal Coat",
@@ -2334,6 +2336,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Polteageist",
+				"gender": "N",
 				"level": 24,
 				"ability": "Weak Armor",
 				"item": "White Herb",
@@ -2455,6 +2458,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Porygon2",
+				"gender": "N",
 				"level": 24,
 				"ability": "Download",
 				"item": "Silk Scarf",
@@ -2530,6 +2534,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Bronzong",
+				"gender": "N",
 				"level": 24,
 				"ability": "Levitate",
 				"item": "Occa Berry",
@@ -2996,6 +3001,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Dhelmise",
+				"gender": "N",
 				"level": 25,
 				"ability": "Steelworker",
 				"item": "Iron Ball",
@@ -3141,6 +3147,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Rotom-Heat",
+				"gender": "N",
 				"level": 25,
 				"ability": "Levitate",
 				"item": "Charcoal",
@@ -3605,6 +3612,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Starmie",
+				"gender": "N",
 				"level": 27,
 				"ability": "Natural Cure",
 				"item": "Expert Belt",
@@ -3825,6 +3833,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Rotom-Wash",
+				"gender": "N",
 				"level": 28,
 				"ability": "Levitate",
 				"item": "Leftovers",
@@ -4213,6 +4222,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Magnezone",
+				"gender": "N",
 				"level": 31,
 				"ability": "Analytic",
 				"item": "Air Balloon",
@@ -4357,7 +4367,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Liepard",
-				"gender": "M",
+				"gender": "F",
 				"level": 31,
 				"ability": "Prankster",
 				"item": "Focus Sash",
@@ -4380,7 +4390,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Sableye",
-				"gender": "M",
+				"gender": "F",
 				"level": 31,
 				"ability": "Prankster",
 				"item": "Roseli Berry",
@@ -4722,7 +4732,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Sirfetch\u2019d",
+				"species": "Sirfetch’d",
 				"gender": "M",
 				"level": 31,
 				"ability": "Scrappy",
@@ -5571,6 +5581,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Porygon2",
+				"gender": "N",
 				"level": 37,
 				"ability": "Download",
 				"item": "Eviolite",
@@ -5761,6 +5772,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Solrock",
+				"gender": "N",
 				"level": 37,
 				"ability": "Levitate",
 				"item": "Heat Rock",
@@ -6080,6 +6092,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Claydol",
+				"gender": "N",
 				"level": 37,
 				"ability": "Levitate",
 				"item": "Heat Rock",
@@ -6205,7 +6218,7 @@ var TRAINERDEX = [
 				"gender": "M",
 				"level": 38,
 				"ability": "Skill Link",
-				"item": "King's Rock",
+				"item": "King’s Rock",
 				"nature": "Adamant",
 				"moves": [
 					"Shell Smash",
@@ -6225,6 +6238,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zygarde-10%",
+				"gender": "N",
 				"level": 38,
 				"ability": "Aura Break",
 				"item": "Yache Berry",
@@ -6370,6 +6384,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zygarde-10%",
+				"gender": "N",
 				"level": 38,
 				"ability": "Aura Break",
 				"item": "Yache Berry",
@@ -6492,6 +6507,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Rotom-Mow",
+				"gender": "N",
 				"level": 38,
 				"ability": "Levitate",
 				"item": "Choice Scarf",
@@ -6514,6 +6530,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zygarde-10%",
+				"gender": "N",
 				"level": 38,
 				"ability": "Aura Break",
 				"item": "Yache Berry",
@@ -6681,6 +6698,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Falinks",
+				"gender": "N",
 				"level": 39,
 				"ability": "Battle Armor",
 				"item": "Lum Berry",
@@ -6801,7 +6819,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Sirfetch\u2019d",
+				"species": "Sirfetch’d",
 				"gender": "M",
 				"level": 39,
 				"ability": "Scrappy",
@@ -6954,6 +6972,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Buzzwole",
+				"gender": "N",
 				"level": 40,
 				"ability": "Beast Boost",
 				"item": "Rocky Helmet",
@@ -7045,6 +7064,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Marshadow",
+				"gender": "N",
 				"level": 40,
 				"ability": "Technician",
 				"item": "Spell Tag",
@@ -7311,6 +7331,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Polteageist",
+				"gender": "N",
 				"level": 43,
 				"ability": "Weak Armor",
 				"item": "Leftovers",
@@ -7630,6 +7651,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Porygon2",
+				"gender": "N",
 				"level": 43,
 				"ability": "Download",
 				"item": "Eviolite",
@@ -8120,6 +8142,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Diancie",
+				"gender": "N",
 				"level": 44,
 				"ability": "Clear Body",
 				"item": "Leftovers",
@@ -8165,6 +8188,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Tapu Lele",
+				"gender": "N",
 				"level": 44,
 				"ability": "Psychic Surge",
 				"item": "Terrain Extender",
@@ -8173,7 +8197,7 @@ var TRAINERDEX = [
 					"Flatter",
 					"Grass Knot",
 					"Psyshock",
-					"Nature's Madness"
+					"Nature’s Madness"
 				],
 				"ivs": {
 					"hp": 31,
@@ -8310,6 +8334,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Raikou",
+				"gender": "N",
 				"level": 47,
 				"ability": "Inner Focus",
 				"item": "Magnet",
@@ -8409,6 +8434,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Dhelmise",
+				"gender": "N",
 				"level": 47,
 				"ability": "Steelworker",
 				"item": "Spell Tag",
@@ -8431,6 +8457,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Magnezone",
+				"gender": "N",
 				"level": 47,
 				"ability": "Analytic",
 				"item": "Air Balloon",
@@ -8453,6 +8480,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Suicune",
+				"gender": "N",
 				"level": 47,
 				"ability": "Inner Focus",
 				"item": "Leftovers",
@@ -8598,6 +8626,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Entei",
+				"gender": "N",
 				"level": 47,
 				"ability": "Inner Focus",
 				"item": "Choice Band",
@@ -8818,6 +8847,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Klinklang",
+				"gender": "N",
 				"level": 48,
 				"ability": "Clear Body",
 				"item": "Metal Coat",
@@ -8863,6 +8893,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Rotom-Fan",
+				"gender": "N",
 				"level": 48,
 				"ability": "Levitate",
 				"item": "Wise Glasses",
@@ -9007,6 +9038,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Porygon-Z",
+				"gender": "N",
 				"level": 48,
 				"ability": "Adaptability",
 				"item": "Silk Scarf",
@@ -9105,6 +9137,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Bronzong",
+				"gender": "N",
 				"level": 48,
 				"ability": "Levitate",
 				"item": "Occa Berry",
@@ -9127,6 +9160,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Golurk",
+				"gender": "N",
 				"level": 48,
 				"ability": "Iron Fist",
 				"item": "Soft Sand",
@@ -9683,6 +9717,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Lunatone",
+				"gender": "N",
 				"level": 49,
 				"ability": "Levitate",
 				"item": "Twisted Spoon",
@@ -9705,6 +9740,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Solrock",
+				"gender": "N",
 				"level": 49,
 				"ability": "Levitate",
 				"item": "Passho Berry",
@@ -10330,6 +10366,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Terrakion",
+				"gender": "N",
 				"level": 50,
 				"ability": "Justified",
 				"item": "Expert Belt",
@@ -10529,6 +10566,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Magnezone",
+				"gender": "N",
 				"level": 52,
 				"ability": "Analytic",
 				"item": "Air Balloon",
@@ -10574,6 +10612,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Dhelmise",
+				"gender": "N",
 				"level": 52,
 				"ability": "Steelworker",
 				"item": "Spell Tag",
@@ -10841,6 +10880,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Dhelmise",
+				"gender": "N",
 				"level": 53,
 				"ability": "Steelworker",
 				"item": "Choice Band",
@@ -10932,6 +10972,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Regice",
+				"gender": "N",
 				"level": 53,
 				"ability": "Clear Body",
 				"item": "Weakness Policy",
@@ -11076,6 +11117,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Tapu Fini",
+				"gender": "N",
 				"level": 53,
 				"ability": "Misty Surge",
 				"item": "Leftovers",
@@ -11365,6 +11407,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Suicune",
+				"gender": "N",
 				"level": 53,
 				"ability": "Pressure",
 				"item": "Binding Band",
@@ -11486,6 +11529,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Falinks",
+				"gender": "N",
 				"level": 53,
 				"ability": "Battle Armor",
 				"item": "Mental Herb",
@@ -11508,6 +11552,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Cobalion",
+				"gender": "N",
 				"level": 53,
 				"ability": "Justified",
 				"item": "Expert Belt",
@@ -11560,6 +11605,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Arctovish",
+				"gender": "N",
 				"level": 53,
 				"ability": "Slush Rush",
 				"item": "Mystic Water",
@@ -11651,6 +11697,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Keldeo",
+				"gender": "N",
 				"level": 53,
 				"ability": "Justified",
 				"item": "Muscle Band",
@@ -11703,6 +11750,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Starmie",
+				"gender": "N",
 				"level": 53,
 				"ability": "Analytic",
 				"item": "Power Herb",
@@ -11794,6 +11842,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Latias",
+				"gender": "F",
 				"level": 53,
 				"ability": "Levitate",
 				"item": "Soul Dew",
@@ -11868,7 +11917,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Sirfetch\u2019d",
+				"species": "Sirfetch’d",
 				"gender": "M",
 				"level": 53,
 				"ability": "Scrappy",
@@ -11938,6 +11987,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Registeel",
+				"gender": "N",
 				"level": 53,
 				"ability": "Clear Body",
 				"item": "Chople Berry",
@@ -12082,6 +12132,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Regieleki",
+				"gender": "N",
 				"level": 53,
 				"ability": "Transistor",
 				"item": "Binding Band",
@@ -12157,6 +12208,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Articuno-Galar",
+				"gender": "N",
 				"level": 53,
 				"ability": "Competitive",
 				"item": "Sitrus Berry",
@@ -12225,6 +12277,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Tapu Koko",
+				"gender": "N",
 				"level": 53,
 				"ability": "Electric Surge",
 				"item": "Terrain Extender",
@@ -12369,6 +12422,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Entei",
+				"gender": "N",
 				"level": 53,
 				"ability": "Inner Focus",
 				"item": "Leftovers",
@@ -12490,6 +12544,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Zarude",
+				"gender": "N",
 				"level": 54,
 				"ability": "Leaf Guard",
 				"item": "Assault Vest",
@@ -13290,6 +13345,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Moltres-Galar",
+				"gender": "N",
 				"level": 55,
 				"ability": "Berserk",
 				"item": "Weakness Policy",
@@ -13503,6 +13559,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Dracovish",
+				"gender": "N",
 				"level": 57,
 				"ability": "Strong Jaw",
 				"item": "Choice Scarf",
@@ -13723,6 +13780,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Dracozolt",
+				"gender": "N",
 				"level": 57,
 				"ability": "Volt Absorb",
 				"item": "Air Balloon",
@@ -13791,6 +13849,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Zygarde-10%",
+				"gender": "N",
 				"level": 57,
 				"ability": "Aura Break",
 				"item": "Roseli Berry",
@@ -13813,8 +13872,9 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Regidrago",
+				"gender": "N",
 				"level": 57,
-				"ability": "Dragon's Maw",
+				"ability": "Dragon’s Maw",
 				"item": "Draco Plate",
 				"nature": "Modest",
 				"moves": [
@@ -14010,6 +14070,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Shedinja",
+				"gender": "N",
 				"level": 62,
 				"ability": "Wonder Guard",
 				"item": "Safety Goggles",
@@ -14101,6 +14162,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Ditto",
+				"gender": "N",
 				"level": 62,
 				"ability": "Imposter",
 				"item": "Choice Scarf",
@@ -14190,7 +14252,7 @@ var TRAINERDEX = [
 					"df": 31,
 					"sa": 31,
 					"sd": 31,
-					"sp": 31
+					"sp": 0
 				}
 			},
 			{
@@ -14218,14 +14280,14 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Aegislash-Shield",
+				"species": "Aegislash",
 				"gender": "M",
 				"level": 62,
 				"ability": "Stance Change",
 				"item": "Weakness Policy",
 				"nature": "Quiet",
 				"moves": [
-					"King's Shield",
+					"King’s Shield",
 					"Shadow Ball",
 					"Sacred Sword",
 					"Shadow Sneak"
@@ -14509,6 +14571,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Bronzong",
+				"gender": "N",
 				"level": 63,
 				"ability": "Heatproof",
 				"item": "Leftovers",
@@ -14706,6 +14769,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Claydol",
+				"gender": "N",
 				"level": 63,
 				"ability": "Levitate",
 				"item": "Mental Herb",
@@ -15041,6 +15105,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Klinklang",
+				"gender": "N",
 				"level": 64,
 				"ability": "Plus",
 				"item": "Sitrus Berry",
@@ -15063,6 +15128,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Starmie",
+				"gender": "N",
 				"level": 64,
 				"ability": "Natural Cure",
 				"item": "Damp Rock",
@@ -15184,6 +15250,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Guzzlord",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Assault Vest",
@@ -15206,6 +15273,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zarude",
+				"gender": "N",
 				"level": 65,
 				"ability": "Leaf Guard",
 				"item": "Leftovers",
@@ -15228,6 +15296,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Yveltal",
+				"gender": "N",
 				"level": 65,
 				"ability": "Dark Aura",
 				"item": "Heavy-Duty Boots",
@@ -15281,6 +15350,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Jirachi",
+				"gender": "N",
 				"level": 65,
 				"ability": "Serene Grace",
 				"item": "Light Clay",
@@ -15303,6 +15373,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Zeraora",
+				"gender": "N",
 				"level": 65,
 				"ability": "Volt Absorb",
 				"item": "Life Orb",
@@ -15371,6 +15442,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Celesteela",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Power Herb",
@@ -15424,6 +15496,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Tapu Bulu",
+				"gender": "N",
 				"level": 65,
 				"ability": "Grassy Surge",
 				"item": "Terrain Extender",
@@ -15432,7 +15505,7 @@ var TRAINERDEX = [
 					"Wood Hammer",
 					"Horn Leech",
 					"Close Combat",
-					"Nature's Madness"
+					"Nature’s Madness"
 				],
 				"ivs": {
 					"hp": 31,
@@ -15446,6 +15519,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Kartana",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Grassy Seed",
@@ -15468,6 +15542,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Blacephalon",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Choice Scarf",
@@ -15490,6 +15565,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zapdos",
+				"gender": "N",
 				"level": 65,
 				"ability": "Static",
 				"item": "Heavy-Duty Boots",
@@ -15566,6 +15642,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Mew",
+				"gender": "N",
 				"level": 65,
 				"ability": "Synchronize",
 				"item": "Mental Herb",
@@ -15611,6 +15688,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Xurkitree",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Shuca Berry",
@@ -15633,6 +15711,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Spectrier",
+				"gender": "N",
 				"level": 65,
 				"ability": "Grim Neigh",
 				"item": "Leftovers",
@@ -15655,6 +15734,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Nihilego",
+				"gender": "N",
 				"level": 65,
 				"ability": "Beast Boost",
 				"item": "Power Herb",
@@ -15707,6 +15787,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Uxie",
+				"gender": "N",
 				"level": 67,
 				"ability": "Levitate",
 				"item": "Mental Herb",
@@ -15729,6 +15810,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Porygon2",
+				"gender": "N",
 				"level": 67,
 				"ability": "Download",
 				"item": "Eviolite",
@@ -15820,6 +15902,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Stakataka",
+				"gender": "N",
 				"level": 67,
 				"ability": "Beast Boost",
 				"item": "Weakness Policy",
@@ -15849,6 +15932,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Heatran",
+				"gender": "",
 				"level": 68,
 				"ability": "Flash Fire",
 				"item": "Leftovers",
@@ -16016,6 +16100,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Klinklang",
+				"gender": "N",
 				"level": 69,
 				"ability": "Clear Body",
 				"item": "White Herb",
@@ -16038,6 +16123,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Magnezone",
+				"gender": "N",
 				"level": 69,
 				"ability": "Analytic",
 				"item": "Air Balloon",
@@ -16060,6 +16146,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Porygon-Z",
+				"gender": "N",
 				"level": 69,
 				"ability": "Adaptability",
 				"item": "Choice Specs",
@@ -16082,6 +16169,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Ditto",
+				"gender": "N",
 				"level": 69,
 				"ability": "Imposter",
 				"item": "Choice Scarf",
@@ -16101,6 +16189,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Genesect",
+				"gender": "N",
 				"level": 69,
 				"ability": "Download",
 				"item": "Douse Drive",
@@ -16153,6 +16242,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Rotom-Fan",
+				"gender": "N",
 				"level": 69,
 				"ability": "Levitate",
 				"item": "Choice Scarf",
@@ -16198,6 +16288,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Golurk",
+				"gender": "N",
 				"level": 69,
 				"ability": "Iron Fist",
 				"item": "Muscle Band",
@@ -16243,6 +16334,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Regigigas",
+				"gender": "N",
 				"level": 69,
 				"ability": "Slow Start",
 				"item": "Leftovers",
@@ -16365,6 +16457,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Stunfisk-Galar",
+				"gender": "",
 				"level": 66,
 				"ability": "Mimicry",
 				"item": "Electric Seed",
@@ -16709,6 +16802,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Calyrex-Ice",
+				"gender": "N",
 				"level": 70,
 				"ability": "As One (Glastrier)",
 				"item": "Mental Herb",
@@ -16725,7 +16819,7 @@ var TRAINERDEX = [
 					"df": 31,
 					"sa": 31,
 					"sd": 31,
-					"sp": 31
+					"sp": 0
 				}
 			},
 			{
@@ -16771,12 +16865,13 @@ var TRAINERDEX = [
 					"df": 31,
 					"sa": 31,
 					"sd": 31,
-					"sp": 31
+					"sp": 0
 				}
 			},
 			{
 				"slot": 4,
 				"species": "Pheromosa",
+				"gender": "N",
 				"level": 70,
 				"ability": "Beast Boost",
 				"item": "Focus Sash",
@@ -16816,7 +16911,7 @@ var TRAINERDEX = [
 					"df": 31,
 					"sa": 31,
 					"sd": 31,
-					"sp": 31
+					"sp": 0
 				}
 			},
 			{
@@ -16921,6 +17016,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Zacian",
+				"gender": "N",
 				"level": 75,
 				"ability": "Intrepid Sword",
 				"item": "Babiri Berry",
@@ -16943,6 +17039,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Xerneas",
+				"gender": "N",
 				"level": 75,
 				"ability": "Fairy Aura",
 				"item": "Power Herb",
@@ -16995,6 +17092,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Kyogre-Primal",
+				"gender": "N",
 				"level": 75,
 				"ability": "Primordial Sea",
 				"item": "Choice Specs",
@@ -17085,7 +17183,8 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Palkia",
+				"species": "Palkia-Origin",
+				"gender": "N",
 				"level": 75,
 				"ability": "Pressure",
 				"item": "Lustrous Orb",
@@ -17161,6 +17260,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Zapdos-Galar",
+				"gender": "N",
 				"level": 75,
 				"ability": "Defiant",
 				"item": "Choice Band",
@@ -17183,6 +17283,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Cobalion",
+				"gender": "N",
 				"level": 75,
 				"ability": "Justified",
 				"item": "Shuca Berry",
@@ -17228,6 +17329,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Zamazenta",
+				"gender": "N",
 				"level": 75,
 				"ability": "Dauntless Shield",
 				"item": "Assault Vest",
@@ -17303,6 +17405,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Dracovish",
+				"gender": "N",
 				"level": 75,
 				"ability": "Strong Jaw",
 				"item": "Choice Scarf",
@@ -17322,6 +17425,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Naganadel",
+				"gender": "N",
 				"level": 75,
 				"ability": "Beast Boost",
 				"item": "Life Orb",
@@ -17344,6 +17448,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Giratina-Origin",
+				"gender": "N",
 				"level": 75,
 				"ability": "Levitate",
 				"item": "Griseous Orb",
@@ -17366,6 +17471,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Rayquaza-Mega",
+				"gender": "N",
 				"level": 75,
 				"ability": "Delta Stream",
 				"item": "Lum Berry",
@@ -17388,6 +17494,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Zygarde-Complete",
+				"gender": "N",
 				"level": 75,
 				"ability": "Aura Break",
 				"item": "Weakness Policy",
@@ -17440,6 +17547,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Magearna",
+				"gender": "N",
 				"level": 80,
 				"ability": "Soul-Heart",
 				"item": "White Herb",
@@ -17462,6 +17570,7 @@ var TRAINERDEX = [
 			{
 				"slot": 3,
 				"species": "Metagross-Mega",
+				"gender": "N",
 				"level": 80,
 				"ability": "Tough Claws",
 				"item": "Choice Band",
@@ -17483,7 +17592,8 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Dialga",
+				"species": "Dialga-Origin",
+				"gender": "N",
 				"level": 80,
 				"ability": "Pressure",
 				"item": "Room Service",
@@ -17506,6 +17616,7 @@ var TRAINERDEX = [
 			{
 				"slot": 5,
 				"species": "Necrozma-Dusk-Mane",
+				"gender": "N",
 				"level": 80,
 				"ability": "Prism Armor",
 				"item": "Weakness Policy",
@@ -17528,6 +17639,7 @@ var TRAINERDEX = [
 			{
 				"slot": 6,
 				"species": "Melmetal",
+				"gender": "N",
 				"level": 80,
 				"ability": "Iron Fist",
 				"item": "Assault Vest",
@@ -17558,6 +17670,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Groudon-Primal",
+				"gender": "N",
 				"level": 85,
 				"ability": "Desolate Land",
 				"item": "Shuca Berry",
@@ -17580,6 +17693,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Victini",
+				"gender": "N",
 				"level": 85,
 				"ability": "Victory Star",
 				"item": "Choice Scarf",
@@ -17625,6 +17739,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Volcanion",
+				"gender": "N",
 				"level": 85,
 				"ability": "Water Absorb",
 				"item": "Assault Vest",
@@ -17669,7 +17784,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 6,
-				"species": "Charizard-Mega-Y",
+				"species": "Charizard",
 				"gender": "M",
 				"level": 85,
 				"ability": "Drought",
@@ -17701,6 +17816,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Groudon-Primal",
+				"gender": "N",
 				"level": 85,
 				"ability": "Desolate Land",
 				"item": "Shuca Berry",
@@ -17723,6 +17839,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Victini",
+				"gender": "N",
 				"level": 85,
 				"ability": "Victory Star",
 				"item": "Choice Scarf",
@@ -17768,6 +17885,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Volcanion",
+				"gender": "N",
 				"level": 85,
 				"ability": "Water Absorb",
 				"item": "Assault Vest",
@@ -17812,7 +17930,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 6,
-				"species": "Charizard-Mega-Y",
+				"species": "Charizard",
 				"gender": "M",
 				"level": 85,
 				"ability": "Drought",
@@ -17844,6 +17962,7 @@ var TRAINERDEX = [
 			{
 				"slot": 1,
 				"species": "Groudon-Primal",
+				"gender": "N",
 				"level": 85,
 				"ability": "Desolate Land",
 				"item": "Shuca Berry",
@@ -17866,6 +17985,7 @@ var TRAINERDEX = [
 			{
 				"slot": 2,
 				"species": "Victini",
+				"gender": "N",
 				"level": 85,
 				"ability": "Victory Star",
 				"item": "Choice Scarf",
@@ -17911,6 +18031,7 @@ var TRAINERDEX = [
 			{
 				"slot": 4,
 				"species": "Volcanion",
+				"gender": "N",
 				"level": 85,
 				"ability": "Water Absorb",
 				"item": "Assault Vest",
@@ -17955,7 +18076,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 6,
-				"species": "Charizard-Mega-Y",
+				"species": "Charizard",
 				"gender": "M",
 				"level": 85,
 				"ability": "Drought",

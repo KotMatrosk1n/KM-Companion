@@ -1033,8 +1033,12 @@ function readInventoryItem8(data, offset) {
 }
 
 function getBattleRelevantBagItemName(itemId) {
-	if (!itemId || itemId >= SAVE_IMPORT_TEXT.items.length) return "";
-	var sourceName = SAVE_IMPORT_TEXT.items[itemId];
+	if (!itemId) return "";
+	var context = getActiveSaveImportContext();
+	var overridden = callRawEntityIdResolver(context && context.resolvedProvider, "The active generation provider", {
+		kind: "item", rawId: itemId, generation: 8, format: "pk8", location: "Bag"
+	});
+	var sourceName = overridden.handled ? overridden.name : SAVE_IMPORT_TEXT.items[itemId];
 	var calcName = resolveCalcName("items", sourceName, 8);
 	var items = getCalcData("items", 8);
 	return calcName && items.indexOf(calcName) !== -1 ? calcName : "";

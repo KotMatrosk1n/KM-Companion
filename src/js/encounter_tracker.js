@@ -37,6 +37,7 @@
 				return item.pokemon && item.pokemon.some(function (name) { return family(name) === family(record.pokemon); });
 			})[0];
 			if (special) return special;
+			if (record.source === "Trade") return rule.allowances.filter(function (item) { return item.id === "trade"; })[0] || null;
 			return rule.allowances.filter(function (item) {
 				if (!item.methods || record.source === "Trade") return false;
 				if (item.methods.indexOf(record.method || record.source) !== -1 || record.source === "Wild") return true;
@@ -149,12 +150,18 @@
 			if (commit(next)) { pokemonInput.value = ""; feedback.textContent = name + " recorded."; pokemonInput.focus(); }
 		});
 		function family(name) { return families[name] || name; }
+		function sameSpecies(first, second) {
+			var aliases = data.encounterAliases || {};
+			var firstName = Object.prototype.hasOwnProperty.call(aliases, first) ? aliases[first] : first;
+			var secondName = Object.prototype.hasOwnProperty.call(aliases, second) ? aliases[second] : second;
+			return firstName === secondName;
+		}
 		function familyCatch(name) { return mode === "normal" ? null : state.catches.filter(function (c) { return family(c.pokemon) === family(name); })[0]; }
 		function catchBlocked(record) {
 			var duplicate = familyCatch(record.pokemon);
 			return duplicate ? "Duplicate family: " + duplicate.pokemon + " · " + areaName(duplicate.area) : rules.reason(record, state);
 		}
-		function caught(area, name) { return state.catches.some(function (c) { return c.area === area.id && c.pokemon === name; }); }
+		function caught(area, name) { return state.catches.some(function (c) { return c.area === area.id && sameSpecies(c.pokemon, name); }); }
 		function used(area) { return rules.describe(area, state).closed; }
 		function progressText(status) {
 			return status.allowances.map(function (item) { return item.limit === null ? item.count + " recorded · Unlimited" : item.label + " " + item.count + "/" + item.limit; }).join(" · ");
@@ -186,7 +193,8 @@
 				var saved = JSON.parse(raw);
 				if (saved && (saved.version === 1 || saved.version === 2) && Array.isArray(saved.catches) && Array.isArray(saved.usedAreas)) {
 					state.catches = saved.catches.filter(function (c) {
-						return c && species.indexOf(c.pokemon) !== -1 && typeof c.source === "string" && (c.area === "" || data.areas.some(function (a) { return a.id === c.area; }));
+						return c && typeof c.pokemon === "string" && c.pokemon.trim() && typeof c.source === "string" &&
+							(c.area === "" || data.areas.some(function (a) { return a.id === c.area; }));
 					});
 					state.usedAreas = saved.usedAreas.filter(function (id) { return data.areas.some(function (a) { return a.id === id; }); });
 				}
@@ -323,22 +331,26 @@
 						next.catches.push(record);
 					} else if (mode === "normal") {
 						for (var index = next.catches.length - 1; index >= 0; index--) {
-							if (next.catches[index].area === area.id && next.catches[index].pokemon === entry.pokemon) { next.catches.splice(index, 1); break; }
+							if (next.catches[index].area === area.id && sameSpecies(next.catches[index].pokemon, entry.pokemon)) { next.catches.splice(index, 1); break; }
 						}
-					} else next.catches = next.catches.filter(function (c) { return c.area !== area.id || c.pokemon !== entry.pokemon; });
+					} else next.catches = next.catches.filter(function (c) { return c.area !== area.id || !sameSpecies(c.pokemon, entry.pokemon); });
 					commit(next);
 					var replacement = document.getElementById(check.id); if (replacement) replacement.focus({preventScroll: true});
 				});
 				cell.appendChild(check); var status = el("span", "km-catch-state", reason); status.id = check.id + "-status";
 				if (mode === "normal" && isCaught) {
-					var total = state.catches.filter(function (c) { return c.area === area.id && c.pokemon === entry.pokemon; }).length;
+					var total = state.catches.filter(function (c) { return c.area === area.id && sameSpecies(c.pokemon, entry.pokemon); }).length;
 					cell.appendChild(el("span", "km-catch-total", " ×" + total));
 					status.textContent = total + " recorded here. Uncheck to remove one; use the catch log to add another.";
 				}
 				check.setAttribute("aria-describedby", status.id); cell.appendChild(status); row.appendChild(cell);
 			},
 			rate: function (area, group, entry) {
-				if (mode === "normal") return entry.rate === null ? "N/A" : entry.rate + "%";
+				if (mode === "normal") {
+					if (data.encounterRates !== "weights") return entry.rate === null ? "N/A" : entry.rate + "%";
+					var weight = group.totalEntries.reduce(function (sum, e) { return sum + Number(e.rate); }, 0);
+					return entry.rate === null || !weight ? "N/A" : Number((entry.rate / weight * 100).toFixed(1)) + "%";
+				}
 				if (entry.rate === null || used(area) || rules.reason(entryRecord(area, group, entry), state)) return "N/A";
 				if (familyCatch(entry.pokemon)) return "0%";
 				var total = group.totalEntries.reduce(function (sum, e) { return sum + (familyCatch(e.pokemon) ? 0 : Number(e.rate)); }, 0);

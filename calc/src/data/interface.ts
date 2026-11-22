@@ -43,6 +43,7 @@ export interface Generations {
 
 export interface Generation {
   readonly num: GenerationNum;
+  readonly game?: 'royal-sword';
   readonly abilities: Abilities;
   readonly items: Items;
   readonly moves: Moves;
@@ -116,6 +117,10 @@ export interface Move extends Data<MoveName> {
   readonly willCrit?: boolean;
   readonly drain?: [number, number];
   readonly priority?: number;
+  readonly accuracy?: number | true;
+  readonly pp?: number;
+  readonly statusChance?: number;
+  readonly statChance?: number;
   readonly self?: SelfOrSecondaryEffect | null;
   readonly ignoreDefensive?: boolean;
   readonly overrideOffensiveStat?: StatIDExceptHP;
@@ -147,7 +152,7 @@ export interface Specie extends Data<SpeciesName> {
   readonly weightkg: number;
   readonly gender?: GenderName;
   readonly nfe?: boolean;
-  readonly abilities?: {0: AbilityName | ''};
+  readonly abilities?: {0: AbilityName | ''; 1?: AbilityName; H?: AbilityName};
   readonly canGigantamax?: MoveName;
   readonly otherFormes?: SpeciesName[];
   readonly baseSpecies?: SpeciesName;

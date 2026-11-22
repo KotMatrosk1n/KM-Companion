@@ -5,11 +5,13 @@
 	if (typeof module === "object" && module.exports) {
 		module.exports = factory(require("../rom_hack_registry.js"), require("../rom_hack_layouts.js"));
 	} else {
-		var bundled = factory(root.KMCalculatorRomHacks, root.KMCalculatorRomHackLayouts);
+		var bundled = factory(root.KMCalculatorRomHacks, root.KMCalculatorRomHackLayouts, function () {
+			return root.KMPokedexProfiles && root.KMPokedexProfiles["pokemon-royal-sword"];
+		});
 		root.KMCalculatorBundledRomHacks = bundled;
 		bundled.install(root.kmRomHackRegistry);
 	}
-})(typeof self !== "undefined" ? self : this, function (romHackApi, layoutApi) {
+})(typeof self !== "undefined" ? self : this, function (romHackApi, layoutApi, getRoyalSwordData) {
 	"use strict";
 
 	if (!romHackApi) throw new Error("rom_hack_registry.js must load before data/rom_hacks.js.");
@@ -20,7 +22,7 @@
 			id: "pokemon-royal-sword",
 			name: "Pokémon Royal Sword",
 			shortName: "Royal Sword",
-			version: "1",
+			version: "2",
 			baseGeneration: 8,
 			calcProfile: "royal-sword",
 			ui: {
@@ -93,6 +95,18 @@
 		id: "royal-sword",
 		kind: "rom-hack-override",
 		baseGeneration: 8,
+		resolveRawEntityId: function (kind, id, request) {
+			var data = getRoyalSwordData && getRoyalSwordData();
+			if (!data || request.generation !== 8 || request.format !== "pk8") return null;
+			if (kind === "ability") return data.abilityNames[id] || null;
+			if (kind === "item") return data.itemNames[id] || null;
+			if (kind === "species") {
+				var key = id + ":" + request.form;
+				var entry = data.entries.find(function (entry) { return entry.key === key && entry.present; });
+				return entry ? entry.name.replace(/♀/g, "-F").replace(/♂/g, "-M") : null;
+			}
+			return null;
+		},
 		getGeneration: function (calcApi, profile) {
 			if (!calcApi || !calcApi.RoyalSwordGenerations ||
 				typeof calcApi.RoyalSwordGenerations.get !== "function") {

@@ -14,7 +14,7 @@
 	}
 	function hasData(entry) { return !!entry && entry.stats.length === 6 && entry.stats.every(function (value) { return value > 0; }); }
 	function searchNames(name) {
-		var alternate = name.replace(/^(.*)-Mega(?:-([XY]))?$/, function (match, base, suffix) { return "Mega " + base + (suffix ? " " + suffix : ""); });
+		var alternate = name.replace(/^(.*)-Mega(?:-([XYZ]))?$/, function (match, base, suffix) { return "Mega " + base + (suffix ? " " + suffix : ""); });
 		return normalize(name) + " " + normalize(alternate.replace(/(.+)-(Alola|Galar|Hisui)$/, function (match, base, region) {
 			return ({Alola: "Alolan", Galar: "Galarian", Hisui: "Hisuian"})[region] + " " + base;
 		}));
@@ -39,12 +39,19 @@
 		});
 		(catalog.species || []).forEach(function (species) { names[identity(species.name)] = species.number + ":0"; });
 		(reference && reference.areas || []).forEach(function (area) {
+			var land = area.groups.find(function (group) { return group.method === "Land"; });
 			area.groups.forEach(function (group) {
+				var shared = Array.isArray(group.sharedSlots) && land ? land.entries.filter(function (row) {
+					return group.sharedSlots.indexOf(row.slot) !== -1;
+				}) : [];
+				var weight = shared.concat(group.entries).reduce(function (sum, row) { return sum + Number(row.rate); }, 0);
 				group.entries.forEach(function (row) {
-					var key = names[identity(row.pokemon)];
+					var aliases = reference.encounterAliases || {};
+					var key = names[identity(row.pokemon)] || names[identity(aliases[row.pokemon])];
 					if (!key) return;
 					if (!locations[key]) locations[key] = [];
-					locations[key].push({area: area.name, method: group.method, weather: group.weather || "", level: row.level, rate: row.rate, note: row.note || row.trade || ""});
+					var rate = reference.encounterRates !== "weights" || row.rate === null || !weight ? row.rate : Number((row.rate / weight * 100).toFixed(1));
+					locations[key].push({area: area.name, method: group.method, weather: group.weather || "", level: row.level, rate: rate, note: row.note || row.trade || ""});
 				});
 			});
 		});

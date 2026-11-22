@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "9df87f634c79ee26b4df22c82af439e7a6072b2c2a3f0e625b8e217f25cfae0e",
+  "revision": "bf7127e92787b0915d377e4b34759c33f27096cc2e5195d402b0055cfb07549a",
   "baseUrl": "https://play.pokemonshowdown.com/sprites/",
   "sprites": {
     "gen5/ababo.png": {
@@ -22,6 +22,10 @@
     "gen5/absol-mega.png": {
       "size": 1026,
       "sha256": "c970a57c05e84497de6aa5f39ef4751a7d3d52c846e266400fd5e062ead53393"
+    },
+    "gen5/absol-megaz.png": {
+      "size": 10566,
+      "sha256": "56c75d0281626d8b94daba6daeef63f97ae5cbb947d7b799574721e0fc4aa46c"
     },
     "gen5/absol.png": {
       "size": 800,
@@ -370,6 +374,12 @@
     "gen5/banette.png": {
       "size": 670,
       "sha256": "bf6f76ab108cb96a81479cdb63a134a59fd8a7ec4891c07e2a2dd0a0f472a69b"
+    },
+    "gen5/barbaracle-mega.png": {
+      "size": 30699,
+      "sha256": "29fdf2f9208b8ea21b45e19c938471c78c6209e194bcb218828e6966ccbe365e",
+      "source": "pokeapi-za",
+      "pokemonId": 10298
     },
     "gen5/barbaracle.png": {
       "size": 1318,
@@ -743,6 +753,10 @@
       "size": 534,
       "sha256": "b08d1606c9ee4973822e037fd66fee7c9ecdd1aa080e3721320c99ccc66d0e31"
     },
+    "gen5/chandelure-mega.png": {
+      "size": 8683,
+      "sha256": "f0c440969e025fd01e17e95c3a23e2f7adddff9db6ef1e563cea6c35852ac3e0"
+    },
     "gen5/chandelure.png": {
       "size": 660,
       "sha256": "77972d9147e607fd12b2a2516fbcc9c906da106ff86803042b9b20c00dd31ee4"
@@ -754,6 +768,10 @@
     "gen5/charcadet.png": {
       "size": 504,
       "sha256": "560c813cea7539ad6927515da7a9f400922f91ed28aa45cb9e2fa4b44b37bc4f"
+    },
+    "gen5/charizard-gmax.png": {
+      "size": 1697,
+      "sha256": "46099cae9baec9d10146b634fbc459739fcea093768898c2f9e134b15f575f1c"
     },
     "gen5/charizard-megax.png": {
       "size": 1342,
@@ -795,6 +813,10 @@
       "size": 419,
       "sha256": "805289de5b21b8447bba86087b96ef8d5a896f8a1f9c2050a9e39d4fd40e4952"
     },
+    "gen5/chesnaught-mega.png": {
+      "size": 12496,
+      "sha256": "68ca884098198f7cb53c6ce871f5f4352e12908eae2008915548053dbb37876c"
+    },
     "gen5/chesnaught.png": {
       "size": 1299,
       "sha256": "f5a2d05f097b151b85dced39450433252063b06fe6cd420bcb666d13465ce9e7"
@@ -818,6 +840,10 @@
     "gen5/chimchar.png": {
       "size": 561,
       "sha256": "49f617119e175548939a35cec368649badc477a090da0f302dc8cba25fab1bab"
+    },
+    "gen5/chimecho-mega.png": {
+      "size": 15957,
+      "sha256": "2999b1e13e7b53421c4fa028590e22713aa54d977a4e3cb576874aaa4224f36c"
     },
     "gen5/chimecho.png": {
       "size": 439,
@@ -874,6 +900,10 @@
     "gen5/claydol.png": {
       "size": 904,
       "sha256": "6dcfe10c491f96666f8add7828c869eef32291ce5d466c377b2fc9713e9b0c40"
+    },
+    "gen5/clefable-mega.png": {
+      "size": 5916,
+      "sha256": "7470feffc25c32f9294f1a5d7b65ef09595cd5444a9f608a02080825f5711a23"
     },
     "gen5/clefable.png": {
       "size": 628,
@@ -974,6 +1004,10 @@
     "gen5/cottonee.png": {
       "size": 471,
       "sha256": "a9de68dc7f1f35808174a20930bc4a62956b6e108f225229622b24bfe882a2d3"
+    },
+    "gen5/crabominable-mega.png": {
+      "size": 13438,
+      "sha256": "a96fa48ef8e244a4c9c4be5dd8657de5254143938852021d1a0fa2e3abac1759"
     },
     "gen5/crabominable.png": {
       "size": 1475,
@@ -1087,6 +1121,12 @@
       "size": 891,
       "sha256": "44bc0d9d6f0f7820d295944594ce6aea977754401ebf8c9bc1987240ce9c7a15"
     },
+    "gen5/darkrai-mega.png": {
+      "size": 22610,
+      "sha256": "321408ebfc274ef76a59f587becff95c631d6434c51a469aa5618693aa25801d",
+      "source": "pokeapi-za",
+      "pokemonId": 10312
+    },
     "gen5/darkrai.png": {
       "size": 818,
       "sha256": "c39530d5727b0f596af5ecd244010407c7d984970d282fbabdbea4b91aed6cac"
@@ -1146,6 +1186,10 @@
     "gen5/delibird.png": {
       "size": 662,
       "sha256": "2bfa1647e88f4e313177e2dff0ca3bcc5dd5bf4af5837b600e6d35adb3efb869"
+    },
+    "gen5/delphox-mega.png": {
+      "size": 11168,
+      "sha256": "a143f1254b89b97de805f39220528fba7bc7e80d4f4ff8b921992d376e113c93"
     },
     "gen5/delphox.png": {
       "size": 1203,
@@ -1259,6 +1303,12 @@
       "size": 1156,
       "sha256": "f59700e82745182ab56c1264a0658cd5b93fcf1cf8b979ee1141223a083aed35"
     },
+    "gen5/dragalge-mega.png": {
+      "size": 27568,
+      "sha256": "4125afde86d3c5caa06867d659dc0cfaf57abf0605ab7b49cd165c5d6d51625d",
+      "source": "pokeapi-za",
+      "pokemonId": 10299
+    },
     "gen5/dragalge.png": {
       "size": 987,
       "sha256": "45bd23a962a573e038338c11be9db9d85e2735403003ad2929ce9e030ea64540"
@@ -1275,6 +1325,10 @@
       "size": 664,
       "sha256": "c898f7cd8d4f167a95aa74fd6f523fa4fc0f1206a54b042a38172959b58d0ea0"
     },
+    "gen5/dragonite-mega.png": {
+      "size": 1325,
+      "sha256": "799576a703a9f2397f8f89731c61b715810ea726f1a10783c624516c86bfb897"
+    },
     "gen5/dragonite.png": {
       "size": 977,
       "sha256": "c97ebd19b812b5a2eca5319870fb74598805f698dd8249fa88b2d73f324a59be"
@@ -1282,6 +1336,10 @@
     "gen5/drakloak.png": {
       "size": 844,
       "sha256": "15d5926c6b6d96e779fc5df17bdd3d55d39165fc9024828c8852aff49dd00cfc"
+    },
+    "gen5/drampa-mega.png": {
+      "size": 8951,
+      "sha256": "f495a717d14cf91c82c75df058abee3569da8862e2ab20d277e0767929e52930"
     },
     "gen5/drampa.png": {
       "size": 969,
@@ -1403,6 +1461,12 @@
       "size": 644,
       "sha256": "896671ed855462281c4627eb350d7d2644cf1c94bf5942e650b0e11388ab4739"
     },
+    "gen5/eelektross-mega.png": {
+      "size": 29152,
+      "sha256": "acbe6d9318a6e844b4cebc2d0a2c721ff2f3122da5991488522efdedae8642ba",
+      "source": "pokeapi-za",
+      "pokemonId": 10290
+    },
     "gen5/eelektross.png": {
       "size": 1010,
       "sha256": "638b0dddf32c53dd0b370f5bb7944486c5aa61e3c687732b70dbc0550906ff18"
@@ -1467,6 +1531,10 @@
       "size": 609,
       "sha256": "600e358bda467c9b45d1e6e2d0bff14c946fdaab80bd8fd9e89d57901bfdc55e"
     },
+    "gen5/emboar-mega.png": {
+      "size": 10803,
+      "sha256": "ab4c4b0f02c9666aff3e77b4d470d4d5f6633c3d9382a8a4897f91c29373d978"
+    },
     "gen5/emboar.png": {
       "size": 1348,
       "sha256": "114215ad2d5dfb7d5b452c826f74bcd956420d4d75f6eb2fb3c06fbe433e7434"
@@ -1519,6 +1587,10 @@
       "size": 1558,
       "sha256": "a8942570f5d66a1f238e9688d80428cadb82b34ee53b9cbdcf88abd893a35c20"
     },
+    "gen5/excadrill-mega.png": {
+      "size": 8447,
+      "sha256": "da1b3081e2a47e6a2fe0ccb8db5065c4bf0c3705c393a25ed28f777ab289db13"
+    },
     "gen5/excadrill.png": {
       "size": 970,
       "sha256": "88af42cd03f6f29edce9763008d9520d6307faaa5046ea5b8792378a215d9205"
@@ -1538,6 +1610,12 @@
     "gen5/exploud.png": {
       "size": 1090,
       "sha256": "f749328c693222b414903ae33668302d699a957414eae042597b5fecd94c8b55"
+    },
+    "gen5/falinks-mega.png": {
+      "size": 26386,
+      "sha256": "1495c62f6210af16f6289f96e6591b7caeec40d2edea9b404eeca1443d56a3fa",
+      "source": "pokeapi-za",
+      "pokemonId": 10303
     },
     "gen5/falinks.png": {
       "size": 897,
@@ -1570,6 +1648,10 @@
     "gen5/fennekin.png": {
       "size": 571,
       "sha256": "fb4da7fadf85c2efb58aa088f473ddf8918cc752f78deb996f3c9daf6945839d"
+    },
+    "gen5/feraligatr-mega.png": {
+      "size": 9210,
+      "sha256": "3d47dd72bcd641f69f2193f6129f6e2f24b29d92dfcce2c6eeca1c841445ccb9"
     },
     "gen5/feraligatr.png": {
       "size": 1027,
@@ -1707,6 +1789,10 @@
       "size": 729,
       "sha256": "a2870e76446d70d0d8a775f5addcac3172b77a5236ca42b3ca6a8a6ce4cfae76"
     },
+    "gen5/froslass-mega.png": {
+      "size": 8690,
+      "sha256": "9ea3c9e44dd5816aa0ecd3db0c97c3615b13acc51270b39b38db78301f6f8c28"
+    },
     "gen5/froslass.png": {
       "size": 636,
       "sha256": "5df28930f8c3cc04900bece575bd3da4e800d0d2b74760dc8e53984b673f0528"
@@ -1750,6 +1836,10 @@
     "gen5/garchomp-mega.png": {
       "size": 1262,
       "sha256": "2afec19f7f9f822aef60e98ed352013e2859c1ad31f92d1ed1a758d27631213a"
+    },
+    "gen5/garchomp-megaz.png": {
+      "size": 7280,
+      "sha256": "953febe5a561a43f610ba383cd59844bcc488ed06a392d0762ea61255fa67b8c"
     },
     "gen5/garchomp.png": {
       "size": 1127,
@@ -1915,9 +2005,17 @@
       "size": 841,
       "sha256": "1a01eb9bc8cfd009d86f81114aff675b5b5951a72f5fd770a1236627643b09f1"
     },
+    "gen5/golisopod-mega.png": {
+      "size": 12921,
+      "sha256": "71ea3f54bd95cc7517a11f41f280abbdfa6c77f54f2f608b1298a98622437946"
+    },
     "gen5/golisopod.png": {
       "size": 1244,
       "sha256": "43396de48947ffbb439cacfe29b301bf7d4b54443002f28f319c4ded2f1d8fa3"
+    },
+    "gen5/golurk-mega.png": {
+      "size": 14110,
+      "sha256": "c70684650346814c93dd4501dd01d1f67cf24fbc3e3cba0467d01c6a7f3441cc"
     },
     "gen5/golurk.png": {
       "size": 1284,
@@ -2010,6 +2108,10 @@
     "gen5/greninja-ash.png": {
       "size": 1092,
       "sha256": "5c3bdf5e598f691dbe01993c9caf0ba0e776e4df148487e912662a2554c68cfa"
+    },
+    "gen5/greninja-mega.png": {
+      "size": 7091,
+      "sha256": "cd4c0d77a98b0c02283211c8ad177284420aeb4143542c501812ca52df818066"
     },
     "gen5/greninja.png": {
       "size": 984,
@@ -2119,6 +2221,10 @@
       "size": 732,
       "sha256": "a1f468b1318cf939b654c64094e153caa980b95c484d5d92a78d63b8febe2566"
     },
+    "gen5/hawlucha-mega.png": {
+      "size": 9329,
+      "sha256": "f620b5ecdcfeb21921c60a4e271ffa5ebea8838e179d0cd39940581239456ef4"
+    },
     "gen5/hawlucha.png": {
       "size": 825,
       "sha256": "460959acfe192ce9a87e9b8c382b42b5c60a273f319a81d21766a0ae581c03c9"
@@ -2130,6 +2236,12 @@
     "gen5/heatmor.png": {
       "size": 952,
       "sha256": "c65cf46979376378402ecb2a4d500f2a5397401a1f6d58cde5d67f8ad13745b9"
+    },
+    "gen5/heatran-mega.png": {
+      "size": 29946,
+      "sha256": "a7d0e3741513dc74f0a4dbf12d8dea65d9bedf64170b6a73a3161fa26505d7bd",
+      "source": "pokeapi-za",
+      "pokemonId": 10311
     },
     "gen5/heatran.png": {
       "size": 1027,
@@ -2671,6 +2783,10 @@
       "size": 883,
       "sha256": "5b0f2e494e50c7fde328331e72fa252fdcfa7abad6d2a46cedb1d24b4dab844e"
     },
+    "gen5/lucario-megaz.png": {
+      "size": 10377,
+      "sha256": "d82791db596b387d58d6253d25b2184d442080c6793c91571a3d223a7d038cce"
+    },
     "gen5/lucario.png": {
       "size": 740,
       "sha256": "6648151b971eaf3aa2d6d437ac04f8eb0fa0ceff7675469ec5d206b89cfe1f41"
@@ -2751,6 +2867,12 @@
       "size": 852,
       "sha256": "4904f4f948697115614f7611a7101b4319832d61d2636bd5ebd202dbb87b14fd"
     },
+    "gen5/magearna-mega.png": {
+      "size": 32249,
+      "sha256": "daab7052b42a4b543c5ee70c2783300c8d701ff2f2d5e0a8430f984605dfefa3",
+      "source": "pokeapi-za",
+      "pokemonId": 10317
+    },
     "gen5/magearna-original.png": {
       "size": 780,
       "sha256": "85d2be8ab448dacf2fb89fab0fb66693a8acf8143451ed9e8c2fe06f9f6d98a1"
@@ -2758,6 +2880,12 @@
     "gen5/magearna.png": {
       "size": 768,
       "sha256": "78212574c86ff5e242467288d1c7141268031758b302656b36e13e2db3c82c5f"
+    },
+    "gen5/magearnaoriginal-mega.png": {
+      "size": 32266,
+      "sha256": "1ad2f71a82368e3ca040956ac54acb16c0676e60d81b4e7254a5ac060d8159f2",
+      "source": "pokeapi-za",
+      "pokemonId": 10318
     },
     "gen5/magikarp.png": {
       "size": 732,
@@ -2790,6 +2918,12 @@
     "gen5/malaconda.png": {
       "size": 1112,
       "sha256": "928b47c2ca5f638f4b7899e7996804567c7e69084ceb0141a7c6ef2c16781651"
+    },
+    "gen5/malamar-mega.png": {
+      "size": 28229,
+      "sha256": "6e7df9dee41f57db3a5f401e11648582b98aac91d62a9c834eec1b603ff178cb",
+      "source": "pokeapi-za",
+      "pokemonId": 10297
     },
     "gen5/malamar.png": {
       "size": 1022,
@@ -2895,6 +3029,10 @@
       "size": 563,
       "sha256": "0d92fc3c27dfadc5e68d0d02859b25c127b58a2523e95bfad1abd19cd5450650"
     },
+    "gen5/meganium-mega.png": {
+      "size": 11290,
+      "sha256": "9cc9d4bbc6dcd2b15961b7cf794d233086f8240d6bb8fb01df1d526a21e25455"
+    },
     "gen5/meganium.png": {
       "size": 964,
       "sha256": "f7ef6983d25ec53879864e2eca81c99c1c52c1a94c3e46d20c562d6bbb983346"
@@ -2926,6 +3064,14 @@
     "gen5/meowstic-f.png": {
       "size": 663,
       "sha256": "72468a67d84ff62758bb03bf82e03a586f2a6441b558d362af60a50c031e24e2"
+    },
+    "gen5/meowstic-fmega.png": {
+      "size": 7364,
+      "sha256": "0801d50669b37b6181f20b3fee2ee45ef8a09592e8c2fd4c8cc8fc895944e6b7"
+    },
+    "gen5/meowstic-mmega.png": {
+      "size": 7364,
+      "sha256": "0801d50669b37b6181f20b3fee2ee45ef8a09592e8c2fd4c8cc8fc895944e6b7"
     },
     "gen5/meowstic.png": {
       "size": 713,
@@ -3763,6 +3909,12 @@
       "size": 1162,
       "sha256": "f8820e82d3a5175407f1b2033100f1a9b91291d5eaa5b7c40e5bb3a2d9170bff"
     },
+    "gen5/pyroar-mega.png": {
+      "size": 23018,
+      "sha256": "c979faf612282d7d3098178f813a7fd55abcf2ceb48ec5951140683308bd0917",
+      "source": "pokeapi-za",
+      "pokemonId": 10295
+    },
     "gen5/pyroar.png": {
       "size": 981,
       "sha256": "5b9c793eff8e975c14262bd51062c08f84a52374c4df42f9e8d0938aefb5bd71"
@@ -3818,6 +3970,18 @@
     "gen5/raichu-alola.png": {
       "size": 812,
       "sha256": "a14f82a686a62a7e39820554a8b6ec585e7e7534adaf70d2ac48969335d224c5"
+    },
+    "gen5/raichu-megax.png": {
+      "size": 23663,
+      "sha256": "4faf4f8b8376ef9d3ba8c95d4dfa6a27aadf7e0424fbb465d040046e5a3b0b3b",
+      "source": "pokeapi-za",
+      "pokemonId": 10304
+    },
+    "gen5/raichu-megay.png": {
+      "size": 25809,
+      "sha256": "8d4a482fde6b28c4e8dbc68e002520494c03c65240fdfdfffa9fb11b0f391846",
+      "source": "pokeapi-za",
+      "pokemonId": 10305
     },
     "gen5/raichu.png": {
       "size": 814,
@@ -4127,6 +4291,12 @@
       "size": 991,
       "sha256": "8ffbdc521220c5fcea42e311ba448c19799fec8cb6dcdec342913e1ba387646a"
     },
+    "gen5/scolipede-mega.png": {
+      "size": 31236,
+      "sha256": "e8e0d19aab26c796b058521ff4fedb62f690ea92872b044c9e2864f2f04ed2cb",
+      "source": "pokeapi-za",
+      "pokemonId": 10288
+    },
     "gen5/scolipede.png": {
       "size": 1181,
       "sha256": "d73eef7a67ee74f46bd4cd6aff4e081b66afea423ccd77ef6adfd4b5ffa9d76f"
@@ -4138,6 +4308,12 @@
     "gen5/scovillain.png": {
       "size": 698,
       "sha256": "6e91b1fe216257706983af466d27e52d95bee545943590d0dd7016bcc816748f"
+    },
+    "gen5/scrafty-mega.png": {
+      "size": 29590,
+      "sha256": "6f72323f6546b409cd19c02b9cb7109401862b997b33584074a8914b70cbee7a",
+      "source": "pokeapi-za",
+      "pokemonId": 10289
     },
     "gen5/scrafty.png": {
       "size": 706,
@@ -4399,6 +4575,10 @@
       "size": 626,
       "sha256": "580532d24567b96b9db2d9115ddaf6e040e662395c18a56255e174e6d4d92497"
     },
+    "gen5/skarmory-mega.png": {
+      "size": 9868,
+      "sha256": "72cb62773f711038385a0dfe22a9fa4791ba179ff1cd25c1905d266d1dd5bbe2"
+    },
     "gen5/skarmory.png": {
       "size": 950,
       "sha256": "cd0e93a222f9324923c8a69f30264f702d0c697b1fd94cedbbd7a31a0824e630"
@@ -4651,6 +4831,12 @@
       "size": 792,
       "sha256": "d98a5cb7158f5b2423affe7a706d970d6da291c18f03ef4e5130aaeee9b7c468"
     },
+    "gen5/staraptor-mega.png": {
+      "size": 29461,
+      "sha256": "2302556d7a49c816af5fcb9fe7e8a1a4bf3d5b1be9d37def6120a303abe4c6c3",
+      "source": "pokeapi-za",
+      "pokemonId": 10308
+    },
     "gen5/staraptor.png": {
       "size": 844,
       "sha256": "2c7c30aaf625cca016350ef5cb65ca3a6e03f551e05fbb8f1742f247e4c52062"
@@ -4662,6 +4848,10 @@
     "gen5/starly.png": {
       "size": 478,
       "sha256": "b6519f1997eca2f17453e5cf4837c6e498a7f323f032a8474c97d641ec335e78"
+    },
+    "gen5/starmie-mega.png": {
+      "size": 9790,
+      "sha256": "3c8e2286ef87c01e8b4338e104fbdc4d36374bf6c12b60defa06692263f4e629"
     },
     "gen5/starmie.png": {
       "size": 834,
@@ -5203,6 +5393,10 @@
       "size": 597,
       "sha256": "e1d56352c92d22ab3848fb81be42587c65a0ebe7cc6e945ce49375e896feda95"
     },
+    "gen5/victreebel-mega.png": {
+      "size": 994,
+      "sha256": "13c882e2c1b7a784606cacba031927fb1d9e46bbc85135528a796438d84d16fc"
+    },
     "gen5/victreebel.png": {
       "size": 798,
       "sha256": "79b36ae0cabfe0e303e03a3f3a04b5b964cc758fb37ebd724a0ff39dbfa87beb"
@@ -5507,6 +5701,12 @@
       "size": 1559,
       "sha256": "73063f8bb703e934441b6c5d46aaf9af6e6768a3e9d657539879a18f39bce4c3"
     },
+    "gen5/zeraora-mega.png": {
+      "size": 27699,
+      "sha256": "9807b4c5c4162512a10c10ccf024e6c36f42a94953d99464d3087eff9ac32ec5",
+      "source": "pokeapi-za",
+      "pokemonId": 10319
+    },
     "gen5/zeraora.png": {
       "size": 1035,
       "sha256": "24b8ad6fb92108370c3dcaa35b71381f39e5325037cdf8cb1afa755c14941b52"
@@ -5551,6 +5751,12 @@
       "size": 1841,
       "sha256": "32b4d1fa97f562f79675ac92ef04dd791d4a984e5a278f900d32662a31ecf6d2"
     },
+    "gen5/zygarde-mega.png": {
+      "size": 27393,
+      "sha256": "e257e055c8cccce1556bee8849c037bdeca209721626acab6cc4208367abe490",
+      "source": "pokeapi-za",
+      "pokemonId": 10301
+    },
     "gen5/zygarde.png": {
       "size": 1152,
       "sha256": "96d1bb6a8dece8f34eddc6c1e592b63d19e7a7b44873e43542d5709b88a2d43f"
@@ -5570,6 +5776,12 @@
     "ani/absol-mega.gif": {
       "size": 87161,
       "sha256": "54b07110e04f34a0c64c4f7806a64afeaa48dd0bcddd2eeaec34383490efbabd"
+    },
+    "ani/absol-megaz.webp": {
+      "size": 6443008,
+      "sha256": "17dafe21bbd0b8bcb1858cc1bd70e541ccd3039bcc66407528e72f3f271ae3d3",
+      "source": "pokeapi-za",
+      "pokemonId": 10307
     },
     "ani/absol.gif": {
       "size": 63959,
@@ -5914,6 +6126,10 @@
     "ani/banette.gif": {
       "size": 42684,
       "sha256": "07109cc953941a25b3b094d2276d6129a8d6c90b432724eca94ef1befcc35d38"
+    },
+    "ani/barbaracle-mega.gif": {
+      "size": 3460,
+      "sha256": "de11d9de36e54cc191151d165af9fb97373f8268d4b7e0a4403fc0b619128162"
     },
     "ani/barbaracle.gif": {
       "size": 166673,
@@ -6267,6 +6483,10 @@
       "size": 40323,
       "sha256": "f919a34669d5c2d47c632e6ece9eafe0165d94995f9b34ea0b474c8071f019a3"
     },
+    "ani/chandelure-mega.gif": {
+      "size": 3124,
+      "sha256": "f513d40057a52ed920919f37982d87063331f11b306153f57573bf88b01168ca"
+    },
     "ani/chandelure.gif": {
       "size": 101243,
       "sha256": "e8e95c1472f42b29bdb942aea5879371756bcf7fbb65349b6adb306bff7bb1a2"
@@ -6278,6 +6498,10 @@
     "ani/charcadet.gif": {
       "size": 21741,
       "sha256": "e7d829285f75d95f4ae82464701a76ee738fdf6a42b4ff767f27e89921ec0619"
+    },
+    "ani/charizard-gmax.gif": {
+      "size": 593355,
+      "sha256": "2d35776719dca732cfde4ad8852851106cefa49c90e7e7070fff4198dab7419a"
     },
     "ani/charizard-megax.gif": {
       "size": 113657,
@@ -6319,6 +6543,10 @@
       "size": 21772,
       "sha256": "32f6f7025b0a2553aeffc030edb96ca342c6b14a6413916062ccdfdfae78df8c"
     },
+    "ani/chesnaught-mega.gif": {
+      "size": 4485,
+      "sha256": "be82d45594802f384b6cd3717db64b1e8ce81e676da777327344446d16f0bf10"
+    },
     "ani/chesnaught.gif": {
       "size": 135733,
       "sha256": "95daf1f53c5ad347979f84c786d1dc18685ebf3e78243aaba361d34d48fa2b98"
@@ -6342,6 +6570,10 @@
     "ani/chimchar.gif": {
       "size": 19574,
       "sha256": "24075c6cb2ced5ef0ced701d1492a45909acc8b9f213be817485619b4b3ce8e1"
+    },
+    "ani/chimecho-mega.gif": {
+      "size": 5282,
+      "sha256": "de31db1849d6297acec84f3e556dff45703e7c98c22966e29b09116fc1ac3bf9"
     },
     "ani/chimecho.gif": {
       "size": 28610,
@@ -6386,6 +6618,10 @@
     "ani/claydol.gif": {
       "size": 95207,
       "sha256": "99db58f0208884ea79219a36066d367672d2ce8b4d35d1e0e1d74ce9f3c1d59b"
+    },
+    "ani/clefable-mega.gif": {
+      "size": 108039,
+      "sha256": "8107d1c8cf7ee737da274fbcc25e601cec38cbab1df90d2da53336721a181fc4"
     },
     "ani/clefable.gif": {
       "size": 35434,
@@ -6482,6 +6718,10 @@
     "ani/cottonee.gif": {
       "size": 57403,
       "sha256": "93a2da8434300f495d162685da1b6dcfab15ddbcbcfb872e81e26ee30dfee339"
+    },
+    "ani/crabominable-mega.gif": {
+      "size": 4804,
+      "sha256": "48ea5a2f68a63daaef843f91826c0756b24f610bb4c1252fa2b8cdc61742a422"
     },
     "ani/crabominable.gif": {
       "size": 96332,
@@ -6583,6 +6823,12 @@
       "size": 40741,
       "sha256": "6c0c66045a8ff045a1728104cf577cc1d507897c2071159ce36ec6d0a726853c"
     },
+    "ani/darkrai-mega.webp": {
+      "size": 7890168,
+      "sha256": "28f62d667c66fd0023f79570f658f2d16415bdd7fcc9b22eacc44ed741c7f3ce",
+      "source": "pokeapi-za",
+      "pokemonId": 10312
+    },
     "ani/darkrai.gif": {
       "size": 74467,
       "sha256": "5a541539a3c95a251e912431cc02a37e32967cbb34fc2b243cc67aabd3a01558"
@@ -6642,6 +6888,10 @@
     "ani/delibird.gif": {
       "size": 35491,
       "sha256": "dfbb15d8ada996c1b644ef339a25e5e0800ce41646f654c747405ef4076d3b8b"
+    },
+    "ani/delphox-mega.gif": {
+      "size": 3726,
+      "sha256": "17cbf483aae5c6c17ef69f4955808b33dd0317c31dca949ffd02aad341091b89"
     },
     "ani/delphox.gif": {
       "size": 92634,
@@ -6747,6 +6997,10 @@
       "size": 113237,
       "sha256": "26034edc5b8efc935d52adb4c5ef17fb40735351cec2461051e61efe00c66699"
     },
+    "ani/dragalge-mega.gif": {
+      "size": 3654,
+      "sha256": "b79dc7d3a5d9707afe65afff324b5fe9f84165be2b964d1b5c53027c2f34fb30"
+    },
     "ani/dragalge.gif": {
       "size": 127094,
       "sha256": "c5567a9f69b51f42664f67bda8d00b19591617974263959e565f3dcdc6c0c663"
@@ -6759,6 +7013,10 @@
       "size": 43694,
       "sha256": "45be9040dea62340b1bbee630843d30da6b2153770ee93dc405cd45177718c18"
     },
+    "ani/dragonite-mega.gif": {
+      "size": 277455,
+      "sha256": "8188ac7066f00b41dcc1eb7aff786f0ba5be2e86d06c902b9adb57e51ed7a7a5"
+    },
     "ani/dragonite.gif": {
       "size": 55212,
       "sha256": "b0f471b3decdd5587dd81e7ef3a910e24532f03b01b12d69c78e92a90c945d99"
@@ -6766,6 +7024,10 @@
     "ani/drakloak.gif": {
       "size": 64248,
       "sha256": "d1775705af5f5c9509e083cc2bf1fadcd463f09f57036ef5a4eafefc1b360977"
+    },
+    "ani/drampa-mega.gif": {
+      "size": 3273,
+      "sha256": "8988a155ce717de72be2db2fdec9e0821879b9b620e51facdfa8d80101502c19"
     },
     "ani/drampa.gif": {
       "size": 155431,
@@ -6883,6 +7145,10 @@
       "size": 50768,
       "sha256": "34ac9b5206643d031be2ccf1d5201cf998649e4396ce350c532f03646051b004"
     },
+    "ani/eelektross-mega.gif": {
+      "size": 2793,
+      "sha256": "20aa340f6c90ec666f62fbf61ac6a5f14ef801e2b2379ff60946f81929230276"
+    },
     "ani/eelektross.gif": {
       "size": 68666,
       "sha256": "f8c9083d64d0e6ffb80196bde058488fb91a5e559a5925979f33080d3077f115"
@@ -6939,6 +7205,10 @@
       "size": 52093,
       "sha256": "d8fa666f1a547d8857e40f7c1a405a3dc610e0e668417a4eee08eb9ceea4e5fc"
     },
+    "ani/emboar-mega.gif": {
+      "size": 251307,
+      "sha256": "596c3f1b86989a5fe2e0958cf98294907a9bc498babaea4511c9bb7acec8b4a4"
+    },
     "ani/emboar.gif": {
       "size": 140040,
       "sha256": "41ac9fcc50c8ab1502e3b71babd3e41b68a01d096d16acf73c40ff31c2c767be"
@@ -6991,6 +7261,10 @@
       "size": 393754,
       "sha256": "1954880c446649af902f42cd64f4467febab8d30ab462b28e1cfa500f7d850d7"
     },
+    "ani/excadrill-mega.gif": {
+      "size": 3253,
+      "sha256": "337d153d83cef900d71dda65c26495f8799bd07d7dbcd646823176c4a799ef05"
+    },
     "ani/excadrill.gif": {
       "size": 66629,
       "sha256": "c37891dbfd608c497cd45e293866d9666230e1f0963755fddb7fbd4b839a5214"
@@ -7010,6 +7284,10 @@
     "ani/exploud.gif": {
       "size": 141032,
       "sha256": "fa93d6c1943b8c9fc82b8d8b5efa5effa103ef8e715c596dd99ff9fde227059d"
+    },
+    "ani/falinks-mega.gif": {
+      "size": 3348,
+      "sha256": "4bfd5713abb627711ba219bbb6a767f2f6fd9d63cb9b1a0502fe735668419eb1"
     },
     "ani/falinks.gif": {
       "size": 58858,
@@ -7038,6 +7316,10 @@
     "ani/fennekin.gif": {
       "size": 19457,
       "sha256": "58b64eaa550119ecd07f7c65457b7fecb1017497aee4a4b017aee54bc254b33e"
+    },
+    "ani/feraligatr-mega.gif": {
+      "size": 196619,
+      "sha256": "4cf52d56932e3938b3644b50f3876e8d9a8ca1d26fa6d0948df3d90176c374e3"
     },
     "ani/feraligatr.gif": {
       "size": 111277,
@@ -7167,6 +7449,10 @@
       "size": 37136,
       "sha256": "846bf59ef03ef2a1dfef68f9588dc56018a0d0a51bc203dac5e1e465bce9edf6"
     },
+    "ani/froslass-mega.gif": {
+      "size": 229958,
+      "sha256": "0a3bf5b3de2a6ddb80434dbca243f3cce4d7f11aa1456df81ddcd54cfb8a7363"
+    },
     "ani/froslass.gif": {
       "size": 64370,
       "sha256": "e6a8eb799fffd5e8d3fad7f1725f7f8f29becdea85b8c12f21792feedbaf01f4"
@@ -7210,6 +7496,12 @@
     "ani/garchomp-mega.gif": {
       "size": 127505,
       "sha256": "3e2fd1aa3ede2fadc25fdebc67847741130438be9785f4e922c4364ecdec08e3"
+    },
+    "ani/garchomp-megaz.webp": {
+      "size": 13639740,
+      "sha256": "b4676d9f7103a0187c188f4ef4bc95d6d1cbaaef77e39f298cbcbed483bb176b",
+      "source": "pokeapi-za",
+      "pokemonId": 10309
     },
     "ani/garchomp.gif": {
       "size": 107419,
@@ -7375,9 +7667,19 @@
       "size": 57777,
       "sha256": "d60b06e1fd24ec55e44ab17b9fc61762a614cda1ff43d1f4ac0906409f3fdd4e"
     },
+    "ani/golisopod-mega.webp": {
+      "size": 7639796,
+      "sha256": "5d87158d20258657a06c9f511b7dfe9b3f49eddb57a27b959b114f245ec4c8a2",
+      "source": "pokeapi-za",
+      "pokemonId": 10316
+    },
     "ani/golisopod.gif": {
       "size": 66491,
       "sha256": "429caad0b35888c14109a72c66cb63f51263809a5db6af7b8b37477ce1732b73"
+    },
+    "ani/golurk-mega.gif": {
+      "size": 5006,
+      "sha256": "289ff412ad692c7ae109017f763b3c424b567c8df85a4d92dce73aa42b8c8a11"
     },
     "ani/golurk.gif": {
       "size": 204777,
@@ -7470,6 +7772,10 @@
     "ani/greninja-ash.gif": {
       "size": 157115,
       "sha256": "78cc7a7fb4229d8bbc706fe4c751eff653286f7e1592c780b6b850132b043d95"
+    },
+    "ani/greninja-mega.gif": {
+      "size": 2547,
+      "sha256": "e41f81a24faab386be781baa8520025e6ede62420f5ef9158aca273e0eb92574"
     },
     "ani/greninja.gif": {
       "size": 51645,
@@ -7583,6 +7889,10 @@
       "size": 61973,
       "sha256": "c3c346131538b83152aa0fc76a3c4a92ec3ac44145040b4bb1ad2cc633e8a630"
     },
+    "ani/hawlucha-mega.gif": {
+      "size": 3355,
+      "sha256": "fc175bda1bd6c87bfedc19ed88173addac1defe14e8d7f5bbb93bc3b2f2ef6ee"
+    },
     "ani/hawlucha.gif": {
       "size": 46427,
       "sha256": "e7b7a526e999d1be2f047f0fbab9230c69d3caa0600983fc687e7c58338e6950"
@@ -7594,6 +7904,12 @@
     "ani/heatmor.gif": {
       "size": 160758,
       "sha256": "46cf984e4139a57a9186aa824969abee369c4e992bc52616ea849b866d04cffc"
+    },
+    "ani/heatran-mega.webp": {
+      "size": 5274906,
+      "sha256": "99e617d91e4c4618cc1e210935dbb07b4430b8b1200093ffd690b64afc252b7f",
+      "source": "pokeapi-za",
+      "pokemonId": 10311
     },
     "ani/heatran.gif": {
       "size": 125733,
@@ -7742,6 +8058,62 @@
     "ani/inteleon.gif": {
       "size": 131952,
       "sha256": "eaa095f4fbe8cd78298111a523222515310c49b0503698b777c60d659266e5a2"
+    },
+    "ani/ironboulder.webp": {
+      "size": 13861538,
+      "sha256": "d02a1a438af3c5e493f5a64b7e63f2ae7440a81a436084a544b7df39f4e05428",
+      "source": "pokeapi-sv",
+      "pokemonId": 1022
+    },
+    "ani/ironbundle.webp": {
+      "size": 2944058,
+      "sha256": "3466ca430c3734efe38b0549f33729569ae78423919cb426ad720239c5e711ba",
+      "source": "pokeapi-sv",
+      "pokemonId": 991
+    },
+    "ani/ironcrown.webp": {
+      "size": 11707302,
+      "sha256": "ad85c8ab053a580a4d580ebea4f8b5b8d18f4d73a871e7f575c2b3d9c12f1067",
+      "source": "pokeapi-sv",
+      "pokemonId": 1023
+    },
+    "ani/ironhands.gif": {
+      "size": 123447,
+      "sha256": "c92d11ba75dd33f8dfbcfcca97b2ccd974d3ffeb24a0a73d3f5cea605b9b4614",
+      "source": "showdown-gen5ani"
+    },
+    "ani/ironjugulis.webp": {
+      "size": 8554458,
+      "sha256": "d984dd97c1ee14d9f82e677d976f6f564414e182d52d861825b1ead59831a549",
+      "source": "pokeapi-sv",
+      "pokemonId": 993
+    },
+    "ani/ironleaves.webp": {
+      "size": 7369506,
+      "sha256": "d3571c74ffa30f8621820a14fe04587d85819734add0b39a3f0b5a59e7f3fd70",
+      "source": "pokeapi-sv",
+      "pokemonId": 1010
+    },
+    "ani/ironmoth.gif": {
+      "size": 172974,
+      "sha256": "29ae12c694c0a6869878a30eed95072b51f7f499e5ef57cf90864e4f2b031f37",
+      "source": "showdown-gen5ani"
+    },
+    "ani/ironthorns.gif": {
+      "size": 105916,
+      "sha256": "7623f5669ec6c3d7190009ccbd0159b72bf69fa322755d675b010719eec2990f",
+      "source": "showdown-gen5ani"
+    },
+    "ani/irontreads.webp": {
+      "size": 5493962,
+      "sha256": "43cdf80e9209852cae64427dc06cae9ab1029af8f9eac7ceb7615d62ba031a6a",
+      "source": "pokeapi-sv",
+      "pokemonId": 990
+    },
+    "ani/ironvaliant.gif": {
+      "size": 82866,
+      "sha256": "2e1a5277c9faea73f20f49304b123e969027268c10281a33892a46d36a605959",
+      "source": "showdown-gen5ani"
     },
     "ani/ivysaur.gif": {
       "size": 49345,
@@ -8095,6 +8467,12 @@
       "size": 85929,
       "sha256": "be03d2db82bc0d7197892cba017260a71aafb659ad29f419c9f619f8622f6efa"
     },
+    "ani/lucario-megaz.webp": {
+      "size": 6447492,
+      "sha256": "0c4ce90c79dff441c5c772ecbbb11aaf7578c6b83a48150fc0ebd92109866ee9",
+      "source": "pokeapi-za",
+      "pokemonId": 10310
+    },
     "ani/lucario.gif": {
       "size": 62474,
       "sha256": "0e3cd52d6d21f265672a4bf4151ad9aeb737101c91d8f1c817a461460d66b8e8"
@@ -8179,6 +8557,12 @@
       "size": 62355,
       "sha256": "a29a7e4fbfb112c8d365776fcef282cb26f93337173decbfed7ee9cd1f6da1d2"
     },
+    "ani/magearna-mega.webp": {
+      "size": 10223790,
+      "sha256": "33860d0b6cdbdde5e08f277482ec20a31c8ebe29de2916409d50403ae84af471",
+      "source": "pokeapi-za",
+      "pokemonId": 10317
+    },
     "ani/magearna-original.gif": {
       "size": 34132,
       "sha256": "9298ab566e299a761acb24be5107636e788992639ddba7808391125dfa226a12"
@@ -8186,6 +8570,12 @@
     "ani/magearna.gif": {
       "size": 40653,
       "sha256": "ca763dc85760bf8ad34e3182f382e3b977b2b955e39063bd7eb39e01e1f0cb3f"
+    },
+    "ani/magearnaoriginal-mega.webp": {
+      "size": 10025042,
+      "sha256": "2529be3f42e7e7c6532500695428f0292541e88b9e1c79b75ce0a7b337f961de",
+      "source": "pokeapi-za",
+      "pokemonId": 10318
     },
     "ani/magikarp.gif": {
       "size": 16483,
@@ -8218,6 +8608,10 @@
     "ani/malaconda.gif": {
       "size": 72710,
       "sha256": "0e9b9e92ecf1ee0e38a0e9ac71a954b08bdd9fe9eb4ce6e90ccd7fd77c86bf03"
+    },
+    "ani/malamar-mega.gif": {
+      "size": 2874,
+      "sha256": "b3da606f760e61c2cdac3e26d57c0539604e459c3ad1620be65668353c3ee9c6"
     },
     "ani/malamar.gif": {
       "size": 150028,
@@ -8327,6 +8721,10 @@
       "size": 27607,
       "sha256": "9aa2f415017e6b185eb3276f7ffdd046338a18f3375485a7de0dff3b12daa94f"
     },
+    "ani/meganium-mega.gif": {
+      "size": 214761,
+      "sha256": "11ce65d99b4aef38db5413c791f56b12f30907b12a7602335001cbadee842918"
+    },
     "ani/meganium.gif": {
       "size": 70059,
       "sha256": "a7a9fd8c3cd69a0f39b500ffacc5d1d6b954efc69a8951985d96618e9d38f73d"
@@ -8358,6 +8756,14 @@
     "ani/meowstic-f.gif": {
       "size": 45652,
       "sha256": "7218a76514002a9a47f134080144d7d4c9c7abe58a86ac506b2d64b1d50a908c"
+    },
+    "ani/meowstic-fmega.gif": {
+      "size": 2885,
+      "sha256": "1c523a8d86ad81a94f1b7dabf758e219341973b12a7a03c7b928a6885e6d5017"
+    },
+    "ani/meowstic-mmega.gif": {
+      "size": 2885,
+      "sha256": "1c523a8d86ad81a94f1b7dabf758e219341973b12a7a03c7b928a6885e6d5017"
     },
     "ani/meowstic.gif": {
       "size": 48636,
@@ -9127,6 +9533,10 @@
       "size": 159388,
       "sha256": "6c8bf3572b6c0f3b4345529ebb146eb2abd303a482d4d346328000e5f9e10c3c"
     },
+    "ani/pyroar-mega.gif": {
+      "size": 3830,
+      "sha256": "66e069c3cb56d5d87eed680cee8f7fca8c4c6d6ea021dcadfec55ba22ba1bfaa"
+    },
     "ani/pyroar.gif": {
       "size": 93504,
       "sha256": "de5391779b1b24a95da1883afc0a873638a599f37143fd7b09828a9a9b06aaa4"
@@ -9182,6 +9592,14 @@
     "ani/raichu-alola.gif": {
       "size": 90883,
       "sha256": "fa5753e085cf274d57b9e1dd1c2d4c5c4604244cc83b84203c678650ec2d538f"
+    },
+    "ani/raichu-megax.gif": {
+      "size": 3386,
+      "sha256": "fb0ab15e5a09e4884114bafb74341171b327013ca936dd0416ce69427e98c3f5"
+    },
+    "ani/raichu-megay.gif": {
+      "size": 3421,
+      "sha256": "3363df4acd9934744d934d183fecff3732c8e4e05532bd4f3fce5de175763a59"
     },
     "ani/raichu.gif": {
       "size": 32318,
@@ -9467,6 +9885,10 @@
       "size": 76089,
       "sha256": "3c0bcb169489b313498a88ece78c3a77f8eb241b780bf723a478b09d47a47ab0"
     },
+    "ani/scolipede-mega.gif": {
+      "size": 3677,
+      "sha256": "62a736f4b8b7af3488f4bf834c7b798935b8c13c7e181c73f0daf2ec00183ff8"
+    },
     "ani/scolipede.gif": {
       "size": 122117,
       "sha256": "acbe6031aca62a44600debb6f5140bf2738a8940e61f19913711f32afef95a71"
@@ -9478,6 +9900,10 @@
     "ani/scovillain.gif": {
       "size": 49772,
       "sha256": "c78888d601066a973665ec7e0954e22de2e8a3c0214a5ac2b2ec443c0ca92740"
+    },
+    "ani/scrafty-mega.gif": {
+      "size": 3524,
+      "sha256": "7f7722773a45e420a0a213a04fcc641a5e9691407b6afedc3ae88978de597d6c"
     },
     "ani/scrafty.gif": {
       "size": 45311,
@@ -9735,6 +10161,10 @@
       "size": 26934,
       "sha256": "d1d8655e7d5880f9c465126391de0d680c5f8eccdc0085ae0396cdbee7fe0e62"
     },
+    "ani/skarmory-mega.gif": {
+      "size": 210100,
+      "sha256": "56b02242c143cd69502068cadbc0762e65c07eacfaf535d040dda9575a5dc30f"
+    },
     "ani/skarmory.gif": {
       "size": 59700,
       "sha256": "4e8099b767d3257cd9524eabfce8600658015eabad1e5ac9c22065f18b5daf55"
@@ -9979,6 +10409,10 @@
       "size": 41630,
       "sha256": "2b36a8baf78e37e78f26633544578b3fbd515accffef785503da1b8d9bee7361"
     },
+    "ani/staraptor-mega.gif": {
+      "size": 4135,
+      "sha256": "94852240ed0402d2f28e02d64e3b603942aa2a31080fc9a60376b23030a607ea"
+    },
     "ani/staraptor.gif": {
       "size": 51964,
       "sha256": "7f731521e55e981efa29dc7fc9c1eeb8000d3b600498ddf85297862cfc9ed2a9"
@@ -9990,6 +10424,10 @@
     "ani/starly.gif": {
       "size": 9909,
       "sha256": "3a22c9134f86e6343c6d051af482bd05c19c29d2825f7dd252f4893bc3ddbc72"
+    },
+    "ani/starmie-mega.gif": {
+      "size": 122951,
+      "sha256": "8ad574895de2d542fa12582d1862c5965b7366b6efee11dd9ea40ed25a37dcaf"
     },
     "ani/starmie.gif": {
       "size": 55353,
@@ -10499,6 +10937,10 @@
       "size": 26039,
       "sha256": "dc5efab67270f12c356063bc339912a7254f21ef925469ffc735fbd5c4a7f6e1"
     },
+    "ani/victreebel-mega.gif": {
+      "size": 157666,
+      "sha256": "43dfdc4ec4a964b3e3abb68f2ed835b61524d4aaa736c776edf8e25dd3a52f91"
+    },
     "ani/victreebel.gif": {
       "size": 57013,
       "sha256": "bfd0b15489f67bb8bcc1a1f1417c8450cead00b04aba468f3708e8b2eca85631"
@@ -10799,6 +11241,12 @@
       "size": 193910,
       "sha256": "c70c7d897c8ee00029e8fb2a94dcc1a1fb3dfa559339d18319d483620421ccdf"
     },
+    "ani/zeraora-mega.webp": {
+      "size": 6054788,
+      "sha256": "74ea2871d535f15fb2e80c09c6cf6620c7a4f077d78facaaa42a58383a2b85b2",
+      "source": "pokeapi-za",
+      "pokemonId": 10319
+    },
     "ani/zeraora.gif": {
       "size": 107638,
       "sha256": "5311f36c306f7572d66ea351fb7e840bd048aad4234c6c51eb97fd83e6ff2a16"
@@ -10842,6 +11290,12 @@
     "ani/zygarde-complete.gif": {
       "size": 251825,
       "sha256": "5d7d44b79836b80892f9e00ca5aafc4bd2182aeb023bba45d1e0ad67b4f95b83"
+    },
+    "ani/zygarde-mega.webp": {
+      "size": 6121914,
+      "sha256": "3fc9e32189d8f37cd42587b48d4be8ea02d4c2fc3119ab303d55315701251bc9",
+      "source": "pokeapi-za",
+      "pokemonId": 10301
     },
     "ani/zygarde.gif": {
       "size": 151027,

@@ -5,7 +5,33 @@ var path = require("path");
 var crypto = require("crypto");
 var illustrations = require("./pokedex-artwork-cache");
 var SPRITE_BASE = "https://play.pokemonshowdown.com/sprites/";
+var POKEAPI_SPRITE_BASE = "https://raw.githubusercontent.com/PokeAPI/sprites/" + illustrations.ARTWORK_REVISION + "/sprites/pokemon/versions/generation-ix/";
 var MAX_BYTES = 4 * 1024 * 1024;
+var MAX_ANIMATED_WEBP_BYTES = 16 * 1024 * 1024;
+
+function getSpriteSourceUrl(key, source, extension) {
+	if (source.source === undefined && extension !== ".webp") return SPRITE_BASE + key;
+	if (source.source === "showdown-gen5ani" && extension === ".gif") {
+		return SPRITE_BASE + "gen5ani/" + key.slice("ani/".length);
+	}
+	if (Number.isSafeInteger(source.pokemonId) && source.pokemonId > 0) {
+		if (source.source === "pokeapi-za" && extension === ".png") {
+			return POKEAPI_SPRITE_BASE + "legends-za/icons/" + source.pokemonId + ".png";
+		}
+		if (extension === ".webp" && (source.source === "pokeapi-za" || source.source === "pokeapi-sv")) {
+			var game = source.source === "pokeapi-za" ? "legends-za" : "scarlet-violet";
+			return POKEAPI_SPRITE_BASE + game + "/" + source.pokemonId + ".webp";
+		}
+	}
+	throw new Error("Invalid sprite source for " + key);
+}
+
+function isSpriteFormat(bytes, extension) {
+	if (extension === ".png") return bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+	if (extension === ".gif") return /^GIF8[79]a$/.test(bytes.toString("ascii", 0, 6));
+	return bytes.length >= 30 && bytes.toString("ascii", 0, 4) === "RIFF" && bytes.readUInt32LE(4) === bytes.length - 8 &&
+		bytes.toString("ascii", 8, 16) === "WEBPVP8X" && (bytes[20] & 2) !== 0;
+}
 
 function createLibrary(options) {
 	var entries = new Map(), routes = new Map(), readyFiles = new Set(), downloadUrls = new Set();
@@ -27,10 +53,11 @@ function createLibrary(options) {
 	if (options.sprites.version !== 1 || options.sprites.baseUrl !== SPRITE_BASE) throw new Error("Unknown sprite inventory");
 	Object.keys(options.sprites.sprites).forEach(function (key) {
 		var source = options.sprites.sprites[key];
-		if (!/^(gen5\/[a-z0-9-]+\.png|ani\/[a-z0-9-]+\.gif)$/.test(key) || !/^[a-f0-9]{64}$/.test(source.sha256) || !Number.isSafeInteger(source.size) || source.size < 14 || source.size > MAX_BYTES) throw new Error("Invalid sprite inventory");
-		var png = key.endsWith(".png");
-		add("local-sprites/" + key, {id: source.sha256, size: source.size, url: SPRITE_BASE + key, file: path.join(root, "pokemon-artwork", source.sha256 + (png ? ".png" : ".gif")), legacy: options.legacySprites && path.join(options.legacySprites, key), type: png ? "image/png" : "image/gif", valid: function (bytes) {
-			return bytes.length === source.size && (png ? bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) : /^GIF8[79]a$/.test(bytes.toString("ascii", 0, 6))) && crypto.createHash("sha256").update(bytes).digest("hex") === source.sha256;
+		var extension = path.extname(key);
+		var maxBytes = extension === ".webp" ? MAX_ANIMATED_WEBP_BYTES : MAX_BYTES;
+		if (!/^(gen5\/[a-z0-9-]+\.png|ani\/[a-z0-9-]+\.(gif|webp))$/.test(key) || !/^[a-f0-9]{64}$/.test(source.sha256) || !Number.isSafeInteger(source.size) || source.size < 14 || source.size > maxBytes) throw new Error("Invalid sprite inventory");
+		add("local-sprites/" + key, {id: source.sha256, size: source.size, url: getSpriteSourceUrl(key, source, extension), file: path.join(root, "pokemon-artwork", source.sha256 + extension), legacy: options.legacySprites && path.join(options.legacySprites, key), type: "image/" + extension.slice(1), valid: function (bytes) {
+			return bytes.length === source.size && isSpriteFormat(bytes, extension) && crypto.createHash("sha256").update(bytes).digest("hex") === source.sha256;
 		}});
 	});
 	state.total = entries.size;
@@ -110,7 +137,8 @@ function createLibrary(options) {
 			while (cursor < missing.length && !signal.aborted) {
 				var entry = missing[cursor++];
 				try {
-					var response = await options.fetch(entry.url, {signal: AbortSignal.any([signal, AbortSignal.timeout(30000)]), redirect: "error"});
+					var timeout = entry.size > MAX_BYTES ? 120000 : 30000;
+					var response = await options.fetch(entry.url, {signal: AbortSignal.any([signal, AbortSignal.timeout(timeout)]), redirect: "error"});
 					if (!response.ok) throw new Error("Artwork download failed: " + response.status);
 					var parts = [], total = 0;
 					for await (var chunk of response.body) { total += chunk.length; if (total > entry.size) throw new Error("Artwork exceeds inventory size"); parts.push(Buffer.from(chunk)); }
@@ -146,6 +174,8 @@ function createLibrary(options) {
 		pause: async function () { await initialized; if (controller) controller.abort(); return snapshot(); },
 		read: async function (route) {
 			await initialized; var entry = routes.get(route);
+			// A request for the preferred animation can use an exact animated WebP when no GIF is listed.
+			if (!entry && route.startsWith("local-sprites/ani/") && route.endsWith(".gif")) entry = routes.get(route.slice(0, -4) + ".webp");
 			if (!enabled || !entry) return new Response("", {status: 404});
 			try { var bytes = await read(entry, entry.file); if (bytes) return new Response(new Uint8Array(bytes), {headers: {"Content-Type": entry.type, "Cache-Control": "no-store"}}); } catch (error) { console.warn("Saved artwork unavailable:", error.code || error.message); }
 			return new Response("", {status: 404});

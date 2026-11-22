@@ -745,7 +745,7 @@
 			encounterTracker = window.KMEncounterTracker.create({panel: panel, heading: heading, note: note, onChange: function () { render(view); }});
 			var help = el("div");
 			help.appendChild(note);
-			help.appendChild(el("p", "km-muted", "In areas with weather encounters, the first seven land slots apply in every weather. Weather cards show only the three replacement slots, with odds calculated from all ten slots. Land shows the odds for normal weather. Filter by a weather to see its complete table."));
+			help.appendChild(el("p", "km-muted", "Land shows encounters in normal weather. Weather cards list the slots that differ from Land and use the odds from the full table. Filter by a weather to see every slot."));
 			referenceDetails("Encounter rules", help, heading.querySelector(".km-catch-summary"));
 			navigation.insertBefore(status, navigation.firstChild);
 		}
@@ -772,7 +772,9 @@
 		function order(group) { return group.method === "Land" ? 0 : group.weather ? 1 : group.method === "Fishing" ? 2 : group.method === "Shaking Trees" ? 3 : 4; }
 		return area.groups.map(function (g) {
 			var weather = ["Land", "Fishing", "Shaking Trees", "Trade", "Gift", "Starter", "Static", "Other"].indexOf(g.method) === -1;
-			var shared = weather && land ? land.entries.filter(function (e) { return e.slot <= 7; }) : [];
+			var shared = weather && land ? land.entries.filter(function (e) {
+				return Array.isArray(g.sharedSlots) ? g.sharedSlots.indexOf(e.slot) !== -1 : e.slot <= 7;
+			}) : [];
 			return {method: g.method, weather: weather, sharedEntries: shared, entries: shared.concat(g.entries)};
 		}).sort(function (a, b) { return order(a) - order(b); });
 	}
