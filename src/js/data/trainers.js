@@ -10342,10 +10342,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Aerodactyl-Mega",
+				"species": "Aerodactyl",
 				"gender": "M",
 				"level": 50,
-				"ability": "Tough Claws",
+				"ability": "Unnerve",
 				"item": "Aerodactylite",
 				"nature": "Jolly",
 				"moves": [
@@ -12520,10 +12520,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Absol-Mega",
+				"species": "Absol",
 				"gender": "F",
 				"level": 54,
-				"ability": "Magic Bounce",
+				"ability": "Justified",
 				"item": "Absolite",
 				"nature": "Jolly",
 				"moves": [
@@ -13367,10 +13367,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Gyarados-Mega",
+				"species": "Gyarados",
 				"gender": "M",
 				"level": 55,
-				"ability": "Mold Breaker",
+				"ability": "Moxie",
 				"item": "Gyaradosite",
 				"nature": "Adamant",
 				"moves": [
@@ -13993,10 +13993,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Garchomp-Mega",
+				"species": "Garchomp",
 				"gender": "M",
 				"level": 60,
-				"ability": "Sand Force",
+				"ability": "Rough Skin",
 				"item": "Garchompite",
 				"nature": "Adamant",
 				"moves": [
@@ -14425,10 +14425,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Sceptile-Mega",
+				"species": "Sceptile",
 				"gender": "M",
 				"level": 62,
-				"ability": "Lightning Rod",
+				"ability": "Unburden",
 				"item": "White Herb",
 				"nature": "Timid",
 				"moves": [
@@ -15226,10 +15226,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 2,
-				"species": "Absol-Mega",
+				"species": "Absol",
 				"gender": "F",
 				"level": 65,
-				"ability": "Magic Bounce",
+				"ability": "Justified",
 				"item": "Life Orb",
 				"nature": "Jolly",
 				"moves": [
@@ -16893,10 +16893,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Scizor-Mega",
+				"species": "Scizor",
 				"gender": "F",
 				"level": 70,
-				"ability": "Technician",
+				"ability": "Light Metal",
 				"item": "Occa Berry",
 				"nature": "Adamant",
 				"moves": [
@@ -17091,10 +17091,10 @@ var TRAINERDEX = [
 		"pokemon": [
 			{
 				"slot": 1,
-				"species": "Kyogre-Primal",
+				"species": "Kyogre",
 				"gender": "N",
 				"level": 75,
-				"ability": "Primordial Sea",
+				"ability": "Drizzle",
 				"item": "Choice Specs",
 				"nature": "Modest",
 				"moves": [
@@ -17160,10 +17160,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Swampert-Mega",
+				"species": "Swampert",
 				"gender": "M",
 				"level": 75,
-				"ability": "Swift Swim",
+				"ability": "Damp",
 				"item": "Life Orb",
 				"nature": "Adamant",
 				"moves": [
@@ -17305,7 +17305,7 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 4,
-				"species": "Blaziken-Mega",
+				"species": "Blaziken",
 				"gender": "M",
 				"level": 75,
 				"ability": "Speed Boost",
@@ -17470,10 +17470,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 5,
-				"species": "Rayquaza-Mega",
+				"species": "Rayquaza",
 				"gender": "N",
 				"level": 75,
-				"ability": "Delta Stream",
+				"ability": "Air Lock",
 				"item": "Lum Berry",
 				"nature": "Jolly",
 				"moves": [
@@ -17569,10 +17569,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Metagross-Mega",
+				"species": "Metagross",
 				"gender": "N",
 				"level": 80,
-				"ability": "Tough Claws",
+				"ability": "Light Metal",
 				"item": "Choice Band",
 				"nature": "Jolly",
 				"moves": [
@@ -17669,10 +17669,10 @@ var TRAINERDEX = [
 		"pokemon": [
 			{
 				"slot": 1,
-				"species": "Groudon-Primal",
+				"species": "Groudon",
 				"gender": "N",
 				"level": 85,
-				"ability": "Desolate Land",
+				"ability": "Drought",
 				"item": "Shuca Berry",
 				"nature": "Adamant",
 				"moves": [
@@ -17715,10 +17715,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Kangaskhan-Mega",
+				"species": "Kangaskhan",
 				"gender": "F",
 				"level": 85,
-				"ability": "Parental Bond",
+				"ability": "Inner Focus",
 				"item": "Protective Pads",
 				"nature": "Jolly",
 				"moves": [
@@ -17815,10 +17815,10 @@ var TRAINERDEX = [
 		"pokemon": [
 			{
 				"slot": 1,
-				"species": "Groudon-Primal",
+				"species": "Groudon",
 				"gender": "N",
 				"level": 85,
-				"ability": "Desolate Land",
+				"ability": "Drought",
 				"item": "Shuca Berry",
 				"nature": "Adamant",
 				"moves": [
@@ -17861,10 +17861,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Kangaskhan-Mega",
+				"species": "Kangaskhan",
 				"gender": "F",
 				"level": 85,
-				"ability": "Parental Bond",
+				"ability": "Inner Focus",
 				"item": "Protective Pads",
 				"nature": "Jolly",
 				"moves": [
@@ -17961,10 +17961,10 @@ var TRAINERDEX = [
 		"pokemon": [
 			{
 				"slot": 1,
-				"species": "Groudon-Primal",
+				"species": "Groudon",
 				"gender": "N",
 				"level": 85,
-				"ability": "Desolate Land",
+				"ability": "Drought",
 				"item": "Shuca Berry",
 				"nature": "Adamant",
 				"moves": [
@@ -18007,10 +18007,10 @@ var TRAINERDEX = [
 			},
 			{
 				"slot": 3,
-				"species": "Kangaskhan-Mega",
+				"species": "Kangaskhan",
 				"gender": "F",
 				"level": 85,
-				"ability": "Parental Bond",
+				"ability": "Inner Focus",
 				"item": "Protective Pads",
 				"nature": "Jolly",
 				"moves": [

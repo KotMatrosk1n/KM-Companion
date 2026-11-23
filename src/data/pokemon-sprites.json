@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "bf7127e92787b0915d377e4b34759c33f27096cc2e5195d402b0055cfb07549a",
+  "revision": "c84c66138547a5062e9e00c67c858ab10edffb84eafb6d0bd816e2f62ad4d153",
   "baseUrl": "https://play.pokemonshowdown.com/sprites/",
   "sprites": {
     "gen5/ababo.png": {
@@ -416,6 +416,10 @@
     "gen5/bastiodon.png": {
       "size": 889,
       "sha256": "8c526ebc2bd4def3245bfec4d2ed50db075e86e255f686fef0465ae10328a0a3"
+    },
+    "gen5/baxcalibur-mega.png": {
+      "size": 6563,
+      "sha256": "30ee26fcece29d6177a9a635886c440772fd3bc5f1c8746668431460a7cdb93f"
     },
     "gen5/baxcalibur.png": {
       "size": 965,
@@ -6166,6 +6170,12 @@
     "ani/bastiodon.gif": {
       "size": 96115,
       "sha256": "88e54ac82eff06712091afda5eba465245148f9a06f595f45b1210f824480a0e"
+    },
+    "ani/baxcalibur-mega.webp": {
+      "size": 3596262,
+      "sha256": "2a688e0b855cd169f6b5d164341b94ef2316160a513f3b22902a4c65a7e304ba",
+      "source": "pokeapi-za",
+      "pokemonId": 10325
     },
     "ani/baxcalibur.gif": {
       "size": 176369,

@@ -7378,6 +7378,12 @@
       "size": 103008,
       "sha": "9049a4046791e1b23b75bb7c982038d2344a6561",
       "pokemonId": 10249
+    },
+    "998:1": {
+      "path": "sprites/pokemon/other/official-artwork/10325.png",
+      "size": 135936,
+      "sha": "3de075596c3238436023f1bca817af1efcf648ff",
+      "pokemonId": 10325
     }
   }
 }
