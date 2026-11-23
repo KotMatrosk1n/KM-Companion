@@ -116,7 +116,8 @@
     [801,2,"-Mega",1273,0],
     [801,3,"Magearna-Original-Mega",1273,1],
     [807,1,"-Mega",1069,0],
-    [870,1,"-Mega",1070,0]
+    [870,1,"-Mega",1070,0],
+    [998,1,"-Mega",1275,0]
   ],
   "abilityDescriptions": {
     "270": "A Fire move that hits this Pokémon raises its Attack. It cannot be burned.",
