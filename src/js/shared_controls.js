@@ -639,9 +639,36 @@ function getPokemonSpriteUrls(pokemonName, options) {
 	];
 }
 
+function getLocalPokemonSpriteUrl(spriteUrl) {
+	if (typeof spriteUrl !== "string" || !spriteUrl.trim()) return "";
+	var url;
+	try {
+		url = new URL(spriteUrl, document.baseURI);
+	} catch (error) {
+		return "";
+	}
+	var page = window.location;
+	if (url.protocol !== page.protocol || url.host !== page.host || url.username || url.password) return "";
+	var resource = url.pathname + url.search + url.hash;
+	switch (url.protocol) {
+	case "royal-sword:":
+		return url.host === "app" ? "royal-sword://app" + resource : "";
+	case "https:":
+		return "https://" + page.host + resource;
+	case "http:":
+		return "http://" + page.host + resource;
+	case "file:":
+		var directory = new URL(".", page.href).pathname;
+		if (url.host || url.pathname.indexOf(directory) !== 0 || /%(?:2f|5c)/i.test(url.pathname)) return "";
+		return "file://" + resource;
+	default:
+		return "";
+	}
+}
+
 function setPokemonSpriteSource(sprite, spriteUrl) {
 	sprite.toggleClass("pokemon-sprite-animated", spriteUrl.indexOf("/ani/") !== -1);
-	sprite.attr("src", spriteUrl);
+	sprite[0].src = spriteUrl;
 }
 
 function setPokemonSpriteState(sprite, state) {
@@ -661,8 +688,14 @@ function createPokemonSprite(pokemonName, className, options) {
 	sprite.addClass(className || "pokemon-sprite");
 	sprite.attr("data-km-pokemon-sprite", "");
 	sprite[0].kmRefreshSprite = function () {
-		spriteUrls = getPokemonSpriteUrls(pokemonName, options); spriteUrlIndex = 0;
-		if (!spriteUrls.length) { sprite.removeClass("pokemon-sprite-animated").removeAttr("src"); setPokemonSpriteState(sprite, "disabled"); return; }
+		var candidates = getPokemonSpriteUrls(pokemonName, options);
+		spriteUrls = candidates.map(getLocalPokemonSpriteUrl).filter(Boolean);
+		spriteUrlIndex = 0;
+		if (!spriteUrls.length) {
+			sprite.removeClass("pokemon-sprite-animated").removeAttr("src");
+			setPokemonSpriteState(sprite, candidates.length ? "missing" : "disabled");
+			return;
+		}
 		setPokemonSpriteState(sprite, "loading"); setPokemonSpriteSource(sprite, spriteUrls[0]);
 	};
 	sprite.on("load", function () {
@@ -1617,7 +1650,7 @@ function updateTeamBoxPokemonPresentation(pokemonButton) {
 	var button = $(pokemonButton);
 	var isTeam = button.parent().attr("id") === "team-poke-list";
 	var style = isTeam ? "animated" : "static";
-	var pokemonName = button.attr("data-pokemon");
+	var pokemonName = button[0].kmBoxPokemonName;
 	if (button.attr("data-sprite-style") !== style) {
 		button.children(".box-pokemon-sprite").remove();
 		button.prepend(createPokemonSprite(pokemonName, "box-pokemon-sprite", {preferStatic: !isTeam}));
@@ -1645,6 +1678,7 @@ function addBoxedPokemon(pokemonName, movesetName) {
 	button.attr("data-id", fullSetName);
 	button.attr("data-pokemon", pokemonName);
 	button.attr("data-set", movesetName);
+	button[0].kmBoxPokemonName = pokemonName;
 	setTeamBoxPokemonLabels(button, fullSetName);
 	$("#box-poke-list").append(button);
 	updateTeamBoxPokemonPresentation(button);
@@ -1771,7 +1805,7 @@ function refreshPlayerTeamMirror() {
 	if (!team.length) return;
 	team.empty();
 	$("#team-poke-list .box-pokemon").each(function () {
-		team.append(renderPlayerTeamPokemon($(this).attr("data-id"), $(this).attr("data-pokemon")));
+		team.append(renderPlayerTeamPokemon($(this).attr("data-id"), this.kmBoxPokemonName));
 	});
 	updateSelectedPokemonHighlights();
 }
