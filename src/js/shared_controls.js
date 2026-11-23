@@ -1650,7 +1650,7 @@ function updateTeamBoxPokemonPresentation(pokemonButton) {
 	var button = $(pokemonButton);
 	var isTeam = button.parent().attr("id") === "team-poke-list";
 	var style = isTeam ? "animated" : "static";
-	var pokemonName = button.attr("data-pokemon");
+	var pokemonName = button[0].kmBoxPokemonName;
 	if (button.attr("data-sprite-style") !== style) {
 		button.children(".box-pokemon-sprite").remove();
 		button.prepend(createPokemonSprite(pokemonName, "box-pokemon-sprite", {preferStatic: !isTeam}));
@@ -1678,6 +1678,7 @@ function addBoxedPokemon(pokemonName, movesetName) {
 	button.attr("data-id", fullSetName);
 	button.attr("data-pokemon", pokemonName);
 	button.attr("data-set", movesetName);
+	button[0].kmBoxPokemonName = pokemonName;
 	setTeamBoxPokemonLabels(button, fullSetName);
 	$("#box-poke-list").append(button);
 	updateTeamBoxPokemonPresentation(button);
@@ -1804,7 +1805,7 @@ function refreshPlayerTeamMirror() {
 	if (!team.length) return;
 	team.empty();
 	$("#team-poke-list .box-pokemon").each(function () {
-		team.append(renderPlayerTeamPokemon($(this).attr("data-id"), $(this).attr("data-pokemon")));
+		team.append(renderPlayerTeamPokemon($(this).attr("data-id"), this.kmBoxPokemonName));
 	});
 	updateSelectedPokemonHighlights();
 }
