@@ -3028,7 +3028,6 @@ body > header {
 .km-settings-page[hidden],
 #km-update-view[hidden],
 #km-settings-view[hidden],
-.km-update-release-notes[hidden],
 .km-update-progress-panel[hidden],
 .km-update-error[hidden],
 .km-settings-secondary-button[hidden] {
@@ -3048,7 +3047,7 @@ body > header {
 	height: 21px;
 	width: 21px;
 }
-.km-update-prompt-heading h3 {
+.km-update-prompt-heading h2 {
 	color: #f4ce6a;
 	font-size: 1.45em;
 	line-height: 1.2;
@@ -3140,31 +3139,6 @@ body > header {
 	grid-column: 1 / -1;
 	justify-self: start;
 }
-#km-update-view {
-	display: grid;
-	gap: 16px;
-}
-.km-update-prompt-copy {
-	color: #e2e9f7;
-	font-size: 1em;
-	line-height: 1.5;
-	margin: 0;
-}
-.km-update-release-notes {
-	background: rgba(5, 14, 31, 0.7);
-	border: 1px solid rgba(115, 148, 201, 0.35);
-	border-radius: 8px;
-	box-sizing: border-box;
-	color: #c9d6ed;
-	font: inherit;
-	line-height: 1.45;
-	margin: 0;
-	max-height: 150px;
-	overflow: auto;
-	padding: 11px 12px;
-	white-space: pre-wrap;
-	width: 100%;
-}
 .km-update-progress-panel {
 	background: rgba(5, 14, 31, 0.72);
 	border: 1px solid rgba(115, 148, 201, 0.42);
@@ -3220,8 +3194,6 @@ body > header {
 }
 .km-update-actions {
 	gap: 10px;
-	justify-content: flex-end;
-	margin-top: 2px;
 }
 @keyframes km-update-progress-slide {
 	0% { transform: translateX(-110%); }
@@ -3238,10 +3210,6 @@ body > header {
 	}
 	.km-settings-summary {
 		grid-template-columns: 1fr;
-	}
-	.km-update-actions {
-		align-items: stretch;
-		flex-direction: column;
 	}
 }
 @media (prefers-reduced-motion: reduce) {

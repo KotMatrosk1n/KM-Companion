@@ -595,7 +595,7 @@ function normalizeUpdateNotes(info) {
 		normalized = notes;
 	}
 	if (!normalized && info && info.releaseName) normalized = String(info.releaseName);
-	return normalized.trim().slice(0, 4000);
+	return normalized.trim().slice(0, 32000);
 }
 
 function isUpdaterBusy() {

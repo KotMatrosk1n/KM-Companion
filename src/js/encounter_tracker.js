@@ -167,8 +167,17 @@
 			return status.allowances.map(function (item) { return item.limit === null ? item.count + " recorded · Unlimited" : item.label + " " + item.count + "/" + item.limit; }).join(" · ");
 		}
 		function entryRecord(area, group, entry) {
+			var source = group.method;
+			if (source === "Fixed overworld" || source === "Roamer") source = "Static";
+			else if (source === "Other") source = "Gift / trade / static";
 			return {pokemon: entry.pokemon, area: area.id, method: group.method,
-				source: area.name === "Starter" ? "Starter" : group.method === "Other" ? "Gift / trade / static" : group.method};
+				source: area.name === "Starter" ? "Starter" : source};
+		}
+		function baseRate(group, entry) {
+			if (entry.rate === null) return "N/A";
+			if (data.encounterRates !== "weights") return entry.rate + "%";
+			var weight = group.totalEntries.reduce(function (sum, row) { return sum + Number(row.rate); }, 0);
+			return weight ? Number((entry.rate / weight * 100).toFixed(1)) + "%" : "N/A";
 		}
 		function copyState() { return JSON.parse(JSON.stringify(state)); }
 		function areaName(id) {
@@ -321,8 +330,12 @@
 				row.title = reason;
 				var cell = el("td"); var check = el("input"); check.type = "checkbox"; check.checked = isCaught;
 				check.disabled = !isCaught && !!blocked;
-				check.id = "km-caught-" + encodeURIComponent([area.id, group.method, entry.slot, entry.pokemon].join("|"));
-				check.setAttribute("aria-label", "Caught " + entry.pokemon + " in " + area.name + " (" + group.method + ")");
+				check.id = "km-caught-" + encodeURIComponent([area.id, group.id || group.method, entry.slot, entry.pokemon].join("|"));
+				var location = group.label || group.method;
+				if (entry.placements && entry.placements.size) {
+					location += (entry.placements.size === 1 ? " · placement " : " · placements ") + Array.from(entry.placements.keys()).join(", ");
+				} else if (entry.placement !== undefined) location += " · placement " + entry.placement;
+				check.setAttribute("aria-label", "Caught " + entry.pokemon + " in " + area.name + " (" + location + ")");
 				check.addEventListener("change", function () {
 					var next = copyState();
 					if (check.checked) {
@@ -345,12 +358,9 @@
 				}
 				check.setAttribute("aria-describedby", status.id); cell.appendChild(status); row.appendChild(cell);
 			},
+			baseRate: baseRate,
 			rate: function (area, group, entry) {
-				if (mode === "normal") {
-					if (data.encounterRates !== "weights") return entry.rate === null ? "N/A" : entry.rate + "%";
-					var weight = group.totalEntries.reduce(function (sum, e) { return sum + Number(e.rate); }, 0);
-					return entry.rate === null || !weight ? "N/A" : Number((entry.rate / weight * 100).toFixed(1)) + "%";
-				}
+				if (mode === "normal") return baseRate(group, entry);
 				if (entry.rate === null || used(area) || rules.reason(entryRecord(area, group, entry), state)) return "N/A";
 				if (familyCatch(entry.pokemon)) return "0%";
 				var total = group.totalEntries.reduce(function (sum, e) { return sum + (familyCatch(e.pokemon) ? 0 : Number(e.rate)); }, 0);

@@ -16,11 +16,10 @@
 	var promptCopy = document.getElementById("km-update-prompt-copy");
 	var releaseNotes = document.getElementById("km-update-release-notes");
 	var notesContent = document.getElementById("km-update-notes-content");
-	var notesNavigation = document.getElementById("km-update-notes-pages");
-	var notesPageLabel = document.getElementById("km-update-notes-page");
-	var notesPrevious = document.getElementById("km-update-notes-previous");
-	var notesNext = document.getElementById("km-update-notes-next");
-	var notesPages = [], notesPage = 0, notesLayoutKey = "";
+	var notesReleaseButton = document.getElementById("km-update-open-release");
+	var renderedNotes = "";
+	var noteElements = ["p", "ul", "ol", "li", "blockquote", "pre", "code", "strong", "em", "del", "br", "h3", "h4", "h5"];
+	var ignoredNoteElements = ["script", "style", "template", "iframe", "object", "embed", "svg", "math", "form"];
 	var progressPanel = document.getElementById("km-update-progress-panel");
 	var progressTitle = document.getElementById("km-update-progress-title");
 	var progressPercent = document.getElementById("km-update-progress-percent");
@@ -188,52 +187,110 @@
 		progressMessage.textContent = message;
 	}
 
-	function renderReleaseNotes() {
-		notesContent.hidden = !updateState.releaseNotes;
-		releaseNotes.hidden = !updateState.releaseNotes;
-		notesNavigation.hidden = !updateState.releaseNotes;
-		if (!updateState.releaseNotes || page.hidden || activeSettingsTab !== 0 || updateView.hidden) return;
-		var scale = parseFloat(window.getComputedStyle(document.body).getPropertyValue("--km-scale")) || 1;
-		var height = Math.max(70, Math.min(400, (window.innerHeight - releaseNotes.getBoundingClientRect().top) / scale - 110));
-		var key = releaseNotes.clientWidth + ":" + height + ":" + updateState.releaseNotes;
-		if (key !== notesLayoutKey) {
-			var offset = notesPages.slice(0, notesPage).join("").length;
-			var remaining = updateState.releaseNotes;
-			notesPages = [];
-			while (remaining.length) {
-				var low = 1, high = remaining.length;
-				while (low < high) {
-					var mid = Math.ceil((low + high) / 2);
-					releaseNotes.textContent = remaining.slice(0, mid);
-					if (releaseNotes.offsetHeight <= height) low = mid;
-					else high = mid - 1;
-				}
-				if (low < remaining.length) {
-					var boundary = remaining.lastIndexOf("\n", low - 1);
-					if (boundary < low / 2) boundary = remaining.lastIndexOf(" ", low - 1);
-					if (boundary >= low / 2) low = boundary + 1;
-					if (/[\uD800-\uDBFF]/.test(remaining.charAt(low - 1))) low = Math.max(1, low - 1);
-				}
-				notesPages.push(remaining.slice(0, low));
-				remaining = remaining.slice(low);
-			}
-			notesPage = 0;
-			while (notesPage < notesPages.length - 1 && offset >= notesPages[notesPage].length) {
-				offset -= notesPages[notesPage++].length;
-			}
-			notesLayoutKey = key;
+	function makeNoteLink(value) {
+		try {
+			var url = new URL(value);
+			if (url.protocol !== "https:" || url.username || url.password) return null;
+			var link = document.createElement("a");
+			link.href = url.href;
+			link.target = "_blank";
+			link.rel = "noopener noreferrer";
+			return link;
+		} catch (error) { return null; }
+	}
+
+	function appendNoteHtml(parent, node, depth) {
+		if (node.nodeType === 3) { parent.appendChild(document.createTextNode(node.textContent)); return; }
+		if (node.nodeType !== 1 || depth > 32 || ignoredNoteElements.indexOf(node.localName) !== -1) return;
+		var tag = node.localName;
+		if (/^h[1-6]$/.test(tag)) tag = "h" + (2 + Math.ceil(Number(tag.charAt(1)) / 2));
+		if (tag === "b") tag = "strong";
+		if (tag === "i") tag = "em";
+		var safe = tag === "a" ? makeNoteLink(node.getAttribute("href")) :
+			(noteElements.indexOf(tag) !== -1 ? document.createElement(tag) : null);
+		Array.prototype.forEach.call(node.childNodes, function (child) { appendNoteHtml(safe || parent, child, depth + 1); });
+		if (safe) parent.appendChild(safe);
+	}
+
+	function appendNoteText(parent, line) {
+		var tokens = /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^\s)]+)\)|(https:\/\/[^\s<>]+)/g;
+		var cursor = 0, match;
+		while ((match = tokens.exec(line))) {
+			parent.appendChild(document.createTextNode(line.slice(cursor, match.index)));
+			var node = match[1] ? document.createElement("code") : match[2] ? document.createElement("strong") : makeNoteLink(match[4] || match[5]);
+			var label = match[1] || match[2] || match[3] || match[5];
+			if (node) { node.textContent = label; parent.appendChild(node); } else parent.appendChild(document.createTextNode(label));
+			cursor = tokens.lastIndex;
 		}
-		releaseNotes.textContent = notesPages[notesPage];
-		notesPageLabel.textContent = "Release notes · Page " + (notesPage + 1) + " of " + notesPages.length;
-		notesPrevious.disabled = notesPage === 0;
-		notesNext.disabled = notesPage === notesPages.length - 1;
+		parent.appendChild(document.createTextNode(line.slice(cursor)));
+	}
+
+	function appendPlainNotes(fragment, notes) {
+		var paragraph, list;
+		notes.split(/\r?\n/).forEach(function (line) {
+			var heading = /^\s{0,3}(#{1,6})\s+(.+)$/.exec(line);
+			var bullet = /^\s*([-*+]|\d+[.)])\s+(.+)$/.exec(line);
+			if (heading) {
+				var title = document.createElement("h" + (2 + Math.ceil(heading[1].length / 2)));
+				appendNoteText(title, heading[2]);
+				fragment.appendChild(title);
+			} else if (bullet) {
+				var tag = /^\d/.test(bullet[1]) ? "ol" : "ul";
+				if (!list || list.localName !== tag) { list = document.createElement(tag); fragment.appendChild(list); }
+				var item = document.createElement("li");
+				appendNoteText(item, bullet[2]);
+				list.appendChild(item);
+				paragraph = null;
+				return;
+			} else if (line.trim()) {
+				if (!paragraph) { paragraph = document.createElement("p"); fragment.appendChild(paragraph); } else paragraph.appendChild(document.createTextNode(" "));
+				appendNoteText(paragraph, line.trim());
+				list = null;
+				return;
+			}
+			paragraph = list = null;
+		});
+	}
+
+	function renderReleaseNotes() {
+		var notes = updateState.releaseNotes;
+		if (renderedNotes === notes) return;
+		renderedNotes = notes;
+		var content = document.createDocumentFragment();
+		if (/<\/?[a-z][\w-]*(?:\s[^>]*|\/)?\s*>/i.test(notes)) {
+			// Template contents stay inert. Only newly created text and allowed note elements reach the page.
+			var template = document.createElement("template");
+			template.innerHTML = notes;
+			Array.prototype.forEach.call(template.content.childNodes, function (node) { appendNoteHtml(content, node, 0); });
+		} else appendPlainNotes(content, notes);
+		var body = document.createElement("div");
+		body.className = "km-update-note-grid";
+		var section;
+		Array.prototype.slice.call(content.childNodes).forEach(function (node) {
+			if (!node.textContent.trim()) return;
+			if (!section || node.nodeName === "H3") {
+				section = document.createElement("section");
+				section.className = "km-update-note-section";
+				body.appendChild(section);
+			}
+			if (node.nodeType === 3) {
+				var paragraph = document.createElement("p");
+				paragraph.textContent = node.textContent.trim();
+				node = paragraph;
+			}
+			section.appendChild(node);
+		});
+		releaseNotes.replaceChildren(body);
+		releaseNotes.scrollTop = 0;
+		notesContent.hidden = !body.childElementCount;
 	}
 
 	function renderUpdateView() {
 		var version = getVersionLabel(updateState.version);
 		var applying = isApplyingUpdate();
-		promptCopy.textContent = "KM Companion " + version + " is available. Install it now?";
+		promptCopy.textContent = (updateState.appVersion ? "Installed " + getVersionLabel(updateState.appVersion) + " · " : "") + "Available " + version;
 		renderReleaseNotes();
+		notesReleaseButton.disabled = applying;
 		updateError.hidden = updateState.status !== "error";
 		updateErrorTitle.textContent = updateState.errorTitle || "Update failed";
 		updateErrorMessage.textContent = updateState.error || updateState.message;
@@ -270,7 +327,6 @@
 		activeView = "update";
 		settingsView.hidden = true;
 		updateView.hidden = false;
-		renderReleaseNotes();
 		installButton.focus();
 	}
 
@@ -282,7 +338,6 @@
 			document.getElementById(tab.getAttribute("aria-controls")).hidden = i !== index;
 		});
 		if (focus) settingsTabs[index].focus();
-		renderReleaseNotes();
 	}
 
 	function setBridgeError(title, message) {
@@ -383,11 +438,6 @@
 		var requested = settingsTabs.findIndex(function (tab) { return tab.id === "km-settings-tab-" + section; });
 		selectSettingsTab(requested < 0 ? activeSettingsTab : requested, true);
 	});
-	if (notesPrevious && notesNext) {
-		notesPrevious.addEventListener("click", function () { notesPage--; renderReleaseNotes(); });
-		notesNext.addEventListener("click", function () { notesPage++; renderReleaseNotes(); });
-		window.addEventListener("resize", renderReleaseNotes);
-	}
 	updateView.addEventListener("keydown", function (event) {
 		if (event.key === "Escape" && !isApplyingUpdate()) {
 			event.preventDefault(); showSettingsView();
@@ -398,6 +448,7 @@
 		else checkForUpdates();
 	});
 	openReleaseButton.addEventListener("click", openReleasePage);
+	notesReleaseButton.addEventListener("click", openReleasePage);
 	installButton.addEventListener("click", installUpdate);
 	dismissButton.addEventListener("click", function () {
 		if (!isApplyingUpdate()) showSettingsView();

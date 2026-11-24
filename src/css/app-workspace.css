@@ -20,9 +20,9 @@ body.km-app .km-location-button[aria-current="true"] { background: var(--km-sele
 .km-reference-card h3 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
 .km-data-table { width: 100%; border-collapse: collapse; }
 .km-data-table th { text-align: left; font-size: 11px; font-weight: 600; color: var(--km-muted); background: var(--km-inset); padding: 4px 8px; line-height: 18px; }
-.km-data-table td { padding: 4px 8px; border-bottom: 1px solid var(--km-line); font-size: 12px; line-height: 18px; }
+.km-data-table td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--km-line); font-size: 12px; line-height: 18px; }
 .km-data-table tr:last-child td { border-bottom: 0; }
-.km-data-table th:last-child, .km-data-table td:last-child { text-align: right; }
+.km-data-table .km-rate, .km-data-table .km-available-rate { text-align: right; }
 .km-pokemon-name { font-weight: 600; }
 .km-rate { color: var(--km-accent); font-variant-numeric: tabular-nums; }
 .km-empty-state { padding: 60px 24px; text-align: center; border: 1px dashed var(--km-line); border-radius: 10px; }
@@ -128,13 +128,19 @@ body.km-app a.km-source-link { display: inline-block; color: var(--km-accent); m
 .km-about { margin: 0 28px 24px; background: transparent; }
 body.km-app .credits { max-width: none; margin: 0; font-size: 12px; color: var(--km-muted); }
 .km-encounter-groups { --km-encounter-min-width: 300px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--km-encounter-min-width)), 1fr)); grid-auto-rows: 1px; column-gap: 16px; row-gap: 0; align-items: start; }
+.km-encounter-content { display: flex; flex-direction: column; flex: 1; min-height: 0; min-width: 0; gap: 10px; overflow-y: auto; padding: 2px 4px 4px 2px; }
+.km-encounter-content > * { flex: none; }
+.km-encounter-disclosure { min-width: 0; }
+.km-encounter-disclosure > summary { cursor: pointer; border: 1px solid var(--km-line); border-radius: 8px; background: var(--km-panel); padding: 8px 10px; font-weight: 600; }
+.km-encounter-disclosure > summary small { margin-inline-start: 10px; font-weight: 400; }
+.km-encounter-disclosure[open] > summary { margin-bottom: 8px; }
+.km-encounter-entry-note { display: block; color: var(--km-muted); font-weight: 400; }
 .km-encounter-groups .km-reference-card { margin: 0; min-width: 0; padding: 8px; }
 .km-encounter-card-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
 .km-encounter-groups .km-reference-card h3 { margin: 0; }
 .km-encounter-level { color: var(--km-muted); font-size: 12px; white-space: nowrap; }
 .km-encounter-groups .km-data-table th, .km-encounter-groups .km-data-table td { box-sizing: border-box; height: 32px; padding: 5px 8px; line-height: 20px; }
 .km-encounter-groups .km-data-table td { font-size: 13px; }
-.km-encounter-groups .km-rate { text-align: right; }
 .km-encounter-groups .km-data-table tbody tr:hover { background: var(--km-inset); }
 .km-encounter-compact .km-data-table th, .km-encounter-compact .km-data-table td { height: 24px; padding: 1px 8px; }
 .km-encounter-area-header { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px; }
@@ -149,11 +155,17 @@ body.km-app .credits { max-width: none; margin: 0; font-size: 12px; color: var(-
 .km-encounters-panel .km-catch-summary { flex-wrap: wrap; gap: 8px; }
 .km-encounters-panel .km-reference-filters { padding: 6px 8px; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
 .km-encounters-panel .km-reference-filters .km-filter { flex-direction: row; align-items: center; gap: 8px; min-width: 0; }
+.km-encounters-panel .km-reference-filters .km-filter[hidden] { display: none; }
 .km-encounters-panel .km-reference-filters .km-filter > span { white-space: nowrap; }
 .km-encounters-panel .km-reference-filters .km-search { position: relative; min-width: 160px; }
 .km-encounters-panel .km-search > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 body.km-app .km-encounters-panel .km-filter select { width: auto; }
 .km-encounters-panel .km-reference-browser { grid-template-columns: 240px minmax(0, 1fr); gap: 12px; }
+@media (max-width: 700px) {
+	body.km-app .km-reference-panel.km-encounters-panel { height: auto; }
+	.km-encounters-panel .km-reference-browser { grid-template-columns: minmax(0, 1fr); grid-template-rows: 148px auto; gap: 8px; }
+	.km-encounter-content { overflow-y: visible; }
+}
 .km-encounters-panel .km-location-list > .km-result-count { margin: 0 0 6px; }
 body.km-app .km-encounter-modes button { min-width: 96px; }
 body.km-app .km-encounter-modes [aria-selected="true"] { color: var(--km-text); background: var(--km-selection); border-color: var(--km-accent); }
@@ -165,7 +177,6 @@ body.km-app .km-reference-panel > .km-encounter-mode-panel { display: flex; flex
 .km-encounter-excluded .km-rate, .km-encounter-excluded .km-available-rate { color: var(--km-muted); }
 .km-encounter-caught { background: var(--km-selection); }
 .km-data-table input[type="checkbox"], .km-area-state input { width: 16px; height: 16px; margin: 0; accent-color: var(--km-accent); cursor: pointer; vertical-align: middle; }
-.km-table-range { color: var(--km-muted); font-size: 11px; font-weight: normal; white-space: nowrap; }
 .km-data-table td:first-child { width: 54px; position: relative; }
 .km-catch-state { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .km-available-rate { color: var(--km-accent); font-variant-numeric: tabular-nums; font-weight: 600; }
@@ -524,7 +535,7 @@ body.km-app .color-code-explanation-lede, body.km-app .color-code-example-copy p
 body.km-app .color-code-example-copy h4 { font-size: 13px; }
 body.km-app .finder-explanation-text-card { text-align: left; }
 .km-settings-page { padding: 16px; text-align: left; }
-.km-settings-tabs { display: flex; gap: 8px; margin: 16px 0; padding-bottom: 10px; border-bottom: 1px solid var(--km-line); }
+.km-settings-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; padding-bottom: 10px; border-bottom: 1px solid var(--km-line); }
 body.km-app .km-settings-tabs button { min-width: 100px; height: 36px; }
 .km-settings-panel { width: 100%; max-width: 1100px; padding: 24px; border: 1px solid var(--km-line); border-radius: 10px; background: var(--km-panel-fill); }
 .km-settings-panel h2 { margin: 0; color: var(--km-text); font-size: 20px; line-height: 1.3; }
@@ -535,10 +546,49 @@ body.km-app .km-settings-panel button { width: auto; height: auto; min-height: 3
 .km-run-card h3 { margin: 0; font-size: 15px; line-height: 1.4; }
 .km-run-card p { margin: 4px 0 0; color: var(--km-muted); }
 .km-run-card button { flex-shrink: 0; }
-.km-update-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, .75fr); align-items: start; gap: 20px; }
-.km-update-layout:has(.km-update-notes-content[hidden]) { grid-template-columns: minmax(0, 1fr); }
-.km-update-notes-content, .km-update-controls { display: grid; min-width: 0; gap: 16px; }
-body.km-app .km-update-actions { justify-content: flex-start; flex-wrap: wrap; }
+#km-settings-updates:has(#km-update-view:not([hidden])) { max-width: none; padding: clamp(12px, 1.5vw, 24px); }
+.km-settings-page:has(#km-settings-updates:not([hidden]) #km-update-view:not([hidden])) > .km-page-heading { margin-bottom: 0; }
+.km-settings-page:has(#km-settings-updates:not([hidden]) #km-update-view:not([hidden])) > .km-settings-tabs { margin-block: 8px 10px; }
+#km-update-view { display: flex; flex-direction: column; min-width: 0; gap: 14px; }
+.km-update-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 18px; padding-bottom: 12px; border-bottom: 1px solid var(--km-line); }
+.km-update-header > div:first-child { min-width: 0; }
+.km-update-prompt-copy { margin: 4px 0 0; color: var(--km-muted); overflow-wrap: anywhere; }
+.km-update-actions { flex-wrap: wrap; }
+.km-update-notes-content { display: flex; flex-direction: column; min-width: 0; container: update-notes / inline-size; }
+.km-update-release-notes { min-width: 0; overflow-wrap: anywhere; line-height: 1.5; }
+.km-update-note-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 10px; }
+.km-update-note-section { min-width: 0; padding: clamp(12px, 1.3vw, 20px); border: 1px solid var(--km-line); border-radius: 8px; background: var(--km-inset); }
+.km-update-note-section:first-child { grid-column: 1 / -1; padding-block: 12px; background: var(--km-panel); }
+.km-update-note-section:first-child > p { max-inline-size: 116ch; }
+.km-update-note-section > :first-child { margin-top: 0; }
+.km-update-note-section > :last-child { margin-bottom: 0; }
+.km-update-note-section :is(h3, h4, h5) { color: var(--km-text); font-weight: 650; line-height: 1.3; }
+.km-update-note-section h3 { margin: 0 0 8px; font-size: 16px; }
+.km-update-note-section :is(h4, h5) { margin: 12px 0 6px; font-size: 14px; }
+.km-update-note-section :is(p, ul, ol, pre, blockquote) { margin: 0 0 10px; }
+.km-update-note-section :is(ul, ol) { padding-inline-start: 1.35em; }
+.km-update-note-section li + li { margin-top: 6px; }
+.km-update-note-section li::marker { color: var(--km-accent); }
+.km-update-note-section a { color: var(--km-link, var(--km-accent)); text-decoration: underline; }
+.km-update-note-section pre { white-space: pre-wrap; }
+.km-update-note-section blockquote { padding-inline-start: 12px; border-inline-start: 2px solid var(--km-line); }
+@container update-notes (max-width: 940px) {
+	.km-update-note-grid { grid-template-columns: minmax(0, 1fr); }
+}
+/* Fit the reader around the actual shell and toolbar heights. Short windows use page scrolling. */
+@media (min-width: 640px) and (min-height: 560px) {
+	body.km-app:has(#km-settings-page:not([hidden]) #km-settings-updates:not([hidden]) #km-update-view:not([hidden]) .km-update-notes-content:not([hidden])) {
+		display: flex; flex-direction: column; block-size: calc(100dvh / var(--km-scale));
+	}
+	.km-settings-page:has(#km-settings-updates:not([hidden]) #km-update-view:not([hidden]) .km-update-notes-content:not([hidden])) {
+		display: flex; flex-direction: column; flex: 1; overflow-y: auto;
+	}
+	#km-settings-updates:has(#km-update-view:not([hidden]) .km-update-notes-content:not([hidden])) {
+		display: flex; flex-direction: column; flex: 1; min-height: 0;
+	}
+	#km-update-view:has(.km-update-notes-content:not([hidden])), .km-update-notes-content { flex: 1; min-height: 0; }
+	.km-update-release-notes { flex: 1; min-height: 108px; overflow: auto; scrollbar-gutter: stable; }
+}
 body.km-app .km-report-button { display: inline-flex; align-items: center; justify-content: center; width: auto; flex-shrink: 0; white-space: nowrap; text-decoration: none; }
 @media (max-width: 1100px) {
 	body.km-app > header { gap: 8px; }
@@ -547,7 +597,6 @@ body.km-app .km-report-button { display: inline-flex; align-items: center; justi
 @media (max-width: 700px) {
 	.km-settings-panel { padding: 16px; }
 	.km-run-card { align-items: flex-start; flex-direction: column; gap: 12px; }
-	.km-update-layout { grid-template-columns: minmax(0, 1fr); }
 	body.km-app .km-settings-summary { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-height: 650px) {
@@ -557,12 +606,10 @@ body.km-app .km-report-button { display: inline-flex; align-items: center; justi
 	.km-settings-description { margin-bottom: 12px; }
 	body.km-app #km-update-view { gap: 10px; }
 }
-body.km-app .km-update-prompt-heading h3, body.km-app .km-update-prompt-heading svg { color: var(--km-accent); }
-body.km-app .km-settings-metric, body.km-app .km-settings-update-status, body.km-app .km-update-release-notes, body.km-app .km-update-progress-panel { color: var(--km-text); background: var(--km-inset); border-color: var(--km-line); }
+body.km-app .km-update-prompt-heading h2, body.km-app .km-update-prompt-heading svg { color: var(--km-accent); }
+body.km-app .km-settings-metric, body.km-app .km-settings-update-status, body.km-app .km-update-progress-panel { color: var(--km-text); background: var(--km-inset); border-color: var(--km-line); }
 body.km-app .km-settings-metric span, body.km-app .km-update-progress-header span, body.km-app .km-update-progress-panel p { color: var(--km-muted); }
-body.km-app .km-settings-metric strong, body.km-app .km-update-prompt-copy { color: var(--km-text); }
-body.km-app .km-update-release-notes { max-height: none; overflow: visible; overflow-wrap: anywhere; font-size: 13px; line-height: 1.5; }
-body.km-app #km-update-notes-pages { margin-top: -8px; padding-top: 0; border: 0; }
+body.km-app .km-settings-metric strong { color: var(--km-text); }
 body.km-app .km-update-error { background: var(--km-inset); border-color: #e47777; color: var(--km-text); }
 body.km-app .km-update-error p, body.km-app .km-update-error strong { color: inherit; }
 body.km-app .km-settings-update-status[data-kind="error"] { border-left-color: #e47777; }

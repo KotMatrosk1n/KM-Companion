@@ -228,14 +228,14 @@
 			var edges = data.evolutionFamily(index, entry.key);
 			if (!edges.length) { section.appendChild(el("p", "km-muted", "No evolution is recorded for this form in the game data.")); return; }
 			var grid = el("div", "km-dex-evolution-grid"); section.appendChild(grid);
+			var text = window.SAVE_IMPORT_TEXT || {};
+			var lookup = Object.assign({}, text, {items: Object.assign({}, text.items, index.pack.itemNames)});
 			edges.forEach(function (edge) {
 				if (!edge.to) return;
 				var link = el("div", "km-dex-evolution-link");
 				[edge.from, edge.to].forEach(function (pokemon, i) {
 					if (i) {
 						var condition = el("div", "km-dex-evolution-condition");
-						var text = window.SAVE_IMPORT_TEXT || {};
-						var lookup = Object.assign({}, text, {items: Object.assign({}, text.items, index.pack.itemNames)});
 						condition.appendChild(el("span", "", "→"));
 						condition.appendChild(el("span", "", data.evolutionText(edge.rule, lookup)));
 						link.appendChild(condition);
@@ -245,10 +245,26 @@
 						if (!results.some(function (s) { return s.number === pokemon.number; })) { search.value = type.value = gen.value = availability.value = ""; filter(); }
 						state.page = Math.floor(results.indexOf(species) / perPage); choose(species, pokemon);
 					}, "km-dex-evolution-pokemon");
-					b.appendChild(sprite(pokemon.name, "km-dex-evolution-sprite")); b.appendChild(el("small", "km-muted", number(pokemon.number))); b.appendChild(el("strong", "", pokemon.name)); b.setAttribute("aria-current", String(pokemon.key === entry.key)); link.appendChild(b);
+					var name = pokemon.name;
+					if (i && edge.rule.method === 45 && pokemon.number === 869) name = pokemon.form === 0 ? "Alcremie (Vanilla Cream)" : name.replace(/-Strawberry-Sweet$/, "").replace(/-/g, " ");
+					b.appendChild(sprite(pokemon.name, "km-dex-evolution-sprite")); b.appendChild(el("small", "km-muted", number(pokemon.number))); b.appendChild(el("strong", "", name)); b.setAttribute("aria-current", String(pokemon.key === entry.key)); link.appendChild(b);
 				});
 				grid.appendChild(link);
 			});
+			var itemIds = [...new Set(edges.flatMap(function (edge) { return data.evolutionItems(edge.rule, index.pack.spinItems); }))];
+			var sources = el("ul", "km-dex-evolution-sources");
+			itemIds.forEach(function (id) {
+				var descriptions = new Set((index.itemSources[id] || []).map(function (item) {
+					return item.location + (item.liveSource === "Shop" ? " · " + data.shopPriceText(item) + (item.badges ? " · " + item.badges : "") : " · " + item.acquisition);
+				}));
+				if (descriptions.size) sources.appendChild(el("li", "", lookup.items[id] + " · " + Array.from(descriptions).join(" / ")));
+			});
+			if (sources.children.length) {
+				var details = el("details", "km-dex-evolution-item-details");
+				details.appendChild(el("summary", "", "Evolution item locations"));
+				details.appendChild(sources);
+				section.appendChild(details);
+			}
 		}
 		function moves(parent, entry) {
 			var section = card(parent, "Moves", "km-dex-moves");
@@ -257,6 +273,13 @@
 			var tabs = el("div", "km-dex-move-tabs"); tabs.setAttribute("role", "tablist"); tabs.setAttribute("aria-label", "Move learnsets"); section.appendChild(tabs);
 			var controls = el("div", "km-dex-move-filters"); section.appendChild(controls);
 			var query = field(controls, "Find a move", el("input")); query.type = "search"; query.placeholder = "Move name"; query.value = state.moveQuery || "";
+			var storyCap;
+			if (index.storyCaps.length) {
+				var capOptions = index.storyCaps.map(function (cap) { return [cap.split, (cap.label || cap.split) + " · Lv. " + cap.level]; });
+				storyCap = field(controls, "Story level cap", select([["", "All levels"]].concat(capOptions), "Story level cap"));
+				storyCap.value = state.moveStorySplit || "";
+				storyCap.addEventListener("change", function () { state.moveStorySplit = storyCap.value; state.movePage = 0; renderMoves(); });
+			}
 			var output = el("div", "km-dex-move-results"); output.id = "km-dex-move-panel"; output.setAttribute("role", "tabpanel"); output.tabIndex = 0; section.appendChild(output);
 			function activateMethod(method, focus) {
 				state.moveMethod = method; state.movePage = 0; renderMoves();
@@ -273,11 +296,17 @@
 			function renderMoves() {
 				state.moveQuery = query.value; output.textContent = "";
 				var active = methods.find(function (method) { return method[0] === state.moveMethod; });
+				var levelTab = active[0] === "Level";
+				if (storyCap) storyCap.parentNode.hidden = !levelTab;
+				var cap = levelTab && storyCap && index.storyCaps.find(function (candidate) { return candidate.split === storyCap.value; });
 				Array.prototype.forEach.call(tabs.children, function (tab, i) {
 					var selected = methods[i][0] === state.moveMethod; tab.setAttribute("aria-selected", String(selected)); tab.tabIndex = selected ? 0 : -1;
 					if (selected) output.setAttribute("aria-labelledby", tab.id);
 				});
-				var rows = entry.moves.filter(function (move) { var details = index.pack.moves[move.id]; return details && move.method === state.moveMethod && data.normalize(details.name).indexOf(data.normalize(query.value)) !== -1; });
+				var rows = entry.moves.filter(function (move) {
+					var details = index.pack.moves[move.id];
+					return details && move.method === state.moveMethod && (!cap || move.level <= cap.level) && data.normalize(details.name).indexOf(data.normalize(query.value)) !== -1;
+				});
 				var table = el("table", "km-dex-move-table"), caption = el("caption", "km-muted", rows.length + " " + active[1] + " move records for " + pokemonLabel(entry)); table.appendChild(caption);
 				var header = el("thead"), labels = el("tr"); ["Learn", "Move", "Type", "Category", "Power", "Accuracy", "PP"].forEach(function (label) { var cell = el("th", "", label); cell.scope = "col"; labels.appendChild(cell); }); header.appendChild(labels); table.appendChild(header);
 				var body = el("tbody"); table.appendChild(body);
@@ -287,15 +316,18 @@
 					row.appendChild(el("td", "km-muted", move.method === "Level" ? move.level === 0 ? "Evolution" : "Lv. " + move.level : move.machine || move.method));
 					var cell = el("td"), disclosure = el("details"), summary = el("summary", "", details.name); disclosure.appendChild(summary);
 					var text = index.pack.moveDescriptions && index.pack.moveDescriptions[move.id];
-					if (!text && profile.id === "pokemon-royal-sword" && window.KMCalculatorTooltipData) {
-						var detail = window.KMCalculatorTooltipData.swsh.moves[data.normalize(details.name)]; text = detail && (detail.effects || detail.description);
+					var catalog = profile.id === "pokemon-royal-sword" && window.KMCalculatorTooltipData && window.KMCalculatorTooltipData.swsh;
+					if (!text && catalog) {
+						var key = data.normalize(details.name);
+						var detail = catalog.moves[catalog.aliases && catalog.aliases[key] || key];
+						text = detail && (detail.effects || detail.description || detail.summary);
 					}
 					disclosure.appendChild(el("p", "km-muted", text || "Move effect text is not recorded.")); disclosure.appendChild(el("small", "km-muted", "Priority: " + details.priority)); cell.appendChild(disclosure); row.appendChild(cell);
 					cell = el("td"); cell.appendChild(badge(details.type)); row.appendChild(cell);
 					[details.category, details.category === "Status" ? "None" : details.power || "Varies", details.accuracy > 100 ? "Always" : details.accuracy + "%", details.pp].forEach(function (value) { row.appendChild(el("td", "", value)); }); body.appendChild(row);
 				});
 				output.appendChild(table);
-				if (!rows.length) output.appendChild(el("p", "km-dex-empty", query.value ? "No " + active[1] + " moves match this search." : "No " + active[1] + " moves are recorded for this form."));
+				if (!rows.length) output.appendChild(el("p", "km-dex-empty", cap ? "No level up moves match at this cap." : query.value ? "No " + active[1] + " moves match this search." : "No " + active[1] + " moves are recorded for this form."));
 				var pages = el("div", "km-dex-pager"); output.appendChild(pages);
 				pager(pages, state.movePage, rows.length, limit, function (page) { state.movePage = page; renderMoves(); output.querySelector("summary").focus(); }, "move");
 			}

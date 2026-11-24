@@ -38,7 +38,7 @@ The canonical calculation engine currently tracks the upstream revision document
 
 [Pokémon Showdown](https://github.com/smogon/pokemon-showdown), created by Guangcong Luo and maintained by its contributors, is used for permissively licensed name data and as the source of the Pokémon sprite directories available through the app's optional artwork download. Its source code and applicable data are distributed under the MIT License. Sprite artwork and other media remain subject to their own rights; see the [Pokémon Showdown credits](https://pokemonshowdown.com/credits).
 
-Trainer move effect descriptions and accuracy values are adapted from Pokémon Showdown's move data at revision `f0e61e58ad297885578231746036438e1b42f40a`, including Generation 8 overrides. The original MIT notice is included with the bundled reference text. Move type, category, and base power use the active calculator generation, as does accuracy when supplied by its data provider.
+Move effect descriptions and trainer tooltip accuracy values are adapted from Pokémon Showdown's move data at revision `f0e61e58ad297885578231746036438e1b42f40a`, including Generation 8 overrides. The Dex and Trainers use the same move reference. The original MIT notice is included with the bundled text. Trainer move type, category, and base power use the active calculator generation, as does accuracy when supplied by its data provider.
 
 ### PokéSprite
 

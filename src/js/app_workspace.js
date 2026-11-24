@@ -1,4 +1,4 @@
-/*global window, document */
+/*global window, document, Map, Set */
 /* The app shell keeps the live calculator mounted while profile reference views change. */
 (function () {
 	"use strict";
@@ -511,61 +511,33 @@
 		}, "km-reference-more");
 		parent.appendChild(opener);
 	}
-	function layoutEncounterTables(grid, tables, available) {
+	function layoutEncounterTables(grid, available) {
+		var width = grid.getBoundingClientRect().width;
+		if (!width) return;
 		var scale = Number(window.getComputedStyle(document.body).zoom) || 1;
-		grid.classList.remove("km-encounter-compact");
 		var style = window.getComputedStyle(grid);
 		var gap = parseFloat(style.columnGap) || 0;
 		var minimumWidth = parseFloat(style.getPropertyValue("--km-encounter-min-width")) || 300;
-		var maximumColumns = Math.max(1, Math.min(4, Math.floor((grid.getBoundingClientRect().width / scale + gap) / (minimumWidth + gap))));
-		function arrange(columns, compact) {
+		var nodes = Array.prototype.slice.call(grid.children);
+		var columns = Math.max(1, Math.min(4, nodes.length, Math.floor((width / scale + gap) / (minimumWidth + gap))));
+		var land = nodes.filter(function (node) { return node.getAttribute("data-encounter-section") === "land"; });
+		var other = nodes.filter(function (node) { return node.getAttribute("data-encounter-section") !== "land"; });
+		grid.style.gridTemplateColumns = "repeat(" + columns + ", minmax(0, 1fr))";
+		function arrange(compact) {
 			grid.classList.toggle("km-encounter-compact", compact);
-			grid.style.gridTemplateColumns = "repeat(" + columns + ", minmax(0, 1fr))";
-			grid.textContent = "";
-			// Reuse the live catch controls when a small window needs to split a table.
-			tables.forEach(function (table) {
-				var card = table.card; card.hidden = false;
-				card.style.gridColumn = ""; card.style.gridRow = "";
-				var body = card.querySelector("tbody"); table.rows.forEach(function (row) { body.appendChild(row); });
-				grid.appendChild(card);
-				var overhead = card.getBoundingClientRect().height - body.getBoundingClientRect().height;
-				var rowHeight = Math.max.apply(null, table.rows.map(function (row) { return row.getBoundingClientRect().height; }));
-				var capacity = Math.max(1, Math.floor((available - overhead) / rowHeight));
-				if (table.rows.length <= capacity) { card.setAttribute("data-page-key", table.rows[0].querySelector("input").id); return; }
-				var range = el("small", "km-table-range", " · " + table.rows.length + " to " + table.rows.length + " / " + table.rows.length);
-				card.querySelector("h3").appendChild(range);
-				overhead = card.getBoundingClientRect().height - body.getBoundingClientRect().height;
-				capacity = Math.max(1, Math.floor((available - overhead) / rowHeight));
-				range.remove();
-				for (var start = 0; start < table.rows.length; start += capacity) {
-					var chunk = card.cloneNode(true); var chunkBody = chunk.querySelector("tbody"); chunkBody.textContent = "";
-					table.rows.slice(start, start + capacity).forEach(function (row) { chunkBody.appendChild(row); });
-					chunk.querySelector("h3").appendChild(el("small", "km-table-range", " · " + (start + 1) + " to " + Math.min(start + capacity, table.rows.length) + " / " + table.rows.length));
-					chunk.setAttribute("data-page-key", table.rows[start].querySelector("input").id); grid.insertBefore(chunk, card);
-				}
-				card.remove();
-			});
-			var nodes = Array.prototype.slice.call(grid.children);
-			var land = nodes.filter(function (node) { return node.getAttribute("data-encounter-section") === "land"; });
-			var other = nodes.filter(function (node) { return node.getAttribute("data-encounter-section") !== "land"; });
-			var pages = [];
+			var heights = new Array(columns).fill(0);
 			function placeLane(entries, firstColumn, count) {
-				var heights = new Array(count).fill(0), page = 0;
 				entries.forEach(function (node) {
-					var column = heights.indexOf(Math.min.apply(null, heights));
+					var column = firstColumn;
+					for (var i = firstColumn + 1; i < firstColumn + count; i++) if (heights[i] < heights[column]) column = i;
 					var cardHeight = Math.ceil(node.getBoundingClientRect().height / scale);
-					if (heights[column] && heights[column] + cardHeight > available / scale) {
-						page++; heights.fill(0); column = 0;
-					}
-					node.style.gridColumn = String(firstColumn + column + 1);
+					node.style.gridColumn = String(column + 1);
 					node.style.gridRow = (heights[column] + 1) + " / span " + cardHeight;
 					heights[column] += cardHeight + gap;
-					if (!pages[page]) pages[page] = [];
-					pages[page].push(node);
 				});
 			}
+			nodes.forEach(function (node, i) { node.style.gridColumn = String(i % columns + 1); node.style.gridRow = ""; });
 			if (land.length && other.length && columns > 1) {
-				// Keep Fishing, then Shaking Trees, beside the land/weather block.
 				var landColumns = Math.min(land.length, columns - 1);
 				var baseLand = land.filter(function (node) { return node.getAttribute("data-encounter-method") === "Land"; });
 				if (landColumns >= 3 && baseLand.length) {
@@ -574,20 +546,11 @@
 				} else placeLane(land, 0, landColumns);
 				placeLane(other, landColumns, columns - landColumns);
 			} else placeLane(nodes, 0, columns);
-			return pages;
+			return (Math.max.apply(null, heights) - gap) * scale;
 		}
-		var pages;
-		// Use the available width before reducing row spacing or introducing another page.
-		for (var density = 0; density < 2; density++) {
-			pages = arrange(Math.max(1, Math.min(tables.length, maximumColumns)), density === 1);
-			if (pages.length <= 1) return pages;
-		}
-		return pages;
+		if (arrange(false) > available) arrange(true);
 	}
 	function referencePager(parent, grid, label, state) {
-		var encounterTables = grid.classList.contains("km-encounter-groups") ? Array.prototype.map.call(grid.children, function (card) {
-			return {card: card, rows: Array.prototype.slice.call(card.querySelector("tbody").children)};
-		}) : null;
 		var viewport = el("div", "km-page-viewport");
 		grid.parentNode.insertBefore(viewport, grid); viewport.appendChild(grid);
 		var footer = el("nav", "km-pagination"); footer.setAttribute("aria-label", label + " pages");
@@ -608,36 +571,26 @@
 			state.anchor = page.length ? page[0].getAttribute("data-page-key") : null;
 			previous.disabled = state.page === 0; next.disabled = state.page >= pages.length - 1;
 			select.value = String(state.page);
-			footer.hidden = !!encounterTables && pages.length <= 1;
-			summary.textContent = encounterTables ? page.length + " of " + grid.children.length + " tables" : page.length ? (Array.prototype.indexOf.call(grid.children, page[0]) + 1) + " to " +
+			summary.textContent = page.length ? (Array.prototype.indexOf.call(grid.children, page[0]) + 1) + " to " +
 				(Array.prototype.indexOf.call(grid.children, page[page.length - 1]) + 1) + " of " + grid.children.length : "0 results";
 		}
 		return function () {
-			footer.hidden = !!encounterTables;
 			if (!viewport.getBoundingClientRect().height) return;
 			var available = viewport.getBoundingClientRect().height;
-			if (encounterTables) {
-				pages = layoutEncounterTables(grid, encounterTables, available);
-				if (pages.length > 1) {
-					footer.hidden = false;
-					pages = layoutEncounterTables(grid, encounterTables, viewport.getBoundingClientRect().height);
-				}
-			} else {
-				var nodes = Array.prototype.slice.call(grid.children);
-				nodes.forEach(function (node) { node.hidden = false; });
-				var style = window.getComputedStyle(grid);
-				var scale = Number(window.getComputedStyle(document.body).zoom) || 1;
-				var columns = style.display === "grid" ? style.gridTemplateColumns.split(" ").length : 1;
-				var gap = (parseFloat(style.rowGap) || 0) * scale;
-				pages = []; var page = []; var height = 0;
-				for (var i = 0; i < nodes.length; i += columns) {
-					var row = nodes.slice(i, i + columns);
-					var rowHeight = Math.max.apply(null, row.map(function (node) { return node.getBoundingClientRect().height; }));
-					if (page.length && height + gap + rowHeight > available + 1) { pages.push(page); page = []; height = 0; }
-					height += (page.length ? gap : 0) + rowHeight; page = page.concat(row);
-				}
-				if (page.length) pages.push(page);
+			var nodes = Array.prototype.slice.call(grid.children);
+			nodes.forEach(function (node) { node.hidden = false; });
+			var style = window.getComputedStyle(grid);
+			var scale = Number(window.getComputedStyle(document.body).zoom) || 1;
+			var columns = style.display === "grid" ? style.gridTemplateColumns.split(" ").length : 1;
+			var gap = (parseFloat(style.rowGap) || 0) * scale;
+			pages = []; var page = []; var height = 0;
+			for (var i = 0; i < nodes.length; i += columns) {
+				var row = nodes.slice(i, i + columns);
+				var rowHeight = Math.max.apply(null, row.map(function (node) { return node.getBoundingClientRect().height; }));
+				if (page.length && height + gap + rowHeight > available + 1) { pages.push(page); page = []; height = 0; }
+				height += (page.length ? gap : 0) + rowHeight; page = page.concat(row);
 			}
+			if (page.length) pages.push(page);
 			select.textContent = "";
 			pages.forEach(function (entries, index) {
 				var option = el("option", "", (index + 1) + " / " + pages.length); option.value = index; select.appendChild(option);
@@ -745,7 +698,8 @@
 			encounterTracker = window.KMEncounterTracker.create({panel: panel, heading: heading, note: note, onChange: function () { render(view); }});
 			var help = el("div");
 			help.appendChild(note);
-			help.appendChild(el("p", "km-muted", "Land shows encounters in normal weather. Weather cards list the slots that differ from Land and use the odds from the full table. Filter by a weather to see every slot."));
+			help.appendChild(el("p", "km-muted", "Use Weather to select a complete Wild Area pool. Choose Visible encounters to see those pools and their level ranges. Fishing and berry tree tables are available in any weather."));
+			help.appendChild(el("p", "km-muted", "Open Static spawns to see each Pokémon, its placements, and the badges required to catch it."));
 			referenceDetails("Encounter rules", help, heading.querySelector(".km-catch-summary"));
 			navigation.insertBefore(status, navigation.firstChild);
 		}
@@ -757,6 +711,7 @@
 		actions.appendChild(view.resetButton);
 		search.addEventListener("input", function () { render(view); });
 		view.primary = makeFilter(view, kind === "encounters" ? "Encounter method" : kind === "items" ? "Acquisition" : "Story split", [{value: "", label: "All"}]);
+		if (kind === "encounters") view.secondary = makeFilter(view, "Weather", [{value: "", label: "All weather"}]);
 		if (kind === "trainers") view.secondary = makeFilter(view, "Battle format", [{value: "", label: "All formats"}, "Single", "Double", "Not listed"]);
 		filters.appendChild(button("Reset filters", function () {
 			view.search.value = "";
@@ -767,16 +722,52 @@
 		views.push(view);
 		return panel;
 	}
-	function getGroups(area) {
-		var land = area.groups.filter(function (g) { return g.method === "Land"; })[0];
-		function order(group) { return group.method === "Land" ? 0 : group.weather ? 1 : group.method === "Fishing" ? 2 : group.method === "Shaking Trees" ? 3 : 4; }
-		return area.groups.map(function (g) {
-			var weather = ["Land", "Fishing", "Shaking Trees", "Trade", "Gift", "Starter", "Static", "Other"].indexOf(g.method) === -1;
-			var shared = weather && land ? land.entries.filter(function (e) {
-				return Array.isArray(g.sharedSlots) ? g.sharedSlots.indexOf(e.slot) !== -1 : e.slot <= 7;
-			}) : [];
-			return {method: g.method, weather: weather, sharedEntries: shared, entries: shared.concat(g.entries)};
+	function encounterGuideGroups(area, showVisible) {
+		return window.KMPokedexData.activeEncounterGroups(area).filter(function (group) { return group.method !== "Overworld" || (showVisible && group.tableId); });
+	}
+	function encounterMethod(group) {
+		return group.tableId && group.weather && group.method !== "Overworld" ? "Land" : group.method;
+	}
+	function getGroups(area, showVisible) {
+		function order(group) {
+			if (group.method === "Land") return 0;
+			if (group.weather) return 1;
+			return group.method === "Fishing" ? 2 : group.method === "Shaking Trees" ? 3 : 4;
+		}
+		return encounterGuideGroups(area, showVisible).map(function (group) {
+			var rows = window.KMPokedexData.encounterRows(area, group);
+			return Object.assign({}, group, {source: group, base: rows.base, weather: rows.weather, sharedEntries: rows.shared, entries: rows.entries, totalEntries: rows.entries});
 		}).sort(function (a, b) { return order(a) - order(b); });
+	}
+	function splitLandByWeather(group, groups) {
+		if (group.method !== "Land") return [group];
+		var weather = groups.filter(function (variant) { return variant.base === group.source; });
+		if (!weather.length) return [group];
+		var shared = group.entries.filter(function (entry) {
+			return weather.every(function (variant) { return variant.sharedEntries.indexOf(entry) !== -1; });
+		});
+		return [
+			Object.assign({}, group, {label: "All Conditions", entries: shared}),
+			Object.assign({}, group, {label: "No Weather", normalWeatherOnly: true, entries: group.entries.filter(function (entry) { return shared.indexOf(entry) === -1; })})
+		];
+	}
+	function groupStaticEntries(group) {
+		if (["Fixed overworld", "Static", "Roamer"].indexOf(group.method) === -1) return group;
+		var byPokemon = new Map();
+		group.entries.forEach(function (entry) {
+			if (!byPokemon.has(entry.pokemon)) byPokemon.set(entry.pokemon, []);
+			byPokemon.get(entry.pokemon).push(entry);
+		});
+		group.entries = Array.from(byPokemon.values(), function (entries) {
+			var placements = new Map();
+			entries.forEach(function (entry) {
+				if (entry.placement !== undefined) placements.set(entry.placement, entry.position);
+			});
+			var levels = new Set(entries.map(function (entry) { return entry.level; }).filter(Boolean));
+			var notes = new Set(entries.map(function (entry) { return entry.note; }).filter(Boolean));
+			return Object.assign({}, entries[0], {placements: placements, level: Array.from(levels).join(", "), note: Array.from(notes).join(" · ")});
+		});
+		return group;
 	}
 	function itemLocationName(item) { return item.postGame === true ? "Post Game" : item.location; }
 	function getResults(view) {
@@ -784,23 +775,27 @@
 		var filter = view.primary.value;
 		if (!sourceData) return [];
 		if (view.kind === "encounters") {
+			var weather = view.secondary.value;
 			return sourceData.areas.map(function (area) {
-				var groups = getGroups(area).filter(function (group) { return !filter || group.method === filter; }).map(function (group) {
-					return {method: group.method, weather: group.weather, sharedEntries: group.sharedEntries, totalEntries: group.entries, entries: group.entries.filter(function (entry) {
-						return !query || textMatch(area.name, query) || textMatch(entry.pokemon, query) || textMatch(entry.requiredPokemon, query);
-					})};
-				}).filter(function (group) { return group.entries.length; });
-				var land = groups.filter(function (group) { return group.method === "Land"; })[0];
-				var sharedWeather = false;
-				if (land) groups.forEach(function (group) {
+				var sourceGroups = getGroups(area, filter === "Overworld");
+				var groups = sourceGroups.filter(function (group) {
+					return (!filter || encounterMethod(group) === filter) && (!weather || !group.weather || group.weather === weather);
+				}).flatMap(function (group) {
+					return splitLandByWeather(group, sourceGroups);
+				}).map(function (group) {
+					var all = !query || textMatch(area.name, query) || (group.label && textMatch(group.label, query));
 					group.entries = group.entries.filter(function (entry) {
-						var shared = group.sharedEntries.indexOf(entry) !== -1 && land.entries.indexOf(entry) !== -1;
-						if (shared) sharedWeather = true;
-						return !shared;
+						return all || textMatch(entry.pokemon, query) || textMatch(entry.requiredPokemon, query);
 					});
+					return group;
+				}).filter(function (group) { return group.entries.length; });
+				var matches = new Map(groups.filter(function (group) { return !group.normalWeatherOnly; }).map(function (group) { return [group.source, group.entries]; }));
+				groups.forEach(function (group) {
+					var base = matches.get(group.base);
+					if (base) group.entries = group.entries.filter(function (entry) { return group.sharedEntries.indexOf(entry) === -1 || base.indexOf(entry) === -1; });
 				});
-				groups = groups.filter(function (group) { return group.entries.length; });
-				return {id: area.id, name: area.name, groups: groups, sharedWeather: sharedWeather, count: groups.reduce(function (n, g) { return n + g.entries.length; }, 0)};
+				groups = groups.filter(function (group) { return group.entries.length; }).map(groupStaticEntries);
+				return {id: area.id, name: area.name, groups: groups, count: groups.reduce(function (n, g) { return n + g.entries.length; }, 0)};
 			}).filter(function (area) { return area.groups.length; });
 		}
 		if (view.kind === "trainers") return sourceData.trainers.filter(function (trainer) {
@@ -835,42 +830,97 @@
 		});
 		return locations;
 	}
-	function renderEncounters(container, area) {
+	function renderEncounters(container, area, fixedExpanded, filtering) {
 		var heading = el("div", "km-encounter-area-header");
 		heading.appendChild(el("h2", "", area.name));
 		encounterTracker.renderArea(heading, area);
 		container.appendChild(heading);
-		var grid = el("div", "km-encounter-groups");
-		container.appendChild(grid);
-		area.groups.forEach(function (group) {
-			var card = el("section", "km-reference-card");
-			card.setAttribute("data-encounter-section", group.method === "Land" || group.weather ? "land" : "other");
-			card.setAttribute("data-encounter-method", group.method);
-			var trade = group.method === "Trade";
-			var level = !trade && group.totalEntries[0].level;
-			var sharedLevel = level && group.totalEntries.every(function (entry) { return entry.level === level; });
-			var cardHeading = el("div", "km-encounter-card-heading");
-			cardHeading.appendChild(el("h3", "", group.method === "Land" ? "Land (no weather)" : group.method));
-			if (sharedLevel) cardHeading.appendChild(el("span", "km-encounter-level", "Lv. " + String(level).replace(/(\d)\s*-\s*(?=\d)/g, "$1 to ")));
-			card.appendChild(cardHeading);
-			var table = el("table", "km-data-table");
-			var head = el("thead");
-			var header = el("tr");
-			var columns = ["Caught", "Pokémon"].concat(sharedLevel ? [] : ["Level"], [trade ? "Required Pokémon" : "Base", "Available"]);
-			columns.forEach(function (text) { var th = el("th", text === "Base" ? "km-rate" : "", text); th.scope = "col"; header.appendChild(th); });
-			head.appendChild(header); table.appendChild(head);
-			var body = el("tbody");
-			group.entries.forEach(function (entry) {
-				var row = el("tr");
-				encounterTracker.renderEntry(row, area, group, entry);
-				row.appendChild(el("td", "km-pokemon-name", entry.pokemon));
-				if (!sharedLevel) row.appendChild(el("td", "", entry.level ? String(entry.level).replace(/(\d)\s*-\s*(?=\d)/g, "$1 to ") : "Not listed"));
-				var rate = trade ? el("td", "km-pokemon-name", entry.requiredPokemon || "Not listed") : el("td", "km-rate", entry.rate === null ? "N/A" : entry.rate + "%");
-				row.appendChild(rate); body.appendChild(row);
+		var content = el("div", "km-encounter-content");
+		content.tabIndex = 0;
+		content.setAttribute("role", "region");
+		content.setAttribute("aria-label", area.name + " encounters");
+		container.appendChild(content);
+		var grids = [];
+		function resize() {
+			var height = content.getBoundingClientRect().height;
+			grids.forEach(function (grid) { layoutEncounterTables(grid, height); });
+		}
+		function appendGroups(parent, groups) {
+			if (!groups.length) return;
+			var grid = el("div", "km-encounter-groups");
+			groups.forEach(function (group) { grid.appendChild(encounterCard(area, group)); });
+			parent.appendChild(grid);
+			grids.push(grid);
+		}
+		var fixed = area.groups.filter(function (group) { return group.method === "Fixed overworld"; });
+		if (fixed.length) {
+			var placements = fixed.reduce(function (count, group) {
+				return count + new Set(group.entries.flatMap(function (entry) { return Array.from(entry.placements.keys()); })).size;
+			}, 0);
+			var details = el("details", "km-encounter-disclosure");
+			details.setAttribute("data-encounter-disclosure", "fixed");
+			details.open = fixedExpanded === undefined ? filtering || placements <= 2 : fixedExpanded;
+			var summary = el("summary");
+			summary.appendChild(el("span", "", "Static spawns"));
+			summary.appendChild(el("small", "km-muted", placements + (placements === 1 ? " placement" : " placements")));
+			details.appendChild(summary);
+			appendGroups(details, fixed);
+			details.addEventListener("toggle", resize);
+			content.appendChild(details);
+		}
+		var roaming = area.groups.filter(function (group) { return group.method === "Roamer"; });
+		var regular = area.groups.filter(function (group) { return group.method !== "Fixed overworld" && group.method !== "Roamer"; });
+		appendGroups(content, roaming.concat(regular));
+		return resize;
+	}
+	function encounterCard(area, group) {
+		var card = el("section", "km-reference-card");
+		card.setAttribute("data-encounter-section", group.method === "Land" || group.weather ? "land" : "other");
+		card.setAttribute("data-encounter-method", group.method);
+		if (group.tableId) card.setAttribute("data-encounter-table", group.tableId);
+		if (group.weather) card.setAttribute("data-encounter-weather", group.weather);
+		var trade = group.method === "Trade";
+		var fixed = group.method === "Fixed overworld";
+		var hasRates = !trade && group.totalEntries.some(function (entry) { return entry.rate !== null; });
+		var level = !trade && group.totalEntries[0].level;
+		var sharedLevel = level && group.totalEntries.every(function (entry) { return entry.level === level; });
+		var cardHeading = el("div", "km-encounter-card-heading");
+		cardHeading.appendChild(el("h3", "", group.label || group.method));
+		if (sharedLevel) cardHeading.appendChild(el("span", "km-encounter-level", "Lv. " + String(level).replace(/(\d)\s*-\s*(?=\d)/g, "$1 to ")));
+		if (Number.isInteger(group.badges)) cardHeading.appendChild(el("span", "km-encounter-level", window.KMPokedexData.catchBadgeText(group.badges)));
+		card.appendChild(cardHeading);
+		var table = el("table", "km-data-table");
+		var head = el("thead");
+		var header = el("tr");
+		var columns = ["Caught", "Pokémon"].concat(sharedLevel ? [] : ["Level"]);
+		if (fixed) columns.push("Placements");
+		if (trade) columns.push("Required Pokémon");
+		if (hasRates) columns.push("Base", "Available");
+		var columnClasses = {"Base": "km-rate", "Available": "km-available-rate"};
+		columns.forEach(function (text) { var th = el("th", columnClasses[text], text); th.scope = "col"; header.appendChild(th); });
+		head.appendChild(header); table.appendChild(head);
+		var body = el("tbody");
+		group.entries.forEach(function (entry) {
+			var row = el("tr");
+			encounterTracker.renderEntry(row, area, group, entry);
+			var pokemon = el("td", "km-pokemon-name", entry.pokemon);
+			if (entry.note) pokemon.appendChild(el("small", "km-encounter-entry-note", entry.note));
+			row.appendChild(pokemon);
+			if (!sharedLevel) row.appendChild(el("td", "", entry.level ? String(entry.level).replace(/(\d)\s*-\s*(?=\d)/g, "$1 to ") : "Not listed"));
+			if (fixed) {
+				var placement = el("td", "", Array.from(entry.placements.keys()).join(", "));
+				placement.title = Array.from(entry.placements, function (point) { return "Placement " + point[0] + " · " + point[1].join(", "); }).join("\n");
+				row.appendChild(placement);
+			}
+			if (trade) row.appendChild(el("td", "km-pokemon-name", entry.requiredPokemon || "Not listed"));
+			if (hasRates) {
+				row.appendChild(el("td", "km-rate", encounterTracker.baseRate(group, entry)));
 				row.appendChild(el("td", "km-available-rate", encounterTracker.rate(area, group, entry)));
-			});
-			table.appendChild(body); card.appendChild(table); grid.appendChild(card);
+			}
+			body.appendChild(row);
 		});
+		table.appendChild(body); card.appendChild(table);
+		return card;
 	}
 	function trainerSplitLabel(split) {
 		var name = String(split || "").trim();
@@ -996,7 +1046,9 @@
 			if (!markTrainerBeaten(trainer, check.checked)) check.checked = !check.checked;
 		});
 		beaten.appendChild(check); beaten.appendChild(document.createTextNode(" Beaten")); heading.appendChild(beaten); info.appendChild(heading);
-		info.appendChild(el("p", "km-muted", [trainerSplitLabel(trainer.split), trainer.location, trainer.levelCap ? "Level cap " + trainer.levelCap : ""].filter(Boolean).join(" · ")));
+		var storyCap = (sourceData.storyCaps || []).find(function (cap) { return cap.split === trainer.split; });
+		var capText = storyCap ? "Story level cap " + storyCap.level : trainer.levelCap ? "Level cap " + trainer.levelCap : "";
+		info.appendChild(el("p", "km-muted", [trainerSplitLabel(trainer.split), trainer.location, capText].filter(Boolean).join(" · ")));
 		if (notes.length) info.appendChild(el("p", "km-trainer-notes km-muted", notes.map(function (note) { return note.slice(1, -1); }).join(" · ")));
 		info.appendChild(el("p", "km-trainer-rewards km-muted", trainerRewards(trainer)));
 		var addToCalculator = button("Add to Calculator", function () {
@@ -1058,7 +1110,7 @@
 			var saved = JSON.parse(window.kmCalculatorStorage.getItem("km-calculator.route-items.v1." + itemProfileId));
 			if (saved && saved.version === 1 && Array.isArray(saved.pickedUp)) {
 				itemProgress.pickedUp = saved.pickedUp.filter(function (id, index, ids) {
-					return typeof id === "string" && ids.indexOf(id) === index && sourceData.routeItems.some(function (item) { return item.id === id; });
+					return typeof id === "string" && ids.indexOf(id) === index && sourceData.routeItems.some(function (item) { return item.id === id && item.liveSource !== "Shop"; });
 				});
 			}
 		} catch (error) { /* Missing or unreadable progress leaves item cards unchecked. */ }
@@ -1084,7 +1136,7 @@
 		return true;
 	}
 	function decorateItemLocation(node, name) {
-		var items = sourceData.routeItems.filter(function (item) { return itemLocationName(item) === name; });
+		var items = sourceData.routeItems.filter(function (item) { return itemLocationName(item) === name && item.liveSource !== "Shop"; });
 		var complete = items.length > 0 && items.every(function (item) { return itemProgress.pickedUp.indexOf(item.id) !== -1; });
 		node.classList.toggle("km-item-location-complete", complete);
 		if (complete) node.setAttribute("aria-label", name + ", all items picked up");
@@ -1105,6 +1157,15 @@
 			var card = el("article", "km-reference-card km-item-card");
 			var top = el("div", "km-card-heading");
 			var heading = el("h3");
+			if (item.liveSource === "Shop") {
+				heading.textContent = item.items;
+				top.appendChild(heading);
+				top.appendChild(el("span", "km-tag", item.acquisition));
+				card.appendChild(top);
+				card.appendChild(el("p", "km-item-directions", [window.KMPokedexData.shopPriceText(item), item.badges, item.directions].filter(Boolean).join(" · ")));
+				grid.appendChild(card);
+				return;
+			}
 			var label = el("label", "km-item-picked-control");
 			var check = el("input"); check.type = "checkbox";
 			check.setAttribute("aria-label", "Picked up: " + item.items);
@@ -1124,9 +1185,9 @@
 			card.appendChild(el("p", "km-item-directions", item.directions));
 			if (item.edition && item.edition !== "Both") card.appendChild(el("p", "km-edition", "Edition: " + item.edition));
 			var evidence = el("div", "km-item-evidence");
-			evidence.appendChild(el("p", "", "Placement match: " + item.match + ". " + (item.reason || "")));
+			evidence.appendChild(el("p", "", item.liveSource === "Placement" ? "Verified in the Royal Sword placement data." : "Placement match: " + item.match + ". " + (item.reason || "")));
 			if (item.map) evidence.appendChild(el("p", "km-muted", "Map: " + item.map));
-			evidence.appendChild(el("p", "km-muted", "Guide entry " + item.id + ". Source: " + item.source + ". A data match does not confirm placement in the game."));
+			evidence.appendChild(el("p", "km-muted", "Guide entry " + item.id + ". Source: " + item.source + "." + (item.liveSource === "Placement" ? "" : " A data match does not confirm placement in the game.")));
 			var location = (sourceData.itemLocations || []).filter(function (l) { return l.name === item.location; })[0];
 			if (location) [["GameWith guide", location.gameWith], ["Bulbapedia guide", location.bulbapedia]].forEach(function (pair) {
 				if (!/^https:\/\/(gamewith\.net|bulbapedia\.bulbagarden\.net)\//.test(pair[1] || "")) return;
@@ -1140,6 +1201,10 @@
 		var results = getResults(view);
 		var restoreFocus = view.list.contains(document.activeElement);
 		var previousSelection = view.renderedSelection;
+		var encounterContent = view.detail.querySelector(".km-encounter-content");
+		var fixedSpawns = encounterContent && encounterContent.querySelector('[data-encounter-disclosure="fixed"]');
+		var fixedExpanded = fixedSpawns ? fixedSpawns.open : undefined;
+		var scrollTop = encounterContent ? encounterContent.scrollTop : 0;
 		view.list.textContent = "";
 		view.detail.textContent = "";
 		var selected = results.filter(function (entry) { return entry.id === view.selected; })[0] || results[0];
@@ -1147,7 +1212,12 @@
 		var resultKey = results.map(function (entry) { return entry.id; }).join("|");
 		if (view.resultKey !== resultKey) { view.listPage.anchor = view.selected; view.listPage.page = 0; view.resultKey = resultKey; }
 		var filterKey = [view.search.value, view.primary.value, view.secondary && view.secondary.value].join("|");
-		if (previousSelection !== view.selected || view.filterKey !== filterKey) { view.detailPage.anchor = null; view.detailPage.page = 0; }
+		if (previousSelection !== view.selected || view.filterKey !== filterKey) {
+			view.detailPage.anchor = null;
+			view.detailPage.page = 0;
+			fixedExpanded = undefined;
+			scrollTop = 0;
+		}
 		view.renderedSelection = view.selected; view.filterKey = filterKey;
 		view.resizeDetail = null;
 		view.status.textContent = results.length + (view.kind === "trainers" ? " trainer" : " location") + (results.length === 1 ? "" : "s") + " found";
@@ -1160,20 +1230,24 @@
 			var b = button("", function () { view.selected = entry.id; render(view); }, "km-location-button");
 			b.setAttribute("data-page-key", entry.id);
 			b.appendChild(el("span", "", entry.name));
-			b.appendChild(el("small", "", view.kind === "trainers" ? trainerSplitLabel(entry.split) + " · " + entry.team.length + " Pokémon" : entry.count + (view.kind === "items" ? " item" : " encounter slot") + (entry.count === 1 ? "" : "s")));
+			b.appendChild(el("small", "", view.kind === "trainers" ? trainerSplitLabel(entry.split) + " · " + entry.team.length + " Pokémon" : entry.count + (view.kind === "items" ? " item" : " encounter") + (entry.count === 1 ? "" : "s")));
 			if (view.kind === "encounters") encounterTracker.decorateLocation(b, entry);
 			if (view.kind === "trainers") b.classList.toggle("km-trainer-beaten", trainerProgress.beaten.indexOf(entry.id) !== -1);
 			if (view.kind === "items") decorateItemLocation(b, entry.name);
 			b.setAttribute("aria-current", String(entry.id === view.selected));
 			view.list.appendChild(b);
 		});
-		if (view.kind === "encounters") renderEncounters(view.detail, selected);
-		else if (view.kind === "trainers") renderTrainer(view.detail, selected);
-		else renderItems(view.detail, selected);
-		var grid = view.detail.querySelector(".km-encounter-groups, .km-trainer-roster, .km-item-grid");
-		Array.prototype.forEach.call(grid.children, function (node, index) { node.setAttribute("data-page-key", String(index)); });
-		view.resizeDetail = referencePager(view.detail, grid, "Reference details", view.detailPage);
+		if (view.kind === "encounters") {
+			view.resizeDetail = renderEncounters(view.detail, selected, fixedExpanded, !!(view.search.value.trim() || view.primary.value || view.secondary.value));
+		} else {
+			if (view.kind === "trainers") renderTrainer(view.detail, selected);
+			else renderItems(view.detail, selected);
+			var grid = view.detail.querySelector(".km-trainer-roster, .km-item-grid");
+			Array.prototype.forEach.call(grid.children, function (node, index) { node.setAttribute("data-page-key", String(index)); });
+			view.resizeDetail = referencePager(view.detail, grid, "Reference details", view.detailPage);
+		}
 		resizeReferences();
+		if (encounterContent && scrollTop) view.detail.querySelector(".km-encounter-content").scrollTop = scrollTop;
 		if (restoreFocus) {
 			var current = view.list.querySelector('[aria-current="true"]');
 			if (current && !current.hidden) current.focus({preventScroll: true});
@@ -1192,9 +1266,15 @@
 		views.forEach(function (view) {
 			view.resetButton.disabled = !profile || !sourceData;
 			view.selected = null; view.search.value = ""; view.listPage.anchor = null; view.listPage.page = 0; view.detailPage.anchor = null; view.detailPage.page = 0;
-			var options = [];
+			var options = [], weatherOptions = [];
 			if (sourceData) {
-				if (view.kind === "encounters") sourceData.areas.forEach(function (a) { a.groups.forEach(function (g) { if (options.indexOf(g.method) === -1) options.push(g.method); }); });
+				if (view.kind === "encounters") sourceData.areas.forEach(function (area) {
+					encounterGuideGroups(area, true).forEach(function (group) {
+						var method = encounterMethod(group);
+						if (options.indexOf(method) === -1) options.push(method);
+						if (group.tableId && group.weather && weatherOptions.indexOf(group.weather) === -1) weatherOptions.push(group.weather);
+					});
+				});
 				else (view.kind === "items" ? sourceData.routeItems : sourceData.trainers).forEach(function (entry) {
 					var value = view.kind === "items" ? entry.acquisition : entry.split;
 					if (options.indexOf(value) === -1) options.push(value);
@@ -1202,9 +1282,25 @@
 			}
 			view.primary.textContent = "";
 			var all = el("option", "", "All"); all.value = ""; view.primary.appendChild(all);
-			options.forEach(function (value) { var option = el("option", "", view.kind === "trainers" ? trainerSplitLabel(value) : value); option.value = value; view.primary.appendChild(option); });
+			options.forEach(function (value) {
+				var label = view.kind === "trainers" ? trainerSplitLabel(value) : value;
+				if (view.kind === "encounters" && value === "Fixed overworld") label = "Static spawns";
+				if (view.kind === "encounters" && value === "Overworld") label = "Visible encounters";
+				if (view.kind === "encounters" && value === "Shaking Trees") label = "Berry trees";
+				var option = el("option", "", label); option.value = value; view.primary.appendChild(option);
+			});
+			if (view.kind === "encounters") {
+				view.secondary.textContent = "";
+				var anyWeather = el("option", "", "All weather"); anyWeather.value = ""; view.secondary.appendChild(anyWeather);
+				weatherOptions.forEach(function (weather) { view.secondary.appendChild(el("option", "", weather)); });
+				view.secondary.parentNode.hidden = !weatherOptions.length;
+			}
 			if (view.secondary) view.secondary.value = "";
-			if (view.kind !== "encounters") view.note.textContent = !sourceData ? "" : view.kind === "items" ? "Reference for the base Sword/Shield 1.3.2 games; item placements in this ROM hack are unverified. Includes both editions. Some landmarks and item pools remain uncertain; expand an entry for its source and match details." : "Trainers are organized by story split. Check Beaten to record your progress.";
+			if (view.kind === "trainers") view.note.textContent = sourceData ? "Trainers are organized by story split. Check Beaten to record your progress." : "";
+			if (view.kind === "items") {
+				var verifiedItems = sourceData && sourceData.routeItems.some(function (item) { return item.liveSource; });
+				view.note.textContent = !sourceData ? "" : verifiedItems ? "Royal Sword evolution item shops and verified pickups are included alongside the base game guide. Open an entry for its source and placement details." : "This guide covers both base Sword and Shield games. Open an entry for its source and match details.";
+			}
 			render(view);
 		});
 	}
