@@ -1,4 +1,4 @@
-/*global module */
+/*global module, Set */
 /* Profile facts stay separate from the National Dex index and calculator tables. */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) module.exports = factory();
@@ -19,8 +19,34 @@
 			return ({Alola: "Alolan", Galar: "Galarian", Hisui: "Hisuian"})[region] + " " + base;
 		}));
 	}
+	function encounterWeather(group) {
+		return group.weather || (["Overcast", "Rain", "Thunderstorm", "Intense Sun", "Snow", "Snowstorm", "Sandstorm", "Heavy Fog"].indexOf(group.method) !== -1 ? group.method : "");
+	}
+	function activeEncounterGroups(area) {
+		return area.hasWeather === false ? area.groups.filter(function (group) { return !encounterWeather(group); }) : area.groups;
+	}
+	function encounterRows(area, group) {
+		var weather = encounterWeather(group);
+		if (group.tableId) return {weather: weather, shared: [], entries: group.entries};
+		var method = group.method === "Overworld" ? "Overworld" : "Land";
+		var base = weather && area.groups.find(function (candidate) {
+			return candidate !== group && candidate.pool === group.pool && candidate.method === method && !candidate.weather;
+		});
+		var shared = base ? base.entries.filter(function (row) {
+			return Array.isArray(group.sharedSlots) ? group.sharedSlots.indexOf(row.slot) !== -1 : row.slot <= 7;
+		}) : [];
+		var entries = shared.length ? shared.concat(group.entries).sort(function (a, b) { return a.slot - b.slot; }) : group.entries;
+		return {base: base, weather: weather, shared: shared, entries: entries};
+	}
+	function catchBadgeText(badges) {
+		if (badges === 0) return "Catchable with no badges";
+		return badges + (badges === 1 ? " badge" : " badges") + " required to catch";
+	}
+	function shopPriceText(item) {
+		return item.price.toLocaleString("en-US") + " Pokédollars";
+	}
 	function createIndex(catalog, pack, reference, generation) {
-		var entries = Object.create(null), names = Object.create(null), forms = Object.create(null), locations = Object.create(null);
+		var entries = Object.create(null), names = Object.create(null), forms = Object.create(null), locations = Object.create(null), itemSources = Object.create(null);
 		(pack && pack.entries || []).forEach(function (entry) {
 			entries[entry.key] = entry;
 			names[identity(entry.name)] = entry.key;
@@ -39,23 +65,28 @@
 		});
 		(catalog.species || []).forEach(function (species) { names[identity(species.name)] = species.number + ":0"; });
 		(reference && reference.areas || []).forEach(function (area) {
-			var land = area.groups.find(function (group) { return group.method === "Land"; });
-			area.groups.forEach(function (group) {
-				var shared = Array.isArray(group.sharedSlots) && land ? land.entries.filter(function (row) {
-					return group.sharedSlots.indexOf(row.slot) !== -1;
-				}) : [];
-				var weight = shared.concat(group.entries).reduce(function (sum, row) { return sum + Number(row.rate); }, 0);
+			activeEncounterGroups(area).forEach(function (group) {
+				var weight = encounterRows(area, group).entries.reduce(function (sum, row) { return sum + Number(row.rate); }, 0);
+				var fixed = group.method === "Fixed overworld";
+				var badges = Number.isInteger(group.badges) ? catchBadgeText(group.badges) : "";
+				var fixedSpecies = new Set();
 				group.entries.forEach(function (row) {
 					var aliases = reference.encounterAliases || {};
-					var key = names[identity(row.pokemon)] || names[identity(aliases[row.pokemon])];
-					if (!key) return;
+					var key = Number.isInteger(row.speciesId) && Number.isInteger(row.form) ? row.speciesId + ":" + row.form : names[identity(row.pokemon)] || names[identity(aliases[row.pokemon])];
+					if (!key || (fixed && fixedSpecies.has(key))) return;
+					if (fixed) fixedSpecies.add(key);
 					if (!locations[key]) locations[key] = [];
 					var rate = reference.encounterRates !== "weights" || row.rate === null || !weight ? row.rate : Number((row.rate / weight * 100).toFixed(1));
-					locations[key].push({area: area.name, method: group.method, weather: group.weather || "", level: row.level, rate: rate, note: row.note || row.trade || ""});
+					locations[key].push({area: area.name, method: group.label || group.method, weather: group.label ? "" : group.weather || "", level: row.level, rate: rate, note: row.note || row.trade || badges});
 				});
 			});
 		});
-		return {catalog: catalog, pack: pack, entries: entries, forms: forms, names: names, locations: locations};
+		(reference && reference.routeItems || []).forEach(function (item) {
+			if (!item.liveSource || !Number.isInteger(item.itemId)) return;
+			if (!itemSources[item.itemId]) itemSources[item.itemId] = [];
+			itemSources[item.itemId].push(item);
+		});
+		return {catalog: catalog, pack: pack, entries: entries, forms: forms, names: names, locations: locations, itemSources: itemSources, storyCaps: reference && reference.storyCaps || []};
 	}
 	function search(index, query, filters) {
 		filters = filters || {};
@@ -85,6 +116,7 @@
 				var entry = index.entries[id];
 				(entry.evolutions || []).forEach(function (evolution, i) {
 					var target = targetKey(index, entry, evolution);
+					if (target === id) return;
 					if (keys.indexOf(id) === -1 && keys.indexOf(target) === -1) return;
 					if (!seen[id + "/" + i]) { edges.push({from: entry, to: index.entries[target], rule: evolution}); seen[id + "/" + i] = true; }
 					[id, target].forEach(function (next) { if (keys.indexOf(next) === -1) { keys.push(next); changed = true; } });
@@ -93,16 +125,21 @@
 		}
 		return edges;
 	}
+	function evolutionItems(rule, spinItems) {
+		if (rule.method === 45) return spinItems || [];
+		return [6, 8, 17, 18, 19, 20, 42].indexOf(rule.method) !== -1 ? [rule.argument] : [];
+	}
 	function evolutionText(rule, lookup) {
 		lookup = lookup || {};
 		var level = rule.level ? "Level " + rule.level : "Level up";
 		var item = (lookup.items || [])[rule.argument] || "item " + rule.argument;
+		var useItem = "Use " + item + (rule.minimumLevel ? " at Level " + rule.minimumLevel + " or higher" : "");
 		var move = (lookup.moves || [])[rule.argument] || "move " + rule.argument;
 		var pokemon = (lookup.species || [])[rule.argument] || "Pokémon " + rule.argument;
 		var moveType = ["Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"][rule.argument] || "specified";
 		var descriptions = {
 			1: "High friendship", 2: "High friendship during the day", 3: "High friendship at night", 4: level,
-			5: "Trade", 6: "Trade holding " + item, 7: "Trade for the matching Shelmet or Karrablast", 8: "Use " + item,
+			5: "Trade", 6: "Trade holding " + item, 7: "Trade for the matching Shelmet or Karrablast", 8: useItem,
 			9: level + ", Attack greater than Defense", 10: level + ", Attack equals Defense", 11: level + ", Defense greater than Attack",
 			12: level + ", personality branch 1", 13: level + ", personality branch 2", 14: level,
 			15: level + ", empty party slot and a Poké Ball", 16: "Level up with high Beauty", 17: "Male: use " + item, 18: "Female: use " + item,
@@ -114,7 +151,7 @@
 			36: level + ", game version condition", 37: level + ", day and game version condition", 38: level + ", night and game version condition",
 			39: "Level up at Mount Lanakila", 40: level + " at dusk", 41: "Level up in an Ultra Wormhole", 42: "Use " + item + " in an Ultra Wormhole",
 			43: "Land three critical hits in one battle", 44: "Lose at least 49 HP, then pass under the stone arch in Dusty Bowl",
-			45: "Spin while holding a Sweet; direction, duration, and time determine the form", 46: level + ", Amped nature", 47: level + ", Low Key nature",
+			45: "Spin while holding a Sweet. Time, direction, and duration determine the cream.", 46: level + ", Amped nature", 47: level + ", Low Key nature",
 			48: "Complete the Tower of Darkness trial", 49: "Complete the Tower of Waters trial"
 		};
 		return descriptions[rule.method] || "Evolution condition " + rule.method + " (" + rule.argument + ")";
@@ -147,5 +184,5 @@
 		var min = Math.floor(2 * base * level / 100), max = Math.floor((2 * base + 31 + (evs ? 63 : 0)) * level / 100);
 		return stat === 0 ? [min + level + 10, max + level + 10] : [Math.floor((min + 5) * 0.9), Math.floor((max + 5) * 1.1)];
 	}
-	return {normalize: normalize, searchNames: searchNames, identity: identity, createIndex: createIndex, search: search, hasData: hasData, evolutionFamily: evolutionFamily, evolutionText: evolutionText, defenses: defenses, gender: gender, statNames: statNames, statRange: statRange};
+	return {normalize: normalize, searchNames: searchNames, identity: identity, activeEncounterGroups: activeEncounterGroups, encounterRows: encounterRows, catchBadgeText: catchBadgeText, shopPriceText: shopPriceText, createIndex: createIndex, search: search, hasData: hasData, evolutionFamily: evolutionFamily, evolutionItems: evolutionItems, evolutionText: evolutionText, defenses: defenses, gender: gender, statNames: statNames, statRange: statRange};
 });

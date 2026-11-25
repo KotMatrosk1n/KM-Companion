@@ -86,47 +86,43 @@
         </div>
 
         <div id="km-update-view" hidden>
-            <div class="km-update-prompt-heading">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2Zm14-9h-4V3H9v8H5l7 7 7-7Z"/></svg>
-                <h3 id="km-update-prompt-heading">Update Available</h3>
+            <div class="km-update-header">
+                <div>
+                    <div class="km-update-prompt-heading">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2Zm14-9h-4V3H9v8H5l7 7 7-7Z"/></svg>
+                        <h2 id="km-update-prompt-heading">Update available</h2>
+                    </div>
+                    <p id="km-update-prompt-copy" class="km-update-prompt-copy"></p>
+                </div>
+                <div class="km-update-actions">
+                    <button id="km-update-open-release" class="km-settings-secondary-button" type="button">
+                        <span>Open Release Page</span>
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.3 9.3-1.42-1.42L17.58 5H14V3ZM5 5h6v2H5v12h12v-6h2v8H3V5h2Z"/></svg>
+                    </button>
+                    <button id="km-update-install" class="km-settings-primary-button" type="button">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2Zm14-9h-4V3H9v8H5l7 7 7-7Z"/></svg>
+                        <span id="km-update-install-label">Install Update</span>
+                    </button>
+                    <button id="km-update-dismiss" class="km-settings-secondary-button" type="button">Not Now</button>
+                </div>
             </div>
-            <p id="km-update-prompt-copy" class="km-update-prompt-copy"></p>
-            <div class="km-update-layout">
-                <div id="km-update-notes-content" class="km-update-notes-content" hidden>
-                    <pre id="km-update-release-notes" class="km-update-release-notes" hidden></pre>
-                    <nav id="km-update-notes-pages" class="km-pagination" aria-label="Release notes pages" hidden>
-                        <span id="km-update-notes-page" class="km-pagination-summary" aria-live="polite"></span>
-                        <button id="km-update-notes-previous" type="button">Previous</button>
-                        <button id="km-update-notes-next" type="button">Next</button>
-                    </nav>
+            <div id="km-update-progress-panel" class="km-update-progress-panel" role="status" hidden>
+                <div class="km-update-progress-header">
+                    <strong id="km-update-progress-title">Downloading update</strong>
+                    <span id="km-update-progress-percent"></span>
                 </div>
-                <div class="km-update-controls">
-                    <div id="km-update-progress-panel" class="km-update-progress-panel" role="status" hidden>
-                        <div class="km-update-progress-header">
-                            <strong id="km-update-progress-title">Downloading update</strong>
-                            <span id="km-update-progress-percent"></span>
-                        </div>
-                        <div id="km-update-progress-track" class="km-update-progress-track" role="progressbar" aria-label="Update download progress">
-                            <span id="km-update-progress-fill" class="km-update-progress-fill"></span>
-                        </div>
-                        <p id="km-update-progress-message"></p>
-                    </div>
-                    <div id="km-update-error" class="km-update-error" role="alert" hidden>
-                        <strong id="km-update-error-title"></strong>
-                        <p id="km-update-error-message"></p>
-                        <p id="km-update-error-next-step"></p>
-                    </div>
-                    <div class="km-update-actions">
-                        <button id="km-update-install" class="km-settings-primary-button" type="button">
-                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2Zm14-9h-4V3H9v8H5l7 7 7-7Z"/></svg>
-                            <span id="km-update-install-label">Install Update</span>
-                        </button>
-                        <button id="km-update-dismiss" class="km-settings-secondary-button" type="button">
-                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6.4 4.98 5.6 5.6 5.6-5.6 1.42 1.42-5.6 5.6 5.6 5.6-1.42 1.42-5.6-5.6-5.6 5.6-1.42-1.42 5.6-5.6-5.6-5.6 1.42-1.42Z"/></svg>
-                            <span>Not Now</span>
-                        </button>
-                    </div>
+                <div id="km-update-progress-track" class="km-update-progress-track" role="progressbar" aria-label="Update download progress">
+                    <span id="km-update-progress-fill" class="km-update-progress-fill"></span>
                 </div>
+                <p id="km-update-progress-message"></p>
+            </div>
+            <div id="km-update-error" class="km-update-error" role="alert" hidden>
+                <strong id="km-update-error-title"></strong>
+                <p id="km-update-error-message"></p>
+                <p id="km-update-error-next-step"></p>
+            </div>
+            <div id="km-update-notes-content" class="km-update-notes-content" hidden>
+                <div id="km-update-release-notes" class="km-update-release-notes" role="region" aria-label="Release notes" tabindex="0"></div>
             </div>
         </div>
     </section>

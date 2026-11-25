@@ -50,7 +50,7 @@
 				if (move.accuracy === true || (typeof move.accuracy === "number" && move.accuracy >= 0 && move.accuracy <= 100)) detail.accuracy = move.accuracy;
 				if (pack) {
 					var id = Object.keys(pack.moveDescriptions || {}).find(function (id) { return keyFor(pack.moves[id].name) === key; });
-					if (id) detail.effects = pack.moveDescriptions[id];
+					if (id) detail.effects = detail.summary = pack.moveDescriptions[id];
 				}
 			}
 		}
@@ -112,7 +112,7 @@
 		var rect = popup.getBoundingClientRect();
 		if (rect.height > bottom - top) {
 			var effects = popup.querySelector(".km-tooltip-description");
-			if (effects && detail.summary) effects.textContent = detail.summary;
+			if (effects && detail.summary) effects.textContent = descriptionText(detail.summary);
 			popup.style.width = Math.min(640, (right - left) / scale) + "px";
 			rect = popup.getBoundingClientRect();
 		}
